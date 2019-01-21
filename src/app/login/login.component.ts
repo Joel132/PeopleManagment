@@ -41,7 +41,6 @@ export class LoginComponent implements OnInit {
   }
 
   private correctLogin(data: Session){
-    console.log(data);
     this.storageService.setCurrentSession(data);
     this.router.navigate(['/home']);
   }

@@ -34,12 +34,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               "tokenType": "Bearer"
             }
             }));
-          }else{
-            return throwError({code: 2, message: 'The password does not match '});
           }
-        } else {
-          return throwError({code: 1, message: 'Email does not exists'});
         }
+          return throwError({code: 1, message: 'Credenciales no validas.'});
+        
 
       }
 
