@@ -1,29 +1,24 @@
 import { MatCheckboxModule,MatInputModule,
-  MatButtonModule, MatOptionModule, MatSelectModule, MatGridListModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule} from '@angular/material';
+  MatButtonModule, MatOptionModule, MatGridListModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule,MatCardModule} from '@angular/material';
 import { NgModule } from '@angular/core';
 
-
-
-import {MatNativeDateModule,MatSnackBarModule,MatDialogModule, MatTableModule, MatPaginatorModule , 
-  MatSortModule,MatTabsModule, 
-  MatFormFieldModule, MatProgressSpinnerModule} from '@angular/material';
-
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatSliderModule} from '@angular/material/slider';
+import {MatMenuModule} from '@angular/material/menu';
 import {MatDividerModule} from '@angular/material/divider';
-
-import {MatCardModule} from '@angular/material/card';
-
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {TextFieldModule} from '@angular/cdk/text-field'
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
-  imports: [MatDatepickerModule,MatRadioModule,MatSliderModule,MatDividerModule,  MatNativeDateModule,MatSnackBarModule,MatDialogModule, MatTableModule, MatPaginatorModule , 
-    MatSortModule,MatTabsModule, MatFormFieldModule, MatProgressSpinnerModule,MatButtonModule, MatCheckboxModule,MatInputModule,
-    MatCardModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule,MatOptionModule, MatSelectModule, MatGridListModule],
-  
-  
-    exports: [MatDatepickerModule,MatRadioModule,MatSliderModule,MatDividerModule,MatNativeDateModule,MatSnackBarModule,MatDialogModule, MatTableModule, MatPaginatorModule , 
-    MatSortModule,MatTabsModule, MatFormFieldModule, MatProgressSpinnerModule,MatButtonModule, MatCheckboxModule,MatInputModule,
-    MatCardModule, MatToolbarModule, MatSidenavModule, MatIconModule,MatOptionModule, MatSelectModule, MatGridListModule,  MatListModule],
+  imports: [MatButtonModule, MatCheckboxModule,MatInputModule,
+    MatCardModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatMenuModule,
+    MatDividerModule, MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, TextFieldModule,
+    MatSelectModule,MatOptionModule,MatGridListModule],
+  exports: [MatButtonModule, MatCheckboxModule,MatInputModule,
+    MatCardModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatMenuModule, 
+    MatDividerModule, MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, TextFieldModule, 
+    MatSelectModule,MatOptionModule,MatGridListModule],
 })
 export class MaterialModule { }
