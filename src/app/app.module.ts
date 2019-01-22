@@ -13,9 +13,11 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule} from '@angular/common/http';
+
 import { CrearPostulanteComponent } from './postulantes/crear-postulante/crear-postulante.component';
 import { EditarPostulanteComponent } from './postulantes/editar-postulante/editar-postulante.component';
 import { ListarPostulantesComponent } from './postulantes/listar-postulantes/listar-postulantes.component';
+
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { ListarPostulantesComponent } from './postulantes/listar-postulantes/lis
     CrearPostulanteComponent,
     EditarPostulanteComponent,
     ListarPostulantesComponent
+
   ],
   imports: [
     BrowserModule,
