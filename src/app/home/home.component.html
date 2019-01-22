@@ -1,19 +1,49 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
+  <mat-sidenav #drawer 
+      class="sidenav" 
+      fixedInViewport="true"
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="!(isHandset$ | async)">
-    <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item routerLink="/postulante">Postulante</a>
-      <a mat-list-item routerLink="/postulante/crear">Crear postulante</a>
-      <a mat-list-item routerLink="/postulante/editar/8">Editar Postulante</a>
-      <a mat-list-item (click)="logout()">Logout</a>
-    </mat-nav-list>
+      [opened]="!(isHandset$ | async)"
+      >
+      
+  
+      <mat-toolbar >Menu</mat-toolbar>
+    
+      <mat-nav-list class="lista">
+        <a class="opcion" mat-list-item [routerLink] = "['/']">
+          <mat-icon aria-label="Side nav toggle icon" >home</mat-icon>
+          INICIO</a>
+        <a class="opcion" mat-list-item >
+          <mat-icon aria-label="Side nav toggle icon">person</mat-icon>
+          MI PERFIL</a>
+        <a class="opcion" mat-list-item [routerLink] = "['/postulante']">
+          <mat-icon aria-label="Side nav toggle icon" >person_add</mat-icon>
+          POSTULANTES</a>
+        <a class="opcion" mat-list-item href="#">
+            <mat-icon aria-label="Side nav toggle icon">people</mat-icon>
+          FUNCIONARIOS</a>
+        <a class="opcion" mat-list-item href="#">
+            <mat-icon aria-label="Side nav toggle icon">school</mat-icon>
+          APTITUDES</a>
+        <a class="opcion" mat-list-item href="#">
+            <mat-icon aria-label="Side nav toggle icon">live_help</mat-icon>
+          AYUDA</a>
+        <a class="opcion" mat-list-item href="#">
+            <mat-icon aria-label="Side nav toggle icon">settings</mat-icon>
+          CONFIGURACION</a>
+        <a class="opcion" mat-list-item (click)='logout()'>
+            <mat-icon aria-label="Side nav toggle icon">power_settings_new</mat-icon>
+          CERRAR SESION</a>
+        <a class="opcion" mat-list-item href="#" >
+            <mat-icon aria-label="Side nav toggle icon">arrow_back</mat-icon>
+          CONTRAER</a>
+      </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button
+
+  <mat-sidenav-content >
+    <mat-toolbar class="barraNavegacion">
+      <button class="opcion"
         type="button"
         aria-label="Toggle sidenav"
         mat-icon-button
@@ -21,9 +51,12 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>people-managment</span>
+      <span>proyectoMaterial</span>
     </mat-toolbar>
+
     <router-outlet></router-outlet>
-    
   </mat-sidenav-content>
+
 </mat-sidenav-container>
+
+  
