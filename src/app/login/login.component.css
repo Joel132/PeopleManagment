@@ -1,0 +1,47 @@
+.example-card {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    top: 130px;
+    background: rgba(0, 0, 0, 0);
+    color: white;
+    border-style: none;
+
+}
+
+.mat-focused .placeholder {
+    color: white;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+.input{
+    color: beige;
+}
+p.inicio {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 5px;
+    font-weight: bold;
+    font-size: 18;
+
+}
+
+
+.portrait {
+    height:80px;
+    width: 80px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.barraNavegacion{
+    background: black;
+}
+
+.placeholder{
+    color: white;
+}
