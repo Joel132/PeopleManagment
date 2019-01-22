@@ -38,6 +38,18 @@ export class StorageService {
     return (session && session.tokenType) ? session.tokenType : null;
   };
 
+  // rol=1 Admin
+  // rol=2 Scrum Master
+  // rol=3 Usuario
+  setCurrentRol(rol: number){
+    var session: Session = this.getCurrentSession();
+    session.rol = rol;
+  }
+  getCurrentRol(): number{
+    var session: Session = this.getCurrentSession();
+    return session.rol;
+  }
+
   isAuthenticated(): boolean {
     return (this.getCurrentToken() != null) ? true : false;
   };

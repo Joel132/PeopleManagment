@@ -1,5 +1,6 @@
 export class Session{
-    accessToken: string;
-    tokenType: string;
+     constructor(public accessToken: string, public tokenType: string, public rol: number){
+          this.rol=1;
+     }
 
 }
