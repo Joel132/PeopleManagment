@@ -10,7 +10,7 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) {}
 
-  private basePath = '/api/v1/auth/';
+  private basePath = 'http://10.128.3.82:8080/api/v1/auth/';
 
   login(loginObj: LoginObject): Observable<Session> {
     return this.http.post<Session>(this.basePath + 'login', loginObj);

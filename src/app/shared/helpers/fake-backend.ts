@@ -4,6 +4,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 import {LoginObject} from "../models/login";
 import {USERS} from "../mocks/mock-users";
+import { StorageService } from './storage.service';
 
 @Injectable(
   {providedIn: 'root'}
@@ -11,7 +12,7 @@ import {USERS} from "../mocks/mock-users";
 )
 export class FakeBackendInterceptor implements HttpInterceptor {
 
-  constructor() { }
+  constructor(private storageService: StorageService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     
@@ -22,7 +23,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     return of(null).pipe(mergeMap(() => {
 
       // fake authenticate api end point
-      if (request.url.endsWith('/api/v1/auth/login') && request.method === 'POST') {
+      /* if (request.url.endsWith('/api/v1/auth/login') && request.method === 'POST') {
         let params = request.body;
 
         // check user credentials and return fake jwt token if valid
@@ -39,10 +40,17 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           return throwError({code: 1, message: 'Credenciales no validas.'});
         
 
-      }
+      } */
 
       if (request.url.endsWith('/api/v1/auth/logout') && request.method === 'POST') {
         return of(new HttpResponse({status: 200, body: true}));
+      }
+
+      if(request.url.includes("/api/v1/postulante")){
+        const req=request.clone({setHeaders:{
+          'Authorization' : `Bearer ${this.storageService.getCurrentToken()}`
+        }})
+        return next.handle(req);
       }
 
       // pass through any requests not handled above
