@@ -1,22 +1,23 @@
 table {
     width: 100%;
   }
-  
   div{
     width: 100%;
   }
   .mat-form-field {
+    margin-left: 20px;
     font-size: 14px;
     width: 20%;
   }
   th{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9;
     background: black;
     color: white;
   }
   mat-toolbar{
     background: white;
   }
-  
   th.mat-sort-header-sorted {
     color: black;
   }
@@ -25,8 +26,18 @@ table {
   }
 
 .natura-button-3{
+  margin-left: 40%;
   margin-right: 8px;
   height:50px;
   bottom: 10px;
   text-align: center;
 }
+
+.mat-row:nth-child(even){
+  background-color:white;
+  }
+
+.mat-row:nth-child(odd){
+  background-color: #f2f0f0;
+  }
+

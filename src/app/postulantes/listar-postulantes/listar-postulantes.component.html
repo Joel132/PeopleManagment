@@ -1,5 +1,5 @@
 <div class="example-container mat-elevation-z10">
-  <h3 class="mat-display-1">Lista de Postulantes</h3>
+  <h3 style=" font-family: 'Montserrat', sans-serif; font-size: 9;" class="mat-display-1">Lista de Postulantes</h3>
   <mat-toolbar>
       <!--Buscar Form-->
       <mat-form-field appearance="outline">
@@ -12,7 +12,7 @@
       <mat-form-field appearance="outline"> 
           <mat-select placeholder="Filtrar por estados" (selectionChange)= "applyFilter($event.value)"> 
               <!--$event.value me devuelve el contenido de [value]-->
-              <mat-option>Ninguno</mat-option>
+              <mat-option>-- Ninguno --</mat-option>
               <mat-option *ngFor="let est of estados" [value]="est.value">
                   {{est.viewValue}}
               </mat-option>
@@ -79,5 +79,5 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
 </div>
