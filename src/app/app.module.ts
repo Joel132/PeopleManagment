@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import {fakeBackendProvider} from './shared/helpers/fake-backend';
+import {AgregarPostulanteService} from './shared/helpers/agregar.service';
 // Animations
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 // Angular Material
@@ -36,9 +37,9 @@ import { ListarPostulantesComponent } from './postulantes/listar-postulantes/lis
     FormsModule, 
     ReactiveFormsModule, LayoutModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, 
     AppRoutingModule,
-    HttpClientModule,
+    HttpClientModule
   ],
-  providers: [fakeBackendProvider],
+  providers: [fakeBackendProvider, AgregarPostulanteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

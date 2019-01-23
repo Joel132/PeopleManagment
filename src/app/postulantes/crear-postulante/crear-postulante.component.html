@@ -1,3 +1,80 @@
-<p>
-  crear-postulante works!
-</p>
+<form [formGroup] = 'formPostulantes' (ngSubmit)="onSubmit()">
+  <div fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+      <!--FOTO-->
+      <div fxFlex="80%" class="seccion-foto" fxLayoutAlign="center" >
+        <mat-card >
+          <img mat-card-avatar src="https://www.hannafords.ca/wp-content/themes/comox/convertus/images/img-avatar.png" style="margin: auto;">
+        </mat-card>  
+      </div>
+    
+      <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center"  >
+         
+        <!--DATOS PERSONALES-->
+          <div fxFlex="40%" class="bloque">
+              <h4>Datos Personales</h4>
+              <mat-form-field>
+                <mat-icon matSuffix aria-label="Side nav toggle icon" >person</mat-icon>
+                <input formControlName = "nombre" matInput placeholder="Nombre" type="text" required>
+              </mat-form-field>
+              
+              <mat-form-field>
+              <mat-icon matSuffix aria-label="Side nav toggle icon" >person</mat-icon>
+              <input formControlName = "apellido" matInput placeholder="Apellido" type="text" required>
+              </mat-form-field>
+              
+              <mat-form-field>
+              <mat-icon matSuffix aria-label="Side nav toggle icon" >contact_mail</mat-icon>
+              <input formControlName = "cedula" matInput placeholder="CI" type="text">
+              </mat-form-field>
+              
+              <mat-form-field>
+              <mat-icon matSuffix aria-label="Side nav toggle icon" >call</mat-icon>
+              <input formControlName = "telefono" matInput placeholder="Telefono" type="tel">
+              </mat-form-field>
+              
+              <mat-form-field>
+              <mat-icon matSuffix aria-label="Side nav toggle icon" >cake</mat-icon>
+              <input formControlName = "fecha_nac" matInput placeholder="Fecha Nacimiento" type="date">
+              </mat-form-field>
+              
+              <mat-form-field>
+              <mat-icon matSuffix aria-label="Side nav toggle icon" >alternate_email</mat-icon>
+              <input formControlName = "correo" matInput placeholder="Correo Electronico" type="email">
+              </mat-form-field>
+              
+              <mat-form-field>
+              <mat-icon matSuffix aria-label="Side nav toggle icon" >location_on</mat-icon>
+              <input formControlName = "direccion" matInput placeholder="Direccion" type="text">
+              </mat-form-field>
+              
+              <mat-form-field>
+                <mat-select formControlName = "estado" placeholder="Estado">
+                  <mat-option value=1>Rechazado</mat-option>
+                  <mat-option value=2>Pendiente</mat-option>
+                  <mat-option value=3>Aprobado</mat-option>
+                </mat-select>
+              </mat-form-field>  
+          </div>
+  
+          <!--DATOS ADJUNTOS-->
+          <div fxFlex="40%" class="bloque">
+            <h4>Datos Adjuntos</h4>
+            <mat-form-field>
+              <mat-icon matSuffix aria-label="Side nav toggle icon" >attach_file</mat-icon>
+              <input matInput placeholder="Curriculum" type="url">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-icon matSuffix aria-label="Side nav toggle icon" >attach_file</mat-icon>
+              <input matInput placeholder="Desafio" type="text">
+            </mat-form-field>
+            
+            <mat-form-field>
+                <textarea matInput placeholder="Comentario"></textarea>
+            </mat-form-field>  
+      
+            <button mat-stroked-button color="warn">Cancelar</button>
+            <button mat-raised-button class="natura-button-3" type="aubmit">Guardar</button>    
+          </div>
+      </div>
+    </div>  
+</form>
