@@ -24,12 +24,12 @@
               
               <mat-form-field>
               <mat-icon matSuffix aria-label="Side nav toggle icon" >contact_mail</mat-icon>
-              <input formControlName = "cedula" matInput placeholder="CI" type="text">
+              <input formControlName = "documento" matInput placeholder="CI" type="text">
               </mat-form-field>
               
               <mat-form-field>
               <mat-icon matSuffix aria-label="Side nav toggle icon" >call</mat-icon>
-              <input formControlName = "telefono" matInput placeholder="Telefono" type="tel">
+              <input formControlName = "celular" matInput placeholder="Telefono" type="tel">
               </mat-form-field>
               
               <mat-form-field>
@@ -39,7 +39,7 @@
               
               <mat-form-field>
               <mat-icon matSuffix aria-label="Side nav toggle icon" >alternate_email</mat-icon>
-              <input formControlName = "correo" matInput placeholder="Correo Electronico" type="email">
+              <input formControlName = "mail" matInput placeholder="Correo Electronico" type="email">
               </mat-form-field>
               
               <mat-form-field>
@@ -49,9 +49,14 @@
               
               <mat-form-field>
                 <mat-select formControlName = "estado" placeholder="Estado">
-                  <mat-option value=1>Rechazado</mat-option>
-                  <mat-option value=2>Pendiente</mat-option>
-                  <mat-option value=3>Aprobado</mat-option>
+                  <mat-option value="Pendiente Desafio">Pendiente Desafio</mat-option>
+                  <mat-option value="Desafío Recibido">Desafío Recibido</mat-option>
+                  <mat-option value="Desafío Revisado">Desafío Revisado</mat-option>
+                  <mat-option value="Pendiente E. SM">Pendiente E. SM</mat-option>
+                  <mat-option value="Pendiente E. Admin">Pendiente E. Admin</mat-option>
+                  <mat-option value="Pendiente E. Team">Pendiente E. Team</mat-option>
+                  <mat-option value="Aprobado">Aprobado</mat-option>
+                  <mat-option value="Rechazado">Rechazado</mat-option>
                 </mat-select>
               </mat-form-field>  
           </div>
@@ -61,18 +66,18 @@
             <h4>Datos Adjuntos</h4>
             <mat-form-field>
               <mat-icon matSuffix aria-label="Side nav toggle icon" >attach_file</mat-icon>
-              <input matInput placeholder="Curriculum" type="url">
+              <input matInput formControlName="curriculumUrl" placeholder="Curriculum" type="url">
             </mat-form-field>
             <mat-form-field>
               <mat-icon matSuffix aria-label="Side nav toggle icon" >attach_file</mat-icon>
-              <input matInput placeholder="Desafio" type="text">
+              <input formControlName="desafioUrl" matInput placeholder="Desafio" type="text">
             </mat-form-field>
             
             <mat-form-field>
-                <textarea matInput placeholder="Comentario"></textarea>
+                <textarea matInput formControlName="comentario" placeholder="Comentario"></textarea>
             </mat-form-field>  
       
-            <button mat-stroked-button color="warn">Cancelar</button>
+            <button mat-stroked-button color="warn" (click)="volverAlListado()">Cancelar</button>
             <button mat-raised-button class="natura-button-3" type="aubmit">Guardar</button>    
           </div>
       </div>

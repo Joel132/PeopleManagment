@@ -14,3 +14,4 @@ export class Postulante {
         public estado: string
     ) {}
 }
+
