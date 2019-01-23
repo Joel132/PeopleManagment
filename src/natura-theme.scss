@@ -1,4 +1,5 @@
 @import '~@angular/material/theming';
+
 @include mat-core();
 
 $natura-primary: mat-palette($mat-grey,A700,600,900);
@@ -40,6 +41,7 @@ $natura-dark-theme:   mat-dark-theme($natura-dark-primary, $natura-dark-accent, 
     color: white;
 }
 
+
 body{
   height: 100vh;
   margin: 0;
@@ -72,3 +74,4 @@ body{
 .aligner-item {
   max-width: 50%;
 }
+

@@ -23,3 +23,10 @@ table {
   .example-spacer {
     flex: 1 1 auto;
   }
+
+.natura-button-3{
+  margin-right: 8px;
+  height:50px;
+  bottom: 10px;
+  text-align: center;
+}

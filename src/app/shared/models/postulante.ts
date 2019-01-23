@@ -9,7 +9,7 @@ export class Postulante {
         public id: number,
         public mail: string,
         public nombre: string,
-        
+        // Estos no estan en el JSON
         public foto: string,
         public estado: string
     ) {}
