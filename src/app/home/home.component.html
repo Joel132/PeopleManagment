@@ -20,22 +20,22 @@
         <a class="opcion" mat-list-item [routerLink] = "['/postulante']">
           <mat-icon aria-label="Side nav toggle icon" >person_add</mat-icon>
           POSTULANTES</a>
-        <a class="opcion" mat-list-item [routerLink] = "['/postulante/crear']">
+        <a class="opcion" mat-list-item [routerLink] = "['/']">
           <mat-icon aria-label="Side nav toggle icon" >people</mat-icon>
           FUNCIONARIOS</a>
-        <a class="opcion" mat-list-item href="#">
+        <a class="opcion" mat-list-item [routerLink] = "['/']">
             <mat-icon aria-label="Side nav toggle icon">school</mat-icon>
           APTITUDES</a>
-        <a class="opcion" mat-list-item href="#">
+        <a class="opcion" mat-list-item [routerLink] = "['/']">
             <mat-icon aria-label="Side nav toggle icon">live_help</mat-icon>
           AYUDA</a>
-        <a class="opcion" mat-list-item href="#">
+        <a class="opcion" mat-list-item [routerLink] = "['/']">
             <mat-icon aria-label="Side nav toggle icon">settings</mat-icon>
           CONFIGURACION</a>
         <a class="opcion" mat-list-item (click)='logout()'>
             <mat-icon aria-label="Side nav toggle icon">power_settings_new</mat-icon>
           CERRAR SESION</a>
-        <a class="opcion" mat-list-item href="#" >
+        <a class="opcion" mat-list-item [routerLink] = "['/']" >
             <mat-icon aria-label="Side nav toggle icon">arrow_back</mat-icon>
           CONTRAER</a>
       </mat-nav-list>
