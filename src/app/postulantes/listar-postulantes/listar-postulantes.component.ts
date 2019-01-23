@@ -37,10 +37,14 @@ export class ListarPostulantesComponent implements OnInit {
   }
 
   applyFilter(filterValue: string) {
-      this.dataSource.filter = filterValue.trim().toLowerCase();
-  
+    if(filterValue){
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+    
       if (this.dataSource.paginator) {
         this.dataSource.paginator.firstPage();
       }
+    }else{
+        this.dataSource.filter= "";
+    }
   }
 }

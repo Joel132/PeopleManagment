@@ -8,15 +8,18 @@
           <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
       <!--Filtar Form -->
+
       <mat-form-field appearance="outline"> 
           <mat-select placeholder="Filtrar por estados" (selectionChange)= "applyFilter($event.value)"> 
               <!--$event.value me devuelve el contenido de [value]-->
+              <mat-option>Ninguno</mat-option>
               <mat-option *ngFor="let est of estados" [value]="est.value">
                   {{est.viewValue}}
               </mat-option>
           </mat-select>
           <mat-icon matSuffix>filter_list</mat-icon>
       </mat-form-field>
+
       <!--Boton Agregar Postulante-->
     <button mat-stroked-button class="natura-button-3" routerLink="/postulante/crear">Agregar Postulante</button>      
   </mat-toolbar>
