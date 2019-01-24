@@ -64,6 +64,13 @@
     <code>src/app/postulantes/crear-postulante/crear-postulante.component.ts</code>
 </p>
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente Crear Postulante.</p>
+
+    </p>
 
 
     <p class="comment">
@@ -121,6 +128,20 @@
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#formPostulantes">formPostulantes</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -131,7 +152,22 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#errorRecibido">errorRecibido</a>
+                            </li>
+                            <li>
                                 <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onSubmit">onSubmit</a>
+                            </li>
+                            <li>
+                                <a href="#openSnackBar">openSnackBar</a>
+                            </li>
+                            <li>
+                                <a href="#recibidoCorrectamente">recibidoCorrectamente</a>
+                            </li>
+                            <li>
+                                <a href="#volverAlListado">volverAlListado</a>
                             </li>
                         </ul>
                     </td>
@@ -151,15 +187,69 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor()</code>
+<code>constructor(servicioAgregar: <a href="../injectables/AgregarPostulanteService.html">AgregarPostulanteService</a>, snackBar: MatSnackBar, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/postulantes/crear-postulante/crear-postulante.component.ts:8</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/postulantes/crear-postulante/crear-postulante.component.ts:17</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>servicioAgregar</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/AgregarPostulanteService.html" target="_self" >AgregarPostulanteService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>snackBar</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatSnackBar</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -173,6 +263,73 @@
         <h3 id="methods">
             Methods
         </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="errorRecibido"></a>
+                        <span class="name">
+                            <b>
+                            errorRecibido
+                            </b>
+                            <a href="#errorRecibido"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>errorRecibido(error)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/postulantes/crear-postulante/crear-postulante.component.ts:74</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Mensaje de error</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>error</td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
@@ -195,7 +352,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/postulantes/crear-postulante/crear-postulante.component.ts:12</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/postulantes/crear-postulante/crear-postulante.component.ts:21</a></div>
                             </td>
                         </tr>
 
@@ -211,43 +368,506 @@
                 </tr>
             </tbody>
         </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="onSubmit"></a>
+                        <span class="name">
+                            <b>
+                            onSubmit
+                            </b>
+                            <a href="#onSubmit"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>onSubmit()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/postulantes/crear-postulante/crear-postulante.component.ts:44</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Pasa los valores del formulario al método agregarPostulante</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="openSnackBar"></a>
+                        <span class="name">
+                            <b>
+                            openSnackBar
+                            </b>
+                            <a href="#openSnackBar"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>openSnackBar(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, action: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/postulantes/crear-postulante/crear-postulante.component.ts:63</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Genera el SnackBar con el mensaje recibido como parámetro y redirecciona a la lista de postulantes</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>message</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <code><p>Mensaje de éxito</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>action</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <code><p>Acción utilizada: cerrar</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="recibidoCorrectamente"></a>
+                        <span class="name">
+                            <b>
+                            recibidoCorrectamente
+                            </b>
+                            <a href="#recibidoCorrectamente"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>recibidoCorrectamente(data: <a href="../classes/Postulante.html">Postulante</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/postulantes/crear-postulante/crear-postulante.component.ts:53</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Utiliza un SnackBar para informar al usuario que creó correctamente un postulante</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>data</td>
+                                                        <td>
+                                                                    <code><a href="../classes/Postulante.html" target="_self" >Postulante</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <code><p>Datos del postulante</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="volverAlListado"></a>
+                        <span class="name">
+                            <b>
+                            volverAlListado
+                            </b>
+                            <a href="#volverAlListado"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>volverAlListado()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/postulantes/crear-postulante/crear-postulante.component.ts:81</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Utiliza el Router para redireccionar a la lista de postulantes</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 </section>
 
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="formPostulantes"></a>
+                        <span class="name">
+                            <b>
+                            formPostulantes
+                            </b>
+                            <a href="#formPostulantes"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>formPostulantes:     <code></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new FormGroup({
+    id: new FormControl(0),
+    nombre : new FormControl(),
+    apellido : new FormControl(),
+    documento : new FormControl(),
+    celular : new FormControl(),
+    fecha_nac : new FormControl(),
+    mail : new FormControl(),
+    direccion : new FormControl(),
+    estado : new FormControl(),
+    desafioUrl: new FormControl(),
+    curriculumUrl: new FormControl(),
+    comentario: new FormControl()
+  })</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/postulantes/crear-postulante/crear-postulante.component.ts:26</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
 
 </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { FormControl, FormGroup } from &#x27;@angular/forms&#x27;;
+import { AgregarPostulanteService } from &#x27;../../shared/helpers/agregar.service&#x27;;
+import { Postulante } from &#x27;src/app/shared/models/postulante&#x27;;
+import {MatSnackBar} from &#x27;@angular/material&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+/**
+ * Componente Crear Postulante.
+ */
 
 @Component({
   selector: &#x27;app-crear-postulante&#x27;,
   templateUrl: &#x27;./crear-postulante.component.html&#x27;,
   styleUrls: [&#x27;./crear-postulante.component.css&#x27;]
 })
+
 export class CrearPostulanteComponent implements OnInit {
 
-  constructor() { }
+  constructor(private servicioAgregar: AgregarPostulanteService,private snackBar: MatSnackBar,private router: Router ) { }
 
   ngOnInit() {
+
+    
   }
 
+  formPostulantes &#x3D; new FormGroup({
+    id: new FormControl(0),
+    nombre : new FormControl(),
+    apellido : new FormControl(),
+    documento : new FormControl(),
+    celular : new FormControl(),
+    fecha_nac : new FormControl(),
+    mail : new FormControl(),
+    direccion : new FormControl(),
+    estado : new FormControl(),
+    desafioUrl: new FormControl(),
+    curriculumUrl: new FormControl(),
+    comentario: new FormControl()
+  });
+
+  /**
+   * Pasa los valores del formulario al método agregarPostulante
+   */
+  onSubmit() {
+    // TODO: Use EventEmitter with form value
+    this.servicioAgregar.agregarPostulante(this.formPostulantes.value).subscribe(data &#x3D;&gt; this.recibidoCorrectamente(data),error&#x3D;&gt;this.errorRecibido(error));
+  }
+
+  /**
+   * Utiliza un SnackBar para informar al usuario que creó correctamente un postulante
+   * @param data {Postulante} Datos del postulante
+   */
+  recibidoCorrectamente(data: Postulante){
+    console.log(&quot;Creado &quot;+data);
+    this.openSnackBar(&quot;Postulante creado exitosamente&quot;,&quot;Entendido&quot;);
+  }
+
+  /**
+   * Genera el SnackBar con el mensaje recibido como parámetro y redirecciona a la lista de postulantes
+   * @param message {string} Mensaje de éxito
+   * @param action {string} Acción utilizada: cerrar
+   */
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 4000,
+    });
+    this.volverAlListado();
+  }
+
+ /**
+  * Mensaje de error
+  * @param error 
+  */
+  errorRecibido(error){
+
+  }
+
+ /**
+  * Utiliza el Router para redireccionar a la lista de postulantes
+  */
+  volverAlListado(){
+    this.router.navigate([&#x27;/postulante&#x27;]);
+  }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;p&gt;
-  crear-postulante works!
-&lt;/p&gt;
-</code></pre>
+        <pre class="line-numbers"><code class="language-html">&lt;form [formGroup] &#x3D; &#x27;formPostulantes&#x27; (ngSubmit)&#x3D;&quot;onSubmit()&quot;&gt;
+  &lt;div fxLayout&#x3D;&quot;column&quot; fxLayout.xs&#x3D;&quot;column&quot; fxLayoutWrap fxLayoutGap&#x3D;&quot;0.5%&quot; fxLayoutAlign&#x3D;&quot;center&quot;&gt;
+      &lt;!--FOTO--&gt;
+      &lt;div fxFlex&#x3D;&quot;80%&quot; class&#x3D;&quot;seccion-foto&quot; fxLayoutAlign&#x3D;&quot;center&quot; &gt;
+        &lt;mat-card &gt;
+          &lt;img mat-card-avatar src&#x3D;&quot;https://www.hannafords.ca/wp-content/themes/comox/convertus/images/img-avatar.png&quot; style&#x3D;&quot;margin: auto;&quot;&gt;
+        &lt;/mat-card&gt;  
+      &lt;/div&gt;
+    
+      &lt;div class&#x3D;&quot;container&quot; fxLayout&#x3D;&quot;row&quot; fxLayout.xs&#x3D;&quot;column&quot; fxLayoutWrap fxLayoutGap&#x3D;&quot;0.5%&quot; fxLayoutAlign&#x3D;&quot;center&quot;  &gt;
+         
+        &lt;!--DATOS PERSONALES--&gt;
+          &lt;div fxFlex&#x3D;&quot;40%&quot; class&#x3D;&quot;bloque&quot;&gt;
+              &lt;h4&gt;Datos Personales&lt;/h4&gt;
+              &lt;mat-form-field&gt;
+                &lt;mat-icon matSuffix aria-label&#x3D;&quot;Side nav toggle icon&quot; &gt;person&lt;/mat-icon&gt;
+                &lt;input formControlName &#x3D; &quot;nombre&quot; matInput placeholder&#x3D;&quot;Nombre&quot; type&#x3D;&quot;text&quot; required&gt;
+              &lt;/mat-form-field&gt;
+              
+              &lt;mat-form-field&gt;
+              &lt;mat-icon matSuffix aria-label&#x3D;&quot;Side nav toggle icon&quot; &gt;person&lt;/mat-icon&gt;
+              &lt;input formControlName &#x3D; &quot;apellido&quot; matInput placeholder&#x3D;&quot;Apellido&quot; type&#x3D;&quot;text&quot; required&gt;
+              &lt;/mat-form-field&gt;
+              
+              &lt;mat-form-field&gt;
+              &lt;mat-icon matSuffix aria-label&#x3D;&quot;Side nav toggle icon&quot; &gt;contact_mail&lt;/mat-icon&gt;
+              &lt;input formControlName &#x3D; &quot;documento&quot; matInput placeholder&#x3D;&quot;CI&quot; type&#x3D;&quot;text&quot;&gt;
+              &lt;/mat-form-field&gt;
+              
+              &lt;mat-form-field&gt;
+              &lt;mat-icon matSuffix aria-label&#x3D;&quot;Side nav toggle icon&quot; &gt;call&lt;/mat-icon&gt;
+              &lt;input formControlName &#x3D; &quot;celular&quot; matInput placeholder&#x3D;&quot;Telefono&quot; type&#x3D;&quot;tel&quot;&gt;
+              &lt;/mat-form-field&gt;
+              
+              &lt;mat-form-field&gt;
+              &lt;mat-icon matSuffix aria-label&#x3D;&quot;Side nav toggle icon&quot; &gt;cake&lt;/mat-icon&gt;
+              &lt;input formControlName &#x3D; &quot;fecha_nac&quot; matInput placeholder&#x3D;&quot;Fecha Nacimiento&quot; type&#x3D;&quot;date&quot;&gt;
+              &lt;/mat-form-field&gt;
+              
+              &lt;mat-form-field&gt;
+              &lt;mat-icon matSuffix aria-label&#x3D;&quot;Side nav toggle icon&quot; &gt;alternate_email&lt;/mat-icon&gt;
+              &lt;input formControlName &#x3D; &quot;mail&quot; matInput placeholder&#x3D;&quot;Correo Electronico&quot; type&#x3D;&quot;email&quot;&gt;
+              &lt;/mat-form-field&gt;
+              
+              &lt;mat-form-field&gt;
+              &lt;mat-icon matSuffix aria-label&#x3D;&quot;Side nav toggle icon&quot; &gt;location_on&lt;/mat-icon&gt;
+              &lt;input formControlName &#x3D; &quot;direccion&quot; matInput placeholder&#x3D;&quot;Direccion&quot; type&#x3D;&quot;text&quot;&gt;
+              &lt;/mat-form-field&gt;
+              
+              &lt;mat-form-field&gt;
+                &lt;mat-select formControlName &#x3D; &quot;estado&quot; placeholder&#x3D;&quot;Estado&quot;&gt;
+                  &lt;mat-option value&#x3D;&quot;Pendiente Desafio&quot;&gt;Pendiente Desafio&lt;/mat-option&gt;
+                  &lt;mat-option value&#x3D;&quot;Desafío Recibido&quot;&gt;Desafío Recibido&lt;/mat-option&gt;
+                  &lt;mat-option value&#x3D;&quot;Desafío Revisado&quot;&gt;Desafío Revisado&lt;/mat-option&gt;
+                  &lt;mat-option value&#x3D;&quot;Pendiente E. SM&quot;&gt;Pendiente E. SM&lt;/mat-option&gt;
+                  &lt;mat-option value&#x3D;&quot;Pendiente E. Admin&quot;&gt;Pendiente E. Admin&lt;/mat-option&gt;
+                  &lt;mat-option value&#x3D;&quot;Pendiente E. Team&quot;&gt;Pendiente E. Team&lt;/mat-option&gt;
+                  &lt;mat-option value&#x3D;&quot;Aprobado&quot;&gt;Aprobado&lt;/mat-option&gt;
+                  &lt;mat-option value&#x3D;&quot;Rechazado&quot;&gt;Rechazado&lt;/mat-option&gt;
+                &lt;/mat-select&gt;
+              &lt;/mat-form-field&gt;  
+          &lt;/div&gt;
+  
+          &lt;!--DATOS ADJUNTOS--&gt;
+          &lt;div fxFlex&#x3D;&quot;40%&quot; class&#x3D;&quot;bloque&quot;&gt;
+            &lt;h4&gt;Datos Adjuntos&lt;/h4&gt;
+            &lt;mat-form-field&gt;
+              &lt;mat-icon matSuffix aria-label&#x3D;&quot;Side nav toggle icon&quot; &gt;attach_file&lt;/mat-icon&gt;
+              &lt;input matInput formControlName&#x3D;&quot;curriculumUrl&quot; placeholder&#x3D;&quot;Curriculum&quot; type&#x3D;&quot;url&quot;&gt;
+            &lt;/mat-form-field&gt;
+            &lt;mat-form-field&gt;
+              &lt;mat-icon matSuffix aria-label&#x3D;&quot;Side nav toggle icon&quot; &gt;attach_file&lt;/mat-icon&gt;
+              &lt;input formControlName&#x3D;&quot;desafioUrl&quot; matInput placeholder&#x3D;&quot;Desafio&quot; type&#x3D;&quot;text&quot;&gt;
+            &lt;/mat-form-field&gt;
+            
+            &lt;mat-form-field&gt;
+                &lt;textarea matInput formControlName&#x3D;&quot;comentario&quot; placeholder&#x3D;&quot;Comentario&quot;&gt;&lt;/textarea&gt;
+            &lt;/mat-form-field&gt;  
+      
+            &lt;button mat-stroked-button color&#x3D;&quot;warn&quot; (click)&#x3D;&quot;volverAlListado()&quot;&gt;Cancelar&lt;/button&gt;
+            &lt;button mat-raised-button class&#x3D;&quot;natura-button-3&quot; type&#x3D;&quot;aubmit&quot;&gt;Guardar&lt;/button&gt;    
+          &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;  
+&lt;/form&gt;</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-styleData">
                 <p class="comment">
                     <code>./crear-postulante.component.css</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss"></code></pre>
+                <pre class="line-numbers"><code class="language-scss">.container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 5%;
+    width: 80%;
+    font-family: &#x27;Montserrat&#x27;, sans-serif;
+  }
+
+  .bloque &gt; *{
+    width: 80%;
+  }
+
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-tree">
@@ -275,7 +895,7 @@ export class CrearPostulanteComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><p>  crear-postulante works!</p></div>'
+        var COMPONENT_TEMPLATE = '<div><form [formGroup] = \'formPostulantes\' (ngSubmit)="onSubmit()">  <div fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">      <!--FOTO-->      <div fxFlex="80%" class="seccion-foto" fxLayoutAlign="center" >        <mat-card >          <img mat-card-avatar src="https://www.hannafords.ca/wp-content/themes/comox/convertus/images/img-avatar.png" style="margin: auto;">        </mat-card>        </div>          <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center"  >                 <!--DATOS PERSONALES-->          <div fxFlex="40%" class="bloque">              <h4>Datos Personales</h4>              <mat-form-field>                <mat-icon matSuffix aria-label="Side nav toggle icon" >person</mat-icon>                <input formControlName = "nombre" matInput placeholder="Nombre" type="text" required>              </mat-form-field>                            <mat-form-field>              <mat-icon matSuffix aria-label="Side nav toggle icon" >person</mat-icon>              <input formControlName = "apellido" matInput placeholder="Apellido" type="text" required>              </mat-form-field>                            <mat-form-field>              <mat-icon matSuffix aria-label="Side nav toggle icon" >contact_mail</mat-icon>              <input formControlName = "documento" matInput placeholder="CI" type="text">              </mat-form-field>                            <mat-form-field>              <mat-icon matSuffix aria-label="Side nav toggle icon" >call</mat-icon>              <input formControlName = "celular" matInput placeholder="Telefono" type="tel">              </mat-form-field>                            <mat-form-field>              <mat-icon matSuffix aria-label="Side nav toggle icon" >cake</mat-icon>              <input formControlName = "fecha_nac" matInput placeholder="Fecha Nacimiento" type="date">              </mat-form-field>                            <mat-form-field>              <mat-icon matSuffix aria-label="Side nav toggle icon" >alternate_email</mat-icon>              <input formControlName = "mail" matInput placeholder="Correo Electronico" type="email">              </mat-form-field>                            <mat-form-field>              <mat-icon matSuffix aria-label="Side nav toggle icon" >location_on</mat-icon>              <input formControlName = "direccion" matInput placeholder="Direccion" type="text">              </mat-form-field>                            <mat-form-field>                <mat-select formControlName = "estado" placeholder="Estado">                  <mat-option value="Pendiente Desafio">Pendiente Desafio</mat-option>                  <mat-option value="Desafío Recibido">Desafío Recibido</mat-option>                  <mat-option value="Desafío Revisado">Desafío Revisado</mat-option>                  <mat-option value="Pendiente E. SM">Pendiente E. SM</mat-option>                  <mat-option value="Pendiente E. Admin">Pendiente E. Admin</mat-option>                  <mat-option value="Pendiente E. Team">Pendiente E. Team</mat-option>                  <mat-option value="Aprobado">Aprobado</mat-option>                  <mat-option value="Rechazado">Rechazado</mat-option>                </mat-select>              </mat-form-field>            </div>            <!--DATOS ADJUNTOS-->          <div fxFlex="40%" class="bloque">            <h4>Datos Adjuntos</h4>            <mat-form-field>              <mat-icon matSuffix aria-label="Side nav toggle icon" >attach_file</mat-icon>              <input matInput formControlName="curriculumUrl" placeholder="Curriculum" type="url">            </mat-form-field>            <mat-form-field>              <mat-icon matSuffix aria-label="Side nav toggle icon" >attach_file</mat-icon>              <input formControlName="desafioUrl" matInput placeholder="Desafio" type="text">            </mat-form-field>                        <mat-form-field>                <textarea matInput formControlName="comentario" placeholder="Comentario"></textarea>            </mat-form-field>                    <button mat-stroked-button color="warn" (click)="volverAlListado()">Cancelar</button>            <button mat-raised-button class="natura-button-3" type="aubmit">Guardar</button>              </div>      </div>    </div>  </form></div>'
     var COMPONENTS = [{'name': 'AgregarPostulanteComponent', 'selector': 'app-agregar-postulante'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CrearPostulanteComponent', 'selector': 'app-crear-postulante'},{'name': 'EditarPostulanteComponent', 'selector': 'app-editar-postulante'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'ListarPostulantesComponent', 'selector': 'app-listar-postulantes'},{'name': 'LoginComponent', 'selector': 'app-login'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'CrearPostulanteComponent'};

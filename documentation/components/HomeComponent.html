@@ -165,12 +165,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/home/home.component.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/home/home.component.ts:22</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Manejo de la Sesión </p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -179,6 +181,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -193,6 +196,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>utilidad que ofrece Material para evaluar consultas y reaccionar a los cambios</p>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>storageService</td>
@@ -205,6 +212,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>Mantiene la sesión almacenada para que sea persistente</p>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>authenticationService</td>
@@ -217,6 +228,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>Para hacer el logout</p>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -260,13 +275,15 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/home/home.component.ts:24</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/home/home.component.ts:37</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Realiza un request para cerrar sesión y elimina la sesión</p>
+</div>
 
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -318,7 +335,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/home/home.component.ts:14</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/home/home.component.ts:19</a></div>
                             </td>
                         </tr>
 
@@ -342,18 +359,31 @@ import {StorageService} from &quot;../shared/helpers/storage.service&quot;;
   templateUrl: &#x27;./home.component.html&#x27;,
   styleUrls: [&#x27;./home.component.css&#x27;]
 })
+/**
+ * HomeComponent
+ * Contiene la barra de navegación &quot;side-nav&quot; en la que se acceden a los componentes de Postulantes,
+ * Funcionarios, Aptitudes, Configuración, Ayuda, el Perfil del Usuario y Cerrar Sesión
+ */
 export class HomeComponent {
 
   isHandset$: Observable&lt;boolean&gt; &#x3D; this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result &#x3D;&gt; result.matches)
     );
+    /**
+     * Manejo de la Sesión 
+     * @param breakpointObserver utilidad que ofrece Material para evaluar consultas y reaccionar a los cambios
+     * @param storageService Mantiene la sesión almacenada para que sea persistente
+     * @param authenticationService Para hacer el logout
+     */
 
   constructor(private breakpointObserver: BreakpointObserver,
     private storageService: StorageService,
-    private authenticationService: AuthenticationService
-              ) {}
+    private authenticationService: AuthenticationService) {}
 
+    /**
+     * Realiza un request para cerrar sesión y elimina la sesión
+     */
   public logout(): void{
     this.authenticationService.logout().subscribe(
       response &#x3D;&gt; {if(response) {this.storageService.logout();}}
@@ -367,21 +397,51 @@ export class HomeComponent {
 
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;mat-sidenav-container class&#x3D;&quot;sidenav-container&quot;&gt;
-  &lt;mat-sidenav #drawer class&#x3D;&quot;sidenav&quot; fixedInViewport&#x3D;&quot;true&quot;
+  &lt;mat-sidenav #drawer 
+      class&#x3D;&quot;sidenav&quot; 
+      fixedInViewport&#x3D;&quot;true&quot;
       [attr.role]&#x3D;&quot;(isHandset$ | async) ? &#x27;dialog&#x27; : &#x27;navigation&#x27;&quot;
       [mode]&#x3D;&quot;(isHandset$ | async) ? &#x27;over&#x27; : &#x27;side&#x27;&quot;
-      [opened]&#x3D;&quot;!(isHandset$ | async)&quot;&gt;
-    &lt;mat-toolbar&gt;Menu&lt;/mat-toolbar&gt;
-    &lt;mat-nav-list&gt;
-      &lt;a mat-list-item routerLink&#x3D;&quot;/postulante&quot;&gt;Postulante&lt;/a&gt;
-      &lt;a mat-list-item routerLink&#x3D;&quot;/postulante/crear&quot;&gt;Crear postulante&lt;/a&gt;
-      &lt;a mat-list-item routerLink&#x3D;&quot;/postulante/editar/8&quot;&gt;Editar Postulante&lt;/a&gt;
-      &lt;a mat-list-item (click)&#x3D;&quot;logout()&quot;&gt;Logout&lt;/a&gt;
-    &lt;/mat-nav-list&gt;
+      [opened]&#x3D;&quot;!(isHandset$ | async)&quot;
+      &gt;
+      
+  
+      &lt;mat-toolbar &gt;Menu&lt;/mat-toolbar&gt;
+    
+      &lt;mat-nav-list class&#x3D;&quot;lista&quot;&gt;
+        &lt;a class&#x3D;&quot;opcion&quot; mat-list-item [routerLink] &#x3D; &quot;[&#x27;/&#x27;]&quot;&gt;
+          &lt;mat-icon aria-label&#x3D;&quot;Side nav toggle icon&quot; &gt;home&lt;/mat-icon&gt;
+          INICIO&lt;/a&gt;
+        &lt;a class&#x3D;&quot;opcion&quot; mat-list-item &gt;
+          &lt;mat-icon aria-label&#x3D;&quot;Side nav toggle icon&quot;&gt;person&lt;/mat-icon&gt;
+          MI PERFIL&lt;/a&gt;
+        &lt;a class&#x3D;&quot;opcion&quot; mat-list-item [routerLink] &#x3D; &quot;[&#x27;/postulante&#x27;]&quot;&gt;
+          &lt;mat-icon aria-label&#x3D;&quot;Side nav toggle icon&quot; &gt;person_add&lt;/mat-icon&gt;
+          POSTULANTES&lt;/a&gt;
+        &lt;a class&#x3D;&quot;opcion&quot; mat-list-item [routerLink] &#x3D; &quot;[&#x27;/&#x27;]&quot;&gt;
+          &lt;mat-icon aria-label&#x3D;&quot;Side nav toggle icon&quot; &gt;people&lt;/mat-icon&gt;
+          FUNCIONARIOS&lt;/a&gt;
+        &lt;a class&#x3D;&quot;opcion&quot; mat-list-item [routerLink] &#x3D; &quot;[&#x27;/&#x27;]&quot;&gt;
+            &lt;mat-icon aria-label&#x3D;&quot;Side nav toggle icon&quot;&gt;school&lt;/mat-icon&gt;
+          APTITUDES&lt;/a&gt;
+        &lt;a class&#x3D;&quot;opcion&quot; mat-list-item [routerLink] &#x3D; &quot;[&#x27;/&#x27;]&quot;&gt;
+            &lt;mat-icon aria-label&#x3D;&quot;Side nav toggle icon&quot;&gt;live_help&lt;/mat-icon&gt;
+          AYUDA&lt;/a&gt;
+        &lt;a class&#x3D;&quot;opcion&quot; mat-list-item [routerLink] &#x3D; &quot;[&#x27;/&#x27;]&quot;&gt;
+            &lt;mat-icon aria-label&#x3D;&quot;Side nav toggle icon&quot;&gt;settings&lt;/mat-icon&gt;
+          CONFIGURACION&lt;/a&gt;
+        &lt;a class&#x3D;&quot;opcion&quot; mat-list-item (click)&#x3D;&#x27;logout()&#x27;&gt;
+            &lt;mat-icon aria-label&#x3D;&quot;Side nav toggle icon&quot;&gt;power_settings_new&lt;/mat-icon&gt;
+          CERRAR SESION&lt;/a&gt;
+        &lt;a class&#x3D;&quot;opcion&quot; mat-list-item [routerLink] &#x3D; &quot;[&#x27;/&#x27;]&quot; &gt;
+            &lt;mat-icon aria-label&#x3D;&quot;Side nav toggle icon&quot;&gt;arrow_back&lt;/mat-icon&gt;
+          CONTRAER&lt;/a&gt;
+      &lt;/mat-nav-list&gt;
   &lt;/mat-sidenav&gt;
-  &lt;mat-sidenav-content&gt;
-    &lt;mat-toolbar color&#x3D;&quot;primary&quot;&gt;
-      &lt;button
+
+  &lt;mat-sidenav-content &gt;
+    &lt;mat-toolbar class&#x3D;&quot;barraNavegacion&quot;&gt;
+      &lt;button class&#x3D;&quot;opcion&quot;
         type&#x3D;&quot;button&quot;
         aria-label&#x3D;&quot;Toggle sidenav&quot;
         mat-icon-button
@@ -389,12 +449,15 @@ export class HomeComponent {
         *ngIf&#x3D;&quot;isHandset$ | async&quot;&gt;
         &lt;mat-icon aria-label&#x3D;&quot;Side nav toggle icon&quot;&gt;menu&lt;/mat-icon&gt;
       &lt;/button&gt;
-      &lt;span&gt;people-managment&lt;/span&gt;
+      &lt;span&gt;proyectoMaterial&lt;/span&gt;
     &lt;/mat-toolbar&gt;
+
     &lt;router-outlet&gt;&lt;/router-outlet&gt;
-    
   &lt;/mat-sidenav-content&gt;
+
 &lt;/mat-sidenav-container&gt;
+
+  
 </code></pre>
     </div>
 
@@ -407,17 +470,43 @@ export class HomeComponent {
 }
 
 .sidenav {
-  width: 400px;
+  width: 250px;
+  background: #353535; 
+  box-shadow: 0px 0px 0px 5px rgba rgba(179, 179 , 179, 30);
 }
 
 .sidenav .mat-toolbar {
-  background: inherit;
+  
 }
 
 .mat-toolbar.mat-primary {
   position: sticky;
   top: 0;
   z-index: 1;
+}
+
+.lista{
+  background: #353535; 
+}
+
+.barraNavegacion{
+  background:black;
+}
+
+.opcion{
+  color: rgba(179, 179 , 179, 100);
+  padding: 70px;
+}
+
+.opcion:hover{
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f3c5bd+0,e86c57+0,7b1a52+0,db1943+54,ea5a18+100 */
+background: #f3c5bd; /* Old browsers */
+background: -moz-linear-gradient(left, #f3c5bd 0%, #e86c57 0%, #7b1a52 0%, #db1943 54%, #ea5a18 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left, #f3c5bd 0%,#e86c57 0%,#7b1a52 0%,#db1943 54%,#ea5a18 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right, #f3c5bd 0%,#e86c57 0%,#7b1a52 0%,#db1943 54%,#ea5a18 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr&#x3D;&#x27;#f3c5bd&#x27;, endColorstr&#x3D;&#x27;#ea5a18&#x27;,GradientType&#x3D;1 ); /* IE6-9 */
+  color: white;
+
 }
 </code></pre>
     </div>
@@ -447,7 +536,7 @@ export class HomeComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><mat-sidenav-container class="sidenav-container">  <mat-sidenav #drawer class="sidenav" fixedInViewport="true"      [attr.role]="(isHandset$ | async) ? \'dialog\' : \'navigation\'"      [mode]="(isHandset$ | async) ? \'over\' : \'side\'"      [opened]="!(isHandset$ | async)">    <mat-toolbar>Menu</mat-toolbar>    <mat-nav-list>      <a mat-list-item routerLink="/postulante">Postulante</a>      <a mat-list-item routerLink="/postulante/crear">Crear postulante</a>      <a mat-list-item routerLink="/postulante/editar/8">Editar Postulante</a>      <a mat-list-item (click)="logout()">Logout</a>    </mat-nav-list>  </mat-sidenav>  <mat-sidenav-content>    <mat-toolbar color="primary">      <button        type="button"        aria-label="Toggle sidenav"        mat-icon-button        (click)="drawer.toggle()"        *ngIf="isHandset$ | async">        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>      </button>      <span>people-managment</span>    </mat-toolbar>    <router-outlet></router-outlet>      </mat-sidenav-content></mat-sidenav-container></div>'
+        var COMPONENT_TEMPLATE = '<div><mat-sidenav-container class="sidenav-container">  <mat-sidenav #drawer       class="sidenav"       fixedInViewport="true"      [attr.role]="(isHandset$ | async) ? \'dialog\' : \'navigation\'"      [mode]="(isHandset$ | async) ? \'over\' : \'side\'"      [opened]="!(isHandset$ | async)"      >              <mat-toolbar >Menu</mat-toolbar>          <mat-nav-list class="lista">        <a class="opcion" mat-list-item [routerLink] = "[\'/\']">          <mat-icon aria-label="Side nav toggle icon" >home</mat-icon>          INICIO</a>        <a class="opcion" mat-list-item >          <mat-icon aria-label="Side nav toggle icon">person</mat-icon>          MI PERFIL</a>        <a class="opcion" mat-list-item [routerLink] = "[\'/postulante\']">          <mat-icon aria-label="Side nav toggle icon" >person_add</mat-icon>          POSTULANTES</a>        <a class="opcion" mat-list-item [routerLink] = "[\'/\']">          <mat-icon aria-label="Side nav toggle icon" >people</mat-icon>          FUNCIONARIOS</a>        <a class="opcion" mat-list-item [routerLink] = "[\'/\']">            <mat-icon aria-label="Side nav toggle icon">school</mat-icon>          APTITUDES</a>        <a class="opcion" mat-list-item [routerLink] = "[\'/\']">            <mat-icon aria-label="Side nav toggle icon">live_help</mat-icon>          AYUDA</a>        <a class="opcion" mat-list-item [routerLink] = "[\'/\']">            <mat-icon aria-label="Side nav toggle icon">settings</mat-icon>          CONFIGURACION</a>        <a class="opcion" mat-list-item (click)=\'logout()\'>            <mat-icon aria-label="Side nav toggle icon">power_settings_new</mat-icon>          CERRAR SESION</a>        <a class="opcion" mat-list-item [routerLink] = "[\'/\']" >            <mat-icon aria-label="Side nav toggle icon">arrow_back</mat-icon>          CONTRAER</a>      </mat-nav-list>  </mat-sidenav>  <mat-sidenav-content >    <mat-toolbar class="barraNavegacion">      <button class="opcion"        type="button"        aria-label="Toggle sidenav"        mat-icon-button        (click)="drawer.toggle()"        *ngIf="isHandset$ | async">        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>      </button>      <span>proyectoMaterial</span>    </mat-toolbar>    <router-outlet></router-outlet>  </mat-sidenav-content></mat-sidenav-container>  </div>'
     var COMPONENTS = [{'name': 'AgregarPostulanteComponent', 'selector': 'app-agregar-postulante'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CrearPostulanteComponent', 'selector': 'app-crear-postulante'},{'name': 'EditarPostulanteComponent', 'selector': 'app-editar-postulante'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'ListarPostulantesComponent', 'selector': 'app-listar-postulantes'},{'name': 'LoginComponent', 'selector': 'app-login'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'HomeComponent'};

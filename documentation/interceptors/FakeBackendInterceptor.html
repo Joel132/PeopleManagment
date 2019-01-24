@@ -257,7 +257,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     return of(null).pipe(mergeMap(() &#x3D;&gt; {
 
       // fake authenticate api end point
-      /* if (request.url.endsWith(&#x27;/api/v1/auth/login&#x27;) &amp;&amp; request.method &#x3D;&#x3D;&#x3D; &#x27;POST&#x27;) {
+      /*  if (request.url.endsWith(&#x27;/api/v1/auth/login&#x27;) &amp;&amp; request.method &#x3D;&#x3D;&#x3D; &#x27;POST&#x27;) {
         let params &#x3D; request.body;
 
         // check user credentials and return fake jwt token if valid
@@ -274,7 +274,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           return throwError({code: 1, message: &#x27;Credenciales no validas.&#x27;});
         
 
-      } */
+      }  */
 
       if (request.url.endsWith(&#x27;/api/v1/auth/logout&#x27;) &amp;&amp; request.method &#x3D;&#x3D;&#x3D; &#x27;POST&#x27;) {
         return of(new HttpResponse({status: 200, body: true}));

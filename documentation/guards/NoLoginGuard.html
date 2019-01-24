@@ -61,6 +61,13 @@
                 <code>src/app/shared/auth/no-login.guard.ts</code>
             </p>
 
+                <p class="comment">
+                <h3>Description</h3>
+                </p>
+                <p class="comment">
+                    <p>Evita que se ingrese al sistema si no se realiza la autenticación</p>
+
+                </p>
 
 
 
@@ -104,7 +111,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/shared/auth/no-login.guard.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/shared/auth/no-login.guard.ts:13</a></div>
                             </td>
                         </tr>
 
@@ -181,13 +188,15 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/shared/auth/no-login.guard.ts:14</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/shared/auth/no-login.guard.ts:23</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Autoriza el acceso a rutas específicas.</p>
+</div>
 
                             <div class="io-description">
                                     <b>Parameters :</b>
@@ -251,14 +260,23 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from &#x27;@
 import { Observable } from &#x27;rxjs&#x27;;
 import {StorageService} from &quot;../helpers/storage.service&quot;;
 import {Router} from &quot;@angular/router&quot;;
-
+ 
+/**
+ * Evita que se ingrese al sistema si no se realiza la autenticación
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 export class NoLoginGuard implements CanActivate {
+  
   constructor(private router: Router,
     private storageService: StorageService) { }
 
+    /**
+     * Autoriza el acceso a rutas específicas.
+     * @param next {ActivatedRouteSnapshot} 
+     * @param state {RouterStateSnapshot} 
+     */
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable&lt;boolean&gt; | Promise&lt;boolean&gt; | boolean {

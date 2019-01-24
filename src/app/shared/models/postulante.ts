@@ -1,3 +1,9 @@
+/**
+ * Clase Postulante
+ * 
+ * Define la estructura postulante del servidor.
+ */
+
 export class Postulante {
     constructor(
         public apellido: string,
@@ -9,9 +15,10 @@ export class Postulante {
         public id: number,
         public mail: string,
         public nombre: string,
+        public estado: string,
         // Estos no estan en el JSON
-        public foto: string,
-        public estado: string
+        public foto: string
+        
     ) {}
 }
 

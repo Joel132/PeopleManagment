@@ -64,6 +64,13 @@
     <code>src/app/postulantes/listar-postulantes/listar-postulantes.component.ts</code>
 </p>
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente Listar Postulante</p>
+
+    </p>
 
 
     <p class="comment">
@@ -121,6 +128,35 @@
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#dataSource">dataSource</a>
+                            </li>
+                            <li>
+                                <a href="#displayedColumns">displayedColumns</a>
+                            </li>
+                            <li>
+                                <a href="#estados">estados</a>
+                            </li>
+                            <li>
+                                <a href="#lista_Postulantes">lista_Postulantes</a>
+                            </li>
+                            <li>
+                                <a href="#paginator">paginator</a>
+                            </li>
+                            <li>
+                                <a href="#sort">sort</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -130,6 +166,15 @@
                 <tr>
                     <td class="col-md-4">
                         <ul class="index-list">
+                            <li>
+                                <a href="#applyFilter">applyFilter</a>
+                            </li>
+                            <li>
+                                <a href="#aux">aux</a>
+                            </li>
+                            <li>
+                                <a href="#getPostulantes">getPostulantes</a>
+                            </li>
                             <li>
                                 <a href="#ngOnInit">ngOnInit</a>
                             </li>
@@ -151,15 +196,45 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor()</code>
+<code>constructor(postulantesService: <a href="../injectables/RecibirPostulanteService.html">RecibirPostulanteService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/postulantes/listar-postulantes/listar-postulantes.component.ts:8</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/postulantes/listar-postulantes/listar-postulantes.component.ts:23</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>postulantesService</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/RecibirPostulanteService.html" target="_self" >RecibirPostulanteService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -173,6 +248,201 @@
         <h3 id="methods">
             Methods
         </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="applyFilter"></a>
+                        <span class="name">
+                            <b>
+                            applyFilter
+                            </b>
+                            <a href="#applyFilter"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>applyFilter(filterValue: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/postulantes/listar-postulantes/listar-postulantes.component.ts:56</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Recibe filterValue y asigna a la propiedad filter del dataSource, que selecciona los elementos en común</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>filterValue</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <code><p>Valor del estado por el que se desea filtrar</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="aux"></a>
+                        <span class="name">
+                            <b>
+                            aux
+                            </b>
+                            <a href="#aux"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>aux(lista_postulantes: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/postulantes/listar-postulantes/listar-postulantes.component.ts:46</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Crea la matriz de datos de el arreglo recibido en lista_postulantes.
+Se realiza la paginación y la ordenación de los datos.</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>lista_postulantes</td>
+                                                        <td>
+                                                                    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <code><p>La lista de objetos Postulante</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getPostulantes"></a>
+                        <span class="name">
+                            <b>
+                            getPostulantes
+                            </b>
+                            <a href="#getPostulantes"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getPostulantes()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/postulantes/listar-postulantes/listar-postulantes.component.ts:37</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Realiza un request de la lista de postulantes y espera que el servidor responda.
+De un ResponseLista recibe la lista de los postulantes almacenados en servidor.
+Llama a la función aux enviando como contenido la lista.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
@@ -195,7 +465,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/postulantes/listar-postulantes/listar-postulantes.component.ts:12</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/postulantes/listar-postulantes/listar-postulantes.component.ts:27</a></div>
                             </td>
                         </tr>
 
@@ -213,41 +483,447 @@
         </table>
 </section>
 
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="dataSource"></a>
+                        <span class="name">
+                            <b>
+                            dataSource
+                            </b>
+                            <a href="#dataSource"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>dataSource:     <code><a href="../classes/Postulante.html" target="_self" >MatTableDataSource&lt;Postulante&gt;</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../classes/Postulante.html" target="_self" >MatTableDataSource&lt;Postulante&gt;</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/postulantes/listar-postulantes/listar-postulantes.component.ts:18</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="displayedColumns"></a>
+                        <span class="name">
+                            <b>
+                            displayedColumns
+                            </b>
+                            <a href="#displayedColumns"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>displayedColumns:     <code>string[]</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>string[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[&#x27;foto&#x27;, &#x27;nombre&#x27;, &#x27;apellido&#x27;, &#x27;mail&#x27;,&#x27;celular&#x27;,&#x27;estado&#x27;,&#x27;accion&#x27;]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/postulantes/listar-postulantes/listar-postulantes.component.ts:17</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="estados"></a>
+                        <span class="name">
+                            <b>
+                            estados
+                            </b>
+                            <a href="#estados"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>estados:     <code></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>ESTADOS</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/postulantes/listar-postulantes/listar-postulantes.component.ts:20</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="lista_Postulantes"></a>
+                        <span class="name">
+                            <b>
+                            lista_Postulantes
+                            </b>
+                            <a href="#lista_Postulantes"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>lista_Postulantes:     <code><a href="../classes/Postulante.html" target="_self" >Array&lt;Postulante&gt;</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../classes/Postulante.html" target="_self" >Array&lt;Postulante&gt;</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/postulantes/listar-postulantes/listar-postulantes.component.ts:19</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="paginator"></a>
+                        <span class="name">
+                            <b>
+                            paginator
+                            </b>
+                            <a href="#paginator"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>paginator:     <code>MatPaginator</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>MatPaginator</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @ViewChild(MatPaginator)<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/postulantes/listar-postulantes/listar-postulantes.component.ts:22</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="sort"></a>
+                        <span class="name">
+                            <b>
+                            sort
+                            </b>
+                            <a href="#sort"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>sort:     <code>MatSort</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>MatSort</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @ViewChild(MatSort)<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/postulantes/listar-postulantes/listar-postulantes.component.ts:23</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
 
 </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, ViewChild } from &#x27;@angular/core&#x27;;
+import {MatPaginator, MatSort, MatTableDataSource} from &#x27;@angular/material&#x27;;
+import { Postulante } from &#x27;src/app/shared/models/postulante&#x27;;
+import { ESTADOS } from &#x27;src/app/shared/models/estados&#x27;;
+import { RecibirPostulanteService } from &#x27;src/app/shared/helpers/recibir-postulante.service&#x27;;
+/**
+ * Componente Listar Postulante
+ */
 
 @Component({
   selector: &#x27;app-listar-postulantes&#x27;,
   templateUrl: &#x27;./listar-postulantes.component.html&#x27;,
   styleUrls: [&#x27;./listar-postulantes.component.css&#x27;]
 })
+
 export class ListarPostulantesComponent implements OnInit {
+  displayedColumns: string[] &#x3D; [&#x27;foto&#x27;, &#x27;nombre&#x27;, &#x27;apellido&#x27;, &#x27;mail&#x27;,&#x27;celular&#x27;,&#x27;estado&#x27;,&#x27;accion&#x27;];
+  dataSource: MatTableDataSource&lt;Postulante&gt;;
+  lista_Postulantes: Array&lt;Postulante&gt;;
+  estados&#x3D; ESTADOS;
+  
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private postulantesService: RecibirPostulanteService){ }
+  
+  ngOnInit(){
+      this.getPostulantes();
+      
+  }
+  
+  /**
+   * Realiza un request de la lista de postulantes y espera que el servidor responda.
+   * De un ResponseLista recibe la lista de los postulantes almacenados en servidor.
+   * Llama a la función aux enviando como contenido la lista.
+   */
+  getPostulantes(){
+      this.postulantesService.getPostulantes().subscribe(data&#x3D;&gt;this.aux(data.content)); //suscribe
+  }
+  
+  /**
+   * Crea la matriz de datos de el arreglo recibido en lista_postulantes.
+   * Se realiza la paginación y la ordenación de los datos.
+   * @param lista_postulantes {any} La lista de objetos Postulante
+   */
+  aux(lista_postulantes: any){
+      this.dataSource&#x3D;new MatTableDataSource(lista_postulantes);
+      this.dataSource.paginator&#x3D; this.paginator;
+      this.dataSource.sort&#x3D; this.sort;
   }
 
+  /**
+   * Recibe filterValue y asigna a la propiedad filter del dataSource, que selecciona los elementos en común
+   * @param filterValue {string} Valor del estado por el que se desea filtrar
+   */
+  applyFilter(filterValue: string) {
+    if(filterValue){
+        this.dataSource.filter &#x3D; filterValue.trim().toLowerCase();
+    
+      if (this.dataSource.paginator) {
+        this.dataSource.paginator.firstPage();
+      }
+    }else{
+        this.dataSource.filter&#x3D; &quot;&quot;;
+    }
+  }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;p&gt;
-  listar-postulantes works!
-&lt;/p&gt;
-</code></pre>
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;example-container mat-elevation-z10&quot;&gt;
+  &lt;h3 style&#x3D;&quot; font-family: &#x27;Montserrat&#x27;, sans-serif; font-size: 9;&quot; class&#x3D;&quot;mat-display-1&quot;&gt;Lista de Postulantes&lt;/h3&gt;
+  &lt;mat-toolbar&gt;
+      &lt;!--Buscar Form--&gt;
+      &lt;mat-form-field appearance&#x3D;&quot;outline&quot;&gt;
+          &lt;mat-label&gt;Buscar Postulante&lt;/mat-label&gt;
+          &lt;input matInput (keyup)&#x3D;&quot;applyFilter($event.target.value)&quot;&gt;
+          &lt;mat-icon matSuffix&gt;search&lt;/mat-icon&gt;
+      &lt;/mat-form-field&gt;
+      &lt;!--Filtar Form --&gt;
+
+      &lt;mat-form-field appearance&#x3D;&quot;outline&quot;&gt; 
+          &lt;mat-select placeholder&#x3D;&quot;Filtrar por estados&quot; (selectionChange)&#x3D; &quot;applyFilter($event.value)&quot;&gt; 
+              &lt;!--$event.value me devuelve el contenido de [value]--&gt;
+              &lt;mat-option&gt;-- Ninguno --&lt;/mat-option&gt;
+              &lt;mat-option *ngFor&#x3D;&quot;let est of estados&quot; [value]&#x3D;&quot;est.value&quot;&gt;
+                  {{est.viewValue}}
+              &lt;/mat-option&gt;
+          &lt;/mat-select&gt;
+          &lt;mat-icon matSuffix&gt;filter_list&lt;/mat-icon&gt;
+      &lt;/mat-form-field&gt;
+
+      &lt;!--Boton Agregar Postulante--&gt;
+    &lt;button mat-stroked-button class&#x3D;&quot;natura-button-3&quot; routerLink&#x3D;&quot;/postulante/crear&quot;&gt;Agregar Postulante&lt;/button&gt;      
+  &lt;/mat-toolbar&gt;
+  &lt;!--Tabla Postulantes--&gt;
+  
+  &lt;table mat-table [dataSource]&#x3D;&quot;dataSource&quot; matSort&gt;
+  
+      &lt;!-- Columna Foto --&gt;
+      &lt;ng-container matColumnDef&#x3D;&quot;foto&quot;&gt;
+          &lt;th mat-header-cell *matHeaderCellDef&gt; Perfil &lt;/th&gt;
+          &lt;td mat-cell *matCellDef&gt; &lt;mat-icon class&#x3D;&quot;example-icon&quot;&gt;account_circle&lt;/mat-icon&gt; &lt;/td&gt;
+      &lt;/ng-container&gt;
+  
+      &lt;!-- Columna Nombre --&gt;
+      &lt;ng-container matColumnDef&#x3D;&quot;nombre&quot;&gt;
+          &lt;th mat-header-cell *matHeaderCellDef mat-sort-header&gt; Nombre &lt;/th&gt;
+          &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt; {{element.nombre}} &lt;/td&gt;
+      &lt;/ng-container&gt;
+  
+      &lt;!-- Columna Apellido --&gt;
+      &lt;ng-container matColumnDef&#x3D;&quot;apellido&quot;&gt;
+          &lt;th mat-header-cell *matHeaderCellDef mat-sort-header&gt; Apellido &lt;/th&gt;
+          &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt; {{element.apellido}} &lt;/td&gt;
+      &lt;/ng-container&gt;
+  
+      &lt;!-- Columna Mail --&gt;
+      &lt;ng-container matColumnDef&#x3D;&quot;mail&quot;&gt;
+          &lt;th mat-header-cell *matHeaderCellDef&gt; Mail &lt;/th&gt;
+          &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt; {{element.mail}} &lt;/td&gt;
+      &lt;/ng-container&gt;
+      
+      &lt;!-- Columna Telefono --&gt;
+      &lt;ng-container matColumnDef&#x3D;&quot;celular&quot;&gt;
+          &lt;th mat-header-cell *matHeaderCellDef&gt; Celular &lt;/th&gt;
+          &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt; {{element.celular}} &lt;/td&gt;
+      &lt;/ng-container&gt;
+
+      &lt;!-- Columna Estado --&gt;
+      &lt;ng-container matColumnDef&#x3D;&quot;estado&quot;&gt;
+          &lt;th mat-header-cell *matHeaderCellDef mat-sort-header&gt; Estado &lt;/th&gt;
+          &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt; {{element.estado}} &lt;/td&gt;
+      &lt;/ng-container&gt;}
+
+      &lt;!-- Columna Accion --&gt;
+      &lt;ng-container matColumnDef&#x3D;&quot;accion&quot;&gt;
+              &lt;th mat-header-cell *matHeaderCellDef&gt; Acción &lt;/th&gt;
+              &lt;td mat-cell *matCellDef&gt;
+                      &lt;button mat-icon-button class&#x3D;&quot;example-icon&quot;&gt;
+                          &lt;mat-icon class&#x3D;&quot;example-icon&quot;&gt;edit&lt;/mat-icon&gt;
+                      &lt;/button&gt; 
+                      &lt;button mat-icon-button class&#x3D;&quot;example-icon&quot;&gt;
+                          &lt;mat-icon class&#x3D;&quot;example-icon&quot;&gt;delete&lt;/mat-icon&gt;
+                      &lt;/button&gt;
+              &lt;/td&gt;
+      &lt;/ng-container&gt;
+
+      &lt;tr mat-header-row *matHeaderRowDef&#x3D;&quot;displayedColumns; sticky: true&quot;&gt;&lt;/tr&gt;
+      &lt;tr mat-row *matRowDef&#x3D;&quot;let row; columns: displayedColumns;&quot;&gt;&lt;/tr&gt;
+    &lt;/table&gt;
+    &lt;mat-paginator [pageSizeOptions]&#x3D;&quot;[10, 20, 30]&quot; showFirstLastButtons&gt;&lt;/mat-paginator&gt;
+&lt;/div&gt;</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-styleData">
                 <p class="comment">
                     <code>./listar-postulantes.component.css</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss"></code></pre>
+                <pre class="line-numbers"><code class="language-scss">table {
+    width: 100%;
+  }
+  div{
+    width: 100%;
+  }
+  .mat-form-field {
+    margin-left: 20px;
+    font-size: 14px;
+    width: 20%;
+  }
+  th{
+    font-family: &#x27;Montserrat&#x27;, sans-serif;
+    font-size: 9;
+    background: black;
+    color: white;
+  }
+  mat-toolbar{
+    background: white;
+  }
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+
+.natura-button-3{
+  margin-left: 40%;
+  margin-right: 8px;
+  height:50px;
+  bottom: 10px;
+  text-align: center;
+}
+
+.mat-row:nth-child(even){
+  background-color:white;
+  }
+
+.mat-row:nth-child(odd){
+  background-color: #f2f0f0;
+  }
+
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-tree">
@@ -275,7 +951,7 @@ export class ListarPostulantesComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><p>  listar-postulantes works!</p></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="example-container mat-elevation-z10">  <h3 style=" font-family: \'Montserrat\', sans-serif; font-size: 9;" class="mat-display-1">Lista de Postulantes</h3>  <mat-toolbar>      <!--Buscar Form-->      <mat-form-field appearance="outline">          <mat-label>Buscar Postulante</mat-label>          <input matInput (keyup)="applyFilter($event.target.value)">          <mat-icon matSuffix>search</mat-icon>      </mat-form-field>      <!--Filtar Form -->      <mat-form-field appearance="outline">           <mat-select placeholder="Filtrar por estados" (selectionChange)= "applyFilter($event.value)">               <!--$event.value me devuelve el contenido de [value]-->              <mat-option>-- Ninguno --</mat-option>              <mat-option *ngFor="let est of estados" [value]="est.value">                  {{est.viewValue}}              </mat-option>          </mat-select>          <mat-icon matSuffix>filter_list</mat-icon>      </mat-form-field>      <!--Boton Agregar Postulante-->    <button mat-stroked-button class="natura-button-3" routerLink="/postulante/crear">Agregar Postulante</button>        </mat-toolbar>  <!--Tabla Postulantes-->    <table mat-table [dataSource]="dataSource" matSort>        <!-- Columna Foto -->      <ng-container matColumnDef="foto">          <th mat-header-cell *matHeaderCellDef> Perfil </th>          <td mat-cell *matCellDef> <mat-icon class="example-icon">account_circle</mat-icon> </td>      </ng-container>        <!-- Columna Nombre -->      <ng-container matColumnDef="nombre">          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>          <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>      </ng-container>        <!-- Columna Apellido -->      <ng-container matColumnDef="apellido">          <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </th>          <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>      </ng-container>        <!-- Columna Mail -->      <ng-container matColumnDef="mail">          <th mat-header-cell *matHeaderCellDef> Mail </th>          <td mat-cell *matCellDef="let element"> {{element.mail}} </td>      </ng-container>            <!-- Columna Telefono -->      <ng-container matColumnDef="celular">          <th mat-header-cell *matHeaderCellDef> Celular </th>          <td mat-cell *matCellDef="let element"> {{element.celular}} </td>      </ng-container>      <!-- Columna Estado -->      <ng-container matColumnDef="estado">          <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>          <td mat-cell *matCellDef="let element"> {{element.estado}} </td>      </ng-container>}      <!-- Columna Accion -->      <ng-container matColumnDef="accion">              <th mat-header-cell *matHeaderCellDef> Acción </th>              <td mat-cell *matCellDef>                      <button mat-icon-button class="example-icon">                          <mat-icon class="example-icon">edit</mat-icon>                      </button>                       <button mat-icon-button class="example-icon">                          <mat-icon class="example-icon">delete</mat-icon>                      </button>              </td>      </ng-container>      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>    </table>    <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator></div></div>'
     var COMPONENTS = [{'name': 'AgregarPostulanteComponent', 'selector': 'app-agregar-postulante'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CrearPostulanteComponent', 'selector': 'app-crear-postulante'},{'name': 'EditarPostulanteComponent', 'selector': 'app-editar-postulante'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'ListarPostulantesComponent', 'selector': 'app-listar-postulantes'},{'name': 'LoginComponent', 'selector': 'app-login'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ListarPostulantesComponent'};

@@ -1,3 +1,10 @@
+/**
+ * Interfaz estado
+ * 
+ * Contiene los distintos estados por los que pasa un postulante
+ * para el filtro de lista de postulantes.
+ */
+
 export interface IEstado {
     value: string;
     viewValue: string;

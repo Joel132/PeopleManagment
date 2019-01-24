@@ -4,6 +4,10 @@ import { Observable } from 'rxjs';
 import {Router} from "@angular/router";
 import {StorageService} from "../helpers/storage.service";
 
+/**
+ * Guard de Autorización
+ */
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +15,10 @@ export class AuthorizatedGuard implements CanActivate, CanActivateChild {
   constructor(private router: Router,
     private storageService: StorageService) { }
 
-  canActivate() {
+/**
+ * Permite el acceso al Scrum Master y al Adminitrador a ciertas rutas.
+ */
+canActivate() {
   
     console.log(this.storageService.isAuthenticated());
     if (this.storageService.isAuthenticated() ) {
@@ -31,6 +38,10 @@ export class AuthorizatedGuard implements CanActivate, CanActivateChild {
       return false;
     }
   }
+
+  /**
+   * Permite el acceso al Scrum Master y al Adminitrador a ciertas rutas hijas.
+   */
   canActivateChild(){
     console.log(21321);
     if (this.storageService.isAuthenticated() && (this.storageService.getCurrentRol() == 1 ||this.storageService.getCurrentRol() == 2)) {
