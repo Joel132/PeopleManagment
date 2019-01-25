@@ -1,3 +1,76 @@
-<p>
-  listar-funcionarios works!
-</p>
+<div class="example-container mat-elevation-z10">
+    <h3 style=" font-family: 'Montserrat', sans-serif; font-size: 9;" class="mat-display-1">Lista de Funcionarios</h3>
+    <mat-toolbar>
+        <!--Buscar Form-->
+        <mat-form-field appearance="outline">
+            <mat-label>Buscar Funcionario</mat-label>
+            <input matInput (keyup)="applyFilter($event.target.value)">
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        <!--Filtar Form -->
+  
+        <mat-form-field appearance="outline"> 
+            <mat-select placeholder="Filtrar por estados" (selectionChange)= "applyFilter($event.value)"> 
+                <!--$event.value me devuelve el contenido de [value]-->
+                <mat-option>-- Ninguno --</mat-option>
+                <mat-option *ngFor="let est of estados" [value]="est.value">
+                    {{est.viewValue}}
+                </mat-option>
+            </mat-select>
+            <mat-icon matSuffix>filter_list</mat-icon>
+        </mat-form-field>
+  
+        <!--Boton Agregar funcionario-->
+      <button mat-stroked-button class="natura-button-3" routerLink="/funcionarios/crear-funcionarios">Agregar Funcionario</button>      
+    </mat-toolbar>
+    <!--Tabla funcionarios-->
+    
+    <table mat-table [dataSource]="dataSource" matSort>
+    
+        <!-- Columna Foto -->
+        <ng-container matColumnDef="foto">
+            <th mat-header-cell *matHeaderCellDef> Perfil </th>
+            <td mat-cell *matCellDef>
+              <mat-icon class="example-icon">account_circle</mat-icon>  
+            </td>
+        </ng-container>
+    
+        <!-- Columna Nombre -->
+        <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+            <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+        </ng-container>
+    
+        <!-- Columna Apellido -->
+        <ng-container matColumnDef="apellido">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </th>
+            <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+        </ng-container>
+    
+        <!-- Columna Fecha fin de contrato -->
+        <ng-container matColumnDef="fecha_fin_contrato">
+            <th mat-header-cell *matHeaderCellDef> Fin de Contrato </th>
+            <td mat-cell *matCellDef="let element"> {{element.fecha_fin_contrato}} </td>
+        </ng-container>
+        
+        <!-- Columna Telefono -->
+        <ng-container matColumnDef="celular">
+            <th mat-header-cell *matHeaderCellDef> Celular </th>
+            <td mat-cell *matCellDef="let element"> {{element.celular}} </td>
+        </ng-container>
+
+        <!-- Columna Accion -->
+        <ng-container matColumnDef="accion">
+                <th mat-header-cell *matHeaderCellDef> Acción </th>
+                <td mat-cell *matCellDef>
+                        <button mat-icon-button class="example-icon" routerLink="/">
+                            <mat-icon class="example-icon">edit</mat-icon>
+                        </button> 
+                </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"
+          (click)="onclickfuncionario()"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+  </div>

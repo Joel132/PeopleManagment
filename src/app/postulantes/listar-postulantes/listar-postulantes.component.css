@@ -33,6 +33,6 @@ table {
   text-align: center;
 }
 
-tr.example-element-row:not(.example-expanded-row):hover {
+tr:hover {
   background: #f2f0f0;
 }

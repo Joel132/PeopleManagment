@@ -21,9 +21,19 @@ const routes: Routes = [
           { path: '', component: ListarPostulantesComponent, canActivateChild: [AuthorizatedGuard] },
           { path: 'editar/:id', component: EditarPostulanteComponent, canActivateChild: [AuthorizatedGuard] }
         ]
+      },
+      {
+        path:'funcionario',
+        canActivateChild: [AuthorizatedGuard],
+        children: [
+          { path: 'crear', component: CrearPostulanteComponent },
+          { path: '', component: ListarPostulantesComponent, canActivateChild: [AuthorizatedGuard] },
+          { path: 'editar/:id', component: EditarPostulanteComponent, canActivateChild: [AuthorizatedGuard] }
+        ]
       }
       
     ]
+    
   },
   { path: 'login', component: LoginComponent, canActivate: [ NoLoginGuard ] },
   { path: '**', redirectTo: '/'}
