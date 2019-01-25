@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AgregarPostulanteService } from '../../shared/helpers/agregar.service';
 import { Postulante } from 'src/app/shared/models/postulante';
 import {MatSnackBar} from '@angular/material';
@@ -16,13 +16,6 @@ import { Router } from '@angular/router';
 
 export class CrearPostulanteComponent implements OnInit {
 
-  constructor(private servicioAgregar: AgregarPostulanteService,private snackBar: MatSnackBar,private router: Router ) { }
-
-  ngOnInit() {
-
-    
-  }
-
   formPostulantes = new FormGroup({
     id: new FormControl(0),
     nombre : new FormControl(),
@@ -38,12 +31,18 @@ export class CrearPostulanteComponent implements OnInit {
     comentario: new FormControl()
   });
 
+  
+  constructor(private servicioAgregar: AgregarPostulanteService,private snackBar: MatSnackBar,private router: Router ) { }
+
+  ngOnInit() {
+
+  }
   /**
    * Pasa los valores del formulario al método agregarPostulante
    */
   onSubmit() {
-    // TODO: Use EventEmitter with form value
-    this.servicioAgregar.agregarPostulante(this.formPostulantes.value).subscribe(data => this.recibidoCorrectamente(data),error=>this.errorRecibido(error));
+    this.validarFormulario();
+    //this.servicioAgregar.agregarPostulante(this.formPostulantes.value).subscribe(data => this.recibidoCorrectamente(data),error=>this.errorRecibido(error));
   }
 
   /**
@@ -81,4 +80,35 @@ export class CrearPostulanteComponent implements OnInit {
   volverAlListado(){
     this.router.navigate(['/postulante']);
   }
-}
+
+  validarFormulario(){
+
+    let mensaje: String;
+    let nombre = this.formPostulantes.get('nombre') as FormControl;
+    let apellido = this.formPostulantes.get('apellido') as FormControl;
+    let celular = this.formPostulantes.get('celular') as FormControl;
+    
+   //se valida el campo nombre
+   if(/\d/.test(nombre.value)){
+     console.log("nombre invalido");
+     mensaje = "Nombre no valido";
+    }
+    
+    //se valida el campo nombre
+    if(/\d/.test(apellido.value)){
+      console.log("apellido invalido");
+      mensaje = "Apellido no valido";
+   }
+   
+   //se valida el campo celular
+   if(/^[0-9]+$/.test(apellido.value)){
+     console.log("celular invalido");
+     mensaje = "Celular no valido";
+  }
+
+
+    
+
+  } 
+
+}//fin de la clase

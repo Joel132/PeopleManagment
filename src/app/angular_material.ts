@@ -27,6 +27,17 @@ import {
 } from '@angular/material';
 import {TextFieldModule} from '@angular/cdk/text-field';
 import { NgModule } from '@angular/core';
+
+
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+
+
+
+
+
+
+
 @NgModule({
   imports: [MatDatepickerModule,MatRadioModule,MatSliderModule,  
     MatNativeDateModule,MatSnackBarModule,MatDialogModule , 
@@ -36,7 +47,8 @@ import { NgModule } from '@angular/core';
     MatSelectModule, MatGridListModule,
     MatButtonModule, MatCheckboxModule,MatInputModule,
     MatCardModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatMenuModule,
-    MatDividerModule, MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, TextFieldModule
+    MatDividerModule, MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, TextFieldModule,
+    FlexLayoutModule
     
   ],
   
@@ -49,7 +61,8 @@ import { NgModule } from '@angular/core';
       MatSelectModule, MatGridListModule,
       MatButtonModule, MatCheckboxModule,MatInputModule,
       MatCardModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatMenuModule,
-      MatDividerModule, MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, TextFieldModule
+      MatDividerModule, MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, TextFieldModule,
+      FlexLayoutModule
       
   ]
 

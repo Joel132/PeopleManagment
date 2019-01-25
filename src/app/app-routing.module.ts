@@ -18,7 +18,7 @@ const routes: Routes = [
         canActivateChild: [AuthorizatedGuard],
         children: [
           { path: 'crear', component: CrearPostulanteComponent },
-          { path: '', component: ListarPostulantesComponent, canActivateChild: [AuthorizatedGuard] },
+          { path: 'listar', component: ListarPostulantesComponent, canActivateChild: [AuthorizatedGuard] },
           { path: 'editar/:id', component: EditarPostulanteComponent, canActivateChild: [AuthorizatedGuard] }
         ]
       },

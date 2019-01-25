@@ -15,16 +15,16 @@
 }
 
 .lista{
-  background: #353535; 
 }
 
 .barraNavegacion{
-  background:black;
+  position: fixed;
+  background: black;
 }
 
 .opcion{
   color: rgba(179, 179 , 179, 100);
-  padding: 70px;
+  margin-top: 10px;
 }
 
 .opcion:hover{
@@ -67,4 +67,39 @@ img{
   width: 80px;
   border: 2px solid #000;
   border-radius: 50%;
+}
+mat-toolbar{
+  background: #353535;
+}
+
+mat-icon{
+  padding-right: 10px;
+  color: white;
+
+}
+/*CODIGO PARA LA VERSION CONTRAIDA*/
+
+
+.example-container {
+
+}
+
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  background: #353535;
+}
+
+ul li mat-icon:hover{
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f3c5bd+0,e86c57+0,7b1a52+0,db1943+54,ea5a18+100 */
+  background: #f3c5bd; /* Old browsers */
+  background: -moz-linear-gradient(left, #f3c5bd 0%, #e86c57 0%, #7b1a52 0%, #db1943 54%, #ea5a18 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, #f3c5bd 0%,#e86c57 0%,#7b1a52 0%,#db1943 54%,#ea5a18 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, #f3c5bd 0%,#e86c57 0%,#7b1a52 0%,#db1943 54%,#ea5a18 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3c5bd', endColorstr='#ea5a18',GradientType=1 ); /* IE6-9 */
+  color: white;
+
 }
