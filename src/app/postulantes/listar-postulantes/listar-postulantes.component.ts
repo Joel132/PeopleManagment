@@ -23,8 +23,7 @@ export class ListarPostulantesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private postulantesService: RecibirPostulanteService, 
-              private router: Router){ }
+  constructor(private postulantesService: RecibirPostulanteService, private router: Router){ }
   
   ngOnInit(){
       this.getPostulantes();
