@@ -6,6 +6,7 @@ import { RecibirPostulanteService } from 'src/app/shared/helpers/recibir-postula
 /**
  * Componente Listar Postulante
  */
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listar-postulantes',
@@ -22,7 +23,8 @@ export class ListarPostulantesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private postulantesService: RecibirPostulanteService){ }
+  constructor(private postulantesService: RecibirPostulanteService, 
+              private router: Router){ }
   
   ngOnInit(){
       this.getPostulantes();
@@ -63,5 +65,9 @@ export class ListarPostulantesComponent implements OnInit {
     }else{
         this.dataSource.filter= "";
     }
+  }
+
+  onclickPostulante(){
+    this.router.navigate(['/']);
   }
 }

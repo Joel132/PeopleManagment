@@ -33,11 +33,6 @@ table {
   text-align: center;
 }
 
-.mat-row:nth-child(even){
-  background-color:white;
-  }
-
-.mat-row:nth-child(odd){
-  background-color: #f2f0f0;
-  }
-
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: #f2f0f0;
+}
