@@ -23,7 +23,7 @@ import { ListarFuncionariosComponent } from './funcionarios/listar-funcionarios/
 import { EditarFuncionariosComponent } from './funcionarios/editar-funcionarios/editar-funcionarios.component';
 import { VerFuncionarioComponent } from './funcionarios/ver-funcionario/ver-funcionario.component';
 import { VerPostulanteComponent } from './postulantes/ver-postulante/ver-postulante.component';
-
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -47,7 +47,8 @@ import { VerPostulanteComponent } from './postulantes/ver-postulante/ver-postula
     FormsModule, 
     ReactiveFormsModule, LayoutModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, 
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FlexLayoutModule
   ],
   providers: [fakeBackendProvider, AgregarPostulanteService],
   bootstrap: [AppComponent]

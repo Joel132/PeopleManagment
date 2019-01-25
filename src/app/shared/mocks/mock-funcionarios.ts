@@ -1,6 +1,6 @@
-import { Usuario } from '../models/usuario';
+import { Funcionario } from '../models/funcionario';
 
-export const USUARIOS: Array<Usuario> = [
+export const FUNCIONARIOS: Array<Funcionario> = [
     {
         foto:'',
         nombre:'',
