@@ -5,6 +5,10 @@ import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 import {LoginObject} from "../models/login";
 import {USERS} from "../mocks/mock-users";
 import { StorageService } from './storage.service';
+import { RESPUESTA_POSTULANTES } from '../mocks/mock-response-postulantes';
+import { POSTULANTES } from "../mocks/mock-postulantes";
+import { RESPUESTA_USUARIOS } from '../mocks/mock-response-usuarios';
+import { USUARIOS } from '../mocks/mock-usuarios';
 
 @Injectable(
   {providedIn: 'root'}
@@ -40,13 +44,38 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           return throwError({code: 1, message: 'Credenciales no validas.'});
         
 
-      }  
+        }  
 
       if (request.url.endsWith('/api/v1/auth/logout') && request.method === 'POST') {
         return of(new HttpResponse({status: 200, body: true}));
       }
+      
+      
+      //Fake response para listar postulantes con los campos faltantes en el backend
+      if(request.url.includes("/api/v1/postulante") && request.method === 'GET' ){
+        return of(new HttpResponse({status: 200, body: RESPUESTA_POSTULANTES}));
+      }
+      
+      //Fake response para añadir postulantes con los campos faltantes en el backend
+      if(request.url.includes("/api/v1/postulante") && request.method === 'POST' ){
+        POSTULANTES.push(request.body);
+        return of(new HttpResponse({status: 200, body: request.body}));
+      }
+      //Fake response para listar usuarios con los campos faltantes en el backend
+      if(request.url.includes("/api/v1/funcionarios") && request.method === 'GET' ){
+        return of(new HttpResponse({status: 200, body: RESPUESTA_USUARIOS}));
+      }
+      
+      //Fake response para añadir postulantes con los campos faltantes en el backend
+      if(request.url.includes("/api/v1/funcionarios") && request.method === 'POST' ){
+        USUARIOS.push(request.body);
+        return of(new HttpResponse({status: 200, body: request.body}));
+      }
+
 
       if(request.url.includes("/api/v1/postulante")){
+
+        
         const req=request.clone({setHeaders:{
           'Authorization' : `Bearer ${this.storageService.getCurrentToken()}`
         }})

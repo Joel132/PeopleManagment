@@ -8,7 +8,7 @@ export class Postulante {
     constructor(
         public apellido: string,
         public celular: string,
-        public comentario: string,
+        public comentarioGral: string,
         public curriculumUrl: string,
         public desafioUrl: string,
         public documento: string,
@@ -17,7 +17,11 @@ export class Postulante {
         public nombre: string,
         public estado: string,
         // Estos no estan en el JSON
-        public foto: string
+        public foto: string,
+        public comentarioDesafio: string,
+        public comentarioAdmin: string,
+        public comentarioSM: string,
+        public comentarioTeam: string
         
     ) {}
 }

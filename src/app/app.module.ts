@@ -18,6 +18,11 @@ import { HttpClientModule} from '@angular/common/http';
 import { CrearPostulanteComponent } from './postulantes/crear-postulante/crear-postulante.component';
 import { EditarPostulanteComponent } from './postulantes/editar-postulante/editar-postulante.component';
 import { ListarPostulantesComponent } from './postulantes/listar-postulantes/listar-postulantes.component';
+import { CrearFuncionariosComponent } from './funcionarios/crear-funcionarios/crear-funcionarios.component';
+import { ListarFuncionariosComponent } from './funcionarios/listar-funcionarios/listar-funcionarios.component';
+import { EditarFuncionariosComponent } from './funcionarios/editar-funcionarios/editar-funcionarios.component';
+import { VerFuncionarioComponent } from './funcionarios/ver-funcionario/ver-funcionario.component';
+import { VerPostulanteComponent } from './postulantes/ver-postulante/ver-postulante.component';
 
 
 @NgModule({
@@ -27,7 +32,12 @@ import { ListarPostulantesComponent } from './postulantes/listar-postulantes/lis
     HomeComponent,
     CrearPostulanteComponent,
     EditarPostulanteComponent,
-    ListarPostulantesComponent
+    ListarPostulantesComponent,
+    CrearFuncionariosComponent,
+    ListarFuncionariosComponent,
+    EditarFuncionariosComponent,
+    VerFuncionarioComponent,
+    VerPostulanteComponent
 
   ],
   imports: [
