@@ -30,7 +30,9 @@
       <!-- Columna Foto -->
       <ng-container matColumnDef="foto">
           <th mat-header-cell *matHeaderCellDef> Perfil </th>
-          <td mat-cell *matCellDef> <mat-icon class="example-icon">account_circle</mat-icon> </td>
+          <td mat-cell *matCellDef>
+            <a routerLink="/postulante/crear"> <mat-icon class="example-icon">account_circle</mat-icon> </a>    
+          </td>
       </ng-container>
   
       <!-- Columna Nombre -->
@@ -67,6 +69,9 @@
       <ng-container matColumnDef="accion">
               <th mat-header-cell *matHeaderCellDef> Acción </th>
               <td mat-cell *matCellDef>
+                      <button mat-icon-button class="example-icon">
+                          <mat-icon class="example-icon">visibility</mat-icon>
+                      </button>
                       <button mat-icon-button class="example-icon">
                           <mat-icon class="example-icon">edit</mat-icon>
                       </button> 
