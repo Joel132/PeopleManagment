@@ -17,13 +17,13 @@
         <a class="opcion" mat-list-item >
           <mat-icon aria-label="Side nav toggle icon">person</mat-icon>
           MI PERFIL</a>
-        <a class="opcion" mat-list-item [routerLink] = "['/postulante']">
+        <a *ngIf="getRol() == 'user1' || getRol() === 'user2'" class="opcion" mat-list-item [routerLink] = "['/postulante']">
           <mat-icon aria-label="Side nav toggle icon" >person_add</mat-icon>
           POSTULANTES</a>
-        <a class="opcion" mat-list-item [routerLink] = "['/funcionario']">
+        <a *ngIf="getRol() == 'user1' || getRol() === 'user2'" class="opcion" mat-list-item [routerLink] = "['/funcionario']">
           <mat-icon aria-label="Side nav toggle icon" >people</mat-icon>
           FUNCIONARIOS</a>
-        <a class="opcion" mat-list-item [routerLink] = "['/']">
+        <a *ngIf="getRol() == 'user1' || getRol() === 'user2'" class="opcion" mat-list-item [routerLink] = "['/']">
             <mat-icon aria-label="Side nav toggle icon">school</mat-icon>
           APTITUDES</a>
         <a class="opcion" mat-list-item [routerLink] = "['/']">

@@ -83,7 +83,7 @@ export class StorageService {
    * 
    * @param rol {number} Tipo de sesión
    */
-  setCurrentRol(rol: number){
+  setCurrentRol(rol: string){
     var session: Session = this.getCurrentSession();
     session.rol = rol;
   }
@@ -94,7 +94,7 @@ export class StorageService {
    * Obtiene el rol de la sesión actual.
    * @return {number}
    */
-  getCurrentRol(): number{
+  getCurrentRol(): string{
     var session: Session = this.getCurrentSession();
     return session.rol;
   }

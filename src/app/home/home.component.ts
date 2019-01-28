@@ -39,6 +39,9 @@ export class HomeComponent {
       response => {if(response) {this.storageService.logout();}}
     );
   }
-            
- 
+
+  public getRol(){
+    console.log(this.storageService.getCurrentRol());
+    return this.storageService.getCurrentRol();
+  }
 }
