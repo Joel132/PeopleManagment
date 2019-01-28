@@ -44,7 +44,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           return throwError({code: 1, message: 'Credenciales no validas.'});
         
 
-        }  
+      }  
 
       if (request.url.endsWith('/api/v1/auth/logout') && request.method === 'POST') {
         return of(new HttpResponse({status: 200, body: true}));
