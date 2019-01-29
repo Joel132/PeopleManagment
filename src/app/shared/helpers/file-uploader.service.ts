@@ -1,11 +1,11 @@
 import * as _ from 'lodash';
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpRequest, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpRequest, HttpResponse, HttpHeaderResponse } from '@angular/common/http';
 import { Injectable, Output } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { HttpEventType } from '@angular/common/http';
 import { Subscription } from 'rxjs/Subscription';
-
+import { map } from 'rxjs/operators'
 export enum FileQueueStatus {
   Pending,
   Success,
@@ -19,7 +19,7 @@ export class FileQueueObject {
   public progress: number = 0;
   public request: Subscription = null;
   public response: HttpResponse<any> | HttpErrorResponse = null;
-
+  public tipo : string; 
   constructor(file: any) {
     this.file = file;
   }
@@ -42,7 +42,7 @@ export class FileQueueObject {
 @Injectable()
 export class FileUploaderService {
 
-  public url: string = 'https://jsonplaceholder.typicode.com/posts';
+  public url: string = 'http://10.128.3.82:8080/api/v1/upload/upload';
 
   private _queue: BehaviorSubject<FileQueueObject[]>;
   private _files: FileQueueObject[] = [];
@@ -62,9 +62,9 @@ export class FileUploaderService {
   }
 
   // public functions
-  public addToQueue(data: any) {
+  public addToQueue(data: any,tipo: string) {
     // add file to the queue
-    _.each(data, (file: any) => this._addToQueue(file));
+    _.each(data, (file: any) => this._addToQueue(file,tipo));
   }
 
   public clearQueue() {
@@ -83,21 +83,28 @@ export class FileUploaderService {
   }
 
   // private functions
-  private _addToQueue(file: any) {
+  private _addToQueue(file: any,tipo: string) {
     const queueObj = new FileQueueObject(file);
 
     // set the individual object events
     queueObj.upload = () => this._upload(queueObj);
     queueObj.remove = () => this._removeFromQueue(queueObj);
     queueObj.cancel = () => this._cancel(queueObj);
-
+    queueObj.tipo=tipo;
     // push to the queue
     this._files.push(queueObj);
     this._queue.next(this._files);
   }
 
   private _removeFromQueue(queueObj: FileQueueObject) {
-    _.remove(this._files, queueObj);
+    console.log(queueObj);
+    if(queueObj != null)
+      _.remove(this._files, queueObj);
+  }
+
+
+  public delete(tipo: string){
+    this._removeFromQueue(this._files.find(data=>data.tipo==tipo));
   }
 
   private _upload(queueObj: FileQueueObject) {
@@ -107,19 +114,28 @@ export class FileUploaderService {
 
     // upload file and report progress
     const req = new HttpRequest('POST', this.url, form, {
-      reportProgress: true,
+      reportProgress: true, responseType: 'text'
     });
 
     // upload file and report progress
     queueObj.request = this.http.request(req).subscribe(
       (event: any) => {
+        console.log(event);
         if (event.type === HttpEventType.UploadProgress) {
+          console.log("Es un evento");
           this._uploadProgress(queueObj, event);
         } else if (event instanceof HttpResponse) {
+          console.log("Es un response");
           this._uploadComplete(queueObj, event);
         }
+        else if(event instanceof HttpHeaderResponse){
+          console.log("Es una Cabezera");
+          if(event.status === 200){}
+        }
+        
       },
       (err: HttpErrorResponse) => {
+        console.log(err);
         if (err.error instanceof Error) {
           // A client-side or network error occurred. Handle it accordingly.
           this._uploadFailed(queueObj, err);

@@ -18,10 +18,14 @@ export class EditarPostulanteComponent implements OnInit {
 
  email = new FormControl('', [Validators.required, Validators.email]);
   
- 
+ desafioUrl: string;
+ cvUrl: string;
+ fotoUrl: string;
   @Output() onCompleteItem = new EventEmitter();
 
-  @ViewChild('fileInput') fileInput;
+  @ViewChild('desafioInput') desafioInput;
+  @ViewChild('curriculumInput') curriculumInput;
+  //@ViewChild('desafioInput') desafioInput;
   queue: Observable<FileQueueObject[]>;
 
    percentDone: number;
@@ -133,6 +137,7 @@ export class EditarPostulanteComponent implements OnInit {
 
       reader.onload = (event:any) => { // called once readAsDataURL is completed
         this.url = event.target.result;
+        console.log(event.target);
       }
     }
   }
@@ -156,9 +161,52 @@ export class EditarPostulanteComponent implements OnInit {
     this.onCompleteItem.emit({ item, response });
   }
 
-  addToQueue() {
-    const fileBrowser = this.fileInput.nativeElement;
-    this.uploader.addToQueue(fileBrowser.files);
+  addToQueueDesafio() {
+    const fileBrowser = this.desafioInput.nativeElement;
+    this.uploader.delete("desafio");
+    this.uploader.addToQueue(fileBrowser.files,"desafio");
+  }
+
+  addToQueueCV() {
+    const fileBrowser = this.curriculumInput.nativeElement;
+    this.uploader.delete("CV");
+    console.log(fileBrowser.files);
+    this.uploader.addToQueue(fileBrowser.files,"CV");
+  }
+  
+  /**
+   * Metodo para asignar las respuestas del servidor en una variable local  una vez que se suba un archivo
+   * @param isSuccess 
+   * @param item 
+   */
+  procesarUrl(isSuccess: any,item:FileQueueObject){
+    if(isSuccess){
+      switch (item.tipo){
+        case 'CV':{
+          this.cvUrl=(item.response as HttpResponse<any>).body;
+          console.log(this.cvUrl);
+          break;
+        }
+        case 'desafio':{
+          this.desafioUrl=(item.response as HttpResponse<any>).body;
+          console.log(this.desafioUrl);
+          break;
+        }
+        case 'imagen':{
+          break;
+        }
+
+      }
+        
+
+    }
+    return isSuccess;
+  }
+
+  vaciarDatosAdjuntos(){
+    this.curriculumInput.nativeElement.value='';
+    this.desafioInput.nativeElement.value='';
+    this.uploader.clearQueue();
   }
 }
 

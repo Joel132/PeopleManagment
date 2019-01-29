@@ -94,16 +94,19 @@
     </mat-tab>
     <!--fin pestana 1--> 
     <mat-tab label="Datos Adjuntos">
-    <form [formGroup] = 'formEditarPostulante' (ngSubmit)="onSubmit()"> 
+    <form [formGroup] = 'formEditarPostulante'> 
     <div fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
       <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center"  >
         <div fxFlex="40%" class="bloque">
           <h4>Subir CV y Desafio</h4>
-          <input type="file" #fileInput multiple (change)="addToQueue()" />
+          <label>Desafio</label>
+          <input type="file" #desafioInput (change)="addToQueueDesafio()"  />
+          <label>Curriculum</label>
+          <input type="file" #curriculumInput (change)="addToQueueCV()" />
           <br>
           <br>
           <div>    
-              <button   (click)="uploader.clearQueue()">Eliminar Archivos</button>
+              <button   (click)="vaciarDatosAdjuntos()">Eliminar Archivos</button>
               <button   (click)="uploader.uploadAll()">Subir Archivos</button> 
             </div>
         </div>
@@ -111,6 +114,7 @@
             <table>
                 <thead>
                   <tr>
+                    <th>Tipo</th>
                     <th>Name</th>
                     <th>Size</th>
                     <th>Progress</th>
@@ -120,12 +124,13 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let item of queue | async">
+                    <td>{{ item?.tipo }}</td>
                     <td>{{ item?.file?.name }}</td>
                     <td>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
                     <td>{{ item.progress + ' %' }}</td>
                     <td>
                       <span *ngIf="item.isPending()" class="tag tag-default"></span>
-                      <span *ngIf="item.isSuccess()" class="tag tag-success"></span>
+                      <span *ngIf="procesarUrl(item.isSuccess(),item)" class="tag tag-success"></span>
                       <span *ngIf="item.inProgress()" class="tag tag-warning"></span>
                       <span *ngIf="item.isError()" class="tag tag-danger"></span>
                     </td>
