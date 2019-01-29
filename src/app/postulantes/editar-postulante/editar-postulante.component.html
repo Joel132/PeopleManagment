@@ -8,7 +8,7 @@
           <div class="hover-text">Cambiar Foto</div>
           <div class="background"></div>
           </label>
-          <br/>
+          <br>
           <input id="fileInput" type='file' (change)="onSelectFile($event)">  
         </div>
         <div fxLayoutAlign="center">
@@ -23,27 +23,36 @@
               <mat-label>Nombre</mat-label>
               <input formControlName = "nombre" matInput placeholder="Nombre" type="text" required>
               <mat-icon matSuffix class="icono">person</mat-icon>
+              <mat-error style="color: rgb(59, 61, 71);" *ngIf="formEditarPostulante.get('nombre').errors && formEditarPostulante.get('nombre').dirty">
+                <p *ngIf=" formEditarPostulante.get('nombre').hasError('required')">Completar campo</p>
+                <p *ngIf=" formEditarPostulante.get('nombre').hasError('pattern')">No se aceptan numeros</p>
+              </mat-error>
             </mat-form-field>
+            
 
             <mat-form-field>
               <mat-label>Apellido</mat-label>
               <input formControlName = "apellido" matInput placeholder="Apellido" type="text" required>
               <mat-icon matSuffix class="icono">person</mat-icon>
+              <mat-error style="color: rgb(59, 61, 71);" *ngIf="formEditarPostulante.get('nombre').errors && formEditarPostulante.get('nombre').dirty">
+                <p *ngIf=" formEditarPostulante.get('apellido').hasError('required')">Completar campo</p>
+                <p *ngIf=" formEditarPostulante.get('apellido').hasError('pattern')" [ngStyle]="{'color': 'black'}" align="start">No es un nombre valido</p>
+              </mat-error>
             </mat-form-field>
-            
+           
    
             <mat-form-field>
-              <input matInput placeholder="Email" [formControl]="email" required>
+              <input matInput placeholder="Email" formControlName="mail" required>
               <mat-icon matSuffix class="icono">email</mat-icon>
-              <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+              <mat-error *ngIf="formEditarPostulante.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
-
+           
 
             <mat-form-field>
               <input formControlName = "direccion" matInput placeholder="Direccion" type="text">
               <mat-icon matSuffix class="icono" >location_on</mat-icon>
             </mat-form-field> 
-          
+            
           </div>
           <!--sgt bloque 2-->
           <div fxFlex="40%" class="bloque">
@@ -52,25 +61,22 @@
               <mat-icon matSuffix class="icono">contact_mail</mat-icon>
               <input formControlName = "documento" matInput placeholder="CI" type="text">
             </mat-form-field>
-              
+            
+
             <mat-form-field>
               <mat-label>Telefono</mat-label>
-              <input formControlName = "celular" matInput placeholder="ej; +595961565376" type="tel">
-              <mat-icon matSuffix class="icono">call</mat-icon>
-            </mat-form-field>
-
-            <mat-form-field class="example-full-width">
-              <span matPrefix>+5959 &nbsp;</span>
-              <input type="tel" matInput placeholder="Telephone">
+              <input formControlName = "celular" matInput placeholder="ej; +595961565376" type="tel"
+              ng-minlength="10" ng-maxlength="10"  >
               <mat-icon matSuffix class="icono">call</mat-icon>
             </mat-form-field>
             
+
             <mat-form-field class="Fecha de Nacimiento">
               <input formControlName = "fecha_nac" matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Fecha de Nacimiento">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
-
+            
             <mat-form-field>
               <mat-select formControlName = "estado" placeholder="Estado"  disableRipple>
                 <mat-option value="Pendiente Desafio">Desafio Pendiente</mat-option>
@@ -86,8 +92,8 @@
           </div>
         </div>   
         <mat-action-row>
-            <button mat-button color="warn" (click)="prevStep()">Cancelar</button>
-            <button mat-button color="primary" (click)="nextStep()">Guardar</button>
+          <button mat-stroked-button color="warn" (click)="volverAlListado()">Cancelar</button>
+          <button mat-raised-button class="natura-button-3" type="submit" [disabled]="formEditarPostulante.invalid">Guardar</button>    
         </mat-action-row>    
       </form>
       <!--fin bloques y form--> 
@@ -155,7 +161,7 @@
   </mat-tab>
     <!--pestana comentarios-->
     <mat-tab label="Comentarios"> 
-    <form [formGroup] = 'formEditarPostulante' (ngSubmit)="onSubmit()"> 
+    <form [formGroup] = 'formEditarPostulante'> 
       <!--comentario desafio--> 
       <h4>Editar comentario de Desafio</h4>
         <mat-accordion>

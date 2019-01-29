@@ -3,7 +3,10 @@ import {HttpClientModule, HttpRequest, HttpResponse, HttpEventType} from '@angul
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FileQueueObject, FileUploaderService } from '../../shared/helpers/file-uploader.service';
 import { Observable } from 'rxjs/Observable';
-import { Validators,FormControl, FormGroup } from '@angular/forms';
+import { EditarPostulanteService } from 'src/app/shared/helpers/editar-postulante.service';
+import { Postulante } from 'src/app/shared/models/postulante';
+import { ActivatedRoute } from '@angular/router';
+import { Validators,FormControl, FormGroup, FormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -14,7 +17,10 @@ import { Validators,FormControl, FormGroup } from '@angular/forms';
 
 
 export class EditarPostulanteComponent implements OnInit {
- //email validations
+  //email validations
+
+  //email = new FormControl();
+  public formEditarPostulante: FormGroup;
 
  email = new FormControl('', [Validators.required, Validators.email]);
   
@@ -28,37 +34,33 @@ export class EditarPostulanteComponent implements OnInit {
   //@ViewChild('desafioInput') desafioInput;
   queue: Observable<FileQueueObject[]>;
 
-   percentDone: number;
-   uploadSuccess: boolean;
+  percentDone: number;
+  uploadSuccess: boolean;
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private http:HttpClient,public uploader: FileUploaderService, private editarServicio: EditarPostulanteService) { }
 
+   
   
+  onSubmit() {
+    // TODO: Use EventEmitter with form value
+    console.log( this.formEditarPostulante.value);
+   this.editarServicio.editarPostulante(this.
+   formEditarPostulante.value).subscribe(data => this.recibidoCorrectamente(data),error=>this.errorRecibido(error));
+      
+  }
+  recibidoCorrectamente(data: Postulante){
+    console.log("Editado "+data);
+    //this.formPostulantes.reset();
+  }
 
+  errorRecibido(error){
+''
+  }
 
-  constructor(private http:HttpClient,public uploader: FileUploaderService) { }
-
-    formEditarPostulante = new FormGroup({
-    id: new FormControl(0),
-    nombre : new FormControl(),
-    apellido : new FormControl(),
-    documento : new FormControl(),
-    celular : new FormControl(),
-    fecha_nac : new FormControl(),
-    email : new FormControl(),
-    direccion : new FormControl(),
-    estado : new FormControl(),
-    desafioUrl: new FormControl(),
-    curriculumUrl: new FormControl(),
-    comentario: new FormControl(),
-    comentarioSM:new FormControl(),
-    comentarioAdmin: new FormControl(),
-    comentarioTeam: new FormControl(),
-    comentarioDesafio: new FormControl()
-  });
 
   getErrorMessage() {
-    return this.email.hasError('required') ? 'You must enter a value' :
-        this.email.hasError('email') ? 'Not a valid email' :
-            '';
+    return (this.formEditarPostulante.get("mail") as (FormControl)).hasError('required') ? 'You must enter a value' :
+        (this.formEditarPostulante.get("mail") as (FormControl)).hasError('email') ? 'Not a valid email' :'';
+          //return this.formEditarPostulante.errors;
   } 
     
   //file upload
@@ -156,6 +158,26 @@ export class EditarPostulanteComponent implements OnInit {
   ngOnInit() {
     this.queue = this.uploader.queue;
     this.uploader.onCompleteItem = this.completeItem;
+
+    this.formEditarPostulante = this.formBuilder.group({
+      id: new FormControl(+this.route.snapshot.paramMap.get('id')),
+      nombre : new FormControl('', [Validators.required,Validators.pattern('[/a-zA-Z]*')]),
+      apellido : new FormControl('', [Validators.required,Validators.pattern('[/a-zA-Z]*')] ),
+      documento : new FormControl('', [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
+      celular : new FormControl(),
+      fecha_nac : new FormControl(),
+      mail : new FormControl('', [Validators.required, Validators.email]),
+      direccion : new FormControl(),
+      estado : new FormControl(),
+      desafioUrl: new FormControl(),
+      curriculumUrl: new FormControl(),
+      comentario: new FormControl(),
+      comentarioSM:new FormControl(),
+      comentarioAdmin: new FormControl(),
+      comentarioTeam: new FormControl(),
+      comentarioDesafio: new FormControl()
+    });
+
   }
   completeItem = (item: FileQueueObject, response: any) => {
     this.onCompleteItem.emit({ item, response });
