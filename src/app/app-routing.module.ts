@@ -7,6 +7,7 @@ import {NoLoginGuard} from './shared/auth/no-login.guard';
 import { ListarPostulantesComponent } from './postulantes/listar-postulantes/listar-postulantes.component';
 import { EditarPostulanteComponent } from './postulantes/editar-postulante/editar-postulante.component';
 import { CrearPostulanteComponent } from './postulantes/crear-postulante/crear-postulante.component';
+import { VerPostulanteComponent } from './postulantes/ver-postulante/ver-postulante.component';
 
 
 const routes: Routes = [
@@ -19,7 +20,8 @@ const routes: Routes = [
         children: [
           { path: 'crear', component: CrearPostulanteComponent },
           { path: '', component: ListarPostulantesComponent, canActivateChild: [AuthorizatedGuard] },
-          { path: 'editar/:id', component: EditarPostulanteComponent, canActivateChild: [AuthorizatedGuard] }
+          { path: 'editar/:id', component: EditarPostulanteComponent, canActivateChild: [AuthorizatedGuard] },
+          { path: 'ver/:id', component: VerPostulanteComponent, canActivateChild: [AuthorizatedGuard] }
         ]
       }
       

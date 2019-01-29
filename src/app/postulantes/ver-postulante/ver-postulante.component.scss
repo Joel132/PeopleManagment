@@ -1,0 +1,272 @@
+//imagen perfil
+.aligner{
+  display: block;
+  background-size:cover;
+  margin: 2%;
+}
+mat-card{
+  margin: 10%;
+  position: relative;
+}
+img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
+.hoverable{
+  position: relative;
+  display: block;
+  cursor: pointer;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+}
+.hoverable .hover-text{
+  position: absolute;
+  display: none;
+  top: 50%;
+  left:  50%;
+  transform: translate(-50%,-50%);   
+  z-index: 2;
+}
+.hoverable .background{
+  position: absolute;
+  display: none;
+  top: 0;
+  left:  0;
+  bottom: 0;
+  right: 0;
+  background-color:rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.hoverable:hover .background{
+  display: block;
+}
+
+#fileInput{
+  display: none;
+}
+
+//botones
+.example-button-row button,
+.example-button-row a {
+  margin-right: 30px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 5%;
+    width: 80%;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .bloque > *{
+    width: 80%;
+  }
+
+
+
+  .example-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .example-container > * {
+    width: 100%;
+  }
+  
+  .example-right-align {
+    text-align: right;
+  }
+  
+  input.example-right-align::-webkit-outer-spin-button,
+  input.example-right-align::-webkit-inner-spin-button {
+    display: none;
+  }
+  
+  input.example-right-align {
+    -moz-appearance: textfield;
+  }
+
+  .right-profile{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 50px;
+    position: relative;
+    margin-top: 60px;
+  }
+  
+  .example-card {
+    max-width: 400px;
+  }
+  
+  .fotoPerfil { 
+    width: 140px;
+    height: 140px;
+    border-radius: 70px;
+ }
+  
+  
+  .right-profile h6{
+    margin-top: 100px;
+    margin-bottom: 8px;
+    
+    color: #999;
+  }
+  
+  .right-profile h4{
+    margin-bottom: 5px;
+  }
+  
+  .right-profile p{
+    color: #999;
+  }
+  
+  .right-profile button {
+    margin-top: 15px;
+  }
+  
+  .card{
+    display: flex;
+    flex-direction: column;
+    padding: 80px;
+    position: relative;
+
+  }
+  .card-header:hover{
+    //background: linear-gradient(60deg, #ec407a, #d81b60);
+    cursor: pointer;
+    transform: scale(1.3);
+    transition: 0.6s;
+  }
+  //.card-header {
+    //text-align: center;
+    //margin: auto;
+    //background: linear-gradient(60deg, #ec407a, #d81b60);
+    //box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(233, 30, 99, 0.4);
+    //border-radius: 100px;
+    //padding: 50px;
+    //top: -5px;
+   
+
+ // }
+//form  comen
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+
+}
+
+  .icono{
+    width:10px; 
+    height:18.35px;
+    color:rgba(0, 0, 0, 0.54);
+  }
+  input { margin: 5px; }
+  .card-header i {
+    font-size: 24px;
+    width: 33px;
+    height: 33px;
+    line-height: 33px;
+    color: #fff;
+  }
+  
+  .card-content{
+    position: absolute;
+  }
+  
+  .card-title{
+    padding-left: 80px;
+  }
+  
+  .mat-input-container{
+    width: 100%;
+    top: 20%
+  }
+  
+  .category{
+    font-weight: 300;
+  }
+  
+  form{
+    margin-top: 30px;
+    
+  }
+  
+  .row{
+    margin-top: 15px;
+  }
+  
+  .mat-input-container textarea{
+    height: 90px;
+  }
+  
+  .textarea-label{
+    color: #aaa;
+    margin-bottom: 10px;
+  }
+  
+  .action-btn{
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 15px;
+  }
+/*borrar desde aca*/
+//3
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+//color
+.background{
+  background: white;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+//subir archivos
+.tag {
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  display: inline-block;
+}
+
+.tag-default {
+  background-color: gray;
+}
+
+.tag-success {
+  background-color: green;
+}
+
+.tag-warning {
+  background-color: orange;
+}
+
+.tag-danger {
+  background-color: red;
+}
