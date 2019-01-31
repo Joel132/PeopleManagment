@@ -8,7 +8,6 @@ import { Postulante } from 'src/app/shared/models/postulante';
 import { ActivatedRoute } from '@angular/router';
 import { Validators,FormControl, FormGroup, FormBuilder } from '@angular/forms';
 
-
 @Component({
   selector: 'app-editar-postulante',
   templateUrl: './editar-postulante.component.html',
@@ -72,7 +71,7 @@ export class EditarPostulanteComponent implements OnInit {
   fileSelectMsg: string = 'No file selected yet.';
   fileUploadMsg: string = 'No file uploaded yet.';
   disabled: boolean = false;
-  //file n2g
+ //file n2g
   upload(files: File[]){
     //pick from one of the 4 styles of file uploads below
     this.uploadAndProgress(files);
@@ -230,6 +229,23 @@ export class EditarPostulanteComponent implements OnInit {
     this.desafioInput.nativeElement.value='';
     this.uploader.clearQueue();
   }
+  //hdhdh
+  /*
+  @Input()
+  httpRequestHeaders: HttpHeaders | {
+    [header: string]: string | string[];
+  } = new HttpHeaders().set("sampleHeader", "headerValue").set("sampleHeader1", "headerValue1");
+
+  @Input()
+  httpRequestParams: HttpParams | {
+    [param: string]: string | string[];
+  } = new HttpParams().set("sampleRequestParam", "requestValue").set("sampleRequestParam1", "requestValue1");
+
+  public uploadEvent($event: any) {
+    console.log('from client' + JSON.stringify($event));
+  }*/
+  
+
 }
 
 

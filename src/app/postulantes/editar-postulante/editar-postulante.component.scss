@@ -2,8 +2,27 @@
 mat-form-field{
   margin-top: 10px;
 }
-//imagen perfil
 
+.example-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.example-container > * {
+  width: 100%;
+}
+
+
+//size mat-card file upload
+.example-card {
+  max-width: 300px;
+}
+//size mat-card comentario general
+.comment {
+  max-width: 900px;
+}
+
+//imagen perfil
 img {
   height: 100%;
   width: 100%;
@@ -42,6 +61,7 @@ img {
   display: block;
 }
 
+//ocultar input, para subir archivos
 #fileInput{
   display: none;
 }
@@ -67,14 +87,7 @@ img {
 
 
 
-  .example-container {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .example-container > * {
-    width: 100%;
-  }
+
   
   .example-right-align {
     text-align: right;
@@ -96,10 +109,6 @@ img {
     padding: 50px;
     position: relative;
     margin-top: 60px;
-  }
-  
-  .example-card {
-    max-width: 400px;
   }
   
   .fotoPerfil { 
@@ -167,11 +176,15 @@ img {
 
 }
 
+
+
+
   .icono{
     width:10px; 
     height:18.35px;
     color:rgba(0, 0, 0, 0.54);
   }
+  
   input { margin: 5px; }
   .card-header i {
     font-size: 24px;
@@ -265,4 +278,45 @@ img {
 
 .tag-danger {
   background-color: red;
+}
+
+///subirachio2
+label {
+  color: rgb(116, 27, 27);
+}
+input{
+  color: rgb(126, 126, 126);
+  font-family: 'Montserrat', sans-serif;
+  
+}
+.upload-drop-zone {
+  height: 200px;
+  border-width: 2px;
+  margin-bottom: 20px;
+}
+
+.button {
+  background-color: rgb(214, 94, 150);
+  border: 3px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+/* skin.css Style*/
+.upload-drop-zone {
+  color: #ccc;
+  border-style: dashed;
+  border-color: #ccc;
+  line-height: 200px;
+  text-align: center
+}
+.upload-drop-zone.drop {
+  color: #222;
+  border-color: #222;
 }

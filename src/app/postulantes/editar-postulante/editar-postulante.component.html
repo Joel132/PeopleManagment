@@ -4,7 +4,7 @@
       <form [formGroup] = 'formEditarPostulante' (ngSubmit)="onSubmit()"> 
         <div class="container" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
           <label class="hoverable" for="fileInput">
-          <img [src]="url ? url : 'assets/img/foto-perfil.png'"> 
+          <img matTooltip="Cambiar Foto de Perfil" [src]="url ? url : 'assets/img/foto-perfil.png'"> 
           <div class="hover-text">Cambiar Foto</div>
           <div class="background"></div>
           </label>
@@ -52,7 +52,20 @@
               <input formControlName = "direccion" matInput placeholder="Direccion" type="text">
               <mat-icon matSuffix class="icono" >location_on</mat-icon>
             </mat-form-field> 
-            
+
+                      
+            <mat-form-field>
+                <mat-select formControlName = "estado" placeholder="Estado"  disableRipple>
+                  <mat-option value="Pendiente Desafio">Desafio Pendiente</mat-option>
+                  <mat-option value="Desafío Recibido">Desafío Recibido</mat-option>
+                  <mat-option value="Desafío Revisado">Desafío Revisado</mat-option>
+                  <mat-option value="Pendiente E. SM">Entrevista Pendiente SM</mat-option>
+                  <mat-option value="Pendiente E. Admin">Entrevista Pendiente Admin</mat-option>
+                  <mat-option value="Pendiente E. Team">Entrevista PendienteTeam</mat-option>
+                  <mat-option value="Aprobado">Aprobado</mat-option>
+                  <mat-option value="Rechazado">Rechazado</mat-option>
+                </mat-select>
+              </mat-form-field>     
           </div>
           <!--sgt bloque 2-->
           <div fxFlex="40%" class="bloque">
@@ -76,191 +89,80 @@
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
+
+
+            <!--subir cv-->
+            <mat-form-field class="example-full-width">
+            <input matInput placeholder="Subir CV" disabled value="">
+            <label matPrefix ><mat-icon matTooltip="Descargar archivo"  class="icono">get_app</mat-icon></label>
+            <label matSuffix for="fileInput"><mat-icon matTooltip="Subir archivo" class="icono">attach_file</mat-icon></label>
+            <label matSuffix ><mat-icon  matTooltip="Eliminar archivo" class="icono">clear</mat-icon></label>
+            </mat-form-field>
+            <input type="file" id="fileInput">
+
+            <mat-form-field class="example-full-width">
+            <input matInput placeholder="Subir Desafio" disabled value="">
             
-            <mat-form-field>
-              <mat-select formControlName = "estado" placeholder="Estado"  disableRipple>
-                <mat-option value="Pendiente Desafio">Desafio Pendiente</mat-option>
-                <mat-option value="Desafío Recibido">Desafío Recibido</mat-option>
-                <mat-option value="Desafío Revisado">Desafío Revisado</mat-option>
-                <mat-option value="Pendiente E. SM">Entrevista Pendiente SM</mat-option>
-                <mat-option value="Pendiente E. Admin">Entrevista Pendiente Admin</mat-option>
-                <mat-option value="Pendiente E. Team">Entrevista PendienteTeam</mat-option>
-                <mat-option value="Aprobado">Aprobado</mat-option>
-                <mat-option value="Rechazado">Rechazado</mat-option>
-              </mat-select>
-            </mat-form-field>       
+            <label matPrefix ><mat-icon matTooltip="Descargar archivo" class="icono">get_app</mat-icon></label>
+            <label matSuffix for="fileInput"><mat-icon matTooltip="Subir archivo" class="icono">attach_file</mat-icon></label>
+            <label matSuffix ><mat-icon matTooltip="Eliminar archivo" class="icono">clear</mat-icon></label>
+            </mat-form-field>
+            <input type="file" id="fileInput">
           </div>
-        </div>   
-        <mat-action-row>
+        </div>    
+        
           <button mat-stroked-button color="warn" (click)="volverAlListado()">Cancelar</button>
-          <button mat-raised-button class="natura-button-3" type="submit" [disabled]="formEditarPostulante.invalid">Guardar</button>    
-        </mat-action-row>    
+          <button mat-raised-button  type="submit" [disabled]="formEditarPostulante.invalid">Guardar</button>    
+     
       </form>
       <!--fin bloques y form--> 
     </mat-tab>
     <!--fin pestana 1--> 
-    <mat-tab label="Datos Adjuntos">
-    <form [formGroup] = 'formEditarPostulante'> 
-    <div fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
-      <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center"  >
-        <div fxFlex="40%" class="bloque">
-          <h4>Subir CV y Desafio</h4>
-          <label>Desafio</label>
-          <input type="file" #desafioInput (change)="addToQueueDesafio()"  />
-          <label>Curriculum</label>
-          <input type="file" #curriculumInput (change)="addToQueueCV()" />
-          <br>
-          <br>
-          <div>    
-              <button   (click)="vaciarDatosAdjuntos()">Eliminar Archivos</button>
-              <button   (click)="uploader.uploadAll()">Subir Archivos</button> 
-            </div>
+  <mat-tab label="Datos Adjuntos">
+    <form [formGroup] = 'formEditarPostulante' (ngSubmit)="onSubmit()"> 
+      <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+        <!--div bloque 1-->
+        <div fxFlex="60%" class="bloque" >
+            <!--comentario general--> 
+            <h4>Comentario General</h4>            
+            <mat-form-field appearance="outline" class="example-full-width">
+            <textarea matInput placeholder="Comentario General" formControlName="comentario"></textarea>
+            </mat-form-field>
         </div>
         <div fxFlex="50%" class="bloque">
-            <table>
-                <thead>
-                  <tr>
-                    <th>Tipo</th>
-                    <th>Name</th>
-                    <th>Size</th>
-                    <th>Progress</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of queue | async">
-                    <td>{{ item?.tipo }}</td>
-                    <td>{{ item?.file?.name }}</td>
-                    <td>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
-                    <td>{{ item.progress + ' %' }}</td>
-                    <td>
-                      <span *ngIf="item.isPending()" class="tag tag-default"></span>
-                      <span *ngIf="procesarUrl(item.isSuccess(),item)" class="tag tag-success"></span>
-                      <span *ngIf="item.inProgress()" class="tag tag-warning"></span>
-                      <span *ngIf="item.isError()" class="tag tag-danger"></span>
-                    </td>
-                    <td>
-                      <a tooltip="Subir Archivo" (click)="item.upload()" *ngIf="item.isUploadable()">
-                        <i class="fa fa-upload"></i>
-                      </a>
-                      <a tooltip="Cancelar Subida" (click)="item.cancel()" *ngIf="item.inProgress()">
-                        <i class="fa fa-times-circle"></i>
-                      </a>
-                      <a tooltip="Eliminar Archivos" (click)="item.remove()" *ngIf="!item.inProgress()">
-                        <i class="fa fa-trash"></i>
-                      </a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+          <!--comentario desafio--> 
+          <h4>Comentario de Desafio</h4>
+          <mat-form-field appearance="outline" class="example-full-width">
+            <textarea matInput formControlName="comentarioDesafio" placeholder="Agregar comentario desafio"></textarea>
+          </mat-form-field>
+          <!--comentario de entrevistas-->
+          <h4>Comentario de Entrevistas</h4>
+          <!--SM entrevista-->
+          <mat-form-field appearance="outline" class="example-full-width">
+          <textarea matInput formControlName="comentarioSM" placeholder="Agregar comentario"></textarea>
+          </mat-form-field>
+          <!--admin entrevista--> 
+          <mat-form-field appearance="outline" class="example-full-width">
+          <textarea matInput formControlName="comentarioAdmin" placeholder="Agregar comentario"></textarea>
+          </mat-form-field>             
+          <!--team entrevista-->  
+          <mat-form-field appearance="outline" class="example-full-width">
+          <textarea matInput formControlName="comentarioTeam" placeholder="Agregar comentario"></textarea>
+          </mat-form-field>
         </div>
-      </div>
-    </div>  
+      </div>  
+      <button mat-stroked-button color="warn" (click)="volverAlListado()">Cancelar</button>
+      <button mat-raised-button  type="submit" [disabled]="formEditarPostulante.invalid">Guardar</button> 
   </form>
-  </mat-tab>
+ </mat-tab>
+
+
     <!--pestana comentarios-->
-    <mat-tab label="Comentarios"> 
-    <form [formGroup] = 'formEditarPostulante'> 
-      <!--comentario desafio--> 
-      <h4>Editar comentario de Desafio</h4>
-        <mat-accordion>
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>Desafio</mat-panel-title>
-            </mat-expansion-panel-header>
-           
-            <mat-form-field appearance="outline" class="example-full-width">
-              <mat-label>Comentario desafio </mat-label>
-              <input matInput formControlName="comentarioDesafio" placeholder="Agregar comentario">
-            </mat-form-field>
-           
-            <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">Cancelar</button>
-                <button mat-button color="primary" (click)="nextStep()">Guardar</button>
-            </mat-action-row>
-          </mat-expansion-panel>
-        </mat-accordion>
-      <!--comentario de entrevistas-->
-      <br>
-        <h4>Editar comentario de Entrevistas</h4>
-      <br>
-      <!--SM entrevista-->
-        <mat-accordion>
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>Scrum Master</mat-panel-title>
-            </mat-expansion-panel-header>
-            
-            <mat-form-field appearance="outline" class="example-full-width">
-              <mat-label>Comentario</mat-label>
-              <input matInput formControlName="comentarioSM" placeholder="Agregar comentario">
-            </mat-form-field>
-            
-            <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">Cancelar</button>
-                <button mat-button color="primary" (click)="nextStep()">Guardar</button>
-            </mat-action-row>           
-          </mat-expansion-panel>
-        </mat-accordion>
-      <!--admin entrevista--> 
-        <mat-accordion>
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>Administracion</mat-panel-title>
-              </mat-expansion-panel-header>     
-               
-                <mat-form-field appearance="outline" class="example-full-width">
-                  <mat-label>Comentario</mat-label>
-                  <input matInput formControlName="comentarioAdmin" placeholder="Agregar comentario">
-                </mat-form-field>
-               
-                <mat-action-row>
-                    <button mat-button color="warn" (click)="prevStep()">Cancelar</button>
-                    <button mat-button color="primary" (click)="nextStep()">Guardar</button>
-                </mat-action-row>           
-            </mat-expansion-panel>
-        </mat-accordion>
-      <!--team entrevista--> 
-        <mat-accordion>
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>Team</mat-panel-title>
-            </mat-expansion-panel-header>
-            
-            <mat-form-field appearance="outline" class="example-full-width">
-              <mat-label>Comentario </mat-label>
-              <input matInput formControlName="comentarioTeam" placeholder="Agregar comentario">
-            </mat-form-field>
-            
-            <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">Cancelar</button>
-                <button mat-button color="primary" (click)="nextStep()">Guardar</button>
-            </mat-action-row>
-          </mat-expansion-panel>
-        </mat-accordion>
-      <!--fin team entrevista--> 
-      <!--comentario general-->
-      <br> 
-        <h4>Editar Comentario General</h4>
-        <mat-accordion>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>Comentario general</mat-panel-title>
-              </mat-expansion-panel-header>     
-              
-              <mat-form-field appearance="outline" class="example-full-width">
-                <mat-label>Comentario General</mat-label>
-                <input matInput formControlName="comentario" placeholder="Agregar comentario">
-              </mat-form-field>
-              
-              <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">Cancelar</button>
-                <button mat-button color="primary" (click)="nextStep()">Guardar</button>
-              </mat-action-row>           
-            </mat-expansion-panel>
-        </mat-accordion>
-      </form>
+    <mat-tab label="Aptitudes"> 
+    <h4>En desarrollo </h4>
+    <button mat-icon-button color="warn">
+      <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+    </button>
     </mat-tab>
   </mat-tab-group>
 </div>
