@@ -65,8 +65,11 @@ export class LoginComponent implements OnInit {
    * @param {Session} data atributo que representa el response del servidor
    */
   private correctLogin(data: Session){
-    
-    data.rol=this.jwt.decode(data.accessToken).scopes;
+    let token = this.jwt.decode(data.accessToken);
+
+    data.id = token.sub;
+    data.rol = 'user1'; // token.scopes;
+    console.log(data);
     this.storageService.setCurrentSession(data);
     this.router.navigate(['/']);
   }

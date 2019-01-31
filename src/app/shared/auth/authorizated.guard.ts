@@ -37,10 +37,12 @@ canActivate() {
    */
   canActivateChild(){
     // logeado y es administrador o scrum master entonces devuelve true 
+    console.log("Esta autenticado: ", this.storageService.isAuthenticated());
+    console.log("Su rol es: ", this.storageService.getCurrentRol())
     if (this.storageService.isAuthenticated() && (this.storageService.getCurrentRol() == 'user1' || this.storageService.getCurrentRol() == 'user2')) {
-        return true;
+      
+      return true;
     }else{
-
         this.router.navigate(['/']);
         return false;
     }

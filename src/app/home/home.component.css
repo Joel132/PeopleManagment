@@ -3,13 +3,9 @@
 }
 
 .sidenav {
-  width: 250px;
+  width: 275px;
   background: #353535; 
   box-shadow: 0px 0px 0px 5px rgba rgba(179, 179 , 179, 30);
-}
-
-.sidenav .mat-toolbar {
-  
 }
 
 .mat-toolbar.mat-primary {
@@ -40,4 +36,35 @@ background: linear-gradient(to right, #f3c5bd 0%,#e86c57 0%,#7b1a52 0%,#db1943 5
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3c5bd', endColorstr='#ea5a18',GradientType=1 ); /* IE6-9 */
   color: white;
 
+}
+
+.foto-perfil{
+  padding-top: 30px;
+  height: 80px;
+  width: 80px;
+  margin: 5px;
+  background-image: url(https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png);
+  background-size:cover;
+}
+
+.datos-sesion{
+  width: 100%;
+  height: 120px;
+  text-align: center;
+}
+
+mat-card-title{
+  font-size: 17px;
+}
+
+mat-card{
+  border-radius:0px;
+  color: white;
+}
+
+img{
+  height: 80px;
+  width: 80px;
+  border: 2px solid #000;
+  border-radius: 50%;
 }

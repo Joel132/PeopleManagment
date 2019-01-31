@@ -6,6 +6,7 @@
 
 export class Funcionario {
     constructor(
+        public id: number,
         public foto:string,
         public nombre:string,
         public apellido:string,    
@@ -19,7 +20,8 @@ export class Funcionario {
         public contraseña:string,
         public rol:string,
         public curriculum:string,
-        public estado:string
+        public estado:string,
+        public nombreRol:string
     ) {}
 }
 

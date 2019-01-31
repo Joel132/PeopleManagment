@@ -1,46 +1,89 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer 
+      fxLayoutAlign="center" 
       class="sidenav" 
       fixedInViewport="true"
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="!(isHandset$ | async)"
       >
-      
-  
-      <mat-toolbar >Menu</mat-toolbar>
-    
+        <div fxLayoutAlign="center" class="datos-sesion">
+          <mat-card fxLayout="row" fxLayoutAlign="space-evenly" fxFlex="100%" style="background-image: url('./assets/img/2015_03_galaxy-red-stars-red-space - copia.jpg'); background-size:cover;" >
+            <img fxLayoutAlign="space-around center" [src]=" funcionario.foto ? funcionario.foto : 'https://image.flaticon.com/icons/png/512/149/149071.png' ">
+            <!--div fxLayoutAlign="space-around center" mat-card-avatar class="foto-perfil"></div-->
+            <div fxLayout="column" fxLayoutAlign="center">
+              <mat-card-title>{{funcionario?.nombre}} {{funcionario?.apellido}}</mat-card-title>
+              <mat-card-subtitle style="color:white">{{funcionario?.nombreRol}}</mat-card-subtitle>
+            </div>
+          </mat-card>
+        </div>
       <mat-nav-list class="lista">
-        <a class="opcion" mat-list-item [routerLink] = "['/']">
-          <mat-icon aria-label="Side nav toggle icon" >home</mat-icon>
-          INICIO</a>
-        <a class="opcion" mat-list-item >
-          <mat-icon aria-label="Side nav toggle icon">person</mat-icon>
-          MI PERFIL</a>
-        <a *ngIf="getRol() == 'user1' || getRol() === 'user2'" class="opcion" mat-list-item [routerLink] = "['/postulante']">
-          <mat-icon aria-label="Side nav toggle icon" >person_add</mat-icon>
-          POSTULANTES</a>
-        <a *ngIf="getRol() == 'user1' || getRol() === 'user2'" class="opcion" mat-list-item [routerLink] = "['/funcionario']">
-          <mat-icon aria-label="Side nav toggle icon" >people</mat-icon>
-          FUNCIONARIOS</a>
-        <a *ngIf="getRol() == 'user1' || getRol() === 'user2'" class="opcion" mat-list-item [routerLink] = "['/']">
-            <mat-icon aria-label="Side nav toggle icon">school</mat-icon>
-          APTITUDES</a>
-        <a class="opcion" mat-list-item [routerLink] = "['/']">
-            <mat-icon aria-label="Side nav toggle icon">live_help</mat-icon>
-          AYUDA</a>
-        <a class="opcion" mat-list-item [routerLink] = "['/']">
-            <mat-icon aria-label="Side nav toggle icon">settings</mat-icon>
-          CONFIGURACION</a>
-        <a class="opcion" mat-list-item (click)='logout()'>
-            <mat-icon aria-label="Side nav toggle icon">power_settings_new</mat-icon>
-          CERRAR SESION</a>
-        <a class="opcion" mat-list-item [routerLink] = "['/']" >
-            <mat-icon aria-label="Side nav toggle icon">arrow_back</mat-icon>
-          CONTRAER</a>
+        <a 
+        class="opcion" 
+        mat-list-item [routerLink] = "['/']">
+          <mat-icon>home</mat-icon>
+          INICIO
+        </a>
+        <a 
+        class="opcion" 
+        mat-list-item >
+          <mat-icon>person</mat-icon>
+          MI PERFIL
+        </a>
+        <a 
+        *ngIf="funcionario?.rol == 'user1' || funcionario?.rol === 'user2'" 
+        class="opcion" 
+        mat-list-item 
+        [routerLink]= "['/postulante']">
+          <mat-icon>person_add</mat-icon>
+          POSTULANTES
+        </a>
+        <a 
+        *ngIf="funcionario?.rol == 'user1' || funcionario?.rol === 'user2'" 
+        class="opcion" 
+        mat-list-item 
+        [routerLink] = "['/funcionario']">
+          <mat-icon>people</mat-icon>
+          FUNCIONARIOS
+        </a>
+        <a 
+        *ngIf="funcionario?.rol == 'user1' || funcionario?.rol === 'user2'" 
+        class="opcion" 
+        mat-list-item 
+        [routerLink] = "['/']">
+            <mat-icon>school</mat-icon>
+          APTITUDES
+        </a>
+        <a 
+        class="opcion" 
+        mat-list-item 
+        [routerLink] = "['/']">
+            <mat-icon>live_help</mat-icon>
+          AYUDA
+        </a>
+        <a 
+        class="opcion"
+        mat-list-item 
+        [routerLink] = "['/']">
+            <mat-icon>settings</mat-icon>
+          CONFIGURACION
+        </a>
+        <a 
+        class="opcion" 
+        mat-list-item 
+        (click)='logout()'>
+            <mat-icon>power_settings_new</mat-icon>
+          CERRAR SESION
+        </a>
+        <a 
+        class="opcion" 
+        mat-list-item 
+        [routerLink] = "['/']" >
+            <mat-icon>arrow_back</mat-icon>
+          CONTRAER
+        </a>
       </mat-nav-list>
   </mat-sidenav>
-
   <mat-sidenav-content >
     <mat-toolbar class="barraNavegacion">
       <button class="opcion"
@@ -49,14 +92,10 @@
         mat-icon-button
         (click)="drawer.toggle()"
         *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        <mat-icon>menu</mat-icon>
       </button>
       <span>proyectoMaterial</span>
     </mat-toolbar>
-
     <router-outlet></router-outlet>
   </mat-sidenav-content>
-
 </mat-sidenav-container>
-
-  

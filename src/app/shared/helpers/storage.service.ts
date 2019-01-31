@@ -122,6 +122,17 @@ export class StorageService {
   };
 
   /**
+   * Método getCurrentId
+   * 
+   * Obtiene el id del usuario cuya sesion está iniciada
+   * @return {number} 
+   */
+  getCurrentId(){
+    console.log("[en storage.servise.ts] el id es: ",this.getCurrentSession().id);
+    return this.getCurrentSession().id;
+  }
+
+  /**
    * Método logout
    * 
    * Elimina la sesión y redirecciona a /login

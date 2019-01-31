@@ -2,6 +2,7 @@ import { Funcionario } from '../models/funcionario';
 
 export const FUNCIONARIOS: Array<Funcionario> = [
     {
+        id: 1,
         foto:'',
         nombre:'',
         apellido:'',    
@@ -15,6 +16,7 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         contraseña:'',
         rol:'',
         curriculum:'',
-        estado:''
-    },
+        estado:'',
+        nombreRol: ''
+    }
 ];
