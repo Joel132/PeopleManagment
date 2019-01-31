@@ -20,10 +20,20 @@ mat-form-field {
   width: 180px;
 }
 mat-header-cell{
+  text-align: center;
   font-family: 'Montserrat', sans-serif;
   font-size: 9;
   background: black;
   color: white;
+}
+mat-header-row{
+  align-items: initial;
+}
+mat-row{
+  align-items: center;
+}
+mat-cell{
+  text-align: center;
 }
 mat-toolbar{
   padding-top: 20px;
