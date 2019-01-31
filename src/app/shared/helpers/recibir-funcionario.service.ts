@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ResponseLista } from '../models/responseLista';
+import { ResponseLista } from '../models/responseListaFuncionario';
 import { Observable, of } from 'rxjs';
 import {environment} from "../../../environments/environment";
 import { HttpParams, HttpClient } from '@angular/common/http';

@@ -12,14 +12,15 @@ export class Funcionario {
         public ci:string,    
         public beneficiario:string,
         public email: string,    
-        public telefono: string,
+        public celular: string,
         public fechaInicio:string,
         public fechaVencimiento:string,
         public usuario:string,
         public contraseña:string,
         public rol:string,
         public curriculum:string,
-        public estado:string
+        public estado:boolean,
+        public nombre_estado: string
     ) {}
 }
 

@@ -1,76 +1,103 @@
-<div class="example-container mat-elevation-z10">
-    <h3 style=" font-family: 'Montserrat', sans-serif; font-size: 9;" class="mat-display-1">Lista de Funcionarios</h3>
-    <mat-toolbar>
+<div fxLayout="column">
+    <!--BOTON BUSCAR, FILTRAR Y AGREGAR EN DESKTOP-->
+    <div fxLayout="row" fxLayout.xs="column" class="funciones-lista" fxHide.xs>
         <!--Buscar Form-->
-        <mat-form-field appearance="outline">
+        <mat-form-field  appearance="outline">
             <mat-label>Buscar Funcionario</mat-label>
             <input matInput (keyup)="applyFilter($event.target.value)">
             <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
         <!--Filtar Form -->
-  
-        <mat-form-field appearance="outline"> 
+        <mat-form-field appearance="outline">
             <mat-select placeholder="Filtrar por estados" (selectionChange)= "applyFilter($event.value)"> 
                 <!--$event.value me devuelve el contenido de [value]-->
-                <mat-option>-- Ninguno --</mat-option>
+                <mat-option>-- TODOS --</mat-option>
                 <mat-option *ngFor="let est of estados" [value]="est.value">
                     {{est.viewValue}}
                 </mat-option>
             </mat-select>
             <mat-icon matSuffix>filter_list</mat-icon>
         </mat-form-field>
-  
         <!--Boton Agregar funcionario-->
-      <button mat-stroked-button class="natura-button-3" routerLink="/funcionarios/crear-funcionarios">Agregar Funcionario</button>      
-    </mat-toolbar>
-    <!--Tabla funcionarios-->
-    
-    <table mat-table [dataSource]="dataSource" matSort>
-    
-        <!-- Columna Foto -->
-        <ng-container matColumnDef="foto">
-            <th mat-header-cell *matHeaderCellDef> Perfil </th>
-            <td mat-cell *matCellDef>
-              <mat-icon class="example-icon">account_circle</mat-icon>  
-            </td>
-        </ng-container>
-    
-        <!-- Columna Nombre -->
-        <ng-container matColumnDef="nombre">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
-            <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
-        </ng-container>
-    
-        <!-- Columna Apellido -->
-        <ng-container matColumnDef="apellido">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </th>
-            <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
-        </ng-container>
-    
-        <!-- Columna Fecha fin de contrato -->
-        <ng-container matColumnDef="fecha_fin_contrato">
-            <th mat-header-cell *matHeaderCellDef> Fin de Contrato </th>
-            <td mat-cell *matCellDef="let element"> {{element.fecha_fin_contrato}} </td>
-        </ng-container>
+        <button mat-stroked-button class="natura-button-3" routerLink="/funcionarios/crear-funcionarios">Agregar Funcionario</button>
+    </div>
+    <!--BOTON BUSCAR, FILTRAR EN MOVIL-->
+    <div fxLayoutAlign="center center" fxHide.gt-xs>
+        <mat-form-field class="funciones-responsive" appearance="outline">
+            <mat-label>Buscar</mat-label>
+            <input matInput (keyup)="applyFilter($event.target.value)">
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        <mat-form-field class="funciones-responsive" appearance="outline">
+                <mat-select placeholder="Filtrar" (selectionChange)= "applyFilter($event.value)"> 
+                    <!--$event.value me devuelve el contenido de [value]-->
+                    <mat-option>-- TODOS --</mat-option>
+                    <mat-option *ngFor="let est of estados" [value]="est.value">
+                        {{est.viewValue}}
+                    </mat-option>
+                </mat-select>
+        </mat-form-field>
+        <button mat-stroked-button class="natura-button-2" routerLink="/funcionarios/crear-funcionarios">Agregar</button>
+    </div>
         
-        <!-- Columna Telefono -->
-        <ng-container matColumnDef="celular">
-            <th mat-header-cell *matHeaderCellDef> Celular </th>
-            <td mat-cell *matCellDef="let element"> {{element.celular}} </td>
-        </ng-container>
+    <!--Tabla funcionarios-->
+    <div class="container" fxLayout="column">
+        <mat-table [dataSource]="dataSource" matSort class="tabla-datos">
+            <!-- Columna Foto -->
+            <ng-container matColumnDef="foto">
+                <mat-header-cell *matHeaderCellDef> Perfil </mat-header-cell>
+                <mat-cell *matCellDef>
+                <mat-icon class="example-icon">account_circle</mat-icon>  
+                </mat-cell>
+            </ng-container>
+        
+            <!-- Columna Nombre -->
+            <ng-container matColumnDef="nombre">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.nombre}} </mat-cell>
+            </ng-container>
+        
+            <!-- Columna Apellido -->
+            <ng-container matColumnDef="apellido">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.apellido}} </mat-cell>
+            </ng-container>
+        
+            <!-- Columna Fecha fin de contrato -->
+            <ng-container matColumnDef="fecha_fin_contrato">
+                <mat-header-cell *matHeaderCellDef fxHide.xs> Fin de Contrato </mat-header-cell>
+                <mat-cell *matCellDef="let element" fxHide.xs> {{element.fechaVencimiento}} </mat-cell>
+            </ng-container>
+            
+            <!-- Columna Celular -->
+            <ng-container matColumnDef="celular">
+                <mat-header-cell *matHeaderCellDef fxHide.xs> Celular </mat-header-cell>
+                <mat-cell *matCellDef="let element" fxHide.xs> {{element.celular}} </mat-cell>
+            </ng-container>
 
-        <!-- Columna Accion -->
-        <ng-container matColumnDef="accion">
-                <th mat-header-cell *matHeaderCellDef> Acción </th>
-                <td mat-cell *matCellDef>
+            <!-- Columna Estado -->
+            <ng-container matColumnDef="estado">
+                    <mat-header-cell *matHeaderCellDef fxHide.xs> Estado </mat-header-cell>
+                    <mat-cell *matCellDef="let element" fxHide.xs> {{element.nombre_estado}} </mat-cell>
+                </ng-container>
+
+            <!-- Columna Accion -->
+            <ng-container matColumnDef="accion">
+                    <mat-header-cell *matHeaderCellDef> Acción </mat-header-cell>
+                    <mat-cell *matCellDef>
                         <button mat-icon-button class="example-icon" routerLink="/">
                             <mat-icon class="example-icon">edit</mat-icon>
                         </button> 
-                </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"
-          (click)="onclickfuncionario()"></tr>
-      </table>
-      <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
-  </div>
+                        <button mat-icon-button class="example-icon" routerLink="/">
+                            <mat-icon class="example-icon">thumb_down</mat-icon>
+                        </button> 
+                    </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"
+            (click)="onclickfuncionario()"></mat-row>
+        </mat-table>
+        <mat-paginator class="tabla-datos" [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+    </div>
+</div>
+  

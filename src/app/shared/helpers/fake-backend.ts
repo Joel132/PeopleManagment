@@ -25,7 +25,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
     // wrap in delayed observable to simulate server api call
     return of(null).pipe(mergeMap(() => {
-
+/*
       // fake authenticate api end point
         if (request.url.endsWith('/api/v1/auth/login') && request.method === 'POST') {
         let params = request.body;
@@ -45,7 +45,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         
 
         }  
-
+*/
       if (request.url.endsWith('/api/v1/auth/logout') && request.method === 'POST') {
         return of(new HttpResponse({status: 200, body: true}));
       }
@@ -62,9 +62,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         return of(new HttpResponse({status: 200, body: request.body}));
       }
       //Fake response para listar usuarios con los campos faltantes en el backend
-      if(request.url.includes("/api/v1/funcionarios") && request.method === 'GET' ){
+      /* if(request.url.includes("/api/v1/funcionarios") && request.method === 'GET' ){
         return of(new HttpResponse({status: 200, body: RESPUESTA_FUNCIONARIOS}));
-      }
+      } */
       
       //Fake response para añadir postulantes con los campos faltantes en el backend
       if(request.url.includes("/api/v1/funcionarios") && request.method === 'POST' ){
@@ -73,7 +73,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       }
 
 
-      if(request.url.includes("/api/v1/postulante")){
+      if(this.storageService.getCurrentToken()){
 
         
         const req=request.clone({setHeaders:{

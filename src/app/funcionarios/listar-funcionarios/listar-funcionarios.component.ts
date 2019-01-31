@@ -4,6 +4,8 @@ import { Funcionario } from 'src/app/shared/models/funcionario';
 import { ESTADOS_FUNCIONARIO } from 'src/app/shared/models/estados_funcionario';
 import { RecibirFuncionarioService } from 'src/app/shared/helpers/recibir-funcionario.service';
 import { Router } from '@angular/router';
+
+//import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout"
 /**
  * Componente Listar Funcionario
 */
@@ -15,7 +17,7 @@ import { Router } from '@angular/router';
 })
 
 export class ListarFuncionariosComponent implements OnInit {
-  displayedColumns: string[] = ['foto', 'nombre', 'apellido', 'fecha_fin_contrato','celular'];
+  displayedColumns: string[] = ['foto', 'nombre', 'apellido', 'fecha_fin_contrato','celular', 'estado', 'accion'];
   dataSource: MatTableDataSource<Funcionario>;
   lista_funcionarios: Array<Funcionario>;
   estados= ESTADOS_FUNCIONARIO;
@@ -23,10 +25,12 @@ export class ListarFuncionariosComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private FuncionariosService: RecibirFuncionarioService, private router: Router){ }
+  constructor(private FuncionariosService: RecibirFuncionarioService, private router: Router,
+    /* private breakPoint: BreakpointObserver*/){ }
   
   ngOnInit(){
       this.getFuncionarios();
+      //Para emitir valores una vez que el width cambie para mobile. Ver documentacion de Material Design
       
   }
   
@@ -44,10 +48,32 @@ export class ListarFuncionariosComponent implements OnInit {
    * Se realiza la paginación y la ordenación de los datos.
    * @param lista_funcionarios {any} La lista de objetos funcionario
    */
-  aux(lista_funcionarios: any){
+  aux(lista_funcionarios: Funcionario[]){
+    lista_funcionarios.map(data=>{
+      data.celular="0982312";
+      data.fechaVencimiento= "23/03/19";
+      if(data.estado){
+        data.nombre_estado= 'Activo';
+      }else{
+        data.nombre_estado= 'Ex-Funcionario';
+      }
+    })
       this.dataSource=new MatTableDataSource(lista_funcionarios);
       this.dataSource.paginator= this.paginator;
       this.dataSource.sort= this.sort;
+      
+      /*  No es necesario, se utilizará el fxHide para no modificar la estructura.
+      this.breakPoint.observe([Breakpoints.Handset]).subscribe(result=>{
+        //Si coincide las especificaciones de Handset(Tamaño telefono) entonces ejecutar una accion
+        if(result.matches){
+          this.mobile();
+        }
+        //Sino ejecutar otra odesktopion
+        else{
+          this.desktop();
+        }
+      }); 
+      */
   }
 
   /**
@@ -69,4 +95,13 @@ export class ListarFuncionariosComponent implements OnInit {
   onclickfuncionario(){
     this.router.navigate(['/']);
   }
+  /*
+    mobile(){
+      this.displayedColumns=['foto', 'nombre', 'apellido', 'accion'];
+    }
+
+    desktop(){
+      this.displayedColumns=['foto', 'nombre', 'apellido', 'fecha_fin_contrato','celular', 'estado', 'accion'];
+    }
+  */
 }

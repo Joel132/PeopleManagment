@@ -11,6 +11,6 @@ export interface IEstadoFuncionario {
   }
 
 export const ESTADOS_FUNCIONARIO: Array<IEstadoFuncionario> = [
-    {value: 'Funcionario', viewValue: 'Funcionario'},
+    {value: 'Activo', viewValue: 'Activo'},
     {value: 'Ex-funcionario', viewValue: 'Ex-Funcionario'}
 ];
