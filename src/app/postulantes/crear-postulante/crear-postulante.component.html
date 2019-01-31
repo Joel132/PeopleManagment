@@ -1,79 +1,132 @@
-<form [formGroup] = 'formPostulantes' (ngSubmit)="onSubmit()">
-  <div fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
-      <!--FOTO-->
-      <div fxFlex="80%" class="seccion-foto" fxLayoutAlign="center" >
-        <mat-card >
-          <img mat-card-avatar src="https://www.hannafords.ca/wp-content/themes/comox/convertus/images/img-avatar.png" style="margin: auto;">
-        </mat-card>  
-      </div>    
-      <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center"  >
-         
-        <!--DATOS PERSONALES-->
-          <div fxFlex="40%" class="bloque">
-              <h4>Datos Personales</h4>
-              <mat-form-field>
-                <mat-icon matSuffix aria-label="Side nav toggle icon" >person</mat-icon>
-                <input formControlName = "nombre" matInput placeholder="Nombre" type="text" required>
-              </mat-form-field>
-              
-              <mat-form-field>
-                <mat-icon matSuffix aria-label="Side nav toggle icon" >person</mat-icon>
-                <input formControlName = "apellido" matInput placeholder="Apellido" type="text" required>
-              </mat-form-field>
-              
-              <mat-form-field>
-                <mat-icon matSuffix aria-label="Side nav toggle icon" >contact_mail</mat-icon>
-                <input formControlName = "documento" matInput placeholder="CI" type="text">
-              </mat-form-field>
-              
-              <mat-form-field>
-                <mat-icon matSuffix aria-label="Side nav toggle icon" >call</mat-icon>
-                <input formControlName = "celular" matInput placeholder="Telefono" type="tel">
-              </mat-form-field>
-              
-              <mat-form-field>
-                <mat-icon matSuffix aria-label="Side nav toggle icon" >cake</mat-icon>
-                <input formControlName = "fecha_nac" matInput placeholder="Fecha Nacimiento" type="date">
-              </mat-form-field>
-              
-              <mat-form-field>
-                <mat-icon matSuffix aria-label="Side nav toggle icon" >alternate_email</mat-icon>
-                <input formControlName = "mail" matInput placeholder="Correo Electronico" type="email" required>
-              </mat-form-field>
-              
-              <mat-form-field>
-                <mat-icon matSuffix aria-label="Side nav toggle icon" >location_on</mat-icon>
-                <input formControlName = "direccion" matInput placeholder="Direccion" type="text">
-              </mat-form-field>
-              
-              <mat-form-field>
-                <mat-select formControlName = "estado" placeholder="Estado">
-                  <mat-option value=1>Rechazado</mat-option>
-                  <mat-option value=2>Pendiente</mat-option>
-                  <mat-option value=3>Aprobado</mat-option>
-                </mat-select>
-              </mat-form-field>  
-          </div>
+<form [formGroup] = 'formCrearPostulantes' (ngSubmit)="onSubmit()">
   
-          <!--DATOS ADJUNTOS-->
-          <div fxFlex="40%" class="bloque">
-            <h4>Datos Adjuntos</h4>
-            <mat-form-field>
-              <mat-icon matSuffix aria-label="Side nav toggle icon" >attach_file</mat-icon>
-              <input matInput placeholder="Curriculum" type="url">
-            </mat-form-field>
-            <mat-form-field>
-              <mat-icon matSuffix aria-label="Side nav toggle icon" >attach_file</mat-icon>
-              <input matInput placeholder="Desafio" type="text">
-            </mat-form-field>
-            
-            <mat-form-field>
-                <textarea matInput placeholder="Comentario"></textarea>
-            </mat-form-field>  
-      
-            <button mat-stroked-button color="warn">Cancelar</button>
-            <button mat-raised-button class="natura-button-3" type="aubmit">Guardar</button>    
-          </div>
+  <!--FOTO-->
+  <div class="container" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+    <label class="hoverable" for="fotoPerfil">
+      <img [src]="url ? url : 'assets/img/foto-perfil.png'"> 
+    </label>  
+    <input id="fotoPerfil" type='file' (change)="onSelectFile($event)">  
+  </div>
+
+  <!--boton eliminar-->
+  <div fxLayoutAlign="center">
+      <button mat-button color="warn" *ngIf="url" (click)="delete()">Eliminar</button>
+  </div>
+  
+  <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center"  >         
+    <!--DATOS PERSONALES-->
+      <div fxFlex="40%" class="bloque">
+          
+          <h4>Datos Personales</h4>
+          <!--Nombre-->
+          <mat-form-field>
+            <mat-icon matSuffix aria-label="Side nav toggle icon" >person</mat-icon>
+            <input formControlName = "nombre" matInput placeholder="Nombre" type="text">                
+            <mat-error *ngIf="formCrearPostulantes.get('nombre').errors && formCrearPostulantes.get('nombre').touched">
+              <p *ngIf=" formCrearPostulantes.get('nombre').hasError('required')">Campo Requerido</p>
+              <p *ngIf=" formCrearPostulantes.get('nombre').hasError('pattern')">Ingrese solo Letras</p>
+            </mat-error>              
+          </mat-form-field>
+          
+          <!--Apellido-->
+          <mat-form-field>
+            <mat-icon matSuffix aria-label="Side nav toggle icon" >person</mat-icon>
+            <input formControlName = "apellido" matInput placeholder="Apellido" type="text" required>
+            <mat-error *ngIf="formCrearPostulantes.get('apellido').errors && formCrearPostulantes.get('apellido').touched">
+              <p *ngIf=" formCrearPostulantes.get('apellido').hasError('required')">Campo Requerido</p>
+              <p *ngIf=" formCrearPostulantes.get('apellido').hasError('pattern')">Ingrese solo Letras</p>
+            </mat-error>             
+          </mat-form-field>
+          
+          <!--Documento--> 
+          <mat-form-field>
+            <mat-icon matSuffix aria-label="Side nav toggle icon" >contact_mail</mat-icon>
+            <input formControlName = "documento" matInput placeholder="CI" type="text">
+            <mat-error *ngIf="formCrearPostulantes.get('documento').errors && formCrearPostulantes.get('documento').touched"> 
+              <p *ngIf=" formCrearPostulantes.get('documento').hasError('pattern')">Ingrese solo numeros</p>
+            </mat-error>              
+          </mat-form-field>
+          
+          <!--Celular-->
+          <mat-form-field>
+            <mat-icon matSuffix aria-label="Side nav toggle icon" >call</mat-icon>
+            <input formControlName = "celular" matInput placeholder="Telefono" type="tel" n>
+            <mat-error *ngIf="formCrearPostulantes.get('celular').errors && formCrearPostulantes.get('celular').touched">
+              <p *ngIf=" formCrearPostulantes.get('celular').hasError('pattern')">Numero Invalido</p>
+            </mat-error>             
+          </mat-form-field>
+          
+          <!--Fecha Nacimiento-->
+          <mat-form-field>
+            <input formControlName = "fecha_nac" matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Fecha de Nacimiento">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          
+          <!--Correo-->
+          <mat-form-field>
+            <mat-icon matSuffix aria-label="Side nav toggle icon" >alternate_email</mat-icon>
+            <input formControlName = "mail" matInput placeholder="Correo Electronico" type="email" required>
+            <mat-error *ngIf="formCrearPostulantes.get('mail').errors && formCrearPostulantes.get('mail').touched">
+              <p *ngIf=" formCrearPostulantes.get('mail').hasError('required')">Campo Requerido</p>
+              <p *ngIf=" formCrearPostulantes.get('mail').hasError('email')">Correo No Valido</p>
+            </mat-error>                
+          </mat-form-field>
+          
+          <!--Direccion-->
+          <mat-form-field>
+            <mat-icon matSuffix aria-label="Side nav toggle icon" >location_on</mat-icon>
+            <input formControlName = "direccion" matInput placeholder="Direccion" type="text">
+            <mat-error *ngIf="formCrearPostulantes.get('direccion').errors && formCrearPostulantes.get('direccion').touched">    
+              <p *ngIf=" formCrearPostulantes.get('direccion').hasError('maxlength')">Direccion demadiado larga</p>
+            </mat-error>              
+          </mat-form-field>
+          
+          <!--Estado-->
+          <mat-form-field>
+            <mat-select formControlName = "estado" placeholder="Estado">
+              <mat-option value="Desafio Pendiente">Desafio Pendiente</mat-option>
+              <mat-option value="Desafio Revisado">Desafio Revisado</mat-option>
+              <mat-option value="Entrevista Administrador">Entrevista Administrador</mat-option>
+              <mat-option value="Entrevista Team">Entrevista Team</mat-option>
+              <mat-option value="Aprobado">Aprobado</mat-option>
+              <mat-option value="Rechazado">Rechazado</mat-option>
+            </mat-select>
+          </mat-form-field>  
       </div>
-    </div>  
+
+      <!--DATOS ADJUNTOS-->
+      <div fxFlex="40%" class="bloque">
+        <h4>Datos Adjuntos</h4>
+
+        <!--curriculum-->
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Subir CV" disabled value="curriculum.zip">
+          <label matPrefix ><mat-icon class="icono">get_app</mat-icon></label>
+          <label matSuffix for="curriculum"><mat-icon class="icono">attach_file</mat-icon></label>
+          <label matSuffix ><mat-icon class="icono">clear</mat-icon></label>
+        </mat-form-field>
+        <input type="file" id="curriculum">
+
+        <!--desafio-->
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Subir CV" disabled value="filename.zip">
+          <label matPrefix ><mat-icon class="icono">get_app</mat-icon></label>
+          <label matSuffix for="desafio"><mat-icon class="icono">attach_file</mat-icon></label>
+          <label matSuffix ><mat-icon class="icono">clear</mat-icon></label>
+        </mat-form-field>
+        <input type="file" id="desafio">
+        
+        <!--comentario-->
+        <mat-form-field>
+          <textarea matInput placeholder="Comentario"></textarea>
+        </mat-form-field>
+
+        <!--botones-->
+        <button mat-stroked-button color="warn" (click)="volverAlListado()">Cancelar</button>
+        <button mat-raised-button class="natura-button-3" type="submit" [disabled]="formCrearPostulantes.invalid">Guardar</button>   
+      </div> 
+
+  </div>
+
 </form>

@@ -1,20 +1,24 @@
+//modulos
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { AppComponent } from './app.component';
-import {fakeBackendProvider} from './shared/helpers/fake-backend';
-import {AgregarPostulanteService} from './shared/helpers/agregar.service';
-// Animations
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-// Angular Material
-import {MaterialModule} from './angular_material';
-import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule} from '@angular/common/http';
 
+//servicios
+import {fakeBackendProvider} from './shared/helpers/fake-backend';
+import {AgregarPostulanteService} from './shared/helpers/agregar.service';
+
+// Angular Material y animaciones
+import {MaterialModule} from './angular_material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+
+//componentes
+import { AppComponent } from './app.component';
+import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
 import { CrearPostulanteComponent } from './postulantes/crear-postulante/crear-postulante.component';
 import { EditarPostulanteComponent } from './postulantes/editar-postulante/editar-postulante.component';
 import { ListarPostulantesComponent } from './postulantes/listar-postulantes/listar-postulantes.component';
@@ -23,7 +27,6 @@ import { ListarFuncionariosComponent } from './funcionarios/listar-funcionarios/
 import { EditarFuncionariosComponent } from './funcionarios/editar-funcionarios/editar-funcionarios.component';
 import { VerFuncionarioComponent } from './funcionarios/ver-funcionario/ver-funcionario.component';
 import { VerPostulanteComponent } from './postulantes/ver-postulante/ver-postulante.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -45,11 +48,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule, 
-    ReactiveFormsModule, LayoutModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, 
+    ReactiveFormsModule, LayoutModule, 
     AppRoutingModule,
     HttpClientModule,
-    FlexLayoutModule
-  ],
+    ],
   providers: [fakeBackendProvider, AgregarPostulanteService],
   bootstrap: [AppComponent]
 })

@@ -1,101 +1,93 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer 
-      fxLayoutAlign="center" 
-      class="sidenav" 
-      fixedInViewport="true"
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="!(isHandset$ | async)"
-      >
-        <div fxLayoutAlign="center" class="datos-sesion">
-          <mat-card fxLayout="row" fxLayoutAlign="space-evenly" fxFlex="100%" style="background-image: url('./assets/img/2015_03_galaxy-red-stars-red-space - copia.jpg'); background-size:cover;" >
-            <img fxLayoutAlign="space-around center" [src]=" funcionario.foto ? funcionario.foto : 'https://image.flaticon.com/icons/png/512/149/149071.png' ">
-            <!--div fxLayoutAlign="space-around center" mat-card-avatar class="foto-perfil"></div-->
-            <div fxLayout="column" fxLayoutAlign="center">
-              <mat-card-title>{{funcionario?.nombre}} {{funcionario?.apellido}}</mat-card-title>
-              <mat-card-subtitle style="color:white">{{funcionario?.nombreRol}}</mat-card-subtitle>
-            </div>
-          </mat-card>
+
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer 
+    #drawer 
+    fxLayoutAlign="center"
+    fixedViewPort = "true"
+    class="example-sidenav-content" 
+    mode="side">
+
+    <!--aca va la foto del usuario de jose-->
+    <div fxLayoutAlign="center" class="datos-sesion">
+      <mat-card fxLayout="row" fxLayoutAlign="space-evenly" fxFlex="100%" style="background-image: url('./assets/img/2015_03_galaxy-red-stars-red-space - copia.jpg'); background-size:cover;" >
+        <img fxLayoutAlign="space-around center" [src]=" funcionario.foto ? funcionario.foto : 'https://image.flaticon.com/icons/png/512/149/149071.png' ">
+        <!--div fxLayoutAlign="space-around center" mat-card-avatar class="foto-perfil"></div-->
+        <div fxLayout="column" fxLayoutAlign="center">
+          <mat-card-title>{{funcionario?.nombre}} {{funcionario?.apellido}}</mat-card-title>
+          <mat-card-subtitle style="color:white">{{funcionario?.nombreRol}}</mat-card-subtitle>
         </div>
-      <mat-nav-list class="lista">
-        <a 
-        class="opcion" 
-        mat-list-item [routerLink] = "['/']">
+      </mat-card>
+    </div>
+
+    <mat-nav-list class="lista"> 
+      <a class="opcion"  
+          mat-list-item 
+          [routerLink] = "['home']">
           <mat-icon>home</mat-icon>
-          INICIO
+          <span *ngIf="showFiller">INICIO</span>
         </a>
-        <a 
-        class="opcion" 
-        mat-list-item >
-          <mat-icon>person</mat-icon>
-          MI PERFIL
+      <a class="opcion"  
+          mat-list-item
+          [routerLink] = "['home']">
+          <mat-icon >person</mat-icon>
+          <span *ngIf="showFiller">MI PERFIL</span>
         </a>
-        <a 
-        *ngIf="funcionario?.rol == 'user1' || funcionario?.rol === 'user2'" 
-        class="opcion" 
-        mat-list-item 
-        [routerLink]= "['/postulante']">
+      <a class="opcion" 
+        *ngIf="funcionario?.rol == 'user1' || funcionario?.rol === 'user2'"
+          mat-list-item 
+          [routerLink] = "['postulante']">
           <mat-icon>person_add</mat-icon>
-          POSTULANTES
+          <span *ngIf="showFiller">POSTULANTES</span>
         </a>
-        <a 
-        *ngIf="funcionario?.rol == 'user1' || funcionario?.rol === 'user2'" 
-        class="opcion" 
-        mat-list-item 
-        [routerLink] = "['/funcionario']">
+      <a class="opcion" 
+         *ngIf="funcionario?.rol == 'user1' || funcionario?.rol === 'user2'" 
+          mat-list-item 
+          [routerLink] = "['/']">
           <mat-icon>people</mat-icon>
-          FUNCIONARIOS
+          <span *ngIf="showFiller">FUNCIONARIOS</span>
         </a>
-        <a 
-        *ngIf="funcionario?.rol == 'user1' || funcionario?.rol === 'user2'" 
-        class="opcion" 
-        mat-list-item 
-        [routerLink] = "['/']">
-            <mat-icon>school</mat-icon>
-          APTITUDES
+      <a class="opcion" 
+          *ngIf="funcionario?.rol == 'user1' || funcionario?.rol === 'user2'" 
+          mat-list-item 
+          [routerLink] = "['/']">
+          <mat-icon>school</mat-icon>
+          <span *ngIf="showFiller">APTITUDES</span>
+          </a>
+      <a class="opcion"  
+          mat-list-item 
+          [routerLink] = "['/']">
+          <mat-icon>live_help</mat-icon>
+          <span *ngIf="showFiller">AYUDA</span>
+          </a>
+      <a class="opcion"  
+          mat-list-item 
+          [routerLink] = "['/']">
+          <mat-icon>settings</mat-icon> <span *ngIf="showFiller">CONFIGURACION</span></a>
+      <a class="opcion"  
+          mat-list-item 
+          (click)="logout()">
+          <mat-icon aria-label="Side nav toggle icon" >power_settings_new</mat-icon>
+          <span *ngIf="showFiller">CERRAR SESION</span>
         </a>
-        <a 
-        class="opcion" 
-        mat-list-item 
-        [routerLink] = "['/']">
-            <mat-icon>live_help</mat-icon>
-          AYUDA
+      <a class="opcion"  
+          mat-list-item 
+          (click)="showFiller = !showFiller">
+          <mat-icon aria-label="Side nav toggle icon" (click)="showFiller = !showFiller">arrow_back</mat-icon> 
+          <span *ngIf="showFiller">CONTRAER</span>
         </a>
-        <a 
-        class="opcion"
-        mat-list-item 
-        [routerLink] = "['/']">
-            <mat-icon>settings</mat-icon>
-          CONFIGURACION
-        </a>
-        <a 
-        class="opcion" 
-        mat-list-item 
-        (click)='logout()'>
-            <mat-icon>power_settings_new</mat-icon>
-          CERRAR SESION
-        </a>
-        <a 
-        class="opcion" 
-        mat-list-item 
-        [routerLink] = "['/']" >
-            <mat-icon>arrow_back</mat-icon>
-          CONTRAER
-        </a>
-      </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content >
+    </mat-nav-list>
+  </mat-drawer>
+  <mat-drawer-content >
     <mat-toolbar class="barraNavegacion">
       <button
         type="button"
         aria-label="Toggle sidenav"
         mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
-        <mat-icon>menu</mat-icon>
+        (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon" >menu</mat-icon>
       </button>
       <span>proyectoMaterial</span>
     </mat-toolbar>
     <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  </mat-drawer-content>
+</mat-drawer-container>

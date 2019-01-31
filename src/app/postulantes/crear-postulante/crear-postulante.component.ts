@@ -15,34 +15,36 @@ import { Router } from '@angular/router';
 })
 
 export class CrearPostulanteComponent implements OnInit {
-
-  formPostulantes = new FormGroup({
-    id: new FormControl(0),
-    nombre : new FormControl(),
-    apellido : new FormControl(),
-    documento : new FormControl(),
-    celular : new FormControl(),
-    fecha_nac : new FormControl(),
-    mail : new FormControl(),
-    direccion : new FormControl(),
-    estado : new FormControl(),
-    desafioUrl: new FormControl(),
-    curriculumUrl: new FormControl(),
-    comentario: new FormControl()
-  });
-
   
-  constructor(private servicioAgregar: AgregarPostulanteService,private snackBar: MatSnackBar,private router: Router ) { }
+  formCrearPostulantes: FormGroup;
+  url = '';
+
+  constructor(private servicioAgregar: AgregarPostulanteService,
+              private snackBar: MatSnackBar,
+              private router: Router ) { }
 
   ngOnInit() {
-
+    this.formCrearPostulantes = new FormGroup({
+      id: new FormControl(0),
+      nombre : new FormControl('', [Validators.required,Validators.pattern('[/a-zA-Z]*')]), //solo letras, requerido
+      apellido : new FormControl('', [Validators.required,Validators.pattern('[/a-zA-Z]*')] ), //solo letras, requerido
+      documento : new FormControl('', [Validators.maxLength(7)]), //, hasta 7 cifras
+      celular : new FormControl(),
+      fecha_nac : new FormControl(),
+      mail : new FormControl('', [Validators.required, Validators.email]), //direccion valida, requerido
+      direccion : new FormControl('', Validators.maxLength(20)), //hasta 20 letras
+      estado : new FormControl(),
+      desafioUrl: new FormControl(),
+      curriculumUrl: new FormControl(),
+      comentario: new FormControl()
+    });
   }
   /**
    * Pasa los valores del formulario al método agregarPostulante
    */
   onSubmit() {
-    this.validarFormulario();
-    //this.servicioAgregar.agregarPostulante(this.formPostulantes.value).subscribe(data => this.recibidoCorrectamente(data),error=>this.errorRecibido(error));
+    console.log(this.formCrearPostulantes.value);
+    this.servicioAgregar.agregarPostulante(this.formCrearPostulantes.value).subscribe(data => this.recibidoCorrectamente(data),error=>this.errorRecibido(error));
   }
 
   /**
@@ -51,6 +53,7 @@ export class CrearPostulanteComponent implements OnInit {
    */
   recibidoCorrectamente(data: Postulante){
     console.log("Creado "+data);
+    //this.formCrearPostulantes.reset();
     this.openSnackBar("Postulante creado exitosamente","Entendido");
   }
 
@@ -63,6 +66,8 @@ export class CrearPostulanteComponent implements OnInit {
     this.snackBar.open(message, action, {
       duration: 4000,
     });
+
+    //se vuelve al listado de postulantes
     this.volverAlListado();
   }
 
@@ -80,35 +85,21 @@ export class CrearPostulanteComponent implements OnInit {
   volverAlListado(){
     this.router.navigate(['/postulante']);
   }
+  
+  onSelectFile(event) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
 
-  validarFormulario(){
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
 
-    let mensaje: String;
-    let nombre = this.formPostulantes.get('nombre') as FormControl;
-    let apellido = this.formPostulantes.get('apellido') as FormControl;
-    let celular = this.formPostulantes.get('celular') as FormControl;
-    
-   //se valida el campo nombre
-   if(/\d/.test(nombre.value)){
-     console.log("nombre invalido");
-     mensaje = "Nombre no valido";
+      reader.onload = (event:any) => { // called once readAsDataURL is completed
+        this.url = event.target.result;
+      }
     }
-    
-    //se valida el campo nombre
-    if(/\d/.test(apellido.value)){
-      console.log("apellido invalido");
-      mensaje = "Apellido no valido";
-   }
-   
-   //se valida el campo celular
-   if(/^[0-9]+$/.test(apellido.value)){
-     console.log("celular invalido");
-     mensaje = "Celular no valido";
+  }  
+
+  delete(){
+    this.url = null;
   }
-
-
-    
-
-  } 
 
 }//fin de la clase
