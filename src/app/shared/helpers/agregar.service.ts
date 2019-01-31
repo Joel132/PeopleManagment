@@ -8,7 +8,7 @@ import {environment} from "../../../environments/environment";
 export class AgregarPostulanteService{
 
     
-    private basePath: string="/api/v1/postulante/";
+    private basePath: string="/api/v1/postulantes/";
 
     constructor(private httpClient: HttpClient){}
 

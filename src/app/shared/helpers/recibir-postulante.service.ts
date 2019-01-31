@@ -9,7 +9,7 @@ import { HttpParams, HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class RecibirPostulanteService {
-  private basePath: string="/api/v1/postulante/";
+  private basePath: string="/api/v1/postulantes/";
   constructor(private httpClient: HttpClient) { }
 
   getPostulantes(): Observable<ResponseLista> {
@@ -17,5 +17,9 @@ export class RecibirPostulanteService {
     params=params.append('size','1000'); // Se recibe siempre el total de la lista para trabajar localmente
     params=params.append('page','0');
     return this.httpClient.get<ResponseLista>(environment.apiUrl+this.basePath,{params});
+  }
+
+  getPostulante(id: number): Observable<Postulante>{
+    return this.httpClient.get<Postulante>(environment.apiUrl+this.basePath+id);
   }
 }

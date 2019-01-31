@@ -1,4 +1,4 @@
-<div class="aligner" style="background: white; background-size:cover;" >
+<div class="aligner" style="background: white; background-size:cover;" *ngIf="formEditarPostulante">
   <mat-tab-group mat-stretch-tabs >
     <mat-tab label="Datos Personales">
       <form [formGroup] = 'formEditarPostulante' (ngSubmit)="onSubmit()"> 
@@ -9,7 +9,7 @@
           <div class="background"></div>
           </label>
           <br>
-          <input id="fileInput" type='file' (change)="onSelectFile($event)">  
+          <input id="fileInput" type='file' (change)="onSelectFile($event)" class="inputFile">  
         </div>
         <div fxLayoutAlign="center">
             <button mat-button color="warn" *ngIf="url" (click)="delete()">Eliminar</button>
@@ -23,9 +23,9 @@
               <mat-label>Nombre</mat-label>
               <input formControlName = "nombre" matInput placeholder="Nombre" type="text" required>
               <mat-icon matSuffix class="icono">person</mat-icon>
-              <mat-error style="color: rgb(59, 61, 71);" *ngIf="formEditarPostulante.get('nombre').errors && formEditarPostulante.get('nombre').dirty">
-                <p *ngIf=" formEditarPostulante.get('nombre').hasError('required')">Completar campo</p>
-                <p *ngIf=" formEditarPostulante.get('nombre').hasError('pattern')">No se aceptan numeros</p>
+              <mat-error style="color: rgb(59, 61, 71);" *ngIf="formEditarPostulante?.get('nombre').errors && formEditarPostulante?.get('nombre')?.dirty">
+                <p *ngIf=" formEditarPostulante?.get('nombre').hasError('required')">Completar campo</p>
+                <p *ngIf=" formEditarPostulante?.get('nombre').hasError('pattern')">No se aceptan numeros</p>
               </mat-error>
             </mat-form-field>
             
@@ -34,9 +34,9 @@
               <mat-label>Apellido</mat-label>
               <input formControlName = "apellido" matInput placeholder="Apellido" type="text" required>
               <mat-icon matSuffix class="icono">person</mat-icon>
-              <mat-error style="color: rgb(59, 61, 71);" *ngIf="formEditarPostulante.get('nombre').errors && formEditarPostulante.get('nombre').dirty">
-                <p *ngIf=" formEditarPostulante.get('apellido').hasError('required')">Completar campo</p>
-                <p *ngIf=" formEditarPostulante.get('apellido').hasError('pattern')" [ngStyle]="{'color': 'black'}" align="start">No es un nombre valido</p>
+              <mat-error style="color: rgb(59, 61, 71);" *ngIf="formEditarPostulante?.get('nombre').errors && formEditarPostulante?.get('nombre').dirty">
+                <p *ngIf=" formEditarPostulante?.get('apellido').hasError('required')">Completar campo</p>
+                <p *ngIf=" formEditarPostulante?.get('apellido').hasError('pattern')" [ngStyle]="{'color': 'black'}" align="start">No es un nombre valido</p>
               </mat-error>
             </mat-form-field>
            
@@ -44,7 +44,7 @@
             <mat-form-field>
               <input matInput placeholder="Email" formControlName="mail" required>
               <mat-icon matSuffix class="icono">email</mat-icon>
-              <mat-error *ngIf="formEditarPostulante.invalid">{{getErrorMessage()}}</mat-error>
+              <mat-error *ngIf="formEditarPostulante?.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
            
 
@@ -95,59 +95,59 @@
             <mat-form-field class="example-full-width">
             <input matInput placeholder="Subir CV" disabled value="">
             <label matPrefix ><mat-icon matTooltip="Descargar archivo"  class="icono">get_app</mat-icon></label>
-            <label matSuffix for="fileInput"><mat-icon matTooltip="Subir archivo" class="icono">attach_file</mat-icon></label>
+            <label matSuffix for="cvInput"><mat-icon matTooltip="Subir archivo" class="icono">attach_file</mat-icon></label>
             <label matSuffix ><mat-icon  matTooltip="Eliminar archivo" class="icono">clear</mat-icon></label>
             </mat-form-field>
-            <input type="file" id="fileInput">
+            <input type="file" id="cvInput" class="inputFile">
 
             <mat-form-field class="example-full-width">
             <input matInput placeholder="Subir Desafio" disabled value="">
             
             <label matPrefix ><mat-icon matTooltip="Descargar archivo" class="icono">get_app</mat-icon></label>
-            <label matSuffix for="fileInput"><mat-icon matTooltip="Subir archivo" class="icono">attach_file</mat-icon></label>
+            <label matSuffix for="desafioInput"><mat-icon matTooltip="Subir archivo" class="icono">attach_file</mat-icon></label>
             <label matSuffix ><mat-icon matTooltip="Eliminar archivo" class="icono">clear</mat-icon></label>
             </mat-form-field>
-            <input type="file" id="fileInput">
+            <input type="file" id="desafioInput" class="inputFile">
           </div>
         </div>    
         
           <button mat-stroked-button color="warn" (click)="volverAlListado()">Cancelar</button>
-          <button mat-raised-button  type="submit" [disabled]="formEditarPostulante.invalid">Guardar</button>    
-     
+          <button mat-raised-button  type="submit" [disabled]="formEditarPostulante?.invalid">Guardar</button>    
+            
       </form>
       <!--fin bloques y form--> 
     </mat-tab>
     <!--fin pestana 1--> 
-  <mat-tab label="Datos Adjuntos">
-    <form [formGroup] = 'formEditarPostulante' (ngSubmit)="onSubmit()"> 
+  <mat-tab label="Comentarios">
+    <form> 
       <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
         <!--div bloque 1-->
         <div fxFlex="60%" class="bloque" >
             <!--comentario general--> 
             <h4>Comentario General</h4>            
             <mat-form-field appearance="outline" class="example-full-width">
-            <textarea matInput placeholder="Comentario General" formControlName="comentario"></textarea>
+            <textarea matInput placeholder="Comentario General"></textarea>
             </mat-form-field>
         </div>
         <div fxFlex="50%" class="bloque">
           <!--comentario desafio--> 
           <h4>Comentario de Desafio</h4>
           <mat-form-field appearance="outline" class="example-full-width">
-            <textarea matInput formControlName="comentarioDesafio" placeholder="Agregar comentario desafio"></textarea>
+            <textarea matInput  placeholder="Agregar comentario desafio"></textarea>
           </mat-form-field>
           <!--comentario de entrevistas-->
           <h4>Comentario de Entrevistas</h4>
           <!--SM entrevista-->
           <mat-form-field appearance="outline" class="example-full-width">
-          <textarea matInput formControlName="comentarioSM" placeholder="Agregar comentario"></textarea>
+          <textarea matInput  placeholder="Agregar comentario"></textarea>
           </mat-form-field>
           <!--admin entrevista--> 
           <mat-form-field appearance="outline" class="example-full-width">
-          <textarea matInput formControlName="comentarioAdmin" placeholder="Agregar comentario"></textarea>
+          <textarea matInput  placeholder="Agregar comentario"></textarea>
           </mat-form-field>             
           <!--team entrevista-->  
           <mat-form-field appearance="outline" class="example-full-width">
-          <textarea matInput formControlName="comentarioTeam" placeholder="Agregar comentario"></textarea>
+          <textarea matInput  placeholder="Agregar comentario"></textarea>
           </mat-form-field>
         </div>
       </div>  

@@ -7,6 +7,7 @@ import { EditarPostulanteService } from 'src/app/shared/helpers/editar-postulant
 import { Postulante } from 'src/app/shared/models/postulante';
 import { ActivatedRoute } from '@angular/router';
 import { Validators,FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { RecibirPostulanteService } from 'src/app/shared/helpers/recibir-postulante.service';
 
 @Component({
   selector: 'app-editar-postulante',
@@ -22,7 +23,7 @@ export class EditarPostulanteComponent implements OnInit {
   public formEditarPostulante: FormGroup;
 
  email = new FormControl('', [Validators.required, Validators.email]);
-  
+  postulante : Postulante;
  desafioUrl: string;
  cvUrl: string;
  fotoUrl: string;
@@ -35,7 +36,7 @@ export class EditarPostulanteComponent implements OnInit {
 
   percentDone: number;
   uploadSuccess: boolean;
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private http:HttpClient,public uploader: FileUploaderService, private editarServicio: EditarPostulanteService) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private http:HttpClient,public uploader: FileUploaderService, private editarServicio: EditarPostulanteService, private recibirPostulante: RecibirPostulanteService) { }
 
    
   
@@ -43,16 +44,24 @@ export class EditarPostulanteComponent implements OnInit {
     // TODO: Use EventEmitter with form value
     console.log( this.formEditarPostulante.value);
    this.editarServicio.editarPostulante(this.
-   formEditarPostulante.value).subscribe(data => this.recibidoCorrectamente(data),error=>this.errorRecibido(error));
+   formEditarPostulante.value).subscribe(data => this.editadoCorrectamente(data),error=>this.editadoIncorrecto(error));
       
   }
-  recibidoCorrectamente(data: Postulante){
+
+  /**
+   * Metodo que se ejecuta en caso que la actualizacion de los datos de un postulante dado haya sido exitosa
+   * @param data objeto que representa al postulante editado con los datos correctos
+   */
+  editadoCorrectamente(data: Postulante){
     console.log("Editado "+data);
     //this.formPostulantes.reset();
   }
 
-  errorRecibido(error){
-''
+  /**
+   * Metodo que se ejecuta si ocurre un error al tratar de editar un postulante
+   * @param error 
+   */
+  editadoIncorrecto(error){
   }
 
 
@@ -158,25 +167,47 @@ export class EditarPostulanteComponent implements OnInit {
     this.queue = this.uploader.queue;
     this.uploader.onCompleteItem = this.completeItem;
 
-    this.formEditarPostulante = this.formBuilder.group({
-      id: new FormControl(+this.route.snapshot.paramMap.get('id')),
-      nombre : new FormControl('', [Validators.required,Validators.pattern('[/a-zA-Z]*')]),
-      apellido : new FormControl('', [Validators.required,Validators.pattern('[/a-zA-Z]*')] ),
-      documento : new FormControl('', [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-      celular : new FormControl(),
-      fecha_nac : new FormControl(),
-      mail : new FormControl('', [Validators.required, Validators.email]),
-      direccion : new FormControl(),
-      estado : new FormControl(),
-      desafioUrl: new FormControl(),
-      curriculumUrl: new FormControl(),
-      comentario: new FormControl(),
-      comentarioSM:new FormControl(),
-      comentarioAdmin: new FormControl(),
-      comentarioTeam: new FormControl(),
-      comentarioDesafio: new FormControl()
-    });
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.getPostulante(id);
 
+    
+
+    
+
+  }
+
+  getPostulante(id: number){
+    this.recibirPostulante.getPostulante(id).subscribe(
+      respuesta=>{
+        this.postulante=respuesta;
+        this.cargarFormulario();
+      },
+      error_respuesta=>{
+        console.log("Ha ocurrido un error");
+      }
+      );
+  }
+
+  cargarFormulario(){
+
+    this.formEditarPostulante = this.formBuilder.group({
+      id: new FormControl(this.postulante.id),
+      nombre : new FormControl(this.postulante.nombre, [Validators.required,Validators.pattern('[/a-zA-Z]*')]),
+      apellido : new FormControl(this.postulante.apellido, [Validators.required,Validators.pattern('[/a-zA-Z]*')] ),
+      documento : new FormControl(this.postulante.documento, [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
+      celular : new FormControl(this.postulante.celular),
+      fecha_nac : new FormControl(),
+      mail : new FormControl(this.postulante.mail, [Validators.required, Validators.email]),
+      direccion : new FormControl(),
+      estado : new FormControl(this.postulante.estado),
+      desafioUrl: new FormControl(this.postulante.desafioUrl),
+      curriculumUrl: new FormControl(this.postulante.curriculumUrl),
+      comentario: new FormControl(this.postulante.comentario),
+      comentarioSM:new FormControl(this.postulante.comentarioSm),
+      comentarioAdmin: new FormControl(this.postulante.comentarioAdmin),
+      comentarioTeam: new FormControl(this.postulante.comentarioTeam),
+      comentarioDesafio: new FormControl(this.postulante.comentarioDesafio)
+    });
   }
   completeItem = (item: FileQueueObject, response: any) => {
     this.onCompleteItem.emit({ item, response });

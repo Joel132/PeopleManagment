@@ -7,7 +7,7 @@ import { Postulante } from '../models/postulante';
 export class EditarPostulanteService{
 
     
-    private url: string="http://10.128.3.82:8080/api/v1/postulante/";
+    private url: string="http://10.128.3.82:8080/api/v1/postulantes/";
 
     constructor(private httpClient: HttpClient){}
 
