@@ -1,24 +1,10 @@
-.sidenav-container {
-  height: 100%;
-}
-
-.sidenav {
-  width: 275px;
-  background: #353535; 
-  box-shadow: 0px 0px 0px 5px rgba rgba(179, 179 , 179, 30);
-}
-
 .mat-toolbar.mat-primary {
   position: sticky;
   top: 0;
   z-index: 1;
 }
 
-.lista{
-}
-
 .barraNavegacion{
-  
   background: black;
 }
 
@@ -28,12 +14,11 @@
 }
 
 .opcion:hover{
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f3c5bd+0,e86c57+0,7b1a52+0,db1943+54,ea5a18+100 */
-background: #f3c5bd; /* Old browsers */
-background: -moz-linear-gradient(left, #f3c5bd 0%, #e86c57 0%, #7b1a52 0%, #db1943 54%, #ea5a18 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(left, #f3c5bd 0%,#e86c57 0%,#7b1a52 0%,#db1943 54%,#ea5a18 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to right, #f3c5bd 0%,#e86c57 0%,#7b1a52 0%,#db1943 54%,#ea5a18 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3c5bd', endColorstr='#ea5a18',GradientType=1 ); /* IE6-9 */
+  background: #f3c5bd; /* Old browsers */
+  background: -moz-linear-gradient(left, #f3c5bd 0%, #e86c57 0%, #7b1a52 0%, #db1943 54%, #ea5a18 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, #f3c5bd 0%,#e86c57 0%,#7b1a52 0%,#db1943 54%,#ea5a18 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, #f3c5bd 0%,#e86c57 0%,#7b1a52 0%,#db1943 54%,#ea5a18 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3c5bd', endColorstr='#ea5a18',GradientType=1 ); /* IE6-9 */
   color: white;
 
 }
@@ -65,9 +50,9 @@ mat-card{
 img{
   height: 80px;
   width: 80px;
-  border: 2px solid #000;
   border-radius: 50%;
 }
+
 mat-toolbar{
   background: #353535;
 }
@@ -75,12 +60,6 @@ mat-toolbar{
 mat-icon{
   padding-right: 10px;
   color: white;
-
-}
-/*CODIGO PARA LA VERSION CONTRAIDA*/
-
-
-.example-container {
 
 }
 
@@ -91,6 +70,7 @@ mat-icon{
   justify-content: center;
   position: fixed;
   background: #353535;
+  box-shadow:20px rgba rgba(179, 179 , 179, 30);
 }
 
 ul li mat-icon:hover{
@@ -102,4 +82,11 @@ ul li mat-icon:hover{
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3c5bd', endColorstr='#ea5a18',GradientType=1 ); /* IE6-9 */
   color: white;
 
+}
+
+.fotoContraida{
+  width: 50px; 
+  height: 50px;
+  margin: auto;
+  margin-top: 5px; 
 }
