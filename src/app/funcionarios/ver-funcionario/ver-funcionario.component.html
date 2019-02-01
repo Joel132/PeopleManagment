@@ -1,3 +1,167 @@
-<p>
-  ver-funcionario works!
-</p>
+<div class="component-view">
+  <mat-tab-group mat-stretch-tabs>
+    <mat-tab label="Datos Personales">
+      <mat-list>
+        <div fxLayout="row" fxLayoutAlign="right" fxLayoutGap="10%">
+          <div class="seccion-foto" fxLayoutAlign="center">
+            <mat-card>
+              <img mat-card-avatar src="https://www.hannafords.ca/wp-content/themes/comox/convertus/images/img-avatar.png"
+                style="margin: auto;">
+              <mat-card-content>
+                  <div *ngIf="usuarios?.estado; then estadoSi else estadoNo"></div>
+                  <ng-template #estadoSi>
+                    <strong mat-line> {{ usuarios?.estado }}</strong>
+                  </ng-template>
+                  <ng-template #estadoNo>
+                    <p mat-line> No disponible</p>
+                  </ng-template>
+              </mat-card-content>
+            </mat-card>
+          </div>
+          <div fxLayout="column">
+            <mat-list-item>
+              <mat-icon mat-list-icon>face</mat-icon>
+              <p mat-line><strong>Nombre Y Apellido:</strong></p>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon mat-list-icon>picture_in_picture</mat-icon>
+              <p mat-line><strong>Documento:</strong></p>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon mat-list-icon>local_phone</mat-icon>
+              <p mat-line><strong>Telefono:</strong></p>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon mat-list-icon>alternate_email</mat-icon>
+              <p mat-line><strong>Email:</strong></p>
+            </mat-list-item>
+          </div>
+          <div fxLayout="column">
+            <mat-list-item>
+              <mat-icon mat-list-icon></mat-icon>
+              <div *ngIf="usuarios?.nombre && usuarios.apellido; then nombreSi else nombreNo"></div>
+              <ng-template #nombreSi>
+                <p mat-line> {{ usuarios?.nombre }}
+                  {{usuarios?.apellido}}</p>
+              </ng-template>
+              <ng-template #nombreNo>
+                <p mat-line> No disponible</p>
+              </ng-template>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon mat-list-icon></mat-icon>
+              <div *ngIf="usuarios?.ci; then ciSi else ciNo"></div>
+              <ng-template #ciSi>
+                <p mat-line> {{ usuarios?.ci }}</p>
+              </ng-template>
+              <ng-template #ciNo>
+                <p mat-line> No disponible</p>
+              </ng-template>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon mat-list-icon></mat-icon>
+              <div *ngIf="usuarios?.telefono; then telefonoSi else telefonoNo"></div>
+              <ng-template #telefonoSi>
+                <p mat-line> {{ usuarios?.telefono }}</p>
+              </ng-template>
+              <ng-template #telefonoNo>
+                <p mat-line> No disponible</p>
+              </ng-template>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon mat-list-icon></mat-icon>
+              <div *ngIf="usuarios?.email; then emailSi else emailNo"></div>
+              <ng-template #emailSi>
+                <p mat-line> {{ usuarios?.email }}</p>
+              </ng-template>
+              <ng-template #emailNo>
+                <p mat-line> No disponible</p>
+              </ng-template>
+            </mat-list-item>
+          </div>
+        </div>
+      </mat-list>
+    </mat-tab>
+    <mat-tab label="Datos Administrativos">
+        <mat-list>
+          <div fxLayout="row" fxLayoutAlign="right" fxLayoutGap="10%">
+            <div class="seccion-foto" fxLayoutAlign="center">
+              <mat-card>
+                <img mat-card-avatar src="https://www.hannafords.ca/wp-content/themes/comox/convertus/images/img-avatar.png"
+                  style="margin: auto;">
+                <mat-card-content>
+                    <div *ngIf="usuarios?.estado; then estadoSi else estadoNo"></div>
+                    <ng-template #estadoSi>
+                      <strong mat-line> {{ usuarios?.estado }}</strong>
+                    </ng-template>
+                    <ng-template #estadoNo>
+                      <p mat-line> No disponible</p>
+                    </ng-template>
+                </mat-card-content>
+              </mat-card>
+            </div>
+            <div fxLayout="column">
+              <mat-list-item>
+                <mat-icon mat-list-icon>person_pin</mat-icon>
+                <p mat-line><strong>Usuario:</strong></p>
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon mat-list-icon>calendar_today</mat-icon>
+                <p mat-line><strong>Fecha de Inicio:</strong></p>
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon mat-list-icon>calendar_today</mat-icon>
+                <p mat-line><strong>Fecha de Finalizacion:</strong></p>
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon mat-list-icon>supervisor_account</mat-icon>
+                <p mat-line><strong>Rol:</strong></p>
+              </mat-list-item>
+            </div>
+            <div fxLayout="column">
+                <mat-list-item>
+                    <mat-icon mat-list-icon></mat-icon>
+                    <div *ngIf="usuarios?.usuario; then usuarioSi else usuarioNo"></div>
+                    <ng-template #usuarioSi>
+                      <p mat-line> {{ usuarios?.usuario }}</p>
+                    </ng-template>
+                    <ng-template #usuarioNo>
+                      <p mat-line> No disponible</p>
+                    </ng-template>
+                  </mat-list-item>
+              <mat-list-item>
+                <mat-icon mat-list-icon></mat-icon>
+                <div *ngIf="usuarios?.fechaInicio; then fechaiSi else fechaiNo"></div>
+                <ng-template #fechaiSi>
+                  <p mat-line> {{ usuarios?.fechaInicio }}
+                </ng-template>
+                <ng-template #fechaiNo>
+                  <p mat-line> No disponible</p>
+                </ng-template>
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon mat-list-icon></mat-icon>
+                <div *ngIf="usuarios?.fechaVencimiento; then fechafSi else fechafNo"></div>
+                <ng-template #fechafSi>
+                  <p mat-line> {{ usuarios?.fechaVencimiento }}</p>
+                </ng-template>
+                <ng-template #fechafNo>
+                  <p mat-line> No disponible</p>
+                </ng-template>
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon mat-list-icon></mat-icon>
+                <div *ngIf="usuarios?.rol; then rolSi else rolNo"></div>
+                <ng-template #rolSi>
+                  <p mat-line> {{ usuarios?.rol }}</p>
+                </ng-template>
+                <ng-template #rolNo>
+                  <p mat-line> No disponible</p>
+                </ng-template>
+              </mat-list-item>
+            </div>
+          </div>
+        </mat-list>
+      </mat-tab>
+  </mat-tab-group>
+</div>

@@ -19,7 +19,8 @@ export class Funcionario {
         public contraseña:string,
         public rol:string,
         public curriculum:string,
-        public estado:string
+        public estado:string,
+        public id:number
     ) {}
 }
 

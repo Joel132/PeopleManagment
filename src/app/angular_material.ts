@@ -1,6 +1,6 @@
 import { MatCheckboxModule,MatInputModule,
 
-  MatButtonModule, MatOptionModule, MatGridListModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule,MatCardModule} from '@angular/material';
+  MatButtonModule, MatOptionModule, MatGridListModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule,MatCardModule, MatExpansionModule} from '@angular/material';
 
 import { NgModule } from '@angular/core';
 
@@ -37,7 +37,8 @@ import {MatSliderModule} from '@angular/material/slider';
     MatSelectModule, MatGridListModule,
     MatButtonModule, MatCheckboxModule,MatInputModule,
     MatCardModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatMenuModule,
-    MatDividerModule, MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, TextFieldModule
+    MatDividerModule, MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, TextFieldModule,
+    MatExpansionModule
     
   ],
   
@@ -50,7 +51,8 @@ import {MatSliderModule} from '@angular/material/slider';
       MatSelectModule, MatGridListModule,
       MatButtonModule, MatCheckboxModule,MatInputModule,
       MatCardModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatMenuModule,
-      MatDividerModule, MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, TextFieldModule
+      MatDividerModule, MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, TextFieldModule,
+      MatExpansionModule
       
   ]
 

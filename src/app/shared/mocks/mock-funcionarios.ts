@@ -2,19 +2,20 @@ import { Funcionario } from '../models/funcionario';
 
 export const FUNCIONARIOS: Array<Funcionario> = [
     {
-        foto:'',
-        nombre:'',
-        apellido:'',    
-        ci:'',    
+        foto:'https://material.angular.io/assets/img/examples/shiba2.jpg',
+        nombre:'Miguel',
+        apellido:'Sergio',    
+        ci:'468684684',    
         beneficiario:'',
-        email:'',    
-        telefono:'',
-        fechaInicio:'',
-        fechaVencimiento:'',
-        usuario:'',
+        email:'dddd@gmail.com',    
+        telefono:'468486468684',
+        fechaInicio:'rrgrhuguhr',
+        fechaVencimiento:'uhdsuhdsfuhfuhsfkh',
+        usuario:'user46XD',
         contraseña:'',
-        rol:'',
+        rol:'admin',
         curriculum:'',
-        estado:''
-    },
+        estado:'activo',
+        id: 1
+    }
 ];
