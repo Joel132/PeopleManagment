@@ -8,43 +8,88 @@ import { Postulante } from 'src/app/shared/models/postulante';
 import { ActivatedRoute } from '@angular/router';
 import { Validators,FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { RecibirPostulanteService } from 'src/app/shared/helpers/recibir-postulante.service';
+import { EnviarArchivoService } from 'src/app/shared/helpers/enviar-archivo.service';
 
 @Component({
   selector: 'app-editar-postulante',
   templateUrl: './editar-postulante.component.html',
   styleUrls: ['./editar-postulante.component.scss']
 })
-
+/**
+ * 
+ */
 
 export class EditarPostulanteComponent implements OnInit {
-  //email validations
+  
 
-  //email = new FormControl();
+  /**
+   * Atributo que contiene el form del postulante a editar. Los datos precargados y los que se actualizaran
+   */
   public formEditarPostulante: FormGroup;
 
- email = new FormControl('', [Validators.required, Validators.email]);
-  postulante : Postulante;
- desafioUrl: string;
- cvUrl: string;
- fotoUrl: string;
+  email = new FormControl('', [Validators.required, Validators.email]);
+  
+
+  /**
+   * Atributo usado para mostrar el nombre del archivo del desafio en el input
+   */
+  public desafioName: string='';
+  
+  /**
+   * Atributo usado para mostrar el nombre del archivo del CV en el input 
+   */
+  public cvName: string='';
+
   @Output() onCompleteItem = new EventEmitter();
 
+  /**
+   * Atributo usado para vincular el input file del desafio en el template(se puede referenciar al archivo seleccionado)
+   */
   @ViewChild('desafioInput') desafioInput;
+  
+  /**
+   * Atributo usado para vincular el input file del CV en el template(se puede referenciar al archivo seleccionado) 
+   */
   @ViewChild('curriculumInput') curriculumInput;
-  //@ViewChild('desafioInput') desafioInput;
-  queue: Observable<FileQueueObject[]>;
 
-  percentDone: number;
-  uploadSuccess: boolean;
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private http:HttpClient,public uploader: FileUploaderService, private editarServicio: EditarPostulanteService, private recibirPostulante: RecibirPostulanteService) { }
+  /**
+   * Atributo usado para vincular el input file de la foto en el template(se puede referenciar al archivo seleccionado) 
+   */
+  @ViewChild('fotoInput') fotoInput ;
+  
+  //form date
+  minDate = new Date(1930, 0, 1);
+  maxDate = new Date(2040, 0, 1);
+  fileSelectMsg: string = 'No file selected yet.';
+  fileUploadMsg: string = 'No file uploaded yet.';
+  disabled: boolean = false;
 
+  constructor(private formBuilder: FormBuilder, 
+    private route: ActivatedRoute, 
+    private http:HttpClient,
+    public uploader: FileUploaderService, 
+    private editarServicio: EditarPostulanteService, 
+    private recibirPostulante: RecibirPostulanteService,
+    private enviarArchivo: EnviarArchivoService
+    ) { }
+
+  ngOnInit() {
+      const id = +this.route.snapshot.paramMap.get('id');//Se obtiene el id de la ruta 
+      //this.getPostulante(id);
+      this.cargarFormulario({id:1,celular:'213',apellido:'Florentin',nombre:'Joel',comentario:'sad',comentarioAdmin:'dsa',comentarioDesafio:'sda',comentarioTeam:'dsa',comentarioSm:'sad',curriculumUrl:'df',desafioUrl:'ad',documento:'ad',estado:'Rechazado',foto:'ad',mail:'das'});
+  }
    
   
   onSubmit() {
     // TODO: Use EventEmitter with form value
     console.log( this.formEditarPostulante.value);
-   this.editarServicio.editarPostulante(this.
-   formEditarPostulante.value).subscribe(data => this.editadoCorrectamente(data),error=>this.editadoIncorrecto(error));
+   
+   if(this.formEditarPostulante.valid) {
+     this.editarServicio.editarPostulante(
+      this.formEditarPostulante.value).subscribe(
+       data => this.editadoCorrectamente(data),
+       error=>this.editadoIncorrecto(error));
+    }
       
   }
 
@@ -65,122 +110,46 @@ export class EditarPostulanteComponent implements OnInit {
   }
 
 
-  getErrorMessage() {
+  getErrorEmailMessage() {
     return (this.formEditarPostulante.get("mail") as (FormControl)).hasError('required') ? 'You must enter a value' :
         (this.formEditarPostulante.get("mail") as (FormControl)).hasError('email') ? 'Not a valid email' :'';
           //return this.formEditarPostulante.errors;
   } 
-    
-  //file upload
-  selectFile: File = null;
- 
- //form date
-  minDate = new Date(1930, 0, 1);
-  maxDate = new Date(2040, 0, 1);
-  fileSelectMsg: string = 'No file selected yet.';
-  fileUploadMsg: string = 'No file uploaded yet.';
-  disabled: boolean = false;
- //file n2g
-  upload(files: File[]){
-    //pick from one of the 4 styles of file uploads below
-    this.uploadAndProgress(files);
-  }
 
-  basicUpload(files: File[]){
-    var formData = new FormData();
-    Array.from(files).forEach(f => formData.append('file', f))
-    this.http.post('https://file.io', formData)
-      .subscribe(event => {
-        console.log('done')
-      })
-  }
 
-  //this will fail since file.io dosen't accept this type of upload
-  //but it is still possible to upload a file with this style
-  basicUploadSingle(file: File){
-    this.http.post('https://file.io', file)
-      .subscribe(event => {
-        console.log('done')
-      })
-  }
 
-  uploadAndProgress(files: File[]){
-    console.log(files)
-    var formData = new FormData();
-    Array.from(files).forEach(f => formData.append('file',f))
-
-    this.http.post('https://file.io', formData, {reportProgress: true, observe: 'events'})
-      .subscribe(event => {
-        if (event.type === HttpEventType.UploadProgress) {
-          this.percentDone = Math.round(100 * event.loaded / event.total);
-        } else if (event instanceof HttpResponse) {
-          this.uploadSuccess = true;
-        }
-    });
-  }
-
-  //this will fail since file.io dosen't accept this type of upload
-  //but it is still possible to upload a file with this style
-  uploadAndProgressSingle(file: File){
-    this.http.post('https://file.io', file, {reportProgress: true, observe: 'events'})
-      .subscribe(event => {
-        if (event.type === HttpEventType.UploadProgress) {
-          this.percentDone = Math.round(100 * event.loaded / event.total);
-        } else if (event instanceof HttpResponse) {
-          this.uploadSuccess = true;
-        }
-    });
-  }
-//file upload 
-  onFileSelected(event){
-    this.selectFile = <File>event.target.files[0];
-  }
- 
-
-  name = 'Angular 7';
-  url = '';
-  onSelectFile(event) {
-    if (event.target.files && event.target.files[0]) {
+/**
+ * Metodo para poder manipular la foto(vista previa)
+ */
+  urlFoto = '';
+  cargarFoto() {
+    if (this.fotoInput.nativeElement && this.fotoInput.nativeElement.files[0]) {
       var reader = new FileReader();
 
-      reader.readAsDataURL(event.target.files[0]); // read file as data url
+      reader.readAsDataURL(this.fotoInput.nativeElement.files[0]); // read file as data url
 
       reader.onload = (event:any) => { // called once readAsDataURL is completed
-        this.url = event.target.result;
-        console.log(event.target);
+        this.urlFoto = event.target.result;
       }
     }
   }
-  public delete(){
-    this.url = null;
-  }
 
-  /*onUpload(){
-    const fd =new FormData();
-    fd.append('image', this.selectFile, this.selectFile.name);
-    this.http.post('',fd).subscribe(res=>){
-      console.log(res);
-    });
-  }*/
+  /**
+   * Metodo para desvincular el archivo del input de la foto
+   */
+  public eliminarFoto(){
+    this.urlFoto = null;
+    this.fotoInput.nativeElement.value='';
+  }
   
-  ngOnInit() {
-    this.queue = this.uploader.queue;
-    this.uploader.onCompleteItem = this.completeItem;
-
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.getPostulante(id);
-
-    
-
-    
-
-  }
-
+  /**
+   * Metodo que llama al servicio para obtener el postulante segun un id dado
+   * @param id Atributo a tener en cuenta para obtener un postulante
+   */
   getPostulante(id: number){
     this.recibirPostulante.getPostulante(id).subscribe(
       respuesta=>{
-        this.postulante=respuesta;
-        this.cargarFormulario();
+        this.cargarFormulario(respuesta);
       },
       error_respuesta=>{
         console.log("Ha ocurrido un error");
@@ -188,95 +157,82 @@ export class EditarPostulanteComponent implements OnInit {
       );
   }
 
-  cargarFormulario(){
-
+  /**
+   * Metodo que sirve para precargar el formulario segun un postulante dado
+   * @param postulante Atributo a tener en cuenta para cargar el formulario
+   */
+  cargarFormulario(postulante: Postulante){
+    //TODO: averiguar como obtener el nombre del archivo cuando ya tiene una url asignada
     this.formEditarPostulante = this.formBuilder.group({
-      id: new FormControl(this.postulante.id),
-      nombre : new FormControl(this.postulante.nombre, [Validators.required,Validators.pattern('[/a-zA-Z]*')]),
-      apellido : new FormControl(this.postulante.apellido, [Validators.required,Validators.pattern('[/a-zA-Z]*')] ),
-      documento : new FormControl(this.postulante.documento, [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-      celular : new FormControl(this.postulante.celular),
+      id: new FormControl(postulante.id),
+      nombre : new FormControl(postulante.nombre, [Validators.required,Validators.pattern('[/a-zA-Z ]*')]),
+      apellido : new FormControl(postulante.apellido, [Validators.required,Validators.pattern('[/a-zA-Z ]*')] ),
+      documento : new FormControl(postulante.documento, [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
+      celular : new FormControl(postulante.celular),
       fecha_nac : new FormControl(),
-      mail : new FormControl(this.postulante.mail, [Validators.required, Validators.email]),
+      mail : new FormControl(postulante.mail, [Validators.required, Validators.email]),
       direccion : new FormControl(),
-      estado : new FormControl(this.postulante.estado),
-      desafioUrl: new FormControl(this.postulante.desafioUrl),
-      curriculumUrl: new FormControl(this.postulante.curriculumUrl),
-      comentario: new FormControl(this.postulante.comentario),
-      comentarioSM:new FormControl(this.postulante.comentarioSm),
-      comentarioAdmin: new FormControl(this.postulante.comentarioAdmin),
-      comentarioTeam: new FormControl(this.postulante.comentarioTeam),
-      comentarioDesafio: new FormControl(this.postulante.comentarioDesafio)
+      estado : new FormControl(postulante.estado),
+      desafioUrl: new FormControl(postulante.desafioUrl),
+      curriculumUrl: new FormControl(postulante.curriculumUrl),
+      comentario: new FormControl(postulante.comentario),
+      comentarioSM:new FormControl(postulante.comentarioSm),
+      comentarioAdmin: new FormControl(postulante.comentarioAdmin),
+      comentarioTeam: new FormControl(postulante.comentarioTeam),
+      comentarioDesafio: new FormControl(postulante.comentarioDesafio)
     });
   }
-  completeItem = (item: FileQueueObject, response: any) => {
-    this.onCompleteItem.emit({ item, response });
-  }
+ 
 
-  addToQueueDesafio() {
-    const fileBrowser = this.desafioInput.nativeElement;
-    this.uploader.delete("desafio");
-    this.uploader.addToQueue(fileBrowser.files,"desafio");
-  }
-
-  addToQueueCV() {
-    const fileBrowser = this.curriculumInput.nativeElement;
-    this.uploader.delete("CV");
-    console.log(fileBrowser.files);
-    this.uploader.addToQueue(fileBrowser.files,"CV");
-  }
-  
   /**
-   * Metodo para asignar las respuestas del servidor en una variable local  una vez que se suba un archivo
-   * @param isSuccess 
-   * @param item 
+   * Metodo para vaciar el cv seleccionado
    */
-  procesarUrl(isSuccess: any,item:FileQueueObject){
-    if(isSuccess){
-      switch (item.tipo){
-        case 'CV':{
-          this.cvUrl=(item.response as HttpResponse<any>).body;
-          console.log(this.cvUrl);
-          break;
-        }
-        case 'desafio':{
-          this.desafioUrl=(item.response as HttpResponse<any>).body;
-          console.log(this.desafioUrl);
-          break;
-        }
-        case 'imagen':{
-          break;
-        }
-
-      }
-        
-
-    }
-    return isSuccess;
-  }
-
-  vaciarDatosAdjuntos(){
+  vaciarInputCV(){
     this.curriculumInput.nativeElement.value='';
-    this.desafioInput.nativeElement.value='';
-    this.uploader.clearQueue();
+    this.cvName='';
   }
-  //hdhdh
-  /*
-  @Input()
-  httpRequestHeaders: HttpHeaders | {
-    [header: string]: string | string[];
-  } = new HttpHeaders().set("sampleHeader", "headerValue").set("sampleHeader1", "headerValue1");
 
-  @Input()
-  httpRequestParams: HttpParams | {
-    [param: string]: string | string[];
-  } = new HttpParams().set("sampleRequestParam", "requestValue").set("sampleRequestParam1", "requestValue1");
+  /**
+   * Metodo para vaciar el desafio seleccionado
+   */
+  vaciarInputDesafio(){
+    this.desafioInput.nativeElement.value='';
+    this.desafioName='';
+  }
 
-  public uploadEvent($event: any) {
-    console.log('from client' + JSON.stringify($event));
-  }*/
-  
+  /**
+   * Metodo para colocar el nombre del archivo del curriculum al input correspondiente
+   * 
+   */
+  nombrarCV(){
+    this.cvName=this.curriculumInput.nativeElement.files[0].name;
+  }
 
+  /**
+   * Metodo para colocar el nombre del archivo del desafio al input correspondiente
+   * 
+   */
+  nombrarDesafio(){
+    this.desafioName=this.desafioInput.nativeElement.files[0].name;
+  }
+
+/**
+ * Metodo que sirve para alzar el archivo. Utiliza un servicio para alzar
+ * @param fileInput la referencia a un input file dado(foto, cv o desafio)
+ * @param campo contiene el nombre del campo del input
+ */
+  enviar(fileInput,campo: 'desafioUrl'|'curriculumUrl'){
+     let file: File= fileInput.nativeElement.files[0];
+    this.enviarArchivo.enviarArchivo(file).subscribe(
+      (resultPath) => {
+        this.formEditarPostulante.get(campo).setValue(resultPath);
+      },
+      (error) => {
+        console.log("Ha ocurrido un error al subir el archivo");
+      }
+    );
+    
+  }
 }
 
 

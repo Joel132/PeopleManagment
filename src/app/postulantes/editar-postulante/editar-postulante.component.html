@@ -1,24 +1,30 @@
 <div class="aligner" style="background: white; background-size:cover;" *ngIf="formEditarPostulante">
+  <form [formGroup] = 'formEditarPostulante' (ngSubmit)="onSubmit()"> 
   <mat-tab-group mat-stretch-tabs >
+    <!--inicio pestana 1--> 
     <mat-tab label="Datos Personales">
-      <form [formGroup] = 'formEditarPostulante' (ngSubmit)="onSubmit()"> 
+      
+        <!--bloque de la foto-->
         <div class="container" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
           <label class="hoverable" for="fileInput">
-          <img matTooltip="Cambiar Foto de Perfil" [src]="url ? url : 'assets/img/foto-perfil.png'"> 
+          <img matTooltip="Cambiar Foto de Perfil" [src]="urlFoto ? urlFoto : 'assets/img/foto-perfil.png'"> 
           <div class="hover-text">Cambiar Foto</div>
           <div class="background"></div>
           </label>
           <br>
-          <input id="fileInput" type='file' (change)="onSelectFile($event)" class="inputFile">  
+          <input id="fileInput" type='file' (change)="cargarFoto()" class="inputFile" #fotoInput>  
         </div>
+        
         <div fxLayoutAlign="center">
-            <button mat-button color="warn" *ngIf="url" (click)="delete()">Eliminar</button>
+            <button mat-button color="warn" *ngIf="urlFoto" (click)="eliminarFoto()">Eliminar</button>
         </div>
+
         <!--div gral-->
         <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
           <!--div bloque 1-->
           <div fxFlex="40%" class="bloque">
             
+            <!-- campo del nombre-->
             <mat-form-field>
               <mat-label>Nombre</mat-label>
               <input formControlName = "nombre" matInput placeholder="Nombre" type="text" required>
@@ -29,7 +35,7 @@
               </mat-error>
             </mat-form-field>
             
-
+            <!-- campo del apellido-->
             <mat-form-field>
               <mat-label>Apellido</mat-label>
               <input formControlName = "apellido" matInput placeholder="Apellido" type="text" required>
@@ -40,20 +46,20 @@
               </mat-error>
             </mat-form-field>
            
-   
+            <!-- campo del mail-->
             <mat-form-field>
               <input matInput placeholder="Email" formControlName="mail" required>
               <mat-icon matSuffix class="icono">email</mat-icon>
-              <mat-error *ngIf="formEditarPostulante?.invalid">{{getErrorMessage()}}</mat-error>
+              <mat-error *ngIf="formEditarPostulante?.invalid">{{getErrorEmailMessage()}}</mat-error>
             </mat-form-field>
            
-
+            <!-- campo de la direccion-->
             <mat-form-field>
               <input formControlName = "direccion" matInput placeholder="Direccion" type="text">
               <mat-icon matSuffix class="icono" >location_on</mat-icon>
             </mat-form-field> 
 
-                      
+            <!-- campo del estado-->          
             <mat-form-field>
                 <mat-select formControlName = "estado" placeholder="Estado"  disableRipple>
                   <mat-option value="Pendiente Desafio">Desafio Pendiente</mat-option>
@@ -67,15 +73,17 @@
                 </mat-select>
               </mat-form-field>     
           </div>
+
           <!--sgt bloque 2-->
           <div fxFlex="40%" class="bloque">
 
+            <!-- campo del documento-->
             <mat-form-field>
               <mat-icon matSuffix class="icono">contact_mail</mat-icon>
               <input formControlName = "documento" matInput placeholder="CI" type="text">
             </mat-form-field>
             
-
+            <!-- campo del telefono-->
             <mat-form-field>
               <mat-label>Telefono</mat-label>
               <input formControlName = "celular" matInput placeholder="ej; +595961565376" type="tel"
@@ -83,7 +91,7 @@
               <mat-icon matSuffix class="icono">call</mat-icon>
             </mat-form-field>
             
-
+            <!-- campo de fecha de nacimiento-->
             <mat-form-field class="Fecha de Nacimiento">
               <input formControlName = "fecha_nac" matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Fecha de Nacimiento">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -93,77 +101,89 @@
 
             <!--subir cv-->
             <mat-form-field class="example-full-width">
-            <input matInput placeholder="Subir CV" disabled value="">
+            <input matInput placeholder="Subir CV" disabled [value]="cvName">
             <label matPrefix ><mat-icon matTooltip="Descargar archivo"  class="icono">get_app</mat-icon></label>
             <label matSuffix for="cvInput"><mat-icon matTooltip="Subir archivo" class="icono">attach_file</mat-icon></label>
-            <label matSuffix ><mat-icon  matTooltip="Eliminar archivo" class="icono">clear</mat-icon></label>
+            <label matSuffix *ngIf="cvName" (click)="vaciarInputCV()"><mat-icon  matTooltip="Eliminar archivo" class="icono">clear</mat-icon></label>
             </mat-form-field>
-            <input type="file" id="cvInput" class="inputFile">
+            <input type="file" id="cvInput" class="inputFile"  #curriculumInput (change)="nombrarCV()">
 
+            <!--subir desafio-->
             <mat-form-field class="example-full-width">
-            <input matInput placeholder="Subir Desafio" disabled value="">
-            
+            <input matInput placeholder="Subir Desafio" disabled [value]="desafioName">   
             <label matPrefix ><mat-icon matTooltip="Descargar archivo" class="icono">get_app</mat-icon></label>
             <label matSuffix for="desafioInput"><mat-icon matTooltip="Subir archivo" class="icono">attach_file</mat-icon></label>
-            <label matSuffix ><mat-icon matTooltip="Eliminar archivo" class="icono">clear</mat-icon></label>
+            <label matSuffix (click)="vaciarInputDesafio()" *ngIf="desafioName"><mat-icon matTooltip="Eliminar archivo" class="icono">clear</mat-icon></label>
             </mat-form-field>
-            <input type="file" id="desafioInput" class="inputFile">
+            <input type="file" id="desafioInput"  class="inputFile" #desafioInput (change)="nombrarDesafio()">
+
           </div>
+
         </div>    
-        
-          <button mat-stroked-button color="warn" (click)="volverAlListado()">Cancelar</button>
+          <button type="button" mat-stroked-button color="warn" (click)="volverAlListado()">Cancelar</button>
           <button mat-raised-button  type="submit" [disabled]="formEditarPostulante?.invalid">Guardar</button>    
             
-      </form>
+     
       <!--fin bloques y form--> 
     </mat-tab>
     <!--fin pestana 1--> 
-  <mat-tab label="Comentarios">
-    <form> 
+    
+    <!--inicio pestana 2--> 
+    <mat-tab label="Comentarios">
+    
       <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
         <!--div bloque 1-->
         <div fxFlex="60%" class="bloque" >
             <!--comentario general--> 
             <h4>Comentario General</h4>            
             <mat-form-field appearance="outline" class="example-full-width">
-            <textarea matInput placeholder="Comentario General"></textarea>
+            <textarea matInput formControlName="comentario" placeholder="Comentario General"></textarea>
             </mat-form-field>
         </div>
+
+        <!--div bloque 2-->
         <div fxFlex="50%" class="bloque">
           <!--comentario desafio--> 
           <h4>Comentario de Desafio</h4>
           <mat-form-field appearance="outline" class="example-full-width">
-            <textarea matInput  placeholder="Agregar comentario desafio"></textarea>
+            <textarea matInput formControlName="comentarioDesafio" placeholder="Agregar comentario desafio"></textarea>
           </mat-form-field>
+
           <!--comentario de entrevistas-->
           <h4>Comentario de Entrevistas</h4>
+          
           <!--SM entrevista-->
           <mat-form-field appearance="outline" class="example-full-width">
-          <textarea matInput  placeholder="Agregar comentario"></textarea>
+          <textarea matInput formControlName="comentarioSM" placeholder="Agregar comentario"></textarea>
           </mat-form-field>
+
           <!--admin entrevista--> 
           <mat-form-field appearance="outline" class="example-full-width">
-          <textarea matInput  placeholder="Agregar comentario"></textarea>
-          </mat-form-field>             
+          <textarea matInput formControlName="comentarioAdmin" placeholder="Agregar comentario"></textarea>
+          </mat-form-field>          
+
           <!--team entrevista-->  
           <mat-form-field appearance="outline" class="example-full-width">
-          <textarea matInput  placeholder="Agregar comentario"></textarea>
+          <textarea matInput  formControlName="comentarioTeam" placeholder="Agregar comentario"></textarea>
           </mat-form-field>
-        </div>
-      </div>  
-      <button mat-stroked-button color="warn" (click)="volverAlListado()">Cancelar</button>
-      <button mat-raised-button  type="submit" [disabled]="formEditarPostulante.invalid">Guardar</button> 
-  </form>
- </mat-tab>
 
+        </div>
+
+      </div>  
+      <button type="button" mat-stroked-button color="warn" (click)="volverAlListado()">Cancelar</button>
+      <button mat-raised-button  type="submit" [disabled]="formEditarPostulante.invalid">Guardar</button> 
+  
+    </mat-tab>
+    <!--fin pestana 2--> 
 
     <!--pestana comentarios-->
     <mat-tab label="Aptitudes"> 
     <h4>En desarrollo </h4>
-    <button mat-icon-button color="warn">
+    <button mat-icon-button color="warn" type="button">
       <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
     </button>
     </mat-tab>
   </mat-tab-group>
+  </form>
 </div>
 
