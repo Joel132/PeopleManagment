@@ -1,3 +1,102 @@
-<p>
-  crear-funcionarios works!
-</p>
+<div class="space-01"></div>
+<!--bloque de la foto-->
+<div class="container" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+  <label class="hoverable" for="fileInputProfile">
+  <img matTooltip="Cambiar Foto de Perfil" [src]="urlFoto ? urlFoto : 'assets/img/foto-perfil.png'"> 
+  <div class="hover-text">Cambiar Foto</div>
+  <div class="background"></div>
+  </label>
+  <br>
+  <input id="fileInputProfile" type='file' (change)="cargarFoto()" class="inputFile" #fotoInput>  
+</div>
+<div fxLayoutAlign="center">
+  <button mat-button color="warn" *ngIf="urlFoto" (click)="eliminarFoto()">Eliminar</button>
+</div>
+<!--div gral-->
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="5%" fxLayoutAlign="center">
+  <!--div bloque 1-->
+  <div fxFlex="30%" class="bloque">
+    <div class="example-container">
+      <div class="feature">
+        <div class="icon">
+          <i class="material-icons" style="color: #e91e63;">face</i>
+        </div>
+        <div class="desc">
+         <p>Registrar Usuario</p>
+        </div>
+     </div>
+      <!--contrasenha and username-->
+      <mat-form-field>
+      <input matInput placeholder="Nombre de usuario">
+      <mat-icon matSuffix>person</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field>
+      <input matInput placeholder="Contraseña" [type]="hide ? 'password' : 'text'">
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field>
+      <input matInput placeholder="Repetir contraseña" [type]="hide ? 'password' : 'text'">
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </mat-form-field>
+
+      <div class="feature">
+        <div class="icon">
+        <i class="material-icons" style="color:#00bcd4;">face</i>
+        </div>
+        <div class="desc">
+        <p>Asignar rol</p>
+        </div>
+      </div>
+    
+      <mat-form-field>
+        <mat-select placeholder="Rol">
+        <mat-option value="user1">Administrador</mat-option>
+        <mat-option value="user2">Scrum Master</mat-option>
+        <mat-option value="user3">Funcionario</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div> 
+  <div fxFlex="30%" class="bloque">
+    <div class="example-container">
+      <div class="feature">
+        <div class="icon">
+          <i class="material-icons" style="color: #9c27b0;">face</i>
+        </div>
+        <div class="desc">
+          <h4>Asignar rol</h4>
+        </div>
+      </div>
+
+      <mat-form-field>
+      <mat-select placeholder="Rol">
+      <mat-option value="user1">Administrador</mat-option>
+      <mat-option value="user2">Scrum Master</mat-option>
+      <mat-option value="user3">Funcionario</mat-option>
+      </mat-select>
+      </mat-form-field>
+     
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Fecha de Inicio contrato">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      
+  
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Fecha de vencimiento contrato">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+        
+
+    
+    </div>  
+<mat-action-row>
+    <button mat-button color="warn" (click)="prevStep()">Previous</button>
+    <button mat-button color="primary" (click)="nextStep()">End</button>
+</mat-action-row>  
+</div>
+</div>
