@@ -4,6 +4,7 @@ import { Funcionario } from 'src/app/shared/models/funcionario';
 import { ESTADOS_FUNCIONARIO } from 'src/app/shared/models/estados_funcionario';
 import { RecibirFuncionarioService } from 'src/app/shared/helpers/recibir-funcionario.service';
 import { Router } from '@angular/router';
+import { ObtenerTituloService } from 'src/app/shared/helpers/obtener-titulo.service';
 
 @Component({
   selector: 'app-listar-funcionarios',
@@ -12,6 +13,7 @@ import { Router } from '@angular/router';
 })
 
 export class ListarFuncionariosComponent implements OnInit {
+  public titulo: string = 'Lista de Funcionarios';  
   displayedColumns: string[] = ['foto', 'nombre', 'apellido', 'fecha_fin_contrato','celular', 'estado', 'accion'];
   dataSource: MatTableDataSource<Funcionario>;
   lista_funcionarios: Array<Funcionario>;
@@ -20,10 +22,12 @@ export class ListarFuncionariosComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private FuncionariosService: RecibirFuncionarioService, private router: Router){ }
+  constructor(private FuncionariosService: RecibirFuncionarioService, private router: Router,
+    private tituloService: ObtenerTituloService){ }
   
   ngOnInit(){
-      this.getFuncionarios();
+    this.tituloService.asignarTitulo(this.titulo);  
+    this.getFuncionarios();
   }
   
   /**

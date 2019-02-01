@@ -7,6 +7,7 @@ import { RecibirPostulanteService } from 'src/app/shared/helpers/recibir-postula
  * Componente Listar Postulante
  */
 import { Router } from '@angular/router';
+import { ObtenerTituloService } from 'src/app/shared/helpers/obtener-titulo.service';
 
 @Component({
   selector: 'app-listar-postulantes',
@@ -15,6 +16,7 @@ import { Router } from '@angular/router';
 })
 
 export class ListarPostulantesComponent implements OnInit {
+  public titulo: string = 'Lista de Postulantes';
   displayedColumns: string[] = ['foto', 'nombre', 'apellido', 'mail','celular','estado','accion'];
   dataSource: MatTableDataSource<Postulante>;
   lista_Postulantes: Array<Postulante>;
@@ -23,10 +25,16 @@ export class ListarPostulantesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private postulantesService: RecibirPostulanteService, private router: Router){ }
+  constructor(private postulantesService: RecibirPostulanteService, 
+    private router: Router,
+    private tituloService: ObtenerTituloService
+    ){ 
+
+  }
   
   ngOnInit(){
       this.getPostulantes();
+      this.tituloService.asignarTitulo(this.titulo);
       
   }
   

@@ -4,6 +4,7 @@ import { AgregarPostulanteService } from '../../shared/helpers/agregar.service';
 import { Postulante } from 'src/app/shared/models/postulante';
 import {MatSnackBar} from '@angular/material';
 import { Router } from '@angular/router';
+import { ObtenerTituloService } from 'src/app/shared/helpers/obtener-titulo.service';
 /**
  * Componente Crear Postulante.
  */
@@ -15,12 +16,14 @@ import { Router } from '@angular/router';
 })
 
 export class CrearPostulanteComponent implements OnInit {
-
-  constructor(private servicioAgregar: AgregarPostulanteService,private snackBar: MatSnackBar,private router: Router ) { }
+  public titulo: string = 'Crear Postulante';
+  constructor(private servicioAgregar: AgregarPostulanteService,
+    private snackBar: MatSnackBar,
+    private router: Router,
+    private tituloService: ObtenerTituloService ) { }
 
   ngOnInit() {
-
-    
+    this.tituloService.asignarTitulo(this.titulo);
   }
 
   formPostulantes = new FormGroup({

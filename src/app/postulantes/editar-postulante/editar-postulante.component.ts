@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ObtenerTituloService } from 'src/app/shared/helpers/obtener-titulo.service';
 
 @Component({
   selector: 'app-editar-postulante',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./editar-postulante.component.css']
 })
 export class EditarPostulanteComponent implements OnInit {
+  public titulo: string = 'Editar Postulante';
+  constructor(
+    private tituloService: ObtenerTituloService ) { }
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+    ngOnInit() {
+      this.tituloService.asignarTitulo(this.titulo);
+    }
 
 }
