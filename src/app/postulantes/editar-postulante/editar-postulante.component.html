@@ -1,17 +1,33 @@
-<div class="aligner" style="background: white; background-size:cover;" *ngIf="formEditarPostulante">
+<div class="aligner"  *ngIf="formEditarPostulante">
   <form [formGroup] = 'formEditarPostulante' (ngSubmit)="onSubmit()"> 
   <mat-tab-group mat-stretch-tabs >
     <!--inicio pestana 1--> 
     <mat-tab label="Datos Personales">
       
         <!--bloque de la foto-->
-        <div class="container" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
-          <label class="hoverable" for="fileInput">
-          <img matTooltip="Cambiar Foto de Perfil" [src]="urlFoto ? urlFoto : 'assets/img/foto-perfil.png'"> 
-          <div class="hover-text">Cambiar Foto</div>
-          <div class="background"></div>
-          </label>
-          <br>
+        <div class="container" fxLayout="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center center">
+          
+          <!-- Sin Foto / Foto cargada-->
+          <div *ngIf="!isLoadingFoto">
+            <label class="hoverable" for="fileInput">
+            <img matTooltip="Cambiar Foto de Perfil" [src]="urlFoto ? urlFoto : 'assets/img/foto-perfil.png'"> 
+            <div class="hover-text">Cambiar Foto</div>
+            <div class="background"></div>
+            </label>
+            
+            <br>
+          </div>
+
+          <!-- Cargando foto-->
+          <div *ngIf="isLoadingFoto">
+            <mat-spinner></mat-spinner>
+          </div>
+          <div *ngIf="errorFoto">
+            <mat-error style="color: rgb(59, 61, 71);" >
+              <p style="text-align: center" *ngIf="!errorFotoPesado">No se ha podido subir la imagen. Error en el servidor</p>
+              <p style="text-align: center" *ngIf="errorFotoPesado">El tamaño maximo por imagen es de 10MB</p>
+            </mat-error>
+          </div>
           <input id="fileInput" type='file' (change)="cargarFoto()" class="inputFile" #fotoInput>  
         </div>
         
@@ -20,7 +36,7 @@
         </div>
 
         <!--div gral-->
-        <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+        <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="5%" fxLayoutAlign="center">
           <!--div bloque 1-->
           <div fxFlex="40%" class="bloque">
             
@@ -71,7 +87,15 @@
                   <mat-option value="Aprobado">Aprobado</mat-option>
                   <mat-option value="Rechazado">Rechazado</mat-option>
                 </mat-select>
-              </mat-form-field>     
+              </mat-form-field>   
+              
+              <mat-form-field>
+                <mat-select formControlName = "estado" placeholder="Sexo"  disableRipple>
+                  <mat-option value="masculino">Masculino</mat-option>
+                  <mat-option value="femenino">Femenino</mat-option>
+                  
+                </mat-select>
+              </mat-form-field>
           </div>
 
           <!--sgt bloque 2-->
@@ -93,29 +117,39 @@
             
             <!-- campo de fecha de nacimiento-->
             <mat-form-field class="Fecha de Nacimiento">
-              <input formControlName = "fecha_nac" matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Fecha de Nacimiento">
+              <input formControlName = "fechaDeNacimiento" matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Fecha de Nacimiento">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
 
 
             <!--subir cv-->
-            <mat-form-field class="example-full-width">
-            <input matInput placeholder="Subir CV" disabled [value]="cvName">
-            <label matPrefix ><mat-icon matTooltip="Descargar archivo"  class="icono">get_app</mat-icon></label>
-            <label matSuffix for="cvInput"><mat-icon matTooltip="Subir archivo" class="icono">attach_file</mat-icon></label>
-            <label matSuffix *ngIf="cvName" (click)="vaciarInputCV()"><mat-icon  matTooltip="Eliminar archivo" class="icono">clear</mat-icon></label>
+            <mat-form-field >
+              <label for="cvInput"><input matInput placeholder="Subir CV" disabled [value]="cvName"></label>
+              <label matPrefix ><mat-icon matTooltip="Descargar archivo"  class="icono">get_app</mat-icon></label>
+              <label matSuffix for="cvInput" *ngIf="!isLoadingCV"><mat-icon matTooltip="Subir archivo" class="icono">attach_file</mat-icon></label>
+              <label matSuffix *ngIf="isLoadingCV" ><mat-spinner diameter=20></mat-spinner></label>
+              <label matSuffix *ngIf="!isLoadingCV&&cvName" (click)="vaciarInputCV()"><mat-icon  matTooltip="Eliminar archivo" class="icono">clear</mat-icon></label>
+              <mat-hint *ngIf="errorCV">
+                <p *ngIf="!errorCVPesado">No se ha podido subir el archivo. Error en el servidor</p>
+                <p *ngIf="errorCVPesado">El tamaño maximo por archivo es de 10MB</p>
+              </mat-hint>
             </mat-form-field>
-            <input type="file" id="cvInput" class="inputFile"  #curriculumInput (change)="nombrarCV()">
+            <input type="file" id="cvInput" class="inputFile"  #curriculumInput (change)="cargarCV()">
 
             <!--subir desafio-->
-            <mat-form-field class="example-full-width">
+            <mat-form-field>
             <input matInput placeholder="Subir Desafio" disabled [value]="desafioName">   
             <label matPrefix ><mat-icon matTooltip="Descargar archivo" class="icono">get_app</mat-icon></label>
-            <label matSuffix for="desafioInput"><mat-icon matTooltip="Subir archivo" class="icono">attach_file</mat-icon></label>
-            <label matSuffix (click)="vaciarInputDesafio()" *ngIf="desafioName"><mat-icon matTooltip="Eliminar archivo" class="icono">clear</mat-icon></label>
+            <label matSuffix for="desafioInput" *ngIf="!isLoadingDesafio&&!desafioName"><mat-icon matTooltip="Subir archivo" class="icono">attach_file</mat-icon></label>
+            <label matSuffix for="desafioInput" *ngIf="isLoadingDesafio" ><mat-spinner diameter=20></mat-spinner></label>
+            <label matSuffix *ngIf="!isLoadingDesafio&&desafioName" (click)="vaciarInputDesafio()"><mat-icon matTooltip="Eliminar archivo" class="icono">clear</mat-icon></label>
+            <mat-hint *ngIf="errorDesafio">
+                <p *ngIf="!errorDesafioPesado">No se ha podido subir el archivo. Error en el servidor</p>
+                <p *ngIf="errorDesafioPesado">El tamaño maximo por archivo es de 10MB</p>
+            </mat-hint>
             </mat-form-field>
-            <input type="file" id="desafioInput"  class="inputFile" #desafioInput (change)="nombrarDesafio()">
+            <input type="file" id="desafioInput"  class="inputFile" #desafioInput (change)="cargarDesafio()">
 
           </div>
 

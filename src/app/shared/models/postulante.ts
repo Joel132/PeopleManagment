@@ -11,7 +11,6 @@ export class Postulante {
         public comentario: string,
         public comentarioAdmin: string,
         public comentarioDesafio: string,
-        public comentarioSm: string,
         public comentarioTeam: string,
         public curriculumUrl: string,
         public desafioUrl: string,
@@ -22,8 +21,9 @@ export class Postulante {
         public estado: string,
         // Estos no estan en el JSON
         public foto: string,
-        public comentarioSM: string
-        
+        public comentarioSm: string,
+        public fechaDeNacimiento: string,
+        public genero: string
     ) {}
 }
 

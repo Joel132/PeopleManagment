@@ -1,8 +1,4 @@
-import { HttpClient } from '@angular/common/http';
-import {HttpClientModule, HttpRequest, HttpResponse, HttpEventType} from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { FileQueueObject, FileUploaderService } from '../../shared/helpers/file-uploader.service';
-import { Observable } from 'rxjs/Observable';
 import { EditarPostulanteService } from 'src/app/shared/helpers/editar-postulante.service';
 import { Postulante } from 'src/app/shared/models/postulante';
 import { ActivatedRoute } from '@angular/router';
@@ -57,6 +53,43 @@ export class EditarPostulanteComponent implements OnInit {
    */
   @ViewChild('fotoInput') fotoInput ;
   
+  /**
+   * Atributo que indica si la foto se esta cargando en el servidor
+   */
+  public isLoadingFoto: boolean=false;
+
+  /**
+   * Atributo que indica si ha ocurrido un error al cargar la foto
+   */
+  public errorFoto: boolean=false;
+
+   /**
+   * Atributo que indica si el CV se esta cargando en el servidor 
+   */
+  public isLoadingCV: boolean=false;
+
+  /**
+   * Atributo que indica si ha ocurrido un error al cargar el CV
+   */
+  public errorCV: boolean=false;
+  
+  /**
+   * Atributo que indica si el CV se esta cargando en el servidor 
+   */
+  public isLoadingDesafio: boolean=false;
+
+  /**
+   * Atributo que indica si ha ocurrido un error al cargar el CV
+   */
+  public errorDesafio: boolean=false;
+
+  public errorCVPesado: boolean=false;
+
+  public errorDesafioPesado: boolean=false;
+
+  public errorFotoPesado: boolean=false;
+
+  public error: 'Archivo pesado'|'Error en el servidor'|'';
   //form date
   minDate = new Date(1930, 0, 1);
   maxDate = new Date(2040, 0, 1);
@@ -65,9 +98,7 @@ export class EditarPostulanteComponent implements OnInit {
   disabled: boolean = false;
 
   constructor(private formBuilder: FormBuilder, 
-    private route: ActivatedRoute, 
-    private http:HttpClient,
-    public uploader: FileUploaderService, 
+    private route: ActivatedRoute,
     private editarServicio: EditarPostulanteService, 
     private recibirPostulante: RecibirPostulanteService,
     private enviarArchivo: EnviarArchivoService
@@ -75,8 +106,11 @@ export class EditarPostulanteComponent implements OnInit {
 
   ngOnInit() {
       const id = +this.route.snapshot.paramMap.get('id');//Se obtiene el id de la ruta 
+      //Para el servidor
       //this.getPostulante(id);
-      this.cargarFormulario({id:1,celular:'213',apellido:'Florentin',nombre:'Joel',comentario:'sad',comentarioAdmin:'dsa',comentarioDesafio:'sda',comentarioTeam:'dsa',comentarioSm:'sad',curriculumUrl:'df',desafioUrl:'ad',documento:'ad',estado:'Rechazado',foto:'ad',mail:'das'});
+
+      //Para el mock. Servidor caido
+      this.cargarFormulario({id:1,celular:'213',apellido:'Florentin',nombre:'Joel',comentario:'sad',comentarioAdmin:'dsa',comentarioDesafio:'sda',comentarioTeam:'dsa',comentarioSm:'sad',curriculumUrl:'df',desafioUrl:'ad',documento:'ad',estado:'Rechazado',foto:'ad',mail:'das',fechaDeNacimiento:'',genero:''});
   }
    
   
@@ -118,29 +152,8 @@ export class EditarPostulanteComponent implements OnInit {
 
 
 
-/**
- * Metodo para poder manipular la foto(vista previa)
- */
-  urlFoto = '';
-  cargarFoto() {
-    if (this.fotoInput.nativeElement && this.fotoInput.nativeElement.files[0]) {
-      var reader = new FileReader();
 
-      reader.readAsDataURL(this.fotoInput.nativeElement.files[0]); // read file as data url
-
-      reader.onload = (event:any) => { // called once readAsDataURL is completed
-        this.urlFoto = event.target.result;
-      }
-    }
-  }
-
-  /**
-   * Metodo para desvincular el archivo del input de la foto
-   */
-  public eliminarFoto(){
-    this.urlFoto = null;
-    this.fotoInput.nativeElement.value='';
-  }
+  
   
   /**
    * Metodo que llama al servicio para obtener el postulante segun un id dado
@@ -169,7 +182,7 @@ export class EditarPostulanteComponent implements OnInit {
       apellido : new FormControl(postulante.apellido, [Validators.required,Validators.pattern('[/a-zA-Z ]*')] ),
       documento : new FormControl(postulante.documento, [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
       celular : new FormControl(postulante.celular),
-      fecha_nac : new FormControl(),
+      fechaDeNacimiento	 : new FormControl(),
       mail : new FormControl(postulante.mail, [Validators.required, Validators.email]),
       direccion : new FormControl(),
       estado : new FormControl(postulante.estado),
@@ -179,7 +192,9 @@ export class EditarPostulanteComponent implements OnInit {
       comentarioSM:new FormControl(postulante.comentarioSm),
       comentarioAdmin: new FormControl(postulante.comentarioAdmin),
       comentarioTeam: new FormControl(postulante.comentarioTeam),
-      comentarioDesafio: new FormControl(postulante.comentarioDesafio)
+      comentarioDesafio: new FormControl(postulante.comentarioDesafio),
+      genero: new FormControl(postulante.genero),
+      fotoUrl: new FormControl()
     });
   }
  
@@ -188,8 +203,10 @@ export class EditarPostulanteComponent implements OnInit {
    * Metodo para vaciar el cv seleccionado
    */
   vaciarInputCV(){
+    this.isLoadingCV=false;
     this.curriculumInput.nativeElement.value='';
     this.cvName='';
+    this.formEditarPostulante.get('curriculumUrl').setValue('');
   }
 
   /**
@@ -198,41 +215,133 @@ export class EditarPostulanteComponent implements OnInit {
   vaciarInputDesafio(){
     this.desafioInput.nativeElement.value='';
     this.desafioName='';
+    this.formEditarPostulante.get('desafioUrl').setValue('');
   }
 
   /**
-   * Metodo para colocar el nombre del archivo del curriculum al input correspondiente
-   * 
+   * Metodo para desvincular el archivo del input de la foto
    */
-  nombrarCV(){
-    this.cvName=this.curriculumInput.nativeElement.files[0].name;
+  public eliminarFoto(){
+    this.isLoadingFoto=false;
+    this.urlFoto = null;
+    this.fotoInput.nativeElement.value='';
   }
 
   /**
-   * Metodo para colocar el nombre del archivo del desafio al input correspondiente
+   * Metodo para subir el archivo del curriculum al input correspondiente
    * 
    */
-  nombrarDesafio(){
-    this.desafioName=this.desafioInput.nativeElement.files[0].name;
+  cargarCV(){
+    if(this.curriculumInput.nativeElement.files[0].size>1e+7){
+      this.errorCV=true;
+      this.errorCVPesado=true;
+      this.vaciarInputCV();
+      return ;
+    }
+     if (this.curriculumInput.nativeElement && this.curriculumInput.nativeElement.files[0]) {
+      this.errorCVPesado=false;
+      this.errorCV=false;
+      this.isLoadingCV=true;
+      this.enviar(this.curriculumInput,'curriculumUrl');
+      this.cvName=this.curriculumInput.nativeElement.files[0].name;
+    } 
+    
+  }
+
+  /**
+   * Metodo para poder manipular la foto(vista previa)
+   */
+  urlFoto = '';
+  cargarFoto() {
+
+    if(this.fotoInput.nativeElement.files[0].size>1e+7){
+      this.errorFoto=true;
+      this.errorFotoPesado=true;
+      this.vaciarInputDesafio();
+      return ;
+    }
+    //Validacion para saber si el input de la foto contiene un archivo asociado
+    if (this.fotoInput.nativeElement && this.fotoInput.nativeElement.files[0]) {
+      this.errorFotoPesado=false;
+      this.errorFoto=false;
+      this.isLoadingFoto=true;
+      var reader = new FileReader();
+
+      reader.readAsDataURL(this.fotoInput.nativeElement.files[0]); // read file as data url
+
+      reader.onload = (event:any) => { // called once readAsDataURL is completed
+        this.urlFoto = event.target.result;
+      }
+      this.enviar(this.fotoInput,'fotoUrl');
+    }
+  }
+
+  /**
+   * Metodo para subir el archivo del desafio al input correspondiente
+   * 
+   */
+  cargarDesafio(){
+    if(this.desafioInput.nativeElement.files[0].size>1e+7){
+      this.errorDesafio=true;
+      this.errorDesafioPesado=true;
+      this.vaciarInputDesafio();
+      return ;
+    }
+    if (this.desafioInput.nativeElement && this.desafioInput.nativeElement.files[0]) {
+      this.errorDesafio=false;
+      this.errorDesafioPesado=false;
+      this.isLoadingDesafio=true;
+      this.enviar(this.desafioInput,'desafioUrl');
+      this.desafioName=this.desafioInput.nativeElement.files[0].name;
+    }
   }
 
 /**
- * Metodo que sirve para alzar el archivo. Utiliza un servicio para alzar
+ * Metodo que sirve para alzar el archivo. Utiliza un servicio para alzar dicho archivo
  * @param fileInput la referencia a un input file dado(foto, cv o desafio)
- * @param campo contiene el nombre del campo del input
+ * @param campo contiene el nombre del input del formulario a completar luego de enviar el archivo
  */
-  enviar(fileInput,campo: 'desafioUrl'|'curriculumUrl'){
+  enviar(fileInput,campo: 'desafioUrl'|'curriculumUrl'|'fotoUrl'){
+    this.desafioInput.error="";
      let file: File= fileInput.nativeElement.files[0];
     this.enviarArchivo.enviarArchivo(file).subscribe(
       (resultPath) => {
         this.formEditarPostulante.get(campo).setValue(resultPath);
+        if(campo=='fotoUrl'){
+          this.isLoadingFoto=false;
+        }
+        if(campo=='curriculumUrl'){
+          this.isLoadingCV=false;
+        }
+        if(campo=='desafioUrl'){
+          this.isLoadingCV=false;
+        }
+        console.log("Se subio correctamente el archivo");
       },
       (error) => {
+        
+        
+        console.log(this.errorFoto);
+        if(campo=='fotoUrl'){
+          this.errorFoto=true;
+          this.eliminarFoto();
+        }
+        if(campo=='curriculumUrl'){
+          this.errorCV=true;
+          this.vaciarInputCV();
+        }
+        if(campo=='desafioUrl'){
+          this.errorDesafio=true;
+          this.vaciarInputDesafio();
+        }
+
         console.log("Ha ocurrido un error al subir el archivo");
       }
     );
     
   }
+
+  
 }
 
 
