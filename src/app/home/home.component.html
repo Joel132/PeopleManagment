@@ -5,12 +5,15 @@
     fxLayoutAlign="center"
     fixedViewPort = "true"
     class="example-sidenav-content" 
-    mode="side">
+    mode="side"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async)"    
+    >
 
     <!--aca va la foto del usuario de jose-->
     <div fxLayoutAlign="center" class="datos-sesion"  *ngIf="showFiller" >
       <mat-card fxLayout="row" fxLayoutAlign="space-evenly" fxFlex="100%" style="background-image: url('./assets/img/2015_03_galaxy-red-stars-red-space - copia.jpg'); background-size:cover;" >
-        <img  fxLayoutAlign="space-around center" [src]=" funcionario.foto ? funcionario.foto : 'https://image.flaticon.com/icons/png/512/149/149071.png' ">
+        <img class="foto-perfil" fxLayoutAlign="space-around center" [src]=" funcionario.foto ? funcionario.foto : 'https://image.flaticon.com/icons/png/512/149/149071.png' ">
         <!--div fxLayoutAlign="space-around center" mat-card-avatar class="foto-perfil"></div-->
         <div fxLayout="column" fxLayoutAlign="center">
           <mat-card-title>{{funcionario?.nombre}} {{funcionario?.apellido}}</mat-card-title>
@@ -73,21 +76,28 @@
       <a class="opcion"  
           mat-list-item 
           (click)="showFiller = !showFiller">
-          <mat-icon aria-label="Side nav toggle icon" (click)="showFiller = !showFiller">arrow_back</mat-icon> 
+          <mat-icon aria-label="Side nav toggle icon"  *ngIf="!showFiller" (click)="showFiller = !showFiller">arrow_forward</mat-icon> 
+          <mat-icon aria-label="Side nav toggle icon" *ngIf="showFiller" (click)="showFiller = !showFiller">arrow_back</mat-icon> 
           <span *ngIf="showFiller">CONTRAER</span>
         </a>
     </mat-nav-list>
   </mat-drawer>
   <mat-drawer-content >
     <mat-toolbar class="barraNavegacion">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()">
-        <mat-icon aria-label="Side nav toggle icon" >menu</mat-icon>
-      </button>
-      <span>proyectoMaterial</span>
+      <div class="contenedor-toolbar">
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()">
+          <mat-icon aria-label="Side nav toggle icon" >menu</mat-icon>
+        </button>
+        <span class="example-spacer"></span>
+        <div class="logo">
+          <span>PeopleManagement</span>
+          <img  src="assets\img\simbolo-natura.png">
+        </div>
+      </div>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-drawer-content>

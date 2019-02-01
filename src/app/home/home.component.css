@@ -1,3 +1,6 @@
+.example-container{
+  background: white;
+}
 .mat-toolbar.mat-primary {
   position: sticky;
   top: 0;
@@ -6,6 +9,7 @@
 
 .barraNavegacion{
   background: black;
+  color: white;
 }
 
 .opcion{
@@ -24,12 +28,10 @@
 }
 
 .foto-perfil{
-  padding-top: 30px;
-  height: 80px;
-  width: 80px;
-  margin: 5px;
-  background-image: url(https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png);
-  background-size:cover;
+  width: 50px; 
+  height: 50px;
+  margin: auto;
+  margin-top: 5px; 
 }
 
 .datos-sesion{
@@ -47,20 +49,13 @@ mat-card{
   color: white;
 }
 
-img{
-  height: 80px;
-  width: 80px;
-  border-radius: 50%;
-}
-
 mat-toolbar{
   background: #353535;
 }
 
 mat-icon{
   padding-right: 10px;
-  color: white;
-
+  
 }
 
 .example-sidenav-content {
@@ -89,4 +84,21 @@ ul li mat-icon:hover{
   height: 50px;
   margin: auto;
   margin-top: 5px; 
+}
+
+.contenedor-toolbar{
+  width: 100%;
+}
+
+
+.logo{
+  color: white;
+  float: right;
+  display: inline;
+}
+
+.logo img{ 
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
 }

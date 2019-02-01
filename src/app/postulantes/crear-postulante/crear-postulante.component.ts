@@ -26,14 +26,15 @@ export class CrearPostulanteComponent implements OnInit {
   ngOnInit() {
     this.formCrearPostulantes = new FormGroup({
       id: new FormControl(0),
-      nombre : new FormControl('', [Validators.required,Validators.pattern('[/a-zA-Z]*')]), //solo letras, requerido
-      apellido : new FormControl('', [Validators.required,Validators.pattern('[/a-zA-Z]*')] ), //solo letras, requerido
+      nombre : new FormControl('', [Validators.required,Validators.pattern('[/a-zA-Z ]*')]), //solo letras, requerido
+      apellido : new FormControl('', [Validators.required,Validators.pattern('[/a-zA-Z ]*')] ), //solo letras, requerido
       documento : new FormControl('', [Validators.maxLength(7)]), //, hasta 7 cifras
       celular : new FormControl(),
       fecha_nac : new FormControl(),
       mail : new FormControl('', [Validators.required, Validators.email]), //direccion valida, requerido
       direccion : new FormControl('', Validators.maxLength(20)), //hasta 20 letras
       estado : new FormControl(),
+      genero : new FormControl(),
       desafioUrl: new FormControl(),
       curriculumUrl: new FormControl(),
       comentario: new FormControl()

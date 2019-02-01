@@ -1,9 +1,9 @@
 <form [formGroup] = 'formCrearPostulantes' (ngSubmit)="onSubmit()">
   
   <!--FOTO-->
-  <div class="container" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+  <div class="container"  fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
     <label class="hoverable" for="fotoPerfil">
-      <img [src]="url ? url : 'assets/img/foto-perfil.png'"> 
+      <img matTooltip="Cambiar Foto de Perfil" [src]="url ? url : 'assets/img/foto-perfil.png'"> 
     </label>  
     <input id="fotoPerfil" type='file' (change)="onSelectFile($event)">  
   </div>
@@ -13,14 +13,12 @@
       <button mat-button color="warn" *ngIf="url" (click)="delete()">Eliminar</button>
   </div>
   
-  <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center"  >         
+  <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="5%" fxLayoutAlign="center"  >         
     <!--DATOS PERSONALES-->
       <div fxFlex="40%" class="bloque">
-          
-          <h4>Datos Personales</h4>
           <!--Nombre-->
           <mat-form-field>
-            <mat-icon matSuffix aria-label="Side nav toggle icon" >person</mat-icon>
+            <mat-icon matSuffix aria-label="Side nav toggle icon"  class="icono" >person</mat-icon>
             <input formControlName = "nombre" matInput placeholder="Nombre" type="text">                
             <mat-error *ngIf="formCrearPostulantes.get('nombre').errors && formCrearPostulantes.get('nombre').touched">
               <p *ngIf=" formCrearPostulantes.get('nombre').hasError('required')">Campo Requerido</p>
@@ -30,7 +28,7 @@
           
           <!--Apellido-->
           <mat-form-field>
-            <mat-icon matSuffix aria-label="Side nav toggle icon" >person</mat-icon>
+            <mat-icon matSuffix aria-label="Side nav toggle icon"  class="icono" >person</mat-icon>
             <input formControlName = "apellido" matInput placeholder="Apellido" type="text" required>
             <mat-error *ngIf="formCrearPostulantes.get('apellido').errors && formCrearPostulantes.get('apellido').touched">
               <p *ngIf=" formCrearPostulantes.get('apellido').hasError('required')">Campo Requerido</p>
@@ -38,9 +36,19 @@
             </mat-error>             
           </mat-form-field>
           
+          <!--Correo-->
+          <mat-form-field>
+            <mat-icon matSuffix aria-label="Side nav toggle icon"  class="icono">alternate_email</mat-icon>
+            <input formControlName = "mail" matInput placeholder="Correo Electronico" type="email" required>
+            <mat-error *ngIf="formCrearPostulantes.get('mail').errors && formCrearPostulantes.get('mail').touched">
+              <p *ngIf=" formCrearPostulantes.get('mail').hasError('required')">Campo Requerido</p>
+              <p *ngIf=" formCrearPostulantes.get('mail').hasError('email')">Correo No Valido</p>
+            </mat-error>                
+          </mat-form-field>
+
           <!--Documento--> 
           <mat-form-field>
-            <mat-icon matSuffix aria-label="Side nav toggle icon" >contact_mail</mat-icon>
+            <mat-icon matSuffix aria-label="Side nav toggle icon"  class="icono">contact_mail</mat-icon>
             <input formControlName = "documento" matInput placeholder="CI" type="text">
             <mat-error *ngIf="formCrearPostulantes.get('documento').errors && formCrearPostulantes.get('documento').touched"> 
               <p *ngIf=" formCrearPostulantes.get('documento').hasError('pattern')">Ingrese solo numeros</p>
@@ -49,59 +57,56 @@
           
           <!--Celular-->
           <mat-form-field>
-            <mat-icon matSuffix aria-label="Side nav toggle icon" >call</mat-icon>
+            <mat-icon matSuffix aria-label="Side nav toggle icon"  class="icono" >call</mat-icon>
             <input formControlName = "celular" matInput placeholder="Telefono" type="tel" n>
             <mat-error *ngIf="formCrearPostulantes.get('celular').errors && formCrearPostulantes.get('celular').touched">
               <p *ngIf=" formCrearPostulantes.get('celular').hasError('pattern')">Numero Invalido</p>
             </mat-error>             
           </mat-form-field>
           
-          <!--Fecha Nacimiento-->
-          <mat-form-field>
-            <input formControlName = "fecha_nac" matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Fecha de Nacimiento">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-          
-          <!--Correo-->
-          <mat-form-field>
-            <mat-icon matSuffix aria-label="Side nav toggle icon" >alternate_email</mat-icon>
-            <input formControlName = "mail" matInput placeholder="Correo Electronico" type="email" required>
-            <mat-error *ngIf="formCrearPostulantes.get('mail').errors && formCrearPostulantes.get('mail').touched">
-              <p *ngIf=" formCrearPostulantes.get('mail').hasError('required')">Campo Requerido</p>
-              <p *ngIf=" formCrearPostulantes.get('mail').hasError('email')">Correo No Valido</p>
-            </mat-error>                
-          </mat-form-field>
-          
-          <!--Direccion-->
-          <mat-form-field>
-            <mat-icon matSuffix aria-label="Side nav toggle icon" >location_on</mat-icon>
-            <input formControlName = "direccion" matInput placeholder="Direccion" type="text">
-            <mat-error *ngIf="formCrearPostulantes.get('direccion').errors && formCrearPostulantes.get('direccion').touched">    
-              <p *ngIf=" formCrearPostulantes.get('direccion').hasError('maxlength')">Direccion demadiado larga</p>
-            </mat-error>              
-          </mat-form-field>
-          
-          <!--Estado-->
-          <mat-form-field>
-            <mat-select formControlName = "estado" placeholder="Estado">
-              <mat-option value="Desafio Pendiente">Desafio Pendiente</mat-option>
-              <mat-option value="Desafio Revisado">Desafio Revisado</mat-option>
-              <mat-option value="Entrevista Administrador">Entrevista Administrador</mat-option>
-              <mat-option value="Entrevista Team">Entrevista Team</mat-option>
-              <mat-option value="Aprobado">Aprobado</mat-option>
-              <mat-option value="Rechazado">Rechazado</mat-option>
-            </mat-select>
-          </mat-form-field>  
+        <!--Genero-->
+        <mat-form-field>
+          <mat-select formControlName = "genero" placeholder="Genero">
+            <mat-option value="Masculino">Masculino</mat-option>
+            <mat-option value="Femenino">Femenino</mat-option>
+          </mat-select>
+        </mat-form-field>    
+  
       </div>
 
       <!--DATOS ADJUNTOS-->
-      <div fxFlex="40%" class="bloque">
-        <h4>Datos Adjuntos</h4>
+      <div fxFlex="40%" class="bloque">    
+        <!--Fecha Nacimiento-->
+        <mat-form-field>
+          <input formControlName = "fecha_nac" matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Fecha de Nacimiento">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
 
+        <!--Direccion-->
+        <mat-form-field>
+          <mat-icon matSuffix aria-label="Side nav toggle icon"  class="icono" >location_on</mat-icon>
+          <input formControlName = "direccion" matInput placeholder="Direccion" type="text">
+          <mat-error *ngIf="formCrearPostulantes.get('direccion').errors && formCrearPostulantes.get('direccion').touched">    
+            <p *ngIf=" formCrearPostulantes.get('direccion').hasError('maxlength')">Direccion demadiado larga</p>
+          </mat-error>              
+        </mat-form-field>
+        
+        <!--Estado-->
+        <mat-form-field>
+          <mat-select formControlName = "estado" placeholder="Estado">
+            <mat-option value="Desafio Pendiente">Desafio Pendiente</mat-option>
+            <mat-option value="Desafio Revisado">Desafio Revisado</mat-option>
+            <mat-option value="Entrevista Administrador">Entrevista Administrador</mat-option>
+            <mat-option value="Entrevista Team">Entrevista Team</mat-option>
+            <mat-option value="Aprobado">Aprobado</mat-option>
+            <mat-option value="Rechazado">Rechazado</mat-option>
+          </mat-select>
+        </mat-form-field>  
+        
         <!--curriculum-->
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Subir CV" disabled value="curriculum.zip">
+          <input matInput placeholder="Subir CV" disabled value="">
           <label matPrefix ><mat-icon class="icono">get_app</mat-icon></label>
           <label matSuffix for="curriculum"><mat-icon class="icono">attach_file</mat-icon></label>
           <label matSuffix ><mat-icon class="icono">clear</mat-icon></label>
@@ -110,7 +115,7 @@
 
         <!--desafio-->
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Subir CV" disabled value="filename.zip">
+          <input matInput placeholder="Subir CV" disabled value="">
           <label matPrefix ><mat-icon class="icono">get_app</mat-icon></label>
           <label matSuffix for="desafio"><mat-icon class="icono">attach_file</mat-icon></label>
           <label matSuffix ><mat-icon class="icono">clear</mat-icon></label>
@@ -122,11 +127,14 @@
           <textarea matInput placeholder="Comentario"></textarea>
         </mat-form-field>
 
-        <!--botones-->
-        <button mat-stroked-button color="warn" (click)="volverAlListado()">Cancelar</button>
-        <button mat-raised-button class="natura-button-3" type="submit" [disabled]="formCrearPostulantes.invalid">Guardar</button>   
       </div> 
 
+      <!--botones-->
+      <mat-action-row fxLayout="row" class="botones">
+        <button type="button" mat-stroked-button color="primary" (click)="volverAlListado()">Cancelar</button>
+        <button type="submit" mat-raised-button [disabled]="formCrearPostulantes.invalid">Guardar</button>
+      </mat-action-row>
+      
   </div>
-
+  
 </form>

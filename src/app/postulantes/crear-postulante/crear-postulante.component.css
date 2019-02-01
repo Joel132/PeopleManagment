@@ -8,7 +8,7 @@
   }
 
   .bloque > *{
-    width: 80%;
+    width: 100%;
   }
 
   mat-form-field{
@@ -55,3 +55,15 @@
   #desafio{
     display: none;
   }
+
+  .icono{
+    width:10px; 
+    height:18.35px;
+    color:rgba(0, 0, 0, 0.54);
+}
+
+.botones{
+  margin: auto;
+  border-radius: 50px
+
+}

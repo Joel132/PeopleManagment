@@ -23,7 +23,9 @@ import {
   MatProgressSpinnerModule,
   MatDatepickerModule,
   MatRadioModule,
-  MatSliderModule
+  MatSliderModule,
+  MatTooltipModule,
+  MatExpansionModule
 } from '@angular/material';
 import {TextFieldModule} from '@angular/cdk/text-field';
 import { NgModule } from '@angular/core';
@@ -41,7 +43,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatButtonModule, MatCheckboxModule,MatInputModule,
     MatCardModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatMenuModule,
     MatDividerModule, MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, TextFieldModule,
-    FlexLayoutModule
+    FlexLayoutModule,MatTooltipModule,MatExpansionModule
     
   ],
   
@@ -55,7 +57,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
       MatButtonModule, MatCheckboxModule,MatInputModule,
       MatCardModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatMenuModule,
       MatDividerModule, MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, TextFieldModule,
-      FlexLayoutModule
+      FlexLayoutModule,MatTooltipModule,MatExpansionModule
       
   ]
 
