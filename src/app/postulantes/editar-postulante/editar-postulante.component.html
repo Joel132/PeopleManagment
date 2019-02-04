@@ -28,7 +28,7 @@
               <p style="text-align: center" *ngIf="errorFotoPesado">El tamaño maximo por imagen es de 10MB</p>
             </mat-error>
           </div>
-          <input id="fileInput" type='file' (change)="cargarFoto()" class="inputFile" #fotoInput>  
+          <input id="fileInput" type='file' accept="image/*" (change)="cargarFoto()" class="inputFile" #fotoInput>  
         </div>
         
         <div fxLayoutAlign="center">
@@ -127,7 +127,7 @@
             <mat-form-field >
               <label for="cvInput"><input matInput placeholder="Subir CV" disabled [value]="cvName"></label>
               <label matPrefix ><mat-icon matTooltip="Descargar archivo"  class="icono">get_app</mat-icon></label>
-              <label matSuffix for="cvInput" *ngIf="!isLoadingCV"><mat-icon matTooltip="Subir archivo" class="icono">attach_file</mat-icon></label>
+              <label matSuffix for="cvInput" *ngIf="!isLoadingCV&&!cvName"><mat-icon matTooltip="Subir archivo" class="icono">attach_file</mat-icon></label>
               <label matSuffix *ngIf="isLoadingCV" ><mat-spinner diameter=20></mat-spinner></label>
               <label matSuffix *ngIf="!isLoadingCV&&cvName" (click)="vaciarInputCV()"><mat-icon  matTooltip="Eliminar archivo" class="icono">clear</mat-icon></label>
               <mat-hint *ngIf="errorCV">
@@ -153,9 +153,11 @@
 
           </div>
 
-        </div>    
+        </div>  
+        <div fxFlexAlign="baseline" fxFlex="80%" class="container " fxLayout="row" fxLayoutWrap fxLayoutGap="10%" fxLayoutAlign="end center">
           <button type="button" mat-stroked-button color="warn" (click)="volverAlListado()">Cancelar</button>
-          <button mat-raised-button  type="submit" [disabled]="formEditarPostulante?.invalid">Guardar</button>    
+          <button mat-raised-button  type="submit" [disabled]="formEditarPostulante?.invalid">Guardar</button> 
+        </div>     
             
      
       <!--fin bloques y form--> 

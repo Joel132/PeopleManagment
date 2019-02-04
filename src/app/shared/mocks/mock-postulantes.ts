@@ -4,7 +4,7 @@ export const POSTULANTES: Array<Postulante> = [
     {        
         apellido: 'Perez',
         celular: '182734',
-        comentarioGral: 'Medio',
+        comentario: 'Medio',
         curriculumUrl: 'https://www.link.com',
         desafioUrl: 'https://www.link.com',
         documento: '12345',
@@ -15,13 +15,15 @@ export const POSTULANTES: Array<Postulante> = [
         estado: 'Rechazado',
         comentarioDesafio: '',
         comentarioAdmin: 'Malo',
-        comentarioSM: '',
-        comentarioTeam: ''
+        comentarioSm: '',
+        comentarioTeam: '',
+        fechaDeNacimiento: '',
+        genero:''
     },
     {        
         apellido: 'Martinez',
         celular: '182734',
-        comentarioGral: 'Medio',
+        comentario: 'Medio',
         curriculumUrl: 'https://www.link.com',
         desafioUrl: 'https://www.link.com',
         documento: '12345',
@@ -32,13 +34,15 @@ export const POSTULANTES: Array<Postulante> = [
         estado: 'Aprobado',
         comentarioDesafio: '',
         comentarioAdmin: 'Bueno',
-        comentarioSM: 'Bueno',
-        comentarioTeam: 'Bueno'
+        comentarioSm: 'Bueno',
+        comentarioTeam: 'Bueno',
+        fechaDeNacimiento: '',
+        genero:''
     },
     {        
         apellido: 'Gonzalez',
         celular: '182734',
-        comentarioGral: '',
+        comentario: '',
         curriculumUrl: 'https://www.link.com',
         desafioUrl: 'https://www.link.com',
         documento: '12345',
@@ -49,13 +53,15 @@ export const POSTULANTES: Array<Postulante> = [
         estado: 'Pendiente Desafio',
         comentarioDesafio: '',
         comentarioAdmin: '',
-        comentarioSM: '',
-        comentarioTeam: ''
+        comentarioSm: '',
+        comentarioTeam: '',
+        fechaDeNacimiento: '',
+        genero:''
     },
     {        
         apellido: 'Caceres',
         celular: '182734',
-        comentarioGral: 'Medio',
+        comentario: 'Medio',
         curriculumUrl: 'https://www.link.com',
         desafioUrl: 'https://www.link.com',
         documento: '12345',
@@ -66,13 +72,15 @@ export const POSTULANTES: Array<Postulante> = [
         estado: 'Desafío Revisado',
         comentarioDesafio: 'Medio',
         comentarioAdmin: '',
-        comentarioSM: '',
-        comentarioTeam: ''
+        comentarioSm: '',
+        comentarioTeam: '',
+        fechaDeNacimiento: '',
+        genero:''
     },
     {        
         apellido: 'Perez',
         celular: '182734',
-        comentarioGral: 'Medio',
+        comentario: 'Medio',
         curriculumUrl: 'https://www.link.com',
         desafioUrl: 'https://www.link.com',
         documento: '12345',
@@ -83,13 +91,15 @@ export const POSTULANTES: Array<Postulante> = [
         estado: 'Pendiente E. SM',
         comentarioDesafio: 'Buena',
         comentarioAdmin: '',
-        comentarioSM: '',
-        comentarioTeam: ''
+        comentarioSm: '',
+        comentarioTeam: '',
+        fechaDeNacimiento: '',
+        genero:''
     },
     {        
         apellido: 'Ramirez',
         celular: '182734',
-        comentarioGral: 'Medio',
+        comentario: 'Medio',
         curriculumUrl: 'https://www.link.com',
         desafioUrl: 'https://www.link.com',
         documento: '12345',
@@ -100,13 +110,15 @@ export const POSTULANTES: Array<Postulante> = [
         estado: 'Pendiente E. Admin',
         comentarioDesafio: 'Medio',
         comentarioAdmin: 'Medio',
-        comentarioSM: '',
-        comentarioTeam: ''
+        comentarioSm: '',
+        comentarioTeam: '',
+        fechaDeNacimiento: '',
+        genero:''
     },
     {        
         apellido: 'Corvalan',
         celular: '182734',
-        comentarioGral: 'Medio',
+        comentario: 'Medio',
         curriculumUrl: 'https://www.link.com',
         desafioUrl: 'https://www.link.com',
         documento: '12345',
@@ -117,13 +129,15 @@ export const POSTULANTES: Array<Postulante> = [
         estado: 'Pendiente E. Team',
         comentarioDesafio: 'Medio',
         comentarioAdmin: 'Bueno',
-        comentarioSM: 'Bueno',
-        comentarioTeam: ''
+        comentarioSm: 'Bueno',
+        comentarioTeam: '',
+        fechaDeNacimiento: '',
+        genero:''
     },
     {        
         apellido: 'Gutierrez',
         celular: '182734',
-        comentarioGral: 'Medio',
+        comentario: 'Medio',
         curriculumUrl: 'https://www.link.com',
         desafioUrl: 'https://www.link.com',
         documento: '12345',
@@ -134,7 +148,9 @@ export const POSTULANTES: Array<Postulante> = [
         estado: 'Aprobado',
         comentarioDesafio: 'Bueno',
         comentarioAdmin: 'Bueno',
-        comentarioSM: 'Bueno',
-        comentarioTeam: 'Bueno'
+        comentarioSm: 'Bueno',
+        comentarioTeam: 'Bueno',
+        fechaDeNacimiento: '',
+        genero:''
     }
 ];

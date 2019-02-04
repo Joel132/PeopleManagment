@@ -314,7 +314,7 @@ export class EditarPostulanteComponent implements OnInit {
           this.isLoadingCV=false;
         }
         if(campo=='desafioUrl'){
-          this.isLoadingCV=false;
+          this.isLoadingDesafio=false;
         }
         console.log("Se subio correctamente el archivo");
       },
