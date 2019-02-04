@@ -1,167 +1,176 @@
-<div class="component-view">
+<div class="component-view" fxLayout="column" fxLayoutGap="400px">
   <mat-tab-group mat-stretch-tabs>
     <mat-tab label="Datos Personales">
       <mat-list>
-        <div fxLayout="row" fxLayoutAlign="right" fxLayoutGap="10%">
+        <div fxLayout="row" fxLayoutAlign="right" fxLayoutGap="2.5%" fxLayout.xs="column" fxLayout.md="column"
+          fxLayout.sm="column">
           <div class="seccion-foto" fxLayoutAlign="center">
             <mat-card>
-              <img mat-card-avatar src="https://www.hannafords.ca/wp-content/themes/comox/convertus/images/img-avatar.png"
-                style="margin: auto;">
+              <img mat-card-avatar class="foto" src="./assets/img/foto-perfil.png">
               <mat-card-content>
-                  <div *ngIf="usuarios?.estado; then estadoSi else estadoNo"></div>
-                  <ng-template #estadoSi>
-                    <strong mat-line> {{ usuarios?.estado }}</strong>
-                  </ng-template>
-                  <ng-template #estadoNo>
-                    <p mat-line> No disponible</p>
-                  </ng-template>
+                <div *ngIf="usuarios?.estado; then estadoSi else estadoNo"></div>
+                <ng-template #estadoSi>
+                  <strong mat-line class="comen"> {{ usuarios?.estado }}</strong>
+                </ng-template>
+                <ng-template #estadoNo>
+                  <p mat-line class="comen"> No disponible</p>
+                </ng-template>
               </mat-card-content>
             </mat-card>
           </div>
           <div fxLayout="column">
-            <mat-list-item>
-              <mat-icon mat-list-icon>face</mat-icon>
-              <p mat-line><strong>Nombre Y Apellido:</strong></p>
-            </mat-list-item>
-            <mat-list-item>
-              <mat-icon mat-list-icon>picture_in_picture</mat-icon>
-              <p mat-line><strong>Documento:</strong></p>
-            </mat-list-item>
-            <mat-list-item>
-              <mat-icon mat-list-icon>local_phone</mat-icon>
-              <p mat-line><strong>Telefono:</strong></p>
-            </mat-list-item>
-            <mat-list-item>
-              <mat-icon mat-list-icon>alternate_email</mat-icon>
-              <p mat-line><strong>Email:</strong></p>
-            </mat-list-item>
-          </div>
-          <div fxLayout="column">
-            <mat-list-item>
-              <mat-icon mat-list-icon></mat-icon>
-              <div *ngIf="usuarios?.nombre && usuarios.apellido; then nombreSi else nombreNo"></div>
-              <ng-template #nombreSi>
-                <p mat-line> {{ usuarios?.nombre }}
-                  {{usuarios?.apellido}}</p>
-              </ng-template>
-              <ng-template #nombreNo>
-                <p mat-line> No disponible</p>
-              </ng-template>
-            </mat-list-item>
-            <mat-list-item>
-              <mat-icon mat-list-icon></mat-icon>
-              <div *ngIf="usuarios?.ci; then ciSi else ciNo"></div>
-              <ng-template #ciSi>
-                <p mat-line> {{ usuarios?.ci }}</p>
-              </ng-template>
-              <ng-template #ciNo>
-                <p mat-line> No disponible</p>
-              </ng-template>
-            </mat-list-item>
-            <mat-list-item>
-              <mat-icon mat-list-icon></mat-icon>
-              <div *ngIf="usuarios?.telefono; then telefonoSi else telefonoNo"></div>
-              <ng-template #telefonoSi>
-                <p mat-line> {{ usuarios?.telefono }}</p>
-              </ng-template>
-              <ng-template #telefonoNo>
-                <p mat-line> No disponible</p>
-              </ng-template>
-            </mat-list-item>
-            <mat-list-item>
-              <mat-icon mat-list-icon></mat-icon>
-              <div *ngIf="usuarios?.email; then emailSi else emailNo"></div>
-              <ng-template #emailSi>
-                <p mat-line> {{ usuarios?.email }}</p>
-              </ng-template>
-              <ng-template #emailNo>
-                <p mat-line> No disponible</p>
-              </ng-template>
-            </mat-list-item>
-          </div>
-        </div>
-      </mat-list>
-    </mat-tab>
-    <mat-tab label="Datos Administrativos">
-        <mat-list>
-          <div fxLayout="row" fxLayoutAlign="right" fxLayoutGap="10%">
-            <div class="seccion-foto" fxLayoutAlign="center">
-              <mat-card>
-                <img mat-card-avatar src="https://www.hannafords.ca/wp-content/themes/comox/convertus/images/img-avatar.png"
-                  style="margin: auto;">
-                <mat-card-content>
-                    <div *ngIf="usuarios?.estado; then estadoSi else estadoNo"></div>
-                    <ng-template #estadoSi>
-                      <strong mat-line> {{ usuarios?.estado }}</strong>
-                    </ng-template>
-                    <ng-template #estadoNo>
-                      <p mat-line> No disponible</p>
-                    </ng-template>
-                </mat-card-content>
-              </mat-card>
+            <div fxLayout="column" fxLayout.gt-xs="row">
+              <mat-list-item>
+                <mat-icon mat-list-icon>face</mast-icon>
+                <p mat-line><strong>Nombre Y Apellido:</strong></p>
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon mat-list-icon></mat-icon>
+                <div *ngIf="usuarios?.nombre && usuarios.apellido; then nombreSi else nombreNo"></div>
+                <ng-template #nombreSi>
+                  <p mat-line class="comen"> {{ usuarios?.nombre }}
+                    {{usuarios?.apellido}}</p>
+                </ng-template>
+                <ng-template #nombreNo>
+                  <p mat-line class="comen"> No disponible</p>
+                </ng-template>
+              </mat-list-item>
             </div>
-            <div fxLayout="column">
+            <div fxLayout="column" fxLayout.gt-xs="row">
+              <mat-list-item>
+                <mat-icon mat-list-icon>picture_in_picture</mat-icon>
+                <p mat-line><strong>Documento:</strong></p>
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon mat-list-icon></mat-icon>
+                <div *ngIf="usuarios?.ci; then ciSi else ciNo"></div>
+                <ng-template #ciSi>
+                  <p mat-line class="comen"> {{ usuarios?.ci }}</p>
+                </ng-template>
+                <ng-template #ciNo>
+                  <p mat-lin class="comen"e> No disponible</p>
+                </ng-template>
+              </mat-list-item>
+            </div>
+            <div fxLayout="column" fxLayout.gt-xs="row">
+              <mat-list-item>
+                <mat-icon mat-list-icon>local_phone</mat-icon>
+                <p mat-line><strong>Telefono:</strong></p>
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon mat-list-icon></mat-icon>
+                <div *ngIf="usuarios?.telefono; then telefonoSi else telefonoNo"></div>
+                <ng-template #telefonoSi>
+                  <p mat-line class="comen"> {{ usuarios?.telefono }}</p>
+                </ng-template>
+                <ng-template #telefonoNo>
+                  <p mat-line class="comen"> No disponible</p>
+                </ng-template>
+              </mat-list-item>
+            </div>
+            <div fxLayout="column" fxLayout.gt-xs="row">
+              <mat-list-item>
+                <mat-icon mat-list-icon>alternate_email</mat-icon>
+                <p mat-line><strong>Email:</strong></p>
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon mat-list-icon></mat-icon>
+                <div *ngIf="usuarios?.email; then emailSi else emailNo"></div>
+                <ng-template #emailSi>
+                  <p mat-line class="comen"> {{ usuarios?.email }}</p>
+                </ng-template>
+                <ng-template #emailNo>
+                  <p mat-line class="comen"> No disponible</p>
+                </ng-template>
+              </mat-list-item>
+            </div>
+            <div fxLayout="column" fxLayout.gt-xs="row">
               <mat-list-item>
                 <mat-icon mat-list-icon>person_pin</mat-icon>
                 <p mat-line><strong>Usuario:</strong></p>
               </mat-list-item>
               <mat-list-item>
+                <mat-icon mat-list-icon></mat-icon>
+                <div *ngIf="usuarios?.usuario; then usuarioSi else usuarioNo"></div>
+                <ng-template #usuarioSi>
+                  <p mat-line class="comen"> {{ usuarios?.usuario }}</p>
+                </ng-template>
+                <ng-template #usuarioNo>
+                  <p mat-line class="comen"> No disponible</p>
+                </ng-template>
+              </mat-list-item>
+            </div>
+            <div fxLayout="column" fxLayout.gt-xs="row">
+              <mat-list-item>
                 <mat-icon mat-list-icon>calendar_today</mat-icon>
                 <p mat-line><strong>Fecha de Inicio:</strong></p>
               </mat-list-item>
+              <mat-list-item>
+                <mat-icon mat-list-icon></mat-icon>
+                <div *ngIf="usuarios?.fechaInicio; then fechaiSi else fechaiNo"></div>
+                <ng-template #fechaiSi>
+                  <p mat-line class="comen"> {{ usuarios?.fechaInicio }}
+                </ng-template>
+                <ng-template #fechaiNo>
+                  <p mat-line class="comen"> No disponible</p>
+                </ng-template>
+              </mat-list-item>
+            </div>
+            <div fxLayout="column" fxLayout.gt-xs="row">
               <mat-list-item>
                 <mat-icon mat-list-icon>calendar_today</mat-icon>
                 <p mat-line><strong>Fecha de Finalizacion:</strong></p>
               </mat-list-item>
               <mat-list-item>
-                <mat-icon mat-list-icon>supervisor_account</mat-icon>
-                <p mat-line><strong>Rol:</strong></p>
-              </mat-list-item>
-            </div>
-            <div fxLayout="column">
-                <mat-list-item>
-                    <mat-icon mat-list-icon></mat-icon>
-                    <div *ngIf="usuarios?.usuario; then usuarioSi else usuarioNo"></div>
-                    <ng-template #usuarioSi>
-                      <p mat-line> {{ usuarios?.usuario }}</p>
-                    </ng-template>
-                    <ng-template #usuarioNo>
-                      <p mat-line> No disponible</p>
-                    </ng-template>
-                  </mat-list-item>
-              <mat-list-item>
-                <mat-icon mat-list-icon></mat-icon>
-                <div *ngIf="usuarios?.fechaInicio; then fechaiSi else fechaiNo"></div>
-                <ng-template #fechaiSi>
-                  <p mat-line> {{ usuarios?.fechaInicio }}
-                </ng-template>
-                <ng-template #fechaiNo>
-                  <p mat-line> No disponible</p>
-                </ng-template>
-              </mat-list-item>
-              <mat-list-item>
                 <mat-icon mat-list-icon></mat-icon>
                 <div *ngIf="usuarios?.fechaVencimiento; then fechafSi else fechafNo"></div>
                 <ng-template #fechafSi>
-                  <p mat-line> {{ usuarios?.fechaVencimiento }}</p>
+                  <p mat-line class="comen"> {{ usuarios?.fechaVencimiento }}</p>
                 </ng-template>
                 <ng-template #fechafNo>
-                  <p mat-line> No disponible</p>
+                  <p mat-line class="comen"> No disponible</p>
                 </ng-template>
+              </mat-list-item>
+            </div>
+            <div fxLayout="column" fxLayout.gt-xs="row">
+              <mat-list-item>
+                <mat-icon mat-list-icon>supervisor_account</mat-icon>
+                <p mat-line><strong>Rol:</strong></p>
               </mat-list-item>
               <mat-list-item>
                 <mat-icon mat-list-icon></mat-icon>
                 <div *ngIf="usuarios?.rol; then rolSi else rolNo"></div>
                 <ng-template #rolSi>
-                  <p mat-line> {{ usuarios?.rol }}</p>
+                  <p mat-line class="comen"> {{ usuarios?.rol }}</p>
                 </ng-template>
                 <ng-template #rolNo>
-                  <p mat-line> No disponible</p>
+                  <p mat-line class="comen"> No disponible</p>
                 </ng-template>
               </mat-list-item>
             </div>
           </div>
-        </mat-list>
-      </mat-tab>
+        </div>
+      </mat-list>
+      <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10%" fxLayout.md="column" fxLayout.sm="column"
+        fxLayout.xs="column">
+        <div fxLayout=column class="comen">
+          <p mat-line><strong>Comentarios</strong></p>
+          <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's
+            standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
+            it to make
+            a type specimen book. It has survived not only five centuries, but also the leap into electronic
+            typesetting,
+            remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
+            containing Lorem
+            Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including
+            versions of Lorem Ipsum.
+          </p>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Aptitudes">
+    </mat-tab>
   </mat-tab-group>
 </div>
