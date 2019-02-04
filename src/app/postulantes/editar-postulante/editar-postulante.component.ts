@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Validators,FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { RecibirPostulanteService } from 'src/app/shared/helpers/recibir-postulante.service';
 import { EnviarArchivoService } from 'src/app/shared/helpers/enviar-archivo.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-editar-postulante',
@@ -101,16 +102,17 @@ export class EditarPostulanteComponent implements OnInit {
     private route: ActivatedRoute,
     private editarServicio: EditarPostulanteService, 
     private recibirPostulante: RecibirPostulanteService,
-    private enviarArchivo: EnviarArchivoService
+    private enviarArchivo: EnviarArchivoService,
+    private snackBar: MatSnackBar
     ) { }
 
   ngOnInit() {
       const id = +this.route.snapshot.paramMap.get('id');//Se obtiene el id de la ruta 
       //Para el servidor
-      //this.getPostulante(id);
+      this.getPostulante(id);
 
       //Para el mock. Servidor caido
-      this.cargarFormulario({id:1,celular:'213',apellido:'Florentin',nombre:'Joel',comentario:'sad',comentarioAdmin:'dsa',comentarioDesafio:'sda',comentarioTeam:'dsa',comentarioSm:'sad',curriculumUrl:'df',desafioUrl:'ad',documento:'ad',estado:'Rechazado',foto:'ad',mail:'das',fechaDeNacimiento:'',genero:''});
+      //this.cargarFormulario({id:1,celular:'213',apellido:'Florentin',nombre:'Joel',comentario:'sad',comentarioAdmin:'dsa',comentarioDesafio:'sda',comentarioTeam:'dsa',comentarioSm:'sad',curriculumUrl:'df',desafioUrl:'ad',documento:'ad',estado:'Rechazado',foto:'ad',mail:'das',fechaDeNacimiento:'',genero:''});
   }
    
   
@@ -132,8 +134,17 @@ export class EditarPostulanteComponent implements OnInit {
    * @param data objeto que representa al postulante editado con los datos correctos
    */
   editadoCorrectamente(data: Postulante){
-    console.log("Editado "+data);
+    console.log("Editado Correctamente");
+    console.log(data);
+    this.openSnackBar("Postulante editado exitosamente","Entendido");
     //this.formPostulantes.reset();
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 4000,
+    });
+    //this.volverAlListado();
   }
 
   /**
@@ -156,13 +167,14 @@ export class EditarPostulanteComponent implements OnInit {
   
   
   /**
-   * Metodo que llama al servicio para obtener el postulante segun un id dado
+   * Metodo que llama al servicio para obtener el postulante segun un id dado. Al final se sobrecarga el formulario
    * @param id Atributo a tener en cuenta para obtener un postulante
    */
   getPostulante(id: number){
     this.recibirPostulante.getPostulante(id).subscribe(
       respuesta=>{
         this.cargarFormulario(respuesta);
+        this.cargarInputsFile(respuesta);
       },
       error_respuesta=>{
         console.log("Ha ocurrido un error");
@@ -182,23 +194,43 @@ export class EditarPostulanteComponent implements OnInit {
       apellido : new FormControl(postulante.apellido, [Validators.required,Validators.pattern('[/a-zA-Z ]*')] ),
       documento : new FormControl(postulante.documento, [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
       celular : new FormControl(postulante.celular),
-      fechaDeNacimiento	 : new FormControl(),
+      fechaDeNacimiento	 : new FormControl(new Date(postulante.fechaDeNacimiento)),
       mail : new FormControl(postulante.mail, [Validators.required, Validators.email]),
-      direccion : new FormControl(),
+      direccion : new FormControl(postulante.direccion),
       estado : new FormControl(postulante.estado),
       desafioUrl: new FormControl(postulante.desafioUrl),
       curriculumUrl: new FormControl(postulante.curriculumUrl),
       comentario: new FormControl(postulante.comentario),
-      comentarioSM:new FormControl(postulante.comentarioSm),
+      comentarioSm:new FormControl(postulante.comentarioSm),
       comentarioAdmin: new FormControl(postulante.comentarioAdmin),
       comentarioTeam: new FormControl(postulante.comentarioTeam),
       comentarioDesafio: new FormControl(postulante.comentarioDesafio),
       genero: new FormControl(postulante.genero),
       fotoUrl: new FormControl()
     });
+    
   }
- 
 
+ /**
+  * Vincular todos los inputs file con los nombres de sus archivos correspondientes de un postulante
+  * @param postulante 
+  */
+  cargarInputsFile(postulante: Postulante){
+    this.desafioName=this.extraerNombre(postulante.desafioUrl);
+    this.cvName=this.extraerNombre(postulante.curriculumUrl);
+  }
+  
+/**
+ * Extrae el nombre del archivo de la url enviada del servidor
+ * @param url la url a examinar para extraer el nombre
+ */
+  extraerNombre(url: string): string{
+
+    if(url){
+      return url.substring(66,url.length);
+    }
+    return '';
+  }
   /**
    * Metodo para vaciar el cv seleccionado
    */
@@ -232,7 +264,7 @@ export class EditarPostulanteComponent implements OnInit {
    * 
    */
   cargarCV(){
-    if(this.curriculumInput.nativeElement.files[0].size>1e+7){
+    if(this.curriculumInput.nativeElement.files[0].size>1e+6){
       this.errorCV=true;
       this.errorCVPesado=true;
       this.vaciarInputCV();
@@ -254,7 +286,7 @@ export class EditarPostulanteComponent implements OnInit {
   urlFoto = '';
   cargarFoto() {
 
-    if(this.fotoInput.nativeElement.files[0].size>1e+7){
+    if(this.fotoInput.nativeElement.files[0].size>1e+6){
       this.errorFoto=true;
       this.errorFotoPesado=true;
       this.vaciarInputDesafio();
@@ -281,7 +313,7 @@ export class EditarPostulanteComponent implements OnInit {
    * 
    */
   cargarDesafio(){
-    if(this.desafioInput.nativeElement.files[0].size>1e+7){
+    if(this.desafioInput.nativeElement.files[0].size>1e+6){
       this.errorDesafio=true;
       this.errorDesafioPesado=true;
       this.vaciarInputDesafio();
@@ -306,6 +338,7 @@ export class EditarPostulanteComponent implements OnInit {
      let file: File= fileInput.nativeElement.files[0];
     this.enviarArchivo.enviarArchivo(file).subscribe(
       (resultPath) => {
+        
         this.formEditarPostulante.get(campo).setValue(resultPath);
         if(campo=='fotoUrl'){
           this.isLoadingFoto=false;

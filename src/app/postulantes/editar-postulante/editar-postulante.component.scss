@@ -1,6 +1,6 @@
 //forms
 mat-form-field{
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .example-container {
@@ -315,3 +315,11 @@ input{
   color: #222;
   border-color: #222;
 }
+
+.fabButton{
+  position: fixed;
+    bottom: 40px;
+    right: 20px;
+    z-index: 1;
+}
+

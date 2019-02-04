@@ -19,6 +19,7 @@ export class Postulante {
         public mail: string,
         public nombre: string,
         public estado: string,
+        public direccion: string,
         // Estos no estan en el JSON
         public foto: string,
         public comentarioSm: string,

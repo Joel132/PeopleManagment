@@ -9,7 +9,7 @@
           
           <!-- Sin Foto / Foto cargada-->
           <div *ngIf="!isLoadingFoto">
-            <label class="hoverable" for="fileInput">
+            <label class="hoverable" [for]="urlFoto?null:'fileInput'">
             <img matTooltip="Cambiar Foto de Perfil" [src]="urlFoto ? urlFoto : 'assets/img/foto-perfil.png'"> 
             <div class="hover-text">Cambiar Foto</div>
             <div class="background"></div>
@@ -47,7 +47,7 @@
               <mat-icon matSuffix class="icono">person</mat-icon>
               <mat-error style="color: rgb(59, 61, 71);" *ngIf="formEditarPostulante?.get('nombre').errors && formEditarPostulante?.get('nombre')?.dirty">
                 <p *ngIf=" formEditarPostulante?.get('nombre').hasError('required')">Completar campo</p>
-                <p *ngIf=" formEditarPostulante?.get('nombre').hasError('pattern')">No se aceptan numeros</p>
+                <p *ngIf=" formEditarPostulante?.get('nombre').hasError('pattern')">Ingresa solo Letras</p>
               </mat-error>
             </mat-form-field>
             
@@ -58,7 +58,7 @@
               <mat-icon matSuffix class="icono">person</mat-icon>
               <mat-error style="color: rgb(59, 61, 71);" *ngIf="formEditarPostulante?.get('nombre').errors && formEditarPostulante?.get('nombre').dirty">
                 <p *ngIf=" formEditarPostulante?.get('apellido').hasError('required')">Completar campo</p>
-                <p *ngIf=" formEditarPostulante?.get('apellido').hasError('pattern')" [ngStyle]="{'color': 'black'}" align="start">No es un nombre valido</p>
+                <p *ngIf=" formEditarPostulante?.get('apellido').hasError('pattern')" [ngStyle]="{'color': 'black'}" align="start">Ingresa solo Letras</p>
               </mat-error>
             </mat-form-field>
            
@@ -78,22 +78,22 @@
             <!-- campo del estado-->          
             <mat-form-field>
                 <mat-select formControlName = "estado" placeholder="Estado"  disableRipple>
-                  <mat-option value="Pendiente Desafio">Desafio Pendiente</mat-option>
-                  <mat-option value="Desafío Recibido">Desafío Recibido</mat-option>
-                  <mat-option value="Desafío Revisado">Desafío Revisado</mat-option>
-                  <mat-option value="Pendiente E. SM">Entrevista Pendiente SM</mat-option>
-                  <mat-option value="Pendiente E. Admin">Entrevista Pendiente Admin</mat-option>
-                  <mat-option value="Pendiente E. Team">Entrevista PendienteTeam</mat-option>
-                  <mat-option value="Aprobado">Aprobado</mat-option>
-                  <mat-option value="Rechazado">Rechazado</mat-option>
+                  <mat-option value="1">Desafio Pendiente</mat-option>
+                  <mat-option value="2">Desafío Recibido</mat-option>
+                  <mat-option value="3">Desafío Revisado</mat-option>
+                  <mat-option value="4">Entrevista SM</mat-option>
+                  <mat-option value="5">Entrevista Administrador</mat-option>
+                  <mat-option value="6">Entrevista Team</mat-option>
+                  <mat-option value="7">Aprobado</mat-option>
+                  <mat-option value="8">Rechazado</mat-option>
                 </mat-select>
               </mat-form-field>   
               
               <mat-form-field>
-                <mat-select formControlName = "estado" placeholder="Sexo"  disableRipple>
-                  <mat-option value="masculino">Masculino</mat-option>
-                  <mat-option value="femenino">Femenino</mat-option>
-                  
+                <mat-select formControlName = "genero" placeholder="Sexo"  disableRipple>
+                  <mat-option value="Masculino">Masculino</mat-option>
+                  <mat-option value="Femenino">Femenino</mat-option>
+                  <mat-option value="Otro">Otro</mat-option>
                 </mat-select>
               </mat-form-field>
           </div>
@@ -136,6 +136,7 @@
               </mat-hint>
             </mat-form-field>
             <input type="file" id="cvInput" class="inputFile"  #curriculumInput (change)="cargarCV()">
+          
 
             <!--subir desafio-->
             <mat-form-field>
@@ -154,10 +155,7 @@
           </div>
 
         </div>  
-        <div fxFlexAlign="baseline" fxFlex="80%" class="container " fxLayout="row" fxLayoutWrap fxLayoutGap="10%" fxLayoutAlign="end center">
-          <button type="button" mat-stroked-button color="warn" (click)="volverAlListado()">Cancelar</button>
-          <button mat-raised-button  type="submit" [disabled]="formEditarPostulante?.invalid">Guardar</button> 
-        </div>     
+        
             
      
       <!--fin bloques y form--> 
@@ -190,7 +188,7 @@
           
           <!--SM entrevista-->
           <mat-form-field appearance="outline" class="example-full-width">
-          <textarea matInput formControlName="comentarioSM" placeholder="Agregar comentario"></textarea>
+          <textarea matInput formControlName="comentarioSm" placeholder="Agregar comentario"></textarea>
           </mat-form-field>
 
           <!--admin entrevista--> 
@@ -206,8 +204,8 @@
         </div>
 
       </div>  
-      <button type="button" mat-stroked-button color="warn" (click)="volverAlListado()">Cancelar</button>
-      <button mat-raised-button  type="submit" [disabled]="formEditarPostulante.invalid">Guardar</button> 
+<!--       <button type="button" mat-stroked-button color="warn" (click)="volverAlListado()">Cancelar</button>
+      <button mat-raised-button  type="submit" [disabled]="formEditarPostulante.invalid">Guardar</button>  -->
   
     </mat-tab>
     <!--fin pestana 2--> 
@@ -220,6 +218,23 @@
     </button>
     </mat-tab>
   </mat-tab-group>
-  </form>
+  
+<!--   <div  
+    style="
+    width: 100%;
+    bottom: 1%;
+    position: fixed;
+    ">
+    <button type="button" mat-stroked-button color="warn" (click)="volverAlListado()">Cancelar</button>
+    <button mat-raised-button  type="submit" [disabled]="formEditarPostulante?.invalid">Guardar</button> 
+  </div> -->
+  
+   <button mat-raised-button class="fabButton natura-button-1" mat-fab color="primary"  [disabled]="formEditarPostulante?.invalid" >
+    <mat-icon>save</mat-icon>
+   </button>
+
+  <div style="height:100px;"></div>
+</form>
+
 </div>
 

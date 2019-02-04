@@ -18,7 +18,8 @@ export const POSTULANTES: Array<Postulante> = [
         comentarioSm: '',
         comentarioTeam: '',
         fechaDeNacimiento: '',
-        genero:''
+        genero:'',
+        direccion:''
     },
     {        
         apellido: 'Martinez',
@@ -37,7 +38,8 @@ export const POSTULANTES: Array<Postulante> = [
         comentarioSm: 'Bueno',
         comentarioTeam: 'Bueno',
         fechaDeNacimiento: '',
-        genero:''
+        genero:'',
+        direccion:''
     },
     {        
         apellido: 'Gonzalez',
@@ -56,7 +58,8 @@ export const POSTULANTES: Array<Postulante> = [
         comentarioSm: '',
         comentarioTeam: '',
         fechaDeNacimiento: '',
-        genero:''
+        genero:'',
+        direccion:''
     },
     {        
         apellido: 'Caceres',
@@ -75,7 +78,8 @@ export const POSTULANTES: Array<Postulante> = [
         comentarioSm: '',
         comentarioTeam: '',
         fechaDeNacimiento: '',
-        genero:''
+        genero:'',
+        direccion:''
     },
     {        
         apellido: 'Perez',
@@ -94,7 +98,8 @@ export const POSTULANTES: Array<Postulante> = [
         comentarioSm: '',
         comentarioTeam: '',
         fechaDeNacimiento: '',
-        genero:''
+        genero:'',
+        direccion:''
     },
     {        
         apellido: 'Ramirez',
@@ -113,7 +118,8 @@ export const POSTULANTES: Array<Postulante> = [
         comentarioSm: '',
         comentarioTeam: '',
         fechaDeNacimiento: '',
-        genero:''
+        genero:'',
+        direccion:''
     },
     {        
         apellido: 'Corvalan',
@@ -132,7 +138,8 @@ export const POSTULANTES: Array<Postulante> = [
         comentarioSm: 'Bueno',
         comentarioTeam: '',
         fechaDeNacimiento: '',
-        genero:''
+        genero:'',
+        direccion:''
     },
     {        
         apellido: 'Gutierrez',
@@ -151,6 +158,7 @@ export const POSTULANTES: Array<Postulante> = [
         comentarioSm: 'Bueno',
         comentarioTeam: 'Bueno',
         fechaDeNacimiento: '',
-        genero:''
+        genero:'',
+        direccion:''
     }
 ];
