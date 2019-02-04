@@ -128,7 +128,6 @@ export class StorageService {
    * @return {number} 
    */
   getCurrentId(){
-    console.log("[en storage.servise.ts] el id es: ",this.getCurrentSession().id);
     return this.getCurrentSession().id;
   }
 

@@ -45,11 +45,9 @@ export class HomeComponent{
      */
 
     ngOnInit(){
-      console.log("Entró al home y llamó a getFuncionario");
       this.funcionarioService.getFuncionario(this.storageService.getCurrentId())
       .subscribe(
         data => {
-          data.rol="user1";
           this.funcionario=data;
           if(data.rol == 'user1'){
             this.funcionario.nombreRol='Administrador';
@@ -58,8 +56,6 @@ export class HomeComponent{
           }else{
             this.funcionario.nombreRol='Funcionario';
           }
-          console.log("recibio el objeto de getFuncionarios");
-          console.log(data);
         }
       );
     }

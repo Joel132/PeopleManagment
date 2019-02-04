@@ -68,8 +68,7 @@ export class LoginComponent implements OnInit {
     let token = this.jwt.decode(data.accessToken);
 
     data.id = token.sub;
-    data.rol = 'user1'; // token.scopes;
-    console.log(data);
+    data.rol = token.scopes;
     this.storageService.setCurrentSession(data);
     this.router.navigate(['/']);
   }
