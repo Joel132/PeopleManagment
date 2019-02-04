@@ -8,7 +8,7 @@ import { HttpParams, HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class RecibirFuncionarioService {
-  private basePath: string="/api/v1/usuario/";
+  private basePath: string="/api/v1/usuarios/";
   constructor(private httpClient: HttpClient) { }
 
   getFuncionarios(): Observable<ResponseLista> {

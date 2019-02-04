@@ -9,7 +9,7 @@ import { HttpParams, HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class RecibirPostulanteService {
-  private basePath: string="/api/v1/postulante/";
+  private basePath: string="/api/v1/postulantes/";
   constructor(private httpClient: HttpClient) { }
 
   getPostulantes(): Observable<ResponseLista> {

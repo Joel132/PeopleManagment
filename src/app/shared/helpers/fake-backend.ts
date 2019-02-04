@@ -70,8 +70,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       if(request.url.includes("/api/v1/usuario") && request.method === 'POST' ){
         FUNCIONARIOS.push(request.body);
         return of(new HttpResponse({status: 200, body: request.body}));
-      }
- */
+      } */
 
       if(this.storageService.getCurrentToken()){
 
