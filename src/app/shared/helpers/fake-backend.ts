@@ -25,7 +25,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
     // wrap in delayed observable to simulate server api call
     return of(null).pipe(mergeMap(() => {
-
+/* 
       // fake authenticate api end point
         if (request.url.endsWith('/api/v1/auth/login') && request.method === 'POST') {
         let params = request.body;
@@ -71,7 +71,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         FUNCIONARIOS.push(request.body);
         return of(new HttpResponse({status: 200, body: request.body}));
       }
-
+ */
 
       if(this.storageService.getCurrentToken()){
 
