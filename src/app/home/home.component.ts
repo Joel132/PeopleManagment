@@ -37,6 +37,13 @@ export class HomeComponent{
     private authenticationService: AuthenticationService,
     private funcionarioService: FuncionarioService) { }
 
+    /**
+     * Metodo ngOnInit
+     * En el metodo ngOnInit, que se carga cada vez que inicia el componente 
+     * obtiene los datos del funcionario que inicio sesion y asigna su rol y su id
+     * a la sesion 
+     */
+
     ngOnInit(){
       console.log("Entró al home y llamó a getFuncionario");
       this.funcionarioService.getFuncionario(this.storageService.getCurrentId())
