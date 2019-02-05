@@ -1,25 +1,40 @@
 <form [formGroup] = 'formCrearPostulantes' (ngSubmit)="onSubmit()">
   
-  <!--FOTO-->
-  <div class="container"  fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
-    <label class="hoverable" for="fotoPerfil">
-      <img matTooltip="Cambiar Foto de Perfil" [src]="url ? url : 'assets/img/foto-perfil.png'"> 
-    </label>  
-    <input id="fotoPerfil" type='file' (change)="onSelectFile($event)">  
-  </div>
+  <!--bloque de la foto-->
+  <div class="container" fxLayout="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center center">
+    
+    <!-- Sin Foto / Foto cargada-->
+    <div *ngIf="!isLoadingFoto" >
+      <label class="hoverable" [for]="urlFoto? null:'fileInput'">
+      <img [matTooltip]=" urlFoto ? '' : 'Agregar Foto de Perfil'" [src]="urlFoto ? urlFoto : 'assets/img/foto-perfil.png'"> 
+      <div class="background"></div>
+      </label>
+    </div>
 
-  <!--boton eliminar-->
+    <!-- Cargando foto-->
+    <div *ngIf="isLoadingFoto">
+      <mat-spinner></mat-spinner>
+    </div>
+    <div *ngIf="errorFoto">
+      <mat-error >
+        <p style="text-align: center" *ngIf="!errorFotoPesado">No se ha podido subir la imagen. Error en el servidor</p>
+        <p style="text-align: center" *ngIf="errorFotoPesado">El tamaño maximo por imagen es de 1MB</p>
+      </mat-error>
+    </div>
+    <input id="fileInput" type='file' (change)="cargarFoto()" class="inputFile" #fotoInput>  
+  </div>
+  
   <div fxLayoutAlign="center">
-      <button mat-button color="warn" *ngIf="url" (click)="delete()">Eliminar</button>
+      <button mat-button color="warn" *ngIf="urlFoto" (click)="eliminarFoto()">Eliminar</button>
   </div>
   
   <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="5%" fxLayoutAlign="center"  >         
-    <!--DATOS PERSONALES-->
+    <!--Bloque 1-->
       <div fxFlex="40%" class="bloque">
           <!--Nombre-->
           <mat-form-field>
             <mat-icon matSuffix aria-label="Side nav toggle icon"  class="icono" >person</mat-icon>
-            <input formControlName = "nombre" matInput placeholder="Nombre" type="text">                
+            <input formControlName = "nombre" matInput placeholder="Nombre" type="text" required>                
             <mat-error *ngIf="formCrearPostulantes.get('nombre').errors && formCrearPostulantes.get('nombre').touched">
               <p *ngIf=" formCrearPostulantes.get('nombre').hasError('required')">Campo Requerido</p>
               <p *ngIf=" formCrearPostulantes.get('nombre').hasError('pattern')">Ingrese solo Letras</p>
@@ -42,16 +57,16 @@
             <input formControlName = "mail" matInput placeholder="Correo Electronico" type="email" required>
             <mat-error *ngIf="formCrearPostulantes.get('mail').errors && formCrearPostulantes.get('mail').touched">
               <p *ngIf=" formCrearPostulantes.get('mail').hasError('required')">Campo Requerido</p>
-              <p *ngIf=" formCrearPostulantes.get('mail').hasError('email')">Correo No Valido</p>
+              <p *ngIf=" formCrearPostulantes.get('mail').hasError('email')">Correo No Válido</p>
             </mat-error>                
           </mat-form-field>
 
           <!--Documento--> 
           <mat-form-field>
             <mat-icon matSuffix aria-label="Side nav toggle icon"  class="icono">contact_mail</mat-icon>
-            <input formControlName = "documento" matInput placeholder="CI" type="text">
+            <input formControlName = "documento" matInput placeholder="Documento" type="text">
             <mat-error *ngIf="formCrearPostulantes.get('documento').errors && formCrearPostulantes.get('documento').touched"> 
-              <p *ngIf=" formCrearPostulantes.get('documento').hasError('pattern')">Ingrese solo numeros</p>
+              <p *ngIf=" formCrearPostulantes.  get('documento').hasError('pattern')">Ingrese solo números</p>
             </mat-error>              
           </mat-form-field>
           
@@ -69,19 +84,20 @@
           <mat-select formControlName = "genero" placeholder="Genero">
             <mat-option value="Masculino">Masculino</mat-option>
             <mat-option value="Femenino">Femenino</mat-option>
+            <mat-option value="Otro">Otro</mat-option>
           </mat-select>
         </mat-form-field>    
   
       </div>
 
-      <!--DATOS ADJUNTOS-->
+      <!--Bloque 2-->
       <div fxFlex="40%" class="bloque">    
         <!--Fecha Nacimiento-->
         <mat-form-field>
-          <input formControlName = "fecha_nac" matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Fecha de Nacimiento">
+          <input formControlName = "fechaDeNacimiento" matInput [matDatepicker]="picker" placeholder="Fecha de Nacimiento" >
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
+          <mat-datepicker #picker disabled="false"></mat-datepicker>
+        </mat-form-field> 
 
         <!--Direccion-->
         <mat-form-field>
@@ -94,47 +110,54 @@
         
         <!--Estado-->
         <mat-form-field>
-          <mat-select formControlName = "estado" placeholder="Estado">
-            <mat-option value="Desafio Pendiente">Desafio Pendiente</mat-option>
-            <mat-option value="Desafio Revisado">Desafio Revisado</mat-option>
-            <mat-option value="Entrevista Administrador">Entrevista Administrador</mat-option>
-            <mat-option value="Entrevista Team">Entrevista Team</mat-option>
-            <mat-option value="Aprobado">Aprobado</mat-option>
-            <mat-option value="Rechazado">Rechazado</mat-option>
+          <mat-select formControlName = "estado" placeholder="Estado" >
+            <mat-option value="1">Desafio Pendiente</mat-option>
+            <mat-option value="2">Desafio Recibido</mat-option>
+            <mat-option value="3">Desafio Revisado</mat-option>
+            <mat-option value="4">Entrevista Administrador</mat-option>
+            <mat-option value="5">Entrevista SM</mat-option>
+            <mat-option value="6">Entrevista Team</mat-option>
+            <mat-option value="7">Aprobado</mat-option>
+            <mat-option value="8">Rechazado</mat-option>
           </mat-select>
         </mat-form-field>  
         
-        <!--curriculum-->
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Subir CV" disabled value="">
-          <label matPrefix ><mat-icon class="icono">get_app</mat-icon></label>
-          <label matSuffix for="curriculum"><mat-icon class="icono">attach_file</mat-icon></label>
-          <label matSuffix ><mat-icon class="icono">clear</mat-icon></label>
+        <!--subir cv-->
+        <mat-form-field >
+          <label for="cvInput"><input matInput placeholder="Subir CV" disabled [value]="cvName"></label>
+          <label matPrefix ><mat-icon matTooltip="Descargar archivo"  class="icono">get_app</mat-icon></label>
+          <label matSuffix for="cvInput" *ngIf="!isLoadingCV&&!cvName"><mat-icon matTooltip="Subir archivo" class="icono">attach_file</mat-icon></label>
+          <label matSuffix *ngIf="isLoadingCV" ><mat-spinner diameter=20></mat-spinner></label>
+          <label matSuffix *ngIf="!isLoadingCV&&cvName" (click)="vaciarInputCV()"><mat-icon  matTooltip="Eliminar archivo" class="icono">clear</mat-icon></label>
+          <mat-hint *ngIf="errorCV">
+            <p *ngIf="!errorCVPesado">No se ha podido subir el archivo. Error en el servidor</p>
+            <p *ngIf="errorCVPesado">El tamaño maximo por archivo es de 1MB</p>
+          </mat-hint>
         </mat-form-field>
-        <input type="file" id="curriculum">
-
-        <!--desafio-->
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Subir CV" disabled value="">
-          <label matPrefix ><mat-icon class="icono">get_app</mat-icon></label>
-          <label matSuffix for="desafio"><mat-icon class="icono">attach_file</mat-icon></label>
-          <label matSuffix ><mat-icon class="icono">clear</mat-icon></label>
-        </mat-form-field>
-        <input type="file" id="desafio">
-        
+        <input type="file" id="cvInput" class="inputFile"  #curriculumInput (change)="cargarCV()">
+ 
+        <!--subir desafio-->
+        <mat-form-field>
+          <input matInput placeholder="Subir Desafio" disabled [value]="desafioName">   
+          <label matPrefix ><mat-icon matTooltip="Descargar archivo" class="icono">get_app</mat-icon></label>
+          <label matSuffix for="desafioInput" *ngIf="!isLoadingDesafio&&!desafioName"><mat-icon matTooltip="Subir archivo" class="icono">attach_file</mat-icon></label>
+          <label matSuffix for="desafioInput" *ngIf="isLoadingDesafio" ><mat-spinner diameter=20></mat-spinner></label>
+          <label matSuffix *ngIf="!isLoadingDesafio&&desafioName" (click)="vaciarInputDesafio()"><mat-icon matTooltip="Eliminar archivo" class="icono">clear</mat-icon></label>
+          <mat-error *ngIf="errorDesafio">
+              <p *ngIf="!errorDesafioPesado">No se ha podido subir el archivo. Error en el servidor</p>
+              <p *ngIf="errorDesafioPesado">El tamaño maximo por archivo es de 1sMB</p>
+          </mat-error>
+          </mat-form-field>
+          <input type="file" id="desafioInput"  class="inputFile" #desafioInput (change)="cargarDesafio()">
+      
         <!--comentario-->
         <mat-form-field>
-          <textarea matInput placeholder="Comentario"></textarea>
+          <textarea formControlName="comentario" matInput placeholder="Comentario"></textarea>
         </mat-form-field>
-
-      </div> 
-
-      <!--botones-->
-      <mat-action-row fxLayout="row" class="botones">
-        <button type="button" mat-stroked-button color="primary" (click)="volverAlListado()">Cancelar</button>
-        <button type="submit" mat-raised-button [disabled]="formCrearPostulantes.invalid">Guardar</button>
-      </mat-action-row>
-      
+      </div>   
   </div>
-  
+  <div style='height:100px'></div>   
+    <!--botones-->
+    <button  type="submit" mat-raised-button mat-fab [disabled]="formCrearPostulantes.invalid || enviandoCambios" class="mine natura-button-1"><mat-icon>save</mat-icon></button>
+
 </form>
