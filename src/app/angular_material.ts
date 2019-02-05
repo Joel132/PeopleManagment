@@ -20,6 +20,7 @@ import {MatNativeDateModule,MatSnackBarModule,MatDialogModule ,
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSliderModule} from '@angular/material/slider';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 
@@ -38,7 +39,7 @@ import {MatSliderModule} from '@angular/material/slider';
     MatButtonModule, MatCheckboxModule,MatInputModule,
     MatCardModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatMenuModule,
     MatDividerModule, MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, TextFieldModule,
-    MatExpansionModule
+    MatExpansionModule, MatTooltipModule
     
   ],
   
@@ -52,7 +53,7 @@ import {MatSliderModule} from '@angular/material/slider';
       MatButtonModule, MatCheckboxModule,MatInputModule,
       MatCardModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatMenuModule,
       MatDividerModule, MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, TextFieldModule,
-      MatExpansionModule
+      MatExpansionModule, MatTooltipModule
       
   ]
 

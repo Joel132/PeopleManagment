@@ -64,8 +64,8 @@ table {
 }
 
 .foto{
-  height: 200px;
-  width: 200px;
+  height: 350px;
+  width: 350px;
 }
 
 .comen{
@@ -73,4 +73,26 @@ table {
   text-align: justify;
   align-content: center;
   margin: auto;
+}
+
+  .icono{
+    width:10px; 
+    height:15.35px;
+    color:rgba(0, 0, 0, 0.54);
+  }
+
+.tag{
+  width: 180px;
+}
+
+.fabButton{
+  position: fixed;
+  bottom: 40px;
+  right: 20px;
+  z-index: 1;
+}
+
+a:visited{
+  color:purple;
+  text-decoration: none;
 }

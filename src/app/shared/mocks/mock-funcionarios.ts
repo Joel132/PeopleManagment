@@ -15,7 +15,9 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         contraseña:'',
         rol:'admin',
         curriculum:'',
-        estado:'activo',
-        id: 1
+        activo:true,
+        id: 1,
+        nombreRol:'',
+        estado: '',
     }
 ];

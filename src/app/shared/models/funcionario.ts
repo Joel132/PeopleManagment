@@ -20,7 +20,9 @@ export class Funcionario {
         public rol:string,
         public curriculum:string,
         public estado:string,
-        public id:number
+        public id:number,
+        public nombreRol: string,
+        public activo: boolean,
     ) {}
 }
 

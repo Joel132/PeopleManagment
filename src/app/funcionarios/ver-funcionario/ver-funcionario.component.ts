@@ -1,7 +1,13 @@
 import { Funcionario } from './../../shared/models/funcionario';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { RecibirFuncionarioService } from 'src/app/shared/helpers/recibir-funcionario.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FuncionarioService } from 'src/app/shared/helpers/funcionario.service';
+import { ModalComponent } from 'src/app/funcionarios/ver-funcionario/modal/modal.component';
+import { MatDialog } from '@angular/material';
+
+/*
+*Componente Ver Funcionario
+*/
 
 @Component({
   selector: 'app-ver-funcionario',
@@ -9,32 +15,63 @@ import { RecibirFuncionarioService } from 'src/app/shared/helpers/recibir-funcio
   styleUrls: ['./ver-funcionario.component.css']
 })
 export class VerFuncionarioComponent implements OnInit {
-  step = 0;
-  usuarios: Funcionario;
+  usuario: Funcionario;
+  est: string;
 
-  setStep(index: number) {
-    this.step = index;
-  }
 
-  nextStep() {
-    this.step++;
-  }
+  constructor(private usuariosService: FuncionarioService, private route: ActivatedRoute, private router: Router, public dialog: MatDialog) { }
 
-  prevStep() {
-    this.step--;
-  }
-
-  
-  constructor(private usuariosService: RecibirFuncionarioService, private route: ActivatedRoute) { }
+  /*
+  * Pasa los datos de la lista al metodo getFuncionario()
+  */
 
   ngOnInit() {
-    this.getFuncionario();
+    if (this.getFuncionario()) {
+      this.openDialog();
+    }
   }
 
-  
-  getFuncionario(){
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.usuariosService.getFuncionario(id).subscribe(data => {this.usuarios = data;console.log("hola",this.usuarios)});
-}
+  /*
+  * @param id contiene el identificador del usuario
+  * @param usuarios {Funcionario} Datos del Funcionario
+  */
 
-}
+  getFuncionario(): boolean {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.usuariosService.getFuncionario(id).subscribe(
+      data => {
+        this.usuario = data;
+        if (data.rol == 'user1') {
+          this.usuario.nombreRol = 'Administrador';
+        } else if (data.rol == 'user2') {
+          this.usuario.nombreRol = 'Scrum Master';
+        } else {
+          this.usuario.nombreRol = 'Funcionario';
+        }
+        if (data.activo == true) {
+          this.usuario.estado = 'Activo';
+        } else {
+          this.usuario.estado = 'Ex-Funcionario';
+        }
+        if (!data) {
+          return true;
+        }
+      });
+    }
+
+    openDialog(): void {  
+      const dialogRef = this.dialog.open(ModalComponent, {
+        width: '450px',
+        data: { est: this.est }
+      });
+    }
+
+    /*
+    * Utiliza el Router para redireccionar a la lista de Funcionarios
+    */
+
+    editarFuncionario(id: number){
+      this.router.navigate(['/usuarios/editar/' + id]);
+    }
+
+  }

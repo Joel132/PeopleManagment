@@ -24,6 +24,7 @@ import { EditarFuncionariosComponent } from './funcionarios/editar-funcionarios/
 import { VerFuncionarioComponent } from './funcionarios/ver-funcionario/ver-funcionario.component';
 import { VerPostulanteComponent } from './postulantes/ver-postulante/ver-postulante.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ModalComponent } from './funcionarios/ver-funcionario/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -37,9 +38,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ListarFuncionariosComponent,
     EditarFuncionariosComponent,
     VerFuncionarioComponent,
-    VerPostulanteComponent
+    VerPostulanteComponent,
+    ModalComponent
 
   ],
+  entryComponents: [ModalComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
