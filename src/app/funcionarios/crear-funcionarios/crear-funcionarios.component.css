@@ -22,11 +22,20 @@ css para forms*/
 .example-container.ex  {
   display: flex;
   flex-direction: column;
+
   
 }
 
 .example-container > * {
   width: 100%;
+  margin: 10px;
+}
+/*cursor pointer*/
+.cursor{
+  cursor:pointer;
+  width:10px; 
+  height:18.35px;
+  color:rgba(0, 0, 0, 0.54);
 }
 
 /*
@@ -36,6 +45,7 @@ img {
   width: 100%;
   border-radius: 50%;
 }
+
 .hoverable{
   position: relative;
   display: block;
@@ -44,6 +54,7 @@ img {
   width: 200px;
   border-radius: 50%;
 }
+
 .hoverable .hover-text{
   position: absolute;
   display: none;

@@ -49,7 +49,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ReactiveFormsModule, LayoutModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, 
     AppRoutingModule,
     HttpClientModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+
   ],
   providers: [fakeBackendProvider, AgregarPostulanteService,AgregarFuncionarioService],
   bootstrap: [AppComponent]

@@ -1,13 +1,11 @@
 import { Funcionario } from './../../shared/models/funcionario';
 import {FormControl, FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { EnviarArchivoService } from 'src/app/shared/helpers/enviar-archivo.service';
 import { PasswordValidation } from './../../shared/models/password-validators';
 import { AgregarFuncionarioService } from '../../shared/helpers/agregar-funcionario.service';
 import { Router } from '@angular/router';
-
-
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-crear-funcionarios',
@@ -89,39 +87,101 @@ export class CrearFuncionariosComponent implements OnInit {
   public error: 'Archivo pesado'|'Error en el servidor'|'';
 
   /**
-   * Atributos para validar la fecha de Nacimiento
+   * Atributos para validar la fecha de Nacimiento, no puede ser un funcionario mayor a 90 anhos
    */
   minDate = new Date(1930, 0, 1);
   maxDate = new Date(2040, 0, 1);
+  minDateInicio = new Date(2000,0,1);
+  maxDateInicio = new Date(2030,0,1);
+  minDateVencimiento = new Date();
+  maxDateVencimiento = new Date(2040,0,1);
   fileSelectMsg: string = 'No file selected yet.';
   fileUploadMsg: string = 'No file uploaded yet.';
   disabled: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private enviarArchivo: EnviarArchivoService,
-  private servicioAgregar: AgregarFuncionarioService, private router: Router
-  ) { }
   /**
-   * ocultar password
+   * constructor
+   */
+  constructor(private formBuilder: FormBuilder, private enviarArchivo: EnviarArchivoService,
+    private servicioAgregar: AgregarFuncionarioService, private router: Router,public snackBar: MatSnackBar
+  ) { }
+  
+  /**
+   * atributos boolean, para ocultar caracteres en el  password form
    */
   hide:boolean= true;
   hide2:boolean=true;
+  errorSnack: boolean= false;
+
+    /**
+   * Utiliza un SnackBar para informar al usuario que creó correctamente un postulante
+   * @param data {Postulante} Datos del postulante
+   */
+  recibidoCorrectamente(data: Funcionario){
+    console.log("Creado "+data);
     
+      this.formCrearFuncionario.reset();
+      this.openSnackBar("Funcionario creado exitosamente.","Ver Perfil",data.idUsuario);
+    
+    
+      
+    
+  }
+
+  /**
+   * Genera el SnackBar con el mensaje recibido como parámetro y redirecciona a la lista de postulantes
+   * @param message {string} Mensaje de éxito
+   * @param action {string} Acción utilizada: cerrar
+  */
+  
+ 
+  openSnackBar(message: string, action: string,id:number) {
+    let snack=this.snackBar.open(message, action, {
+    duration: 4000,
+  });
+  snack.onAction().subscribe(()=>{
+    
+    this.router.navigate(['/funcionario/ver/'+id]);
+    console.log("detecte");
+  
+    });
+  }
+ 
+
+  openSnackBarError(message: string, action: string) {
+    let snack=this.snackBar.open(message, action, {
+      duration: 4000,
+    });
+    snack.onAction().subscribe(()=>{
+      
+      this.router.navigate(['/funcionario']);
+      console.log("detecte");
+    
+      });
+  }
+
+
+
+
+
+
+
   ngOnInit() {
     this.formCrearFuncionario = this.formBuilder.group({
         idUsuario: new FormControl(0),
         fotoUrl:new FormControl(''),
-        nombre: new FormControl('', [Validators.required]),
-        apellido:new FormControl('', [Validators.required]),  
-        documento:new FormControl(''),
-        genero: new FormControl(''),
-        beneficiario:new FormControl(''),
+        nombre: new FormControl('', [Validators.required,Validators.pattern('[/a-zA-Z ]*')]),
+        apellido:new FormControl('', [Validators.required,Validators.pattern('[/a-zA-Z ]*')]),
+        documento:new FormControl('',  [Validators.minLength(6), Validators.pattern('[0-9]*')]),
+        genero: new FormControl('Otros'),
+        beneficiario:new FormControl('', [Validators.pattern('[/a-zA-Z ]*')]),
         email:  new FormControl('', [Validators.required, Validators.email]),
         direccion: new FormControl(''),
-        celular: new FormControl(''),
-        fechaInicio:new FormControl(),
-        fechaVencimiento:new FormControl(),
-        fechaDeNacimiento: new FormControl(),
-        usuario:new FormControl(''),
+        celular: new FormControl('',[Validators.maxLength(13), Validators.pattern('[0-9\+\]+')]),
+        fechaInicio:new FormControl({value:'',disabled:true}),
+        fechaVencimiento:new FormControl({value:'',disabled:true}),
+        fechaDeNacimiento: new FormControl({value:'',disabled:true}),
+        usuario:new FormControl('',[Validators.pattern('^[a-z0-9_-]{4,15}$')]),
         rol:new FormControl('user3'),
         curriculumUrl:new FormControl(),
         desafioUrl:new FormControl(''),
@@ -146,14 +206,9 @@ export class CrearFuncionariosComponent implements OnInit {
   }
 
 
-  recibidoCorrectamente(data: Funcionario){
-    console.log("Funcionario Creado :)"+data);
-    this.formCrearFuncionario.reset();
-  }
-
 
   errorRecibido(error){
-
+    this.openSnackBarError("Se ha producido un error.","Volver al listado");
   }
 
  /**
@@ -167,8 +222,8 @@ export class CrearFuncionariosComponent implements OnInit {
 
     
   getErrorEmailMessage() {
-    return (this.formCrearFuncionario.get("email") as (FormControl)).hasError('required') ? 'You must enter a value' :
-        (this.formCrearFuncionario.get("email") as (FormControl)).hasError('email') ? 'Not a valid email' :'';
+    return (this.formCrearFuncionario.get("email") as (FormControl)).hasError('required') ? 'Campo Requerido' :
+        (this.formCrearFuncionario.get("email") as (FormControl)).hasError('email') ? 'No es un email valido' :'';
           //return this.formEditarPostulante.errors;
   } 
 

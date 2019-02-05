@@ -13,16 +13,12 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {TextFieldModule} from '@angular/cdk/text-field'
 import {MatSelectModule} from '@angular/material/select';
-import {MatNativeDateModule,MatSnackBarModule,MatDialogModule , 
-  MatTabsModule, 
-   MatProgressSpinnerModule} from '@angular/material';
-
+import {MatNativeDateModule,MatSnackBarModule,MatDialogModule,MatTabsModule, MatProgressSpinnerModule} from '@angular/material';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTooltipModule} from '@angular/material/tooltip';
-
 
 
 
@@ -39,8 +35,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatButtonModule, MatCheckboxModule,MatInputModule,
     MatCardModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatMenuModule,
     MatDividerModule, MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, TextFieldModule,
-    MatExpansionModule,MatTooltipModule
-    
+    MatExpansionModule,MatTooltipModule  
   ],
   
   
