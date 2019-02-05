@@ -5,6 +5,7 @@ import {StorageService} from "../shared/helpers/storage.service";
 import {Router} from "@angular/router";
 import {LoginObject} from "../shared/models/login";
 import {Session} from "../shared/models/session";
+import {JwtService} from "../shared/helpers/jwt.service";
 /**
  * Login Component
  * 
@@ -30,7 +31,8 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private authenticationService: AuthenticationService,
               private storageService: StorageService,
-              private router: Router) { }
+              private router: Router,
+              private jwt: JwtService) { }
 
   /**
    * Se inicializa el form con valores vacios por defecto
@@ -63,9 +65,12 @@ export class LoginComponent implements OnInit {
    * @param {Session} data atributo que representa el response del servidor
    */
   private correctLogin(data: Session){
-    data.rol=1;
+    let token = this.jwt.decode(data.accessToken);
+
+    data.id = token.sub;
+    data.rol = token.scopes;
     this.storageService.setCurrentSession(data);
-    this.router.navigate(['/home']);
+    this.router.navigate(['/']);
   }
 
 }

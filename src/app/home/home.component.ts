@@ -6,6 +6,8 @@ import {AuthenticationService} from "../shared/helpers/authentication.service";
 import {StorageService} from "../shared/helpers/storage.service";
 import { Router } from '@angular/router';
 import { ObtenerTituloService } from '../shared/helpers/obtener-titulo.service';
+import { FuncionarioService } from '../shared/helpers/funcionario.service';
+import { Funcionario } from '../shared/models/funcionario';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +21,8 @@ import { ObtenerTituloService } from '../shared/helpers/obtener-titulo.service';
  */
 export class HomeComponent implements OnInit{
   public titulo_componente: string;
+  private funcionario: Funcionario;
+  private url: string = '';
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
@@ -33,9 +37,33 @@ export class HomeComponent implements OnInit{
   constructor(private breakpointObserver: BreakpointObserver,
     private storageService: StorageService,
     private authenticationService: AuthenticationService,
-    public tituloService: ObtenerTituloService){}
+    public tituloService: ObtenerTituloService,
+    private funcionarioService: FuncionarioService) { }
 
-  ngOnInit(): void {  }
+    /**
+     * Metodo ngOnInit
+     * En el metodo ngOnInit, que se carga cada vez que inicia el componente 
+     * obtiene los datos del funcionario que inicio sesion y asigna su rol y su id
+     * a la sesion 
+     */
+
+    ngOnInit(){
+      this.funcionarioService.getFuncionario(this.storageService.getCurrentId())
+      .subscribe(
+        data => {
+          this.funcionario=data;
+          if(data.rol == 'user1'){
+            this.funcionario.nombreRol='Administrador';
+          }else if(data.rol == 'user2'){
+            this.funcionario.nombreRol='Scrum Master';
+          }else{
+            this.funcionario.nombreRol='Funcionario';
+          }
+        }
+      );
+    }
+
+  
     /**
      * Realiza un request para cerrar sesión y elimina la sesión
      */
@@ -44,6 +72,4 @@ export class HomeComponent implements OnInit{
       response => {if(response) {this.storageService.logout();}}
     );
   }
-            
- 
 }

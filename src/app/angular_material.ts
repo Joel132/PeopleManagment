@@ -1,29 +1,42 @@
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatCheckboxModule,MatInputModule,MatButtonModule, MatOptionModule, MatGridListModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule,MatCardModule} from '@angular/material';
+import {TextFieldModule} from '@angular/cdk/text-field';
 import { NgModule } from '@angular/core';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatTableModule} from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSortModule} from '@angular/material/sort';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {TextFieldModule} from '@angular/cdk/text-field'
-import {MatSelectModule} from '@angular/material/select';
-import {MatNativeDateModule,MatSnackBarModule,MatDialogModule,MatTabsModule,MatProgressSpinnerModule} from '@angular/material';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatSliderModule} from '@angular/material/slider';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import {
+  MatCheckboxModule,
+  MatInputModule,
+  MatButtonModule,
+  MatOptionModule, 
+  MatGridListModule, 
+  MatToolbarModule, 
+  MatSidenavModule, 
+  MatIconModule, 
+  MatListModule,
+  MatCardModule,
+  MatMenuModule,
+  MatDividerModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatFormFieldModule,
+  MatSelectModule,
+  MatNativeDateModule,
+  MatSnackBarModule,
+  MatDialogModule, 
+  MatTabsModule, 
+  MatProgressSpinnerModule,
+  MatDatepickerModule,
+  MatRadioModule,
+  MatSliderModule,
+  MatTooltipModule,
+  MatExpansionModule,
+  MatRippleModule,
+  MatProgressBarModule} from '@angular/material';
 
-//editar_postulante
-import {MatRippleModule} from '@angular/material/core';
+
+
+
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-//import { MatFileUploadModule } from 'angular-material-fileupload';
-import { MatFileUploadModule } from 'angular-material-fileupload';
-//import {MatFileUploadModule} from '@webacad/ng-mat-file-upload';
-//import {MatFileUploadModule} from '@webacad/ng-mat-file-upload';
+
 
 // other imports
 @NgModule({
@@ -59,8 +72,8 @@ import { MatFileUploadModule } from 'angular-material-fileupload';
     FlexLayoutModule, 
     MatExpansionModule,
     MatProgressBarModule, 
-    MatFileUploadModule,
-    MatTooltipModule
+    MatTooltipModule,
+    LayoutModule
   ],
   
   
@@ -95,11 +108,11 @@ import { MatFileUploadModule } from 'angular-material-fileupload';
       MatRippleModule,
       FlexLayoutModule, 
       MatExpansionModule,
-      MatProgressBarModule, 
-      MatFileUploadModule,
-      MatTooltipModule
+      MatProgressBarModule,
+      MatTooltipModule,
+      LayoutModule
       ]
+    })
 
 
-})
 export class MaterialModule { }

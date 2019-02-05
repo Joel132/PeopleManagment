@@ -19,22 +19,15 @@ export class AuthorizatedGuard implements CanActivate, CanActivateChild {
  * Permite el acceso al Scrum Master y al Adminitrador a ciertas rutas.
  */
 canActivate() {
-  
-    console.log(this.storageService.isAuthenticated());
+
+    // logeado entonces devuelve true 
     if (this.storageService.isAuthenticated() ) {
-    // logged in y es administrador o scrum master so return true 
       return true;
     }
 
-  // not logged in so redirect to login page
+    // no está logeado entonces redirige a la pagina del login y devuelve false
       else if(!this.storageService.isAuthenticated()){
       this.router.navigate(['/login']);
-      return false;
-    }
-
-    // no es admin ni scrum master
-    else{
-      this.router.navigate(['/']);
       return false;
     }
   }
@@ -43,15 +36,15 @@ canActivate() {
    * Permite el acceso al Scrum Master y al Adminitrador a ciertas rutas hijas.
    */
   canActivateChild(){
-    console.log(21321);
-    if (this.storageService.isAuthenticated() && (this.storageService.getCurrentRol() == 1 ||this.storageService.getCurrentRol() == 2)) {
-      // logged in y es administrador o scrum master so return true 
+    // logeado y es administrador o scrum master entonces devuelve true 
+    console.log("Esta autenticado: ", this.storageService.isAuthenticated());
+    console.log("Su rol es: ", this.storageService.getCurrentRol())
+    if (this.storageService.isAuthenticated() && (this.storageService.getCurrentRol() == 'user1' || this.storageService.getCurrentRol() == 'user2')) {
       
-        return true;
-      }
-      else{
-        console.log(21321);
+      return true;
+    }else{
+        this.router.navigate(['/']);
         return false;
-      }
+    }
   }
 }

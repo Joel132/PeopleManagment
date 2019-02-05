@@ -21,7 +21,8 @@ export class Funcionario {
         public rol:string,
         public curriculum:string,
         public activo:boolean,
-        public nombre_estado: string
+        public nombre_estado: string,
+        public nombreRol:string
     ) {}
 }
 

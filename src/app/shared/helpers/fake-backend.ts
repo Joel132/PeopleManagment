@@ -9,6 +9,7 @@ import { RESPUESTA_POSTULANTES } from '../mocks/mock-response-postulantes';
 import { POSTULANTES } from "../mocks/mock-postulantes";
 import { RESPUESTA_FUNCIONARIOS } from '../mocks/mock-response-funcionarios';
 import { FUNCIONARIOS } from '../mocks/mock-funcionarios';
+import { RESPUESTA_FUNCIONARIO } from '../mocks/mock-response-funcionario';
 
 @Injectable(
   {providedIn: 'root'}
@@ -61,11 +62,19 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         POSTULANTES.push(request.body);
         return of(new HttpResponse({status: 200, body: request.body}));
       }
+
+      //Fake response para traer un usuario unico con los campos faltantes en el backend
+      if(request.url.includes("/api/v1/usuario/1") && request.method === 'GET' ){
+        return of(new HttpResponse({status: 200, body: RESPUESTA_FUNCIONARIO}));
+      }
+
       //Fake response para listar usuarios con los campos faltantes en el backend
        if(request.url.includes("/api/v1/usuario") && request.method === 'GET' ){
         return of(new HttpResponse({status: 200, body: RESPUESTA_FUNCIONARIOS}));
       } 
       
+      
+
       //Fake response para añadir postulantes con los campos faltantes en el backend
       if(request.url.includes("/api/v1/usuario") && request.method === 'POST' ){
         FUNCIONARIOS.push(request.body);

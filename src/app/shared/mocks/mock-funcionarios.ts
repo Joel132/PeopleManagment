@@ -17,7 +17,8 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         rol:'scrum',
         curriculum:'lala',
         activo: true,
-        nombre_estado: 'Funcionario'
+        nombre_estado: 'Funcionario',
+        nombreRol:''
     },
     {
         idUsuario: 1,
@@ -35,7 +36,8 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         rol:'scrum',
         curriculum:'lala',
         activo: false,
-        nombre_estado: 'Funcionario'
+        nombre_estado: 'Funcionario',
+        nombreRol:''
     },
     {
         idUsuario: 1,
@@ -53,7 +55,8 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         rol:'scrum',
         curriculum:'lala',
         activo: true,
-        nombre_estado: 'Funcionario'
+        nombre_estado: 'Funcionario',
+        nombreRol:''
     },
     {
         idUsuario: 1,
@@ -71,7 +74,8 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         rol:'scrum',
         curriculum:'lala',
         activo: false,
-        nombre_estado: 'Funcionario'
+        nombre_estado: 'Funcionario',
+        nombreRol:''
     },
     {
         idUsuario: 1,
@@ -89,7 +93,8 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         rol:'scrum',
         curriculum:'lala',
         activo: true,
-        nombre_estado: 'Funcionario'
+        nombre_estado: 'Funcionario',
+        nombreRol:''
     },
     {
         idUsuario: 1,
@@ -107,7 +112,8 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         rol:'scrum',
         curriculum:'lala',
         activo: true,
-        nombre_estado: 'Funcionario'
+        nombre_estado: 'Funcionario',
+        nombreRol:''
     },
     {
         idUsuario: 1,
@@ -125,7 +131,8 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         rol:'scrum',
         curriculum:'lala',
         activo: false,
-        nombre_estado: 'Funcionario'
+        nombre_estado: 'Funcionario',
+        nombreRol:''
     },
     {
         idUsuario: 1,
@@ -143,7 +150,8 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         rol:'scrum',
         curriculum:'lala',
         activo: true,
-        nombre_estado: 'Funcionario'
+        nombre_estado: 'Funcionario',
+        nombreRol:''
     },
     {
         idUsuario: 1,
@@ -161,7 +169,8 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         rol:'scrum',
         curriculum:'lala',
         activo: true,
-        nombre_estado: 'Funcionario'
+        nombre_estado: 'Funcionario',
+        nombreRol:''
     },
     {
         idUsuario: 1,
@@ -179,7 +188,8 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         rol:'scrum',
         curriculum:'lala',
         activo: false,
-        nombre_estado: 'Funcionario'
+        nombre_estado: 'Funcionario',
+        nombreRol:''
     },
     {
         idUsuario: 1,
@@ -197,7 +207,8 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         rol:'scrum',
         curriculum:'lala',
         activo: true,
-        nombre_estado: 'Funcionario'
+        nombre_estado: 'Funcionario',
+        nombreRol:''
     },
     {
         idUsuario: 1,
@@ -215,7 +226,8 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         rol:'scrum',
         curriculum:'lala',
         activo: true,
-        nombre_estado: 'Funcionario'
+        nombre_estado: 'Funcionario',
+        nombreRol:''
     },
     {
         idUsuario: 1,
@@ -233,7 +245,8 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         rol:'scrum',
         curriculum:'lala',
         activo: false,
-        nombre_estado: 'Funcionario'
+        nombre_estado: 'Funcionario',
+        nombreRol:''
     },
     {
         idUsuario: 1,
@@ -251,7 +264,8 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         rol:'scrum',
         curriculum:'lala',
         activo: true,
-        nombre_estado: 'Funcionario'
+        nombre_estado: 'Funcionario',
+        nombreRol:''
     },
     {
         idUsuario: 1,
@@ -269,7 +283,8 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         rol:'scrum',
         curriculum:'lala',
         activo: true,
-        nombre_estado: 'Funcionario'
+        nombre_estado: 'Funcionario',
+        nombreRol:''
     },
     {
         idUsuario: 1,
@@ -287,7 +302,8 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         rol:'scrum',
         curriculum:'lala',
         activo: false,
-        nombre_estado: 'Funcionario'
+        nombre_estado: 'Funcionario',
+        nombreRol:''
     },
     {
         idUsuario: 1,
@@ -305,7 +321,8 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         rol:'scrum',
         curriculum:'lala',
         activo: true,
-        nombre_estado: 'Funcionario'
+        nombre_estado: 'Funcionario',
+        nombreRol:''
     },
     {
         idUsuario: 1,
@@ -323,7 +340,8 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         rol:'scrum',
         curriculum:'lala',
         activo: false,
-        nombre_estado: 'Funcionario'
+        nombre_estado: 'Funcionario',
+        nombreRol:''
     },
     {
         idUsuario: 1,
@@ -341,7 +359,8 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         rol:'scrum',
         curriculum:'lala',
         activo: false,
-        nombre_estado: 'Funcionario'
+        nombre_estado: 'Funcionario',
+        nombreRol:''
     },
     {
         idUsuario: 1,
@@ -359,6 +378,7 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         rol:'scrum',
         curriculum:'lala',
         activo: true,
-        nombre_estado: 'Funcionario'
+        nombre_estado: 'Funcionario',
+        nombreRol:''
     }
 ];
