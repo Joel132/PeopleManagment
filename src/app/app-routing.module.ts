@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [ AuthorizatedGuard ] , children: 
     [
       {
-        path:'postulante',
+        path:'postulantes',
         canActivateChild: [AuthorizatedGuard],
         children: [
           { path: 'crear', component: CrearPostulanteComponent },

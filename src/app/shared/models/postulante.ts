@@ -22,7 +22,6 @@ export class Postulante {
         public comentarioAdmin: string,
         public comentarioSM: string,
         public comentarioTeam: string
-        
     ) {}
 }
 

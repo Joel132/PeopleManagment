@@ -52,7 +52,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       
       
       //Fake response para listar postulantes con los campos faltantes en el backend
-      if(request.url.includes("/api/v1/postulante") && request.method === 'GET' ){
+      /*if(request.url.includes("/api/v1/postulante") && request.method === 'GET' ){
         return of(new HttpResponse({status: 200, body: RESPUESTA_POSTULANTES}));
       }
       
@@ -60,7 +60,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       if(request.url.includes("/api/v1/postulante") && request.method === 'POST' ){
         POSTULANTES.push(request.body);
         return of(new HttpResponse({status: 200, body: request.body}));
-      }
+      }*/
       //Fake response para listar usuarios con los campos faltantes en el backend
       if(request.url.includes("/api/v1/funcionarios") && request.method === 'GET' ){
         return of(new HttpResponse({status: 200, body: RESPUESTA_FUNCIONARIOS}));

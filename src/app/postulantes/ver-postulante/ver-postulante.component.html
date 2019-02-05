@@ -1,15 +1,212 @@
 <div class="component-view">
-  <mat-tab-group mat-stretch-tabs >
-    <mat-tab label="Datos Personales">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-    </mat-tab>
-    
-    <mat-tab label="Datos Adjuntos">
-      
-    </mat-tab>
-    
-    <mat-tab label="Comentarios"></mat-tab>
-  </mat-tab-group>
+    <div fxLayoutAlign="center" class="mat-typography">
+        <div *ngIf="postulante?.nombre && postulante.apellido; then nombreSi else nombreNo"></div>
+        <ng-template #nombreSi>
+            <h2 mat-line><strong>{{ postulante?.nombre }} {{postulante?.apellido}} </strong></h2>
+        </ng-template>
+        <ng-template #nombreNo>
+            <h2 mat-line class="text-error">No disponible</h2>
+        </ng-template>
+    </div>
+    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2%">
+        <mat-tab-group mat-stretch-tabs fxFlex="70%">
+            <mat-tab label="Datos del Postulante">
+
+                <div fxLayout="row" fxLayout.md="column" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="10%">
+                    <div fxLayout="row">
+                        <mat-list fxLayout="column" fxFlex="50%" class="bloque">
+                            <mat-list-item fxLayout="row">
+                                <mat-icon mat-list-icon color="primary">info</mat-icon>
+                                <p fxLayout fxHide.xs class="tag" mat-line> <strong>Estado: </strong> </p>
+                                <div fxLayout>
+
+                                    <div *ngIf="postulante?.estado; then estadoSi else estadoNo"></div>
+                                    <ng-template #estadoSi>
+                                        <p mat-line>{{estado [postulante?.estado - 1 ] }} </p>
+                                    </ng-template>
+                                    <ng-template #estadoNo>
+                                        <p mat-line class="text-error">No disponible</p>
+                                    </ng-template>
+                                </div>
+                            </mat-list-item>
+                            <mat-list-item fxLayout="row">
+                                <mat-icon mat-list-icon color="primary">picture_in_picture</mat-icon>
+                                <p fxLayout fxHide.xs class="tag" mat-line> <strong>Documento: </strong> </p>
+                                <div fxLayout>
+
+                                    <div *ngIf="postulante?.documento; then documentoSi else documentoNo"></div>
+                                    <ng-template #documentoSi>
+                                        <p mat-line>{{ postulante?.documento }}</p>
+                                    </ng-template>
+                                    <ng-template #documentoNo>
+                                        <p mat-line class="text-error">No disponible</p>
+                                    </ng-template>
+                                </div>
+                            </mat-list-item>
+                            <mat-list-item fxLayout="row">
+                                <mat-icon mat-list-icon color="primary">phone</mat-icon>
+                                <p fxLayout fxHide.xs class="tag" mat-line> <strong>Teléfono: </strong> </p>
+                                <div fxLayout>
+                                    <div *ngIf="postulante?.celular; then telefonoSi else telefonoNo"></div>
+                                    <ng-template #telefonoSi>
+                                        <p mat-line>{{ postulante?.celular }}</p>
+                                    </ng-template>
+                                    <ng-template #telefonoNo>
+                                        <p mat-line class="text-error">No disponible</p>
+                                    </ng-template>
+                                </div>
+                            </mat-list-item>
+
+                            <mat-list-item fxLayout="row">
+                                <mat-icon mat-list-icon color="primary">mail</mat-icon>
+                                <p fxLayout fxHide.xs class="tag" mat-line> <strong>Correo: </strong> </p>
+                                <div fxLayout>
+                                    <div *ngIf="postulante?.mail; then correoSi else correoNo"></div>
+                                    <ng-template #correoSi>
+                                        <p mat-line>{{ postulante?.mail }}</p>
+                                    </ng-template>
+                                    <ng-template #correoNo>
+                                        <p mat-line class="text-error">No disponible</p>
+                                    </ng-template>
+                                </div>
+                            </mat-list-item>
+
+                            <mat-list-item fxLayout="row">
+                                <mat-icon mat-list-icon color="primary">location_on</mat-icon>
+                                <p fxLayout fxHide.xs class="tag" mat-line> <strong>Dirección: </strong> </p>
+                                <div fxLayout>
+                                    <div *ngIf="postulante?.direccion; then direccionSi else direccionNo"></div>
+                                    <ng-template #direccionSi>
+                                        <p mat-line>{{ postulante?.direccion }}</p>
+                                    </ng-template>
+                                    <ng-template #direccionNo>
+                                        <p mat-line class="text-error">No disponible</p>
+                                    </ng-template>
+                                </div>
+                            </mat-list-item>
+
+                            <mat-list-item fxLayout="row">
+                                <mat-icon mat-list-icon color="primary">cake</mat-icon>
+                                <p fxLayout fxHide.xs class="tag" mat-line> <strong>Fecha de Nacimiento: </strong> </p>
+                                <div fxLayout>
+                                    <div *ngIf="postulante?.fechaDeNacimiento; then fechaSi else fechaNo"></div>
+                                    <ng-template #fechaSi>
+                                        <p mat-line>{{ postulante?.fechaDeNacimiento| date:'longDate'}}</p>
+                                    </ng-template>
+                                    <ng-template #fechaNo>
+                                        <p mat-line class="text-error">No disponible</p>
+                                    </ng-template>
+                                </div>
+                            </mat-list-item>
+
+                            <mat-list-item fxLayout="row">
+                                <mat-icon mat-list-icon color="primary">wc</mat-icon>
+                                <p fxLayout fxHide.xs class="tag" mat-line> <strong>Género: </strong> </p>
+                                <div fxLayout>
+                                    <div *ngIf="postulante?.genero; then generoSi else generoNo"></div>
+                                    <ng-template #generoSi>
+                                        <p mat-line>{{ postulante?.genero}}</p>
+                                    </ng-template>
+                                    <ng-template #generoNo>
+                                        <p mat-line class="text-error">No disponible</p>
+                                    </ng-template>
+                                </div>
+                            </mat-list-item>
+
+                        </mat-list>
+
+                    </div>
+
+                </div>
+            </mat-tab>
+
+            <mat-tab label="Comentarios">
+
+                <div fxLayout="row" fxLayoutGap="5%" fxLayout.xs="column">
+                    <div fxLayout="column" fxFlex="50%">
+
+                        <div>
+                            <h4 mat-line> <strong>Desafío: </strong> </h4>
+                            <div mat-line *ngIf="postulante?.comentarioDesafio; then comentarioDesafioSi else comentarioDesafioNo"></div>
+                            <ng-template #comentarioDesafioSi>
+                                <p mat-line>{{ postulante?.comentarioDesafio }}</p>
+                            </ng-template>
+                            <ng-template #comentarioDesafioNo>
+                                <p mat-line class="text-error">No disponible</p>
+                            </ng-template>
+
+                        </div>
+                        <div>
+                            <h4 mat-line> <strong>Administrador: </strong> </h4>
+                            <div mat-line *ngIf="postulante?.comentarioAdmin; then comentarioAdminSi else comentarioAdminNo"></div>
+                            <ng-template #comentarioAdminSi>
+                                <p mat-line>{{ postulante?.comentarioAdmin }}</p>
+                            </ng-template>
+                            <ng-template #comentarioAdminNo>
+                                <p mat-line class="text-error">No disponible</p>
+                            </ng-template>
+                        </div>
+                    </div>
+
+                    <div fxLayout="column" fxFlex="50%">
+                        <div>
+                            <h4 mat-line> <strong>Scrum Master: </strong> </h4>
+                            <div mat-line *ngIf="postulante?.comentarioAdmin; then comentarioAdminSi else comentarioAdminNo"></div>
+                            <ng-template #comentarioAdminSi>
+                                <p mat-line>{{ postulante?.comentarioAdmin }}</p>
+                            </ng-template>
+                            <ng-template #comentarioAdminNo>
+                                <p mat-line class="text-error">No disponible</p>
+                            </ng-template>
+                        </div>
+                        <div>
+                            <h4 mat-line> <strong>Equipo: </strong> </h4>
+                            <div mat-line *ngIf="postulante?.comentarioTeam; then comentarioTeamSi else comentarioTeamNo"></div>
+                            <ng-template #comentarioTeamSi>
+                                <p mat-line>{{ postulante?.comentarioTeam }}</p>
+                            </ng-template>
+                            <ng-template #comentarioTeamNo>
+                                <p mat-line class="text-error">No disponible</p>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+
+
+            <mat-tab label="Aptitudes">
+
+
+            </mat-tab>
+        </mat-tab-group>
+        <div fxFlex="30%" class="mat-typography">
+            <h3 mat-line> <strong>Comentario General: </strong> </h3>
+            <div mat-line *ngIf="postulante?.comentario; then comentarioSi else comentarioNo"></div>
+            <ng-template #comentarioSi>
+                <p mat-line>{{ postulante?.comentario }}</p>
+            </ng-template>
+            <ng-template #comentarioNo>
+                <p mat-line class="text-error">No disponible</p>
+            </ng-template>
+            <div fxLayout="column">
+                <h3 mat-line> <strong>Archivos: </strong> </h3>
+                <div fxLayout="row" fxLayoutAlign="start">
+                    <button fxLayout mat-stroked-button color="accent">
+                        <mat-icon>get_app</mat-icon>Desafío
+                    </button>
+                    <button fxLayout mat-stroked-button color="accent">
+                        <mat-icon>get_app</mat-icon>Currículum
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div style="height: 100px"></div>
+    <div>
+        <button mat-fab class="fabButton natura-button-1" (click)="editarPostulante(postulante.id)" matTooltip="Editar Perfil">
+            <mat-icon>create</mat-icon>
+        </button>
+    </div>
+
 </div>
-
-
