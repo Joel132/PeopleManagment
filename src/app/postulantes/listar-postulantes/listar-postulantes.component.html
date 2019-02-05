@@ -26,7 +26,7 @@
   <!--Tabla Postulantes-->
   
   <table mat-table [dataSource]="dataSource" matSort>
-  
+    <span style="background: fuchsia">
       <!-- Columna Foto -->
       <ng-container matColumnDef="foto">
           <th mat-header-cell *matHeaderCellDef> Perfil </th>
@@ -62,9 +62,9 @@
       <!-- Columna Estado -->
       <ng-container matColumnDef="estado">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
-          <td mat-cell *matCellDef="let element"> {{element.estado}} </td>
+          <td mat-cell *matCellDef="let element"> {{estadosPostulante[element.estado-1]}} </td>
       </ng-container>
-
+    </span>
       <!-- Columna Accion -->
       <ng-container matColumnDef="accion">
               <th mat-header-cell *matHeaderCellDef> Acción </th>

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { EditarPostulanteService } from 'src/app/shared/helpers/editar-postulante.service';
 import { Postulante } from 'src/app/shared/models/postulante';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Validators,FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { RecibirPostulanteService } from 'src/app/shared/helpers/recibir-postulante.service';
 import { EnviarArchivoService } from 'src/app/shared/helpers/enviar-archivo.service';
@@ -98,12 +98,14 @@ export class EditarPostulanteComponent implements OnInit {
   fileUploadMsg: string = 'No file uploaded yet.';
   disabled: boolean = false;
 
+  public enviandoCambios: boolean=false;
   constructor(private formBuilder: FormBuilder, 
     private route: ActivatedRoute,
     private editarServicio: EditarPostulanteService, 
     private recibirPostulante: RecibirPostulanteService,
     private enviarArchivo: EnviarArchivoService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
     ) { }
 
   ngOnInit() {
@@ -121,6 +123,7 @@ export class EditarPostulanteComponent implements OnInit {
     console.log( this.formEditarPostulante.value);
    
    if(this.formEditarPostulante.valid) {
+    this.enviandoCambios=true;
      this.editarServicio.editarPostulante(
       this.formEditarPostulante.value).subscribe(
        data => this.editadoCorrectamente(data),
@@ -134,17 +137,27 @@ export class EditarPostulanteComponent implements OnInit {
    * @param data objeto que representa al postulante editado con los datos correctos
    */
   editadoCorrectamente(data: Postulante){
+    
     console.log("Editado Correctamente");
     console.log(data);
-    this.openSnackBar("Postulante editado exitosamente","Entendido");
+    this.openSnackExito("Postulante editado exitosamente","Entendido");
     //this.formPostulantes.reset();
   }
 
-  openSnackBar(message: string, action: string) {
+  openSnackExito(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 4000,
     });
-    //this.volverAlListado();
+    this.enviandoCambios=false;
+    this.volverAlListado();
+  }
+
+  openSnackError(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 4000,
+    }).onAction().subscribe(()=>this.volverAlListado());
+    this.enviandoCambios=false;
+    
   }
 
   /**
@@ -152,8 +165,15 @@ export class EditarPostulanteComponent implements OnInit {
    * @param error 
    */
   editadoIncorrecto(error){
+    this.enviandoCambios=false;
+    this.openSnackError("No se ha podido guardar los cambios. Error en el servidor!","Volver al listado");
+    console.log("No se ha podido guardar los cambios. Error en el servidor!");
+    console.log(error);
   }
 
+  volverAlListado(){
+    this.router.navigate(['/postulante']);
+  }
 
   getErrorEmailMessage() {
     return (this.formEditarPostulante.get("mail") as (FormControl)).hasError('required') ? 'You must enter a value' :
@@ -177,7 +197,8 @@ export class EditarPostulanteComponent implements OnInit {
         this.cargarInputsFile(respuesta);
       },
       error_respuesta=>{
-        console.log("Ha ocurrido un error");
+        console.log("Ha ocurrido un error al intentar cargar los datos del postulante");
+        console.log(error_respuesta);
       }
       );
   }
@@ -192,9 +213,9 @@ export class EditarPostulanteComponent implements OnInit {
       id: new FormControl(postulante.id),
       nombre : new FormControl(postulante.nombre, [Validators.required,Validators.pattern('[/a-zA-Z ]*')]),
       apellido : new FormControl(postulante.apellido, [Validators.required,Validators.pattern('[/a-zA-Z ]*')] ),
-      documento : new FormControl(postulante.documento, [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-      celular : new FormControl(postulante.celular),
-      fechaDeNacimiento	 : new FormControl(new Date(postulante.fechaDeNacimiento)),
+      documento : new FormControl(postulante.documento, [Validators.pattern('[/0-9]*')]),
+      celular : new FormControl(postulante.celular,[Validators.pattern('[[/+][/0-9]+]|[/0-9]+')]),
+      fechaDeNacimiento	 : new FormControl(postulante.fechaDeNacimiento?{value: new Date(postulante.fechaDeNacimiento),disabled: true}:{value:'',disabled:true}),
       mail : new FormControl(postulante.mail, [Validators.required, Validators.email]),
       direccion : new FormControl(postulante.direccion),
       estado : new FormControl(postulante.estado),

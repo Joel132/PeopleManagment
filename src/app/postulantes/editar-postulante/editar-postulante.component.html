@@ -10,7 +10,7 @@
           <!-- Sin Foto / Foto cargada-->
           <div *ngIf="!isLoadingFoto">
             <label class="hoverable" [for]="urlFoto?null:'fileInput'">
-            <img matTooltip="Cambiar Foto de Perfil" [src]="urlFoto ? urlFoto : 'assets/img/foto-perfil.png'"> 
+            <img [matTooltip]="urlFoto ? '':'Cambiar Foto de Perfil'" [src]="urlFoto ? urlFoto : 'assets/img/foto-perfil.png'"> 
             <div class="hover-text">Cambiar Foto</div>
             <div class="background"></div>
             </label>
@@ -23,7 +23,7 @@
             <mat-spinner></mat-spinner>
           </div>
           <div *ngIf="errorFoto">
-            <mat-error style="color: rgb(59, 61, 71);" >
+            <mat-error >
               <p style="text-align: center" *ngIf="!errorFotoPesado">No se ha podido subir la imagen. Error en el servidor</p>
               <p style="text-align: center" *ngIf="errorFotoPesado">El tamaño maximo por imagen es de 10MB</p>
             </mat-error>
@@ -45,7 +45,7 @@
               <mat-label>Nombre</mat-label>
               <input formControlName = "nombre" matInput placeholder="Nombre" type="text" required>
               <mat-icon matSuffix class="icono">person</mat-icon>
-              <mat-error style="color: rgb(59, 61, 71);" *ngIf="formEditarPostulante?.get('nombre').errors && formEditarPostulante?.get('nombre')?.dirty">
+              <mat-error  *ngIf="formEditarPostulante?.get('nombre').errors && formEditarPostulante?.get('nombre')?.dirty">
                 <p *ngIf=" formEditarPostulante?.get('nombre').hasError('required')">Completar campo</p>
                 <p *ngIf=" formEditarPostulante?.get('nombre').hasError('pattern')">Ingresa solo Letras</p>
               </mat-error>
@@ -56,9 +56,9 @@
               <mat-label>Apellido</mat-label>
               <input formControlName = "apellido" matInput placeholder="Apellido" type="text" required>
               <mat-icon matSuffix class="icono">person</mat-icon>
-              <mat-error style="color: rgb(59, 61, 71);" *ngIf="formEditarPostulante?.get('nombre').errors && formEditarPostulante?.get('nombre').dirty">
+              <mat-error *ngIf="formEditarPostulante?.get('nombre').errors && formEditarPostulante?.get('nombre').dirty">
                 <p *ngIf=" formEditarPostulante?.get('apellido').hasError('required')">Completar campo</p>
-                <p *ngIf=" formEditarPostulante?.get('apellido').hasError('pattern')" [ngStyle]="{'color': 'black'}" align="start">Ingresa solo Letras</p>
+                <p *ngIf=" formEditarPostulante?.get('apellido').hasError('pattern')" [ngStyle]="{'color': 'black'}" align="start">Ingrese solo Letras</p>
               </mat-error>
             </mat-form-field>
            
@@ -105,6 +105,7 @@
             <mat-form-field>
               <mat-icon matSuffix class="icono">contact_mail</mat-icon>
               <input formControlName = "documento" matInput placeholder="CI" type="text">
+              <mat-error *ngIf="formEditarPostulante?.get('documento').hasError('pattern')">Ingrese solo numeros</mat-error>
             </mat-form-field>
             
             <!-- campo del telefono-->
@@ -113,13 +114,14 @@
               <input formControlName = "celular" matInput placeholder="ej; +595961565376" type="tel"
               ng-minlength="10" ng-maxlength="10"  >
               <mat-icon matSuffix class="icono">call</mat-icon>
+              <mat-error *ngIf="formEditarPostulante?.get('celular').hasError('pattern')">Ingrese un formato valido. Ej:+5959723214 o 0984124721</mat-error>
             </mat-form-field>
             
             <!-- campo de fecha de nacimiento-->
             <mat-form-field class="Fecha de Nacimiento">
               <input formControlName = "fechaDeNacimiento" matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Fecha de Nacimiento">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
+              <mat-datepicker #picker disabled="false"></mat-datepicker>
             </mat-form-field>
 
 
@@ -130,7 +132,7 @@
               <label matSuffix for="cvInput" *ngIf="!isLoadingCV&&!cvName"><mat-icon matTooltip="Subir archivo" class="icono">attach_file</mat-icon></label>
               <label matSuffix *ngIf="isLoadingCV" ><mat-spinner diameter=20></mat-spinner></label>
               <label matSuffix *ngIf="!isLoadingCV&&cvName" (click)="vaciarInputCV()"><mat-icon  matTooltip="Eliminar archivo" class="icono">clear</mat-icon></label>
-              <mat-hint *ngIf="errorCV">
+              <mat-hint *ngIf="errorCV" class="error">
                 <p *ngIf="!errorCVPesado">No se ha podido subir el archivo. Error en el servidor</p>
                 <p *ngIf="errorCVPesado">El tamaño maximo por archivo es de 10MB</p>
               </mat-hint>
@@ -143,9 +145,9 @@
             <input matInput placeholder="Subir Desafio" disabled [value]="desafioName">   
             <label matPrefix ><mat-icon matTooltip="Descargar archivo" class="icono">get_app</mat-icon></label>
             <label matSuffix for="desafioInput" *ngIf="!isLoadingDesafio&&!desafioName"><mat-icon matTooltip="Subir archivo" class="icono">attach_file</mat-icon></label>
-            <label matSuffix for="desafioInput" *ngIf="isLoadingDesafio" ><mat-spinner diameter=20></mat-spinner></label>
+            <label matSuffix *ngIf="isLoadingDesafio" ><mat-spinner diameter=20></mat-spinner></label>
             <label matSuffix *ngIf="!isLoadingDesafio&&desafioName" (click)="vaciarInputDesafio()"><mat-icon matTooltip="Eliminar archivo" class="icono">clear</mat-icon></label>
-            <mat-hint *ngIf="errorDesafio">
+            <mat-hint *ngIf="errorDesafio" class="error">
                 <p *ngIf="!errorDesafioPesado">No se ha podido subir el archivo. Error en el servidor</p>
                 <p *ngIf="errorDesafioPesado">El tamaño maximo por archivo es de 10MB</p>
             </mat-hint>
@@ -229,7 +231,7 @@
     <button mat-raised-button  type="submit" [disabled]="formEditarPostulante?.invalid">Guardar</button> 
   </div> -->
   
-   <button mat-raised-button class="fabButton natura-button-1" mat-fab color="primary"  [disabled]="formEditarPostulante?.invalid" >
+   <button mat-raised-button class="fabButton natura-button-1" mat-fab color="primary"  [disabled]="formEditarPostulante?.invalid||enviandoCambios" >
     <mat-icon>save</mat-icon>
    </button>
 
