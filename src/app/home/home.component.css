@@ -28,10 +28,19 @@
 }
 
 .foto-perfil{
+  width: 70px; 
+  height: 70px;
+  margin-right: 10px;
+  margin-top: 5px; 
+  border-radius: 50%;
+}
+
+.fotoContraida{
   width: 50px; 
   height: 50px;
   margin: auto;
   margin-top: 5px; 
+  border-radius: 50%;
 }
 
 .datos-sesion{
@@ -79,12 +88,6 @@ ul li mat-icon:hover{
 
 }
 
-.fotoContraida{
-  width: 50px; 
-  height: 50px;
-  margin: auto;
-  margin-top: 5px; 
-}
 
 .contenedor-toolbar{
   width: 100%;
