@@ -10,6 +10,7 @@ import { POSTULANTES } from "../mocks/mock-postulantes";
 import { RESPUESTA_FUNCIONARIOS } from '../mocks/mock-response-funcionarios';
 import { FUNCIONARIOS } from '../mocks/mock-funcionarios';
 import { RESPUESTA_FUNCIONARIO } from '../mocks/mock-response-funcionario';
+import { FUNCIONARIO } from '../mocks/mock-funcionario';
 
 @Injectable(
   {providedIn: 'root'}

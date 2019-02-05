@@ -11,6 +11,6 @@ export class FuncionarioService {
   constructor(private http:HttpClient) { }
 
   getFuncionario(id:number){
-    return this.http.get<Funcionario>(environment.apiUrl+this.basePath/*+"id?id="*/+id);
+    return this.http.get<Funcionario>(environment.apiUrl+this.basePath+id);
   }
 }

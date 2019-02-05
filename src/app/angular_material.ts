@@ -109,7 +109,6 @@ import {FlexLayoutModule} from '@angular/flex-layout';
       FlexLayoutModule, 
       MatExpansionModule,
       MatProgressBarModule,
-      MatTooltipModule,
       LayoutModule
       ]
     })

@@ -1,3 +1,194 @@
-<p>
-  ver-funcionario works!
-</p>
+<div class="component-view" fxLayout="column">
+  <mat-tab-group mat-stretch-tabs>
+    <mat-tab label="Datos Personales">
+      <mat-list>
+        <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="5%" fxLayout.xs="column" fxLayout.md="column"
+          fxLayout.sm="column">
+          <div fxLayout="column">
+            <div class="seccion-foto" fxLayoutAlign="center">
+              <img mat-card-avatar class="foto" fxLayoutAlign="space-around center" [src]="usuario?.foto ? usuario.foto : './assets/img/foto-perfil.png'">
+            </div>
+            <br>
+            <div fxLayout="row" fxLayoutAlign="center">
+              <button mat-raised-button style="text-align: center" class="natura-button-1" matTooltip="Descargar">
+                <mat-icon>get_app</mat-icon>Curriculum
+              </button>
+            </div>
+          </div>
+          <div fxLayout="column">
+            <div fxLayout="column" fxLayout.gt-xs="row">
+              <mat-list-item>
+                <mat-icon mat-list-icon class="icono">face</mat-icon>
+                <p mat-line><strong>Nombre Y Apellido:</strong></p>
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon mat-list-icon class="icono"></mat-icon>
+                <div *ngIf="usuario?.nombre && usuario.apellido; then nombreSi else nombreNo"></div>
+                <ng-template #nombreSi>
+                  <p mat-line class="tag"> {{ usuario?.nombre }}
+                    {{usuario?.apellido}}</p>
+                </ng-template>
+                <ng-template #nombreNo>
+                  <p mat-line class="tag text-error"> No disponible</p>
+                </ng-template>
+              </mat-list-item>
+            </div>
+            <div fxLayout="column" fxLayout.gt-xs="row">
+              <mat-list-item>
+                <mat-icon mat-list-icon class="icono">picture_in_picture</mat-icon>
+                <p mat-line><strong>Documento:</strong></p>
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon mat-list-icon></mat-icon>
+                <div *ngIf="usuario?.ci; then ciSi else ciNo"></div>
+                <ng-template #ciSi>
+                  <p mat-line class="tag"> {{ usuario?.ci }}</p>
+                </ng-template>
+                <ng-template #ciNo>
+                  <p mat-line class="tag text-error"> No disponible</p>
+                </ng-template>
+              </mat-list-item>
+            </div>
+            <div fxLayout="column" fxLayout.gt-xs="row">
+              <mat-list-item>
+                <mat-icon mat-list-icon class="icono">local_phone</mat-icon>
+                <p mat-line><strong>Telefono:</strong></p>
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon mat-list-icon></mat-icon>
+                <div *ngIf="usuario?.celular; then telefonoSi else telefonoNo"></div>
+                <ng-template #telefonoSi>
+                  <p mat-line class="tag"> {{ usuario?.celular }}</p>
+                </ng-template>
+                <ng-template #telefonoNo>
+                  <p mat-line class="tag text-error"> No disponible</p>
+                </ng-template>
+              </mat-list-item>
+            </div>
+            <div fxLayout="column" fxLayout.gt-xs="row">
+              <mat-list-item>
+                <mat-icon mat-list-icon class="icono">alternate_email</mat-icon>
+                <p mat-line><strong>Email:</strong></p>
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon mat-list-icon></mat-icon>
+                <div *ngIf="usuario?.email; then emailSi else emailNo"></div>
+                <ng-template #emailSi>
+                  <p mat-line class="tag"> {{ usuario?.email }}</p>
+                </ng-template>
+                <ng-template #emailNo>
+                  <p mat-line class="tag text-error"> No disponible</p>
+                </ng-template>
+              </mat-list-item>
+            </div>
+            <div fxLayout="column" fxLayout.gt-xs="row">
+              <mat-list-item>
+                <mat-icon mat-list-icon class="icono">person_pin</mat-icon>
+                <p mat-line><strong>Usuario:</strong></p>
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon mat-list-icon></mat-icon>
+                <div *ngIf="usuario?.usuario; then usuarioSi else usuarioNo"></div>
+                <ng-template #usuarioSi>
+                  <p mat-line class="tag"> {{ usuario?.usuario }}</p>
+                </ng-template>
+                <ng-template #usuarioNo>
+                  <p mat-line class="tag text-error"> No disponible</p>
+                </ng-template>
+              </mat-list-item>
+            </div>
+            <div fxLayout="column" fxLayout.gt-xs="row">
+              <mat-list-item>
+                <mat-icon mat-list-icon class="icono">info</mat-icon>
+                <p mat-line><strong>Estado:</strong></p>
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon></mat-icon>
+                <div *ngIf="usuario?.nombre_estado; then estadoSi else estadoNo"></div>
+                <ng-template #estadoSi>
+                  <p mat-line class="tag"> {{ usuario?.nombre_estado }}</p>
+                </ng-template>
+                <ng-template #estadoNo>
+                  <p mat-line class="tag text-error"> No disponible</p>
+                </ng-template>
+              </mat-list-item>
+            </div>
+            <div fxLayout="column" fxLayout.gt-xs="row">
+              <mat-list-item>
+                <mat-icon mat-list-icon class="icono">calendar_today</mat-icon>
+                <p mat-line><strong>Fecha de Inicio:</strong></p>
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon mat-list-icon></mat-icon>
+                <div *ngIf="usuario?.fechaInicio; then fechaiSi else fechaiNo"></div>
+                <ng-template #fechaiSi>
+                  <p mat-line class="tag"> {{ usuario?.fechaInicio | date:'longDate'}}
+                </ng-template>
+                <ng-template #fechaiNo>
+                  <p mat-line class="tag text-error"> No disponible</p>
+                </ng-template>
+              </mat-list-item>
+            </div>
+            <div fxLayout="column" fxLayout.gt-xs="row">
+              <mat-list-item>
+                <mat-icon mat-list-icon class="icono">calendar_today</mat-icon>
+                <p mat-line><strong>Fecha de Finalizacion:</strong></p>
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon mat-list-icon></mat-icon>
+                <div *ngIf="usuario?.fechaVencimiento; then fechafSi else fechafNo"></div>
+                <ng-template #fechafSi>
+                  <p mat-line class="tag"> {{ usuario?.fechaVencimiento | date:'longDate'}}</p>
+                </ng-template>
+                <ng-template #fechafNo>
+                  <p mat-line class="tag text-error"> No disponible</p>
+                </ng-template>
+              </mat-list-item>
+            </div>
+            <div fxLayout="column" fxLayout.gt-xs="row">
+              <mat-list-item>
+                <mat-icon mat-list-icon class="icono">supervisor_account</mat-icon>
+                <p mat-line><strong>Rol:</strong></p>
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon mat-list-icon></mat-icon>
+                <div *ngIf="usuario?.rol; then rolSi else rolNo"></div>
+                <ng-template #rolSi>
+                  <p mat-line class="tag"> {{ usuario?.nombreRol }}</p>
+                </ng-template>
+                <ng-template #rolNo>
+                  <p mat-line class="tag text-error"> No disponible</p>
+                </ng-template>
+              </mat-list-item>
+            </div>
+          </div>
+        </div>
+      </mat-list>
+      <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10%" fxLayout.md="column" fxLayout.sm="column"
+        fxLayout.xs="column">
+        <div fxLayout=column class="comen">
+          <p mat-line><strong>Comentarios</strong></p>
+          <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's
+            standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
+            it to make
+            a type specimen book. It has survived not only five centuries, but also the leap into electronic
+            typesetting,
+            remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
+            containing Lorem
+            Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including
+            versions of Lorem Ipsum.
+          </p>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Aptitudes">
+    </mat-tab>
+  </mat-tab-group>
+  <div style="height: 100px">
+    <button mat-fab class="fabButton natura-button-1" (click)="editarFuncionario(usuario.id)" matTooltip="Editar Perfil">
+      <mat-icon>create</mat-icon>
+    </button>
+  </div>
+</div>

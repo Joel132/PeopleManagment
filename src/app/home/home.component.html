@@ -39,7 +39,7 @@
       <a class="opcion" 
         *ngIf="funcionario?.rol == 'user1' || funcionario?.rol === 'user2'"
           mat-list-item 
-          [routerLink] = "['postulante']">
+          [routerLink] = "['/postulante']">
           <mat-icon>person_add</mat-icon>
           <span *ngIf="showFiller">POSTULANTES</span>
         </a>

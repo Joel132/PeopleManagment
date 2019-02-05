@@ -46,7 +46,7 @@
             <!-- Columna Foto -->
             <ng-container matColumnDef="foto">
                 <mat-header-cell *matHeaderCellDef> Perfil </mat-header-cell>
-                <mat-cell *matCellDef="let element" [routerLink]="['editar/'+element.id]">
+                <mat-cell *matCellDef="let element" [routerLink]="['ver/'+element.idUsuario]">
                 <mat-icon class="example-icon">account_circle</mat-icon>  
                 </mat-cell>
             </ng-container>
@@ -54,31 +54,31 @@
             <!-- Columna Nombre -->
             <ng-container matColumnDef="nombre">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
-                <mat-cell *matCellDef="let element" [routerLink]="['editar/'+element.id]"> {{element.nombre}} </mat-cell>
+                <mat-cell *matCellDef="let element" [routerLink]="['ver/'+element.idUsuario]"> {{element.nombre}} </mat-cell>
             </ng-container>
         
             <!-- Columna Apellido -->
             <ng-container matColumnDef="apellido">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </mat-header-cell>
-                <mat-cell *matCellDef="let element" [routerLink]="['editar/'+element.id]"> {{element.apellido}} </mat-cell>
+                <mat-cell *matCellDef="let element" [routerLink]="['ver/'+element.idUsuario]"> {{element.apellido}} </mat-cell>
             </ng-container>
         
             <!-- Columna Fecha fin de contrato -->
             <ng-container matColumnDef="fecha_fin_contrato">
                 <mat-header-cell *matHeaderCellDef fxHide.xs> Fin de Contrato </mat-header-cell>
-                <mat-cell *matCellDef="let element" [routerLink]="['editar/'+element.id]" fxHide.xs> {{element.fechaVencimiento}} </mat-cell>
+                <mat-cell *matCellDef="let element" [routerLink]="['ver/'+element.idUsuario]" fxHide.xs> {{element.fechaVencimiento}} </mat-cell>
             </ng-container>
             
             <!-- Columna Celular -->
             <ng-container matColumnDef="celular">
                 <mat-header-cell *matHeaderCellDef fxHide.xs> Celular </mat-header-cell>
-                <mat-cell *matCellDef="let element" [routerLink]="['editar/'+element.id]" fxHide.xs> {{element.celular}} </mat-cell>
+                <mat-cell *matCellDef="let element" [routerLink]="['ver/'+element.idUsuario]" fxHide.xs> {{element.celular}} </mat-cell>
             </ng-container>
 
             <!-- Columna Estado -->
             <ng-container matColumnDef="estado">
                     <mat-header-cell *matHeaderCellDef fxHide.xs> Estado </mat-header-cell>
-                    <mat-cell *matCellDef="let element" [routerLink]="['editar/'+element.idUsuario]" fxHide.xs> 
+                    <mat-cell *matCellDef="let element" [routerLink]="['ver/'+element.idUsuario]" fxHide.xs> 
                         <ng-container *ngIf="element.activo">
                             <mat-icon class="success" class="example-icon"> fiber_manual_record </mat-icon>
                         </ng-container>
@@ -93,7 +93,7 @@
             <ng-container matColumnDef="accion">
                     <mat-header-cell *matHeaderCellDef></mat-header-cell>
                     <mat-cell *matCellDef="let element">
-                        <button mat-icon-button matTooltip="Editar Funcionario" class="example-icon" [routerLink]="['editar/'+element.id]">
+                        <button mat-icon-button matTooltip="Editar Funcionario" class="example-icon" [routerLink]="['editar/'+element.idUsuario]">
                             <mat-icon class="example-icon">edit</mat-icon>
                         </button> 
                         <button mat-icon-button matTooltip="Dar de Baja Funcionario" class="example-icon" (click)="openModalBaja()">

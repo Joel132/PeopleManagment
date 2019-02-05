@@ -1,3 +1,4 @@
+import { Funcionario } from './../models/funcionario';
 import { Injectable } from '@angular/core';
 import { ResponseLista } from '../models/responseListaFuncionario';
 import { Observable, of } from 'rxjs';
@@ -17,4 +18,9 @@ export class RecibirFuncionarioService {
     params=params.append('page','0');
     return this.httpClient.get<ResponseLista>(environment.apiUrl+this.basePath,{params});
   }
+
+  getFuncionario(id: number){
+    return this.httpClient.get<Funcionario>(environment.apiUrl+this.basePath+id);
+  }
+
 }

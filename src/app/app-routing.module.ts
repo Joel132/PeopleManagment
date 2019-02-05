@@ -1,3 +1,4 @@
+import { VerFuncionarioComponent } from './funcionarios/ver-funcionario/ver-funcionario.component';
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
@@ -7,7 +8,10 @@ import {NoLoginGuard} from './shared/auth/no-login.guard';
 import { ListarPostulantesComponent } from './postulantes/listar-postulantes/listar-postulantes.component';
 import { EditarPostulanteComponent } from './postulantes/editar-postulante/editar-postulante.component';
 import { CrearPostulanteComponent } from './postulantes/crear-postulante/crear-postulante.component';
-import { ListarFuncionariosComponent } from './funcionarios/listar-funcionarios/listar-funcionarios.component'
+import { EditarFuncionariosComponent } from './funcionarios/editar-funcionarios/editar-funcionarios.component';
+import { ListarFuncionariosComponent } from './funcionarios/listar-funcionarios/listar-funcionarios.component';
+import { CrearFuncionariosComponent } from './funcionarios/crear-funcionarios/crear-funcionarios.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
@@ -28,9 +32,11 @@ const routes: Routes = [
         children: [
           { path: 'crear', component: CrearPostulanteComponent },
           { path: '', component: ListarFuncionariosComponent, canActivateChild: [AuthorizatedGuard] },
-          { path: 'editar/:id', component: EditarPostulanteComponent, canActivateChild: [AuthorizatedGuard] }
+          { path: 'editar/:id', component: EditarPostulanteComponent, canActivateChild: [AuthorizatedGuard] },
+          { path: 'ver/:id', component: VerFuncionarioComponent, canActivateChild: [AuthorizatedGuard] }
         ]
       }
+
       
     ]
     

@@ -31,6 +31,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { DialogBajaComponent } from './funcionarios/listar-funcionarios/dialog-baja/dialog-baja.component';
 //editar-postulante
 import { EditarPostulanteService } from 'src/app/shared/helpers/editar-postulante.service';
+import { ModalComponent } from './funcionarios/ver-funcionario/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -45,10 +46,10 @@ import { EditarPostulanteService } from 'src/app/shared/helpers/editar-postulant
     EditarFuncionariosComponent,
     VerFuncionarioComponent,
     VerPostulanteComponent,
-    DialogBajaComponent
-
+    DialogBajaComponent,
+    ModalComponent
   ],
-  entryComponents: [DialogBajaComponent],
+  entryComponents: [DialogBajaComponent,ModalComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
