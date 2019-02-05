@@ -9,17 +9,24 @@ export class Funcionario {
         public foto:string,
         public nombre:string,
         public apellido:string,    
-        public ci:string,    
+        public documento:string,    
+        public genero: string,
         public beneficiario:string,
-        public email: string,    
-        public telefono: string,
+        public email: string, 
+        public direccion: string,   
+        public celular: string,
         public fechaInicio:string,
         public fechaVencimiento:string,
+        public fechaDeNacimiento: string,
         public usuario:string,
-        public contraseña:string,
+        public clave:string,
+        public confirmarContraseña: string,
         public rol:string,
-        public curriculum:string,
-        public estado:string
+        public curriculumUrl:string,
+        public desafioUrl: string,
+        public activo:boolean,
+        public idUsuario: number,
+
     ) {}
 }
 

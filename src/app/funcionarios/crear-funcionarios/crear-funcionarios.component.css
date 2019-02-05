@@ -1,3 +1,22 @@
+/*buttom*/
+.fabButton{
+  position: fixed;
+  bottom: 40px;
+  right: 20px;
+  z-index: 1;
+}
+.container{
+  
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 5%;
+  width: 80%;
+  font-family: 'Montserrat', sans-serif;
+
+}
+
+
 /*
 css para forms*/
 .example-container.ex  {
@@ -94,6 +113,12 @@ img {
   margin-top: 8px;
 }
 
+
+.icono{
+  width:10px; 
+  height:18.35px;
+  color:rgba(0, 0, 0, 0.54);
+}
 
 /**/
 

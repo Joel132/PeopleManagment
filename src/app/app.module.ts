@@ -4,6 +4,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import {fakeBackendProvider} from './shared/helpers/fake-backend';
 import {AgregarPostulanteService} from './shared/helpers/agregar.service';
+import {AgregarFuncionarioService} from './shared/helpers/agregar-funcionario.service';
 // Animations
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 // Angular Material
@@ -50,7 +51,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     HttpClientModule,
     FlexLayoutModule
   ],
-  providers: [fakeBackendProvider, AgregarPostulanteService],
+  providers: [fakeBackendProvider, AgregarPostulanteService,AgregarFuncionarioService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
