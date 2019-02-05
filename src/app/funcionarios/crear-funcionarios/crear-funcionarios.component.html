@@ -83,14 +83,14 @@
         <!--fecha de inicio-->
         <mat-form-field>
         <input formControlName = "fechaInicio" matInput [min]="minDateInicio" [max]="maxDateInicio" [matDatepicker]="picker" placeholder="Inicio contrato">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker disabled="false"></mat-datepicker>
+        <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+        <mat-datepicker #picker touchUi disabled="false"></mat-datepicker>
         </mat-form-field>
         <!--fecha de vencimiento-->
         <mat-form-field *ngIf="formCrearFuncionario.get('fechaInicio').touched">
         <input formControlName = "fechaVencimiento" matInput [min]="formCrearFuncionario.get('fechaInicio').value" [max]="maxDateVencimiento"  [matDatepicker]="picker2" placeholder="Vencimiento de Contrato">
         <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-        <mat-datepicker #picker2 disabled="false"></mat-datepicker>
+        <mat-datepicker #picker2 touchUi disabled="false"></mat-datepicker>
         </mat-form-field>
 
         <!--beneficiario--> 
@@ -180,7 +180,7 @@
         <mat-form-field *ngIf="formCrearFuncionario.get('documento').touched" >
         <input formControlName = "fechaDeNacimiento" matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker3" placeholder="Fecha de Nacimiento">
         <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-        <mat-datepicker #picker3 disabled="false"></mat-datepicker>
+        <mat-datepicker #picker3 touchUi disabled="false"></mat-datepicker>
         </mat-form-field>
 
         <!--genero-->
