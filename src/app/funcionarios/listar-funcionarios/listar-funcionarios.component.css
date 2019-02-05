@@ -54,3 +54,9 @@ mat-toolbar{
 mat-row:hover {
 background: #f2f0f0;
 }
+#icono_activo{
+  color: green;
+}
+#icono_inactivo{
+  color: red;
+}

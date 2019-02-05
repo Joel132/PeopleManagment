@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Funcionario } from 'src/app/shared/models/funcionario';
 import { ESTADOS_FUNCIONARIO } from 'src/app/shared/models/estados_funcionario';
 import { RecibirFuncionarioService } from 'src/app/shared/helpers/recibir-funcionario.service';
 import { Router } from '@angular/router';
 import { ObtenerTituloService } from 'src/app/shared/helpers/obtener-titulo.service';
+import { DialogBajaComponent } from './dialog-baja/dialog-baja.component';
 
 @Component({
   selector: 'app-listar-funcionarios',
@@ -18,12 +19,13 @@ export class ListarFuncionariosComponent implements OnInit {
   dataSource: MatTableDataSource<Funcionario>;
   lista_funcionarios: Array<Funcionario>;
   estados= ESTADOS_FUNCIONARIO;
+  estado: boolean = true;
   
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private FuncionariosService: RecibirFuncionarioService, private router: Router,
-    private tituloService: ObtenerTituloService){ }
+    private tituloService: ObtenerTituloService, public dialog: MatDialog){ }
   
   ngOnInit(){
     this.tituloService.asignarTitulo(this.titulo);  
@@ -45,15 +47,17 @@ export class ListarFuncionariosComponent implements OnInit {
    * @param lista_funcionarios {any} La lista de objetos funcionario
    */
   aux(lista_funcionarios: Funcionario[]){
+    
     lista_funcionarios.map(data=>{
       data.celular="0982312";
       data.fechaVencimiento= "23/03/19";
-      if(data.estado){
+      if(data.activo === true){
         data.nombre_estado= 'Activo';
       }else{
         data.nombre_estado= 'Ex-Funcionario';
       }
     })
+
       this.dataSource=new MatTableDataSource(lista_funcionarios);
       this.dataSource.paginator= this.paginator;
       this.dataSource.sort= this.sort;
@@ -75,7 +79,19 @@ export class ListarFuncionariosComponent implements OnInit {
     }
   }
 
-  onclickfuncionario(){
+  onClickFuncionario(){
     this.router.navigate(['/']);
+  }  
+  openModalBaja(): void{
+    const dialogRef = this.dialog.open(DialogBajaComponent, {
+      width: '450px',
+      data: {estado: this.estado}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.estado = result;
+    });
   }
 }
+

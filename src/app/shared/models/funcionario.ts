@@ -6,6 +6,7 @@
 
 export class Funcionario {
     constructor(
+        public idUsuario: number,
         public foto:string,
         public nombre:string,
         public apellido:string,    
@@ -19,7 +20,7 @@ export class Funcionario {
         public contraseña:string,
         public rol:string,
         public curriculum:string,
-        public estado:boolean,
+        public activo:boolean,
         public nombre_estado: string
     ) {}
 }

@@ -46,7 +46,7 @@
             <!-- Columna Foto -->
             <ng-container matColumnDef="foto">
                 <mat-header-cell *matHeaderCellDef> Perfil </mat-header-cell>
-                <mat-cell *matCellDef>
+                <mat-cell *matCellDef="let element" [routerLink]="['editar/'+element.id]">
                 <mat-icon class="example-icon">account_circle</mat-icon>  
                 </mat-cell>
             </ng-container>
@@ -54,48 +54,55 @@
             <!-- Columna Nombre -->
             <ng-container matColumnDef="nombre">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.nombre}} </mat-cell>
+                <mat-cell *matCellDef="let element" [routerLink]="['editar/'+element.id]"> {{element.nombre}} </mat-cell>
             </ng-container>
         
             <!-- Columna Apellido -->
             <ng-container matColumnDef="apellido">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.apellido}} </mat-cell>
+                <mat-cell *matCellDef="let element" [routerLink]="['editar/'+element.id]"> {{element.apellido}} </mat-cell>
             </ng-container>
         
             <!-- Columna Fecha fin de contrato -->
             <ng-container matColumnDef="fecha_fin_contrato">
                 <mat-header-cell *matHeaderCellDef fxHide.xs> Fin de Contrato </mat-header-cell>
-                <mat-cell *matCellDef="let element" fxHide.xs> {{element.fechaVencimiento}} </mat-cell>
+                <mat-cell *matCellDef="let element" [routerLink]="['editar/'+element.id]" fxHide.xs> {{element.fechaVencimiento}} </mat-cell>
             </ng-container>
             
             <!-- Columna Celular -->
             <ng-container matColumnDef="celular">
                 <mat-header-cell *matHeaderCellDef fxHide.xs> Celular </mat-header-cell>
-                <mat-cell *matCellDef="let element" fxHide.xs> {{element.celular}} </mat-cell>
+                <mat-cell *matCellDef="let element" [routerLink]="['editar/'+element.id]" fxHide.xs> {{element.celular}} </mat-cell>
             </ng-container>
 
             <!-- Columna Estado -->
             <ng-container matColumnDef="estado">
                     <mat-header-cell *matHeaderCellDef fxHide.xs> Estado </mat-header-cell>
-                    <mat-cell *matCellDef="let element" fxHide.xs> {{element.nombre_estado}} </mat-cell>
+                    <mat-cell *matCellDef="let element" [routerLink]="['editar/'+element.idUsuario]" fxHide.xs> 
+                        <ng-container *ngIf="element.activo">
+                            <mat-icon class="success" class="example-icon"> fiber_manual_record </mat-icon>
+                        </ng-container>
+                        <ng-container *ngIf="!element.activo">
+                            <mat-icon id="danger" class="example-icon"> fiber_manual_record </mat-icon>
+                        </ng-container>
+                        {{element.nombre_estado}}
+                    </mat-cell>
                 </ng-container>
 
             <!-- Columna Accion -->
             <ng-container matColumnDef="accion">
                     <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                    <mat-cell *matCellDef>
-                        <button mat-icon-button class="example-icon" routerLink="/">
+                    <mat-cell *matCellDef="let element">
+                        <button mat-icon-button matTooltip="Editar Funcionario" class="example-icon" [routerLink]="['editar/'+element.id]">
                             <mat-icon class="example-icon">edit</mat-icon>
                         </button> 
-                        <button mat-icon-button class="example-icon" routerLink="/">
+                        <button mat-icon-button matTooltip="Dar de Baja Funcionario" class="example-icon" (click)="openModalBaja()">
                             <mat-icon class="example-icon">thumb_down</mat-icon>
-                        </button> 
+                        </button>
                     </mat-cell>
             </ng-container>
             <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"
-            (click)="onclickfuncionario()"></mat-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"></mat-row>
         </mat-table>
         <mat-paginator class="tabla-datos" [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
     </div>

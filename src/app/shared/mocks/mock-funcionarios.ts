@@ -2,6 +2,7 @@ import { Funcionario } from '../models/funcionario';
 
 export const FUNCIONARIOS: Array<Funcionario> = [
     {
+        idUsuario: 1,
         foto:'foto1',
         nombre:'Jose',
         apellido:'Veron',    
@@ -15,10 +16,11 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         contraseña:'123',
         rol:'scrum',
         curriculum:'lala',
-        estado: true,
+        activo: true,
         nombre_estado: 'Funcionario'
     },
     {
+        idUsuario: 1,
         foto:'foto1',
         nombre:'Pedro',
         apellido:'Alliana',    
@@ -32,10 +34,11 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         contraseña:'123',
         rol:'scrum',
         curriculum:'lala',
-        estado: false,
+        activo: false,
         nombre_estado: 'Funcionario'
     },
     {
+        idUsuario: 1,
         foto:'foto1',
         nombre:'Nicanor',
         apellido:'Duarte',    
@@ -49,10 +52,11 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         contraseña:'123',
         rol:'scrum',
         curriculum:'lala',
-        estado: true,
+        activo: true,
         nombre_estado: 'Funcionario'
     },
     {
+        idUsuario: 1,
         foto:'foto1',
         nombre:'Payo',
         apellido:'Cubas',    
@@ -66,10 +70,11 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         contraseña:'123',
         rol:'scrum',
         curriculum:'lala',
-        estado: false,
+        activo: false,
         nombre_estado: 'Funcionario'
     },
     {
+        idUsuario: 1,
         foto:'foto1',
         nombre:'Will',
         apellido:'Smith',    
@@ -83,10 +88,11 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         contraseña:'123',
         rol:'scrum',
         curriculum:'lala',
-        estado: true,
+        activo: true,
         nombre_estado: 'Funcionario'
     },
     {
+        idUsuario: 1,
         foto:'foto1',
         nombre:'Megan',
         apellido:'Fox',    
@@ -100,10 +106,11 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         contraseña:'123',
         rol:'scrum',
         curriculum:'lala',
-        estado: true,
+        activo: true,
         nombre_estado: 'Funcionario'
     },
     {
+        idUsuario: 1,
         foto:'foto1',
         nombre:'Agatha',
         apellido:'Christie',    
@@ -117,10 +124,11 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         contraseña:'123',
         rol:'scrum',
         curriculum:'lala',
-        estado: false,
+        activo: false,
         nombre_estado: 'Funcionario'
     },
     {
+        idUsuario: 1,
         foto:'foto1',
         nombre:'Menchi',
         apellido:'Barriocanal',    
@@ -134,10 +142,11 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         contraseña:'123',
         rol:'scrum',
         curriculum:'lala',
-        estado: true,
+        activo: true,
         nombre_estado: 'Funcionario'
     },
     {
+        idUsuario: 1,
         foto:'foto1',
         nombre:'Clara',
         apellido:'Franco',    
@@ -151,10 +160,11 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         contraseña:'123',
         rol:'scrum',
         curriculum:'lala',
-        estado: true,
+        activo: true,
         nombre_estado: 'Funcionario'
     },
     {
+        idUsuario: 1,
         foto:'foto1',
         nombre:'Cristiano',
         apellido:'Ronaldo',    
@@ -168,10 +178,11 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         contraseña:'123',
         rol:'scrum',
         curriculum:'lala',
-        estado: false,
+        activo: false,
         nombre_estado: 'Funcionario'
     },
     {
+        idUsuario: 1,
         foto:'foto1',
         nombre:'Muhammad',
         apellido:'Ali',    
@@ -185,10 +196,11 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         contraseña:'123',
         rol:'scrum',
         curriculum:'lala',
-        estado: true,
+        activo: true,
         nombre_estado: 'Funcionario'
     },
     {
+        idUsuario: 1,
         foto:'foto1',
         nombre:'Armando',
         apellido:'Paredes',    
@@ -202,10 +214,11 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         contraseña:'123',
         rol:'scrum',
         curriculum:'lala',
-        estado: true,
+        activo: true,
         nombre_estado: 'Funcionario'
     },
     {
+        idUsuario: 1,
         foto:'foto1',
         nombre:'Alan',
         apellido:'Britos',    
@@ -219,10 +232,11 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         contraseña:'123',
         rol:'scrum',
         curriculum:'lala',
-        estado: false,
+        activo: false,
         nombre_estado: 'Funcionario'
     },
     {
+        idUsuario: 1,
         foto:'foto1',
         nombre:'Arthur',
         apellido:'Conan Doyle',    
@@ -236,10 +250,11 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         contraseña:'123',
         rol:'scrum',
         curriculum:'lala',
-        estado: true,
+        activo: true,
         nombre_estado: 'Funcionario'
     },
     {
+        idUsuario: 1,
         foto:'foto1',
         nombre:'Joyner',
         apellido:'Lucas',    
@@ -253,10 +268,11 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         contraseña:'123',
         rol:'scrum',
         curriculum:'lala',
-        estado: true,
+        activo: true,
         nombre_estado: 'Funcionario'
     },
     {
+        idUsuario: 1,
         foto:'foto1',
         nombre:'Marshall',
         apellido:'Mathers',    
@@ -270,10 +286,11 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         contraseña:'123',
         rol:'scrum',
         curriculum:'lala',
-        estado: false,
+        activo: false,
         nombre_estado: 'Funcionario'
     },
     {
+        idUsuario: 1,
         foto:'foto1',
         nombre:'Guy',
         apellido:'Fawkes',    
@@ -287,10 +304,11 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         contraseña:'123',
         rol:'scrum',
         curriculum:'lala',
-        estado: true,
+        activo: true,
         nombre_estado: 'Funcionario'
     },
     {
+        idUsuario: 1,
         foto:'foto1',
         nombre:'Tom',
         apellido:'Cruise',    
@@ -304,10 +322,11 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         contraseña:'123',
         rol:'scrum',
         curriculum:'lala',
-        estado: false,
+        activo: false,
         nombre_estado: 'Funcionario'
     },
     {
+        idUsuario: 1,
         foto:'foto1',
         nombre:'Giorgio',
         apellido:'Faletti',    
@@ -321,10 +340,11 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         contraseña:'123',
         rol:'scrum',
         curriculum:'lala',
-        estado: false,
+        activo: false,
         nombre_estado: 'Funcionario'
     },
     {
+        idUsuario: 1,
         foto:'foto1',
         nombre:'Jhon',
         apellido:'Lennon',    
@@ -338,7 +358,7 @@ export const FUNCIONARIOS: Array<Funcionario> = [
         contraseña:'123',
         rol:'scrum',
         curriculum:'lala',
-        estado: true,
+        activo: true,
         nombre_estado: 'Funcionario'
     }
 ];
