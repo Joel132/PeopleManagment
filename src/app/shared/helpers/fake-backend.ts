@@ -27,7 +27,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     return of(null).pipe(mergeMap(() => {
 /* 
       // fake authenticate api end point
-        if (request.url.endsWith('/api/v1/auth/login') && request.method === 'POST') {
+      /*  if (request.url.endsWith('/api/v1/auth/login') && request.method === 'POST') {
         let params = request.body;
 
         // check user credentials and return fake jwt token if valid
@@ -44,19 +44,19 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           return throwError({code: 1, message: 'Credenciales no validas.'});
         
 
-        }  
+        } */
 
       if (request.url.endsWith('/api/v1/auth/logout') && request.method === 'POST') {
         return of(new HttpResponse({status: 200, body: true}));
       }
       
       
-      //Fake response para listar postulantes con los campos faltantes en el backend
+      /* //Fake response para listar postulantes con los campos faltantes en el backend
       if(request.url.includes("/api/v1/postulante") && request.method === 'GET' ){
         return of(new HttpResponse({status: 200, body: RESPUESTA_POSTULANTES}));
-      }
+      } */
       
-      //Fake response para añadir postulantes con los campos faltantes en el backend
+     /*  //Fake response para añadir postulantes con los campos faltantes en el backend
       if(request.url.includes("/api/v1/postulante") && request.method === 'POST' ){
         POSTULANTES.push(request.body);
         return of(new HttpResponse({status: 200, body: request.body}));
@@ -70,11 +70,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       if(request.url.includes("/api/v1/usuario") && request.method === 'POST' ){
         FUNCIONARIOS.push(request.body);
         return of(new HttpResponse({status: 200, body: request.body}));
-      } */
+      }  */
 
       if(this.storageService.getCurrentToken()){
-
-        
         const req=request.clone({setHeaders:{
           'Authorization' : `Bearer ${this.storageService.getCurrentToken()}`
         }})

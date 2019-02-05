@@ -1,23 +1,19 @@
 .example-card {
-    max-width: 400px;
+    max-width: 300px;
     margin-left: auto;
     margin-right: auto;
-    top: 130px;
-    background: rgba(0, 0, 0, 0);
-    color: white;
     border-style: none;
-
 }
 
 .mat-focused .placeholder {
-    color: white;
     font-weight: bold;
     font-family: 'Montserrat', sans-serif;
 }
 
 
 .input{
-    color: beige;
+    color:white;
+
 }
 p.inicio {
     text-align: center;
@@ -40,8 +36,4 @@ p.inicio {
 
 .barraNavegacion{
     background: black;
-}
-
-.placeholder{
-    color: white;
 }

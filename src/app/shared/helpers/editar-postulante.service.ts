@@ -2,22 +2,21 @@ import { Injectable } from '@angular/core';
 import {Observable, of} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Postulante } from '../models/postulante';
-import {environment} from "../../../environments/environment";
 @Injectable()
 
-export class AgregarPostulanteService{
+export class EditarPostulanteService{
 
     
-    private basePath: string="/api/v1/postulantes/";
+    private url: string="http://10.128.3.82:8080/api/v1/postulantes/";
 
     constructor(private httpClient: HttpClient){}
 
-    agregarPostulante(postulante:Postulante): Observable<Postulante>{
+    editarPostulante(postulante:Postulante): Observable<Postulante>{
 
         //llamada al sevicio
 
         //se retrona un booleano
-        return this.httpClient.post<Postulante>(environment.apiUrl+this.basePath,postulante);
+        return this.httpClient.put<Postulante>(this.url+postulante.id,postulante);
     }
     
 

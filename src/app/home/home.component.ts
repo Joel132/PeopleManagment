@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit{
   constructor(private breakpointObserver: BreakpointObserver,
     private storageService: StorageService,
     private authenticationService: AuthenticationService,
-    private tituloService: ObtenerTituloService){}
+    public tituloService: ObtenerTituloService){}
 
   ngOnInit(): void {  }
     /**

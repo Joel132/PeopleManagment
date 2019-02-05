@@ -25,6 +25,9 @@ import { VerFuncionarioComponent } from './funcionarios/ver-funcionario/ver-func
 import { VerPostulanteComponent } from './postulantes/ver-postulante/ver-postulante.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DialogBajaComponent } from './funcionarios/listar-funcionarios/dialog-baja/dialog-baja.component';
+//editar-postulante
+import { FileUploaderService } from './shared/helpers/file-uploader.service';
+import { EditarPostulanteService } from 'src/app/shared/helpers/editar-postulante.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +56,7 @@ import { DialogBajaComponent } from './funcionarios/listar-funcionarios/dialog-b
     HttpClientModule,
     FlexLayoutModule
   ],
-  providers: [fakeBackendProvider, AgregarPostulanteService],
+  providers: [fakeBackendProvider, AgregarPostulanteService, FileUploaderService, EditarPostulanteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

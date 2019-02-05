@@ -17,6 +17,7 @@ import { ObtenerTituloService } from 'src/app/shared/helpers/obtener-titulo.serv
 
 export class ListarPostulantesComponent implements OnInit {
   public titulo: string = 'Lista de Postulantes';
+  estadosPostulante: string[]=['Desafio Pendiente','Desafio Recibido','Desafio Revisado','Entrevista Administrador','Entrevista SM','Entrevista Team','Aprobado','Rechazado'];
   displayedColumns: string[] = ['foto', 'nombre', 'apellido', 'mail','celular','estado','accion'];
   dataSource: MatTableDataSource<Postulante>;
   lista_Postulantes: Array<Postulante>;

@@ -18,4 +18,8 @@ export class RecibirPostulanteService {
     params=params.append('page','0');
     return this.httpClient.get<ResponseLista>(environment.apiUrl+this.basePath,{params});
   }
+
+  getPostulante(id: number): Observable<Postulante>{
+    return this.httpClient.get<Postulante>(environment.apiUrl+this.basePath+id);
+  }
 }
