@@ -21,7 +21,7 @@
         </div>
       </mat-card>
     </div>
-    <img  class="fotoContraida" fxLayoutAlign="space-around center" [src]=" funcionario.foto ? funcionario.foto : 'https://image.flaticon.com/icons/png/512/149/149071.png' "  *ngIf="!showFiller">
+    <img  class="fotoContraida" fxLayoutAlign="space-around center" [src]=" funcionario?.foto ? funcionario.foto : 'https://image.flaticon.com/icons/png/512/149/149071.png' "  *ngIf="!showFiller">
 
     <mat-nav-list class="lista"> 
       <a class="opcion"  
@@ -92,11 +92,6 @@
           (click)="drawer.toggle()">
           <mat-icon aria-label="Side nav toggle icon" >menu</mat-icon>
         </button>
-        <span class="example-spacer"></span>
-        <div class="logo">
-          <span>PeopleManagement</span>
-          <img  src="assets\img\simbolo-natura.png">
-        </div>
       </div>
     </mat-toolbar>
     <router-outlet></router-outlet>

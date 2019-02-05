@@ -7,7 +7,7 @@ import {environment} from "../../../environments/environment";
   providedIn: 'root'
 })
 export class FuncionarioService {
-  private basePath: string="/api/v1/usuario/";
+  private basePath: string="/api/v1/usuarios/";
   constructor(private http:HttpClient) { }
 
   getFuncionario(id:number){

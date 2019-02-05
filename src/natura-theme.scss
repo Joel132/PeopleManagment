@@ -27,6 +27,11 @@ $natura-dark-theme:   mat-dark-theme($natura-dark-primary, $natura-dark-accent, 
     color: #fafafa;
 }
 
+.natura-button-1:disabled {
+  background: #616161;
+  color: #fafafa;
+}
+
 .natura-button-2 {
     background: linear-gradient(90deg,#DB1944,#EE730D);
     color: #fafafa;
