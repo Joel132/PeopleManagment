@@ -1,0 +1,138 @@
+/*buttom*/
+.fabButton{
+  position: fixed;
+  bottom: 40px;
+  right: 20px;
+  z-index: 1;
+}
+.container{
+  
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 5%;
+  width: 80%;
+  font-family: 'Montserrat', sans-serif;
+
+}
+
+
+/*
+css para forms*/
+.example-container.ex  {
+  display: flex;
+  flex-direction: column;
+
+  
+}
+
+.example-container > * {
+  width: 100%;
+  margin: 10px;
+}
+/*cursor pointer*/
+.cursor{
+  cursor:pointer;
+  width:10px; 
+  height:18.35px;
+  color:rgba(0, 0, 0, 0.54);
+}
+
+/*
+css para foto de perfil*/
+img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
+
+.hoverable{
+  position: relative;
+  display: block;
+  cursor: pointer;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+}
+
+.hoverable .hover-text{
+  position: absolute;
+  display: none;
+  top: 50%;
+  left:  50%;
+  transform: translate(-50%,-50%);   
+  z-index: 2;
+}
+.hoverable .background{
+  position: absolute;
+  display: none;
+  top: 0;
+  left:  0;
+  bottom: 0;
+  right: 0;
+  background-color:rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.hoverable:hover .background{
+  display: block;
+}
+
+.inputFile{
+  display: none;
+}
+
+.fileInputProfile{
+  display: none;
+}
+/*margin gral*/
+.space-01{
+  margin: 30px;
+}
+
+
+/*alinear iconos*/
+.alinear span,
+
+.feature{
+  display: flex;
+  /*width: 100%;*/
+  flex: 1;
+  margin-top: 50px;
+}
+
+.feature .icon{
+  width: 40px;
+}
+
+.feature .icon i{
+  font-size: 2.6em;
+}
+
+.feature .desc{
+  flex: 1;
+  margin-left: 10px;
+}
+
+.feature .desc p{
+  margin-top: 17px;
+}
+
+.feature .desc h4{
+  margin-top: 8px;
+}
+
+
+.icono{
+  width:10px; 
+  height:18.35px;
+  color:rgba(0, 0, 0, 0.54);
+}
+
+/**/
+
+.bloque > *{
+  width: 100%;
+}

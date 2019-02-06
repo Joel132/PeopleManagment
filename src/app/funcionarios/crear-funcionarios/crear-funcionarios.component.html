@@ -1,3 +1,247 @@
-<p>
-  crear-funcionarios works!
-</p>
+<form [formGroup] = "formCrearFuncionario" (ngSubmit)="onSubmit()" >
+  <!--div gral #1-->
+  <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="5%" fxLayoutAlign="center">
+    <!--div bloque 1-->
+    <div fxFlex="50%" class="bloque">
+      <!--bloque de la foto-->
+      <div class="container" fxLayout="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center center">
+        <!-- Sin Foto / Foto cargada-->
+        <div *ngIf="!isLoadingFoto">
+          <label class="hoverable" [for]="urlFoto ? null : 'fileInput'">
+          <img [matTooltip]="urlFoto ? '' : 'Cambiar Foto de Perfil'" [src]="urlFoto ? urlFoto : 'assets/img/foto-perfil.png'"> 
+          <div class="hover-text">Cambiar Foto</div>
+          <div class="background"></div>
+          </label>   
+          <br>
+        </div>
+        <!-- Cargando foto-->
+        <div *ngIf="isLoadingFoto"><mat-spinner></mat-spinner></div>
+        <div *ngIf="errorFoto">
+          <mat-error style="color: rgb(255, 0, 0);" >
+          <p style="text-align: center" *ngIf="!errorFotoPesado">No se ha podido subir la imagen. Error en el servidor</p>
+          <p style="text-align: center" *ngIf="errorFotoPesado">El tamaño maximo por imagen es de 1MB</p>
+          </mat-error>
+        </div>
+        <input id="fileInput" type='file' (change)="cargarFoto()" class="inputFile" #fotoInput>  
+      </div>
+      <div fxLayoutAlign="center">
+        <button mat-button color="warn" *ngIf="urlFoto" (click)="eliminarFoto()">Eliminar</button>
+      </div>
+      <!--usuario-->
+      <div class="example-container">
+        <div class="feature">
+            <div class="icon">
+              <i class="material-icons" style="color: #e91e63;">account_circle</i>
+            </div>
+            <div class="desc">
+              <h4>Credenciales de Usuario</h4>
+            </div>
+        </div>
+        <!--Nombre de usuario y contrasenha-->
+        <mat-form-field>
+        <input formControlName="usuario" matInput placeholder="Nombre de usuario" required>
+        <mat-icon class="icono" matSuffix>person</mat-icon>
+        <mat-error style="color: rgb(255, 0, 0);" *ngIf="formCrearFuncionario?.get('usuario').errors && formCrearFuncionario?.get('usuario')?.dirty">
+        <p *ngIf=" formCrearFuncionario?.get('usuario').hasError('required')">Campo Requerido</p>
+        <p *ngIf=" formCrearFuncionario?.get('usuario').hasError('pattern')">Nombre de usuario no valido </p>
+        </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field>
+          <input  matInput placeholder="Contraseña" formControlName="clave" [type]="hide ? 'password' : 'text'">
+          <mat-icon class="cursor" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <mat-error *ngIf="formCrearFuncionario.get('clave').invalid">Campo Requerido</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field *ngIf="formCrearFuncionario.get('clave').valid">
+        <input matInput placeholder="Confirmar Contraseña" formControlName="confirmarContraseña" [type]="hide2 ? 'password' : 'text'">
+        <mat-icon class= "cursor" matSuffix (click)="hide2 = !hide2">{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+        <mat-error *ngIf="formCrearFuncionario.get('confirmarContraseña').pristine || formCrearFuncionario.get('confirmarContraseña').errors?.MatchPassword">Las Contraseñas no coinciden</mat-error>
+        </mat-form-field>
+
+      </div> 
+      <!--rol-->
+      <div class="example-container">
+      <div class="feature">
+          <div class="icon">
+            <i class="material-icons" style="color:  #e91e63;">verified_user</i>
+          </div>
+          <div class="desc">
+            <h4>Datos Administrativos</h4>
+          </div>
+      </div>    
+        <!--rol usuario-->
+        <mat-form-field>
+        <mat-select formControlName = "rol" placeholder="Rol">
+        <mat-option value="user1">Administrador</mat-option>
+        <mat-option value="user2">Scrum Master</mat-option>
+        <mat-option value="user3">Funcionario</mat-option>
+        </mat-select>
+        </mat-form-field>
+        <!--fecha de inicio-->
+        <mat-form-field>
+        <input formControlName = "fechaInicio" matInput [min]="minDateInicio" [max]="maxDateInicio" [matDatepicker]="picker" placeholder="Inicio contrato">
+        <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+        <mat-datepicker #picker touchUi disabled="false"></mat-datepicker>
+        </mat-form-field>
+        <!--fecha de vencimiento-->
+        <mat-form-field *ngIf="formCrearFuncionario.get('fechaInicio').touched">
+        <input formControlName = "fechaVencimiento" matInput [min]="formCrearFuncionario.get('fechaInicio').value" [max]="maxDateVencimiento"  [matDatepicker]="picker2" placeholder="Vencimiento de Contrato">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2 touchUi disabled="false"></mat-datepicker>
+        </mat-form-field>
+
+        <!--beneficiario--> 
+        <mat-form-field *ngIf="formCrearFuncionario.get('fechaVencimiento').touched">
+        <input formControlName= "beneficiario" matInput placeholder="Nombre de Beneficiario">
+        <mat-icon class="icono" matSuffix>person</mat-icon>
+        <mat-error *ngIf="formCrearFuncionario.get('beneficiario').errors && formCrearFuncionario.get('beneficiario').touched">
+          <p *ngIf=" formCrearFuncionario.get('beneficiario').hasError('pattern')">No se aceptan numeros</p>
+        </mat-error>  
+        </mat-form-field>
+    
+        <!--estado funcionario-->
+        <mat-form-field>
+        <mat-select formControlName = "activo" placeholder="Estado">
+        <mat-option value="true">Activo</mat-option>
+        <mat-option value="false">Inactivo</mat-option> 
+        </mat-select>
+        </mat-form-field>    
+      
+      </div>     
+    </div>
+    <!--bloque 2-->
+    <div fxFlex="50%" class="bloque">
+      <!---datos de usuario-->
+      <div class="example-container">
+        <div class="feature">
+          <div class="icon">
+            <i class="material-icons" style="color:  #e91e63;">face</i>
+          </div>
+          <div class="desc">
+            <h4>Datos Personales</h4>
+          </div>
+        </div>
+        <!--contrasenha and username-->
+        <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input formControlName = "nombre" matInput placeholder="Nombre" type="text" required>
+        <mat-icon matSuffix class="icono">person</mat-icon>
+        <mat-error *ngIf="formCrearFuncionario.get('nombre').errors && formCrearFuncionario.get('nombre').touched">
+          <p *ngIf=" formCrearFuncionario.get('nombre').hasError('required')">Campo Requerido</p>
+          <p *ngIf=" formCrearFuncionario.get('nombre').hasError('pattern')">No se aceptan numeros</p>
+        </mat-error>    
+        </mat-form-field>
+
+        <!-- campo del apellido-->
+        <mat-form-field>
+        <mat-label>Apellido</mat-label>
+        <input formControlName = "apellido" matInput placeholder="Apellido" type="text" required>
+        <mat-icon matSuffix class="icono">person</mat-icon>
+        <mat-error *ngIf="formCrearFuncionario.get('apellido').errors && formCrearFuncionario.get('apellido').touched">
+          <p *ngIf=" formCrearFuncionario.get('apellido').hasError('required')">Campo Requerido</p>
+          <p *ngIf=" formCrearFuncionario.get('apellido').hasError('pattern')">No se aceptan numeros</p>
+        </mat-error>  
+        </mat-form-field>
+
+        <!-- campo del mail-->
+        <mat-form-field>
+        <input matInput placeholder="Email" formControlName="email" required>
+        <mat-icon matSuffix class="icono">email</mat-icon>
+        <mat-error *ngIf="formCrearFuncionario?.invalid">{{getErrorEmailMessage()}}</mat-error>
+        </mat-form-field>
+
+        <!-- campo del telefono-->
+        <mat-form-field *ngIf="formCrearFuncionario.get('email').touched">
+          <mat-label>Telefono</mat-label>
+          <input formControlName = "celular" matInput placeholder="ej; +595961565376" type="tel"
+          ng-minlength="4" ng-maxlength="13"  >
+          <mat-icon matSuffix class="icono">call</mat-icon>
+          <mat-error *ngIf="formCrearFuncionario.get('celular').errors && formCrearFuncionario.get('celular').touched">
+            <p *ngIf=" formCrearFuncionario.get('celular').hasError('pattern')">Solo se aceptan numeros</p>
+            <p *ngIf=" formCrearFuncionario.get('celular').hasError('maxlength')">Longitud maxima de 13 digitos</p>
+            <p *ngIf=" formCrearFuncionario.get('celular').hasError('pattern')">Numero Invalido</p>
+          </mat-error> 
+          </mat-form-field>
+
+        <!-- campo del documento-->
+        <mat-form-field  *ngIf="formCrearFuncionario.get('celular').touched">
+        <mat-icon matSuffix class="icono">picture_in_picture</mat-icon>
+        <input formControlName = "documento" matInput placeholder="Documento" type="text">
+        <mat-error *ngIf="formCrearFuncionario.get('documento').errors && formCrearFuncionario.get('documento').touched">
+          <p *ngIf=" formCrearFuncionario.get('documento').hasError('pattern')">Solo se aceptan numeros</p>
+          <p *ngIf=" formCrearFuncionario.get('documento').hasError('minlength')">Longitud minima de 6 cifras</p>
+        </mat-error> 
+        </mat-form-field>
+  
+        <!-- campo de fecha de nacimiento-->
+        <mat-form-field *ngIf="formCrearFuncionario.get('documento').touched" >
+        <input formControlName = "fechaDeNacimiento" matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker3" placeholder="Fecha de Nacimiento">
+        <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+        <mat-datepicker #picker3 touchUi disabled="false"></mat-datepicker>
+        </mat-form-field>
+
+        <!--genero-->
+        <mat-form-field *ngIf="formCrearFuncionario.get('fechaDeNacimiento').touched">
+          <mat-select  formControlName = "genero" placeholder="Genero"  disableRipple>
+          <mat-option value="masculino">Masculino</mat-option>
+          <mat-option value="femenino">Femenino</mat-option>
+          <mat-option value="Otros">Otros</mat-option>
+          </mat-select>
+        </mat-form-field>        
+        
+          <!-- campo de la direccion-->
+        <mat-form-field *ngIf="formCrearFuncionario.get('genero').touched">
+        <input formControlName = "direccion" matInput placeholder="Direccion" type="text">
+        <mat-icon matSuffix class="icono" >location_on</mat-icon>
+        </mat-form-field> 
+
+
+        <!--subir archivos-->
+        <div class="feature">
+            <div class="icon">
+              <i class="material-icons" style="color:  #e91e63">archive</i>
+            </div>
+            <div class="desc">
+              <h4>Subir Archivos</h4>
+            </div>
+        </div>
+        
+        <!--subir cv-->
+        <mat-form-field >
+        <label for="cvInput"><input matInput placeholder="Subir CV" disabled [value]="cvName"></label>
+        <label matPrefix ><mat-icon matTooltip="Descargar archivo"  class="icono">get_app</mat-icon></label>
+        <label matSuffix for="cvInput" *ngIf="!isLoadingCV&&!cvName"><mat-icon matTooltip="Subir archivo" class="icono">attach_file</mat-icon></label>
+        <label matSuffix *ngIf="isLoadingCV" ><mat-spinner diameter=20></mat-spinner></label>
+        <label matSuffix *ngIf="!isLoadingCV&&cvName" (click)="vaciarInputCV()"><mat-icon  matTooltip="Eliminar archivo" class="icono">clear</mat-icon></label>
+        <mat-hint style="color: rgb(255, 0, 0);" *ngIf="errorCV">
+        <p *ngIf="!errorCVPesado">No se ha podido subir el archivo. Error en el servidor</p>
+        <p *ngIf="errorCVPesado">El tamaño maximo por archivo es de 10MB</p>
+        </mat-hint>
+        </mat-form-field>
+        <input type="file" id="cvInput" class="inputFile"  #curriculumInput (change)="cargarCV()">
+
+        <!--subir desafio-->
+        <mat-form-field>
+        <input matInput placeholder="Subir Desafio" disabled [value]="desafioName">   
+        <label matPrefix ><mat-icon matTooltip="Descargar archivo" class="icono">get_app</mat-icon></label>
+        <label matSuffix for="desafioInput" *ngIf="!isLoadingDesafio&&!desafioName"><mat-icon matTooltip="Subir archivo" class="icono">attach_file</mat-icon></label>
+        <label matSuffix for="desafioInput" *ngIf="isLoadingDesafio" ><mat-spinner diameter=20></mat-spinner></label>
+        <label matSuffix *ngIf="!isLoadingDesafio&&desafioName" (click)="vaciarInputDesafio()"><mat-icon matTooltip="Eliminar archivo" class="icono">clear</mat-icon></label>
+        <mat-hint style="color: rgb(255, 0, 0);"  *ngIf="errorDesafio">
+        <p  *ngIf="!errorDesafioPesado">No se ha podido subir el archivo. Error en el servidor</p>
+        <p *ngIf="errorDesafioPesado">El tamaño maximo por archivo es de 10MB</p>
+        </mat-hint>
+        </mat-form-field>
+        <input type="file" id="desafioInput"  class="inputFile" #desafioInput (change)="cargarDesafio()">   
+      </div>
+    </div>
+  </div>
+  <!--fin div gral -->
+  <button   matTooltip="Guardar" mat-raised-button class="fabButton natura-button-1" mat-fab color="primary"  [disabled]="formCrearFuncionario?.invalid" >
+  <mat-icon>save</mat-icon>
+  </button>
+  <div style="height:100px;"></div>
+</form>

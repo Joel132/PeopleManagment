@@ -40,9 +40,9 @@
               </mat-list-item>
               <mat-list-item>
                 <mat-icon mat-list-icon></mat-icon>
-                <div *ngIf="usuario?.ci; then ciSi else ciNo"></div>
+                <div *ngIf="usuario?.documento; then ciSi else ciNo"></div>
                 <ng-template #ciSi>
-                  <p mat-line class="tag"> {{ usuario?.ci }}</p>
+                  <p mat-line class="tag"> {{ usuario?.documento }}</p>
                 </ng-template>
                 <ng-template #ciNo>
                   <p mat-line class="tag text-error"> No disponible</p>

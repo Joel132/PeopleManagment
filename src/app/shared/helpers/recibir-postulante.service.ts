@@ -12,6 +12,9 @@ export class RecibirPostulanteService {
   private basePath: string="/api/v1/postulantes/";
   constructor(private httpClient: HttpClient) { }
 
+  
+
+
   getPostulantes(): Observable<ResponseLista> {
     let params=new HttpParams();
     params=params.append('size','1000'); // Se recibe siempre el total de la lista para trabajar localmente

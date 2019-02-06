@@ -19,7 +19,7 @@
             <mat-icon matSuffix>filter_list</mat-icon>
         </mat-form-field>
         <!--Boton Agregar funcionario-->
-        <button mat-stroked-button id="agregar_desktop" class="natura-button-2" routerLink="/funcionarios/crear-funcionarios">Agregar Funcionario</button>
+        <button mat-stroked-button id="agregar_desktop" class="natura-button-2" [routerLink]="['crear/']">Agregar Funcionario</button>
     </div>
     <!--BOTON BUSCAR, FILTRAR EN MOVIL-->
     <div fxLayoutAlign="center center" fxHide.gt-xs>

@@ -31,7 +31,7 @@ const routes: Routes = [
         path:'funcionario',
         canActivateChild: [AuthorizatedGuard],
         children: [
-          { path: 'crear', component: CrearPostulanteComponent },
+          { path: 'crear', component: CrearFuncionariosComponent },
           { path: '', component: ListarFuncionariosComponent, canActivateChild: [AuthorizatedGuard] },
           { path: 'editar/:id', component: EditarPostulanteComponent, canActivateChild: [AuthorizatedGuard] },
           { path: 'ver/:id', component: VerFuncionarioComponent, canActivateChild: [AuthorizatedGuard] }
@@ -47,7 +47,6 @@ const routes: Routes = [
         component: ErrorComponent,
         canActivateChild: [AuthorizatedGuard]
       }
-      
     ]
     
   },

@@ -9,10 +9,12 @@ import { HttpClientModule} from '@angular/common/http';
 //servicios
 import {fakeBackendProvider} from './shared/helpers/fake-backend';
 import {AgregarPostulanteService} from './shared/helpers/agregar.service';
-
-// Angular Material y animaciones
-import {MaterialModule} from './angular_material';
+import {AgregarFuncionarioService} from './shared/helpers/agregar-funcionario.service';
+// Animations
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+// Angular Material
+import {MaterialModule} from './angular_material';
+
 
 
 //componentes
@@ -62,9 +64,10 @@ import { ErrorComponent } from './error/error.component';
     ReactiveFormsModule, LayoutModule, 
     AppRoutingModule,
     HttpClientModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+
   ],
-  providers: [fakeBackendProvider, AgregarPostulanteService, EditarPostulanteService],
+  providers: [fakeBackendProvider, AgregarPostulanteService, EditarPostulanteService,AgregarFuncionarioService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
