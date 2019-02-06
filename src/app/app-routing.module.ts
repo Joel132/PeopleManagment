@@ -13,6 +13,8 @@ import { ListarFuncionariosComponent } from './funcionarios/listar-funcionarios/
 import { CrearFuncionariosComponent } from './funcionarios/crear-funcionarios/crear-funcionarios.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { ErrorComponent } from './error/error.component';
+import { VerPostulanteComponent } from './postulantes/ver-postulante/ver-postulante.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
@@ -24,7 +26,8 @@ const routes: Routes = [
         children: [
           { path: 'crear', component: CrearPostulanteComponent },
           { path: '', component: ListarPostulantesComponent, canActivateChild: [AuthorizatedGuard] },
-          { path: 'editar/:id', component: EditarPostulanteComponent, canActivateChild: [AuthorizatedGuard] }
+          { path: 'editar/:id', component: EditarPostulanteComponent, canActivateChild: [AuthorizatedGuard] },
+          { path: 'ver/:id', component: VerPostulanteComponent, canActivateChild: [AuthorizatedGuard] }
         ]
       },
       {

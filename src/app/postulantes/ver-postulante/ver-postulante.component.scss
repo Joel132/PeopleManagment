@@ -1,0 +1,33 @@
+.bloque{
+    width: 100%;
+    padding: 10px;
+}
+.tag{
+    width: 200px;
+}
+.comment{
+    width: 90%;
+    text-align: justify;
+    align-content: center;
+    margin: auto;
+}
+
+button{
+    margin:5px;
+}
+mat-icon{
+    margin: 5px;
+}
+
+.fabButton{
+position: fixed;
+    bottom: 40px;
+    right: 20px;
+    z-index: 1;
+}
+
+.icono{
+    width:10px; 
+    height:18.35px;
+    color:rgba(0, 0, 0, 0.54);
+  }
