@@ -38,7 +38,7 @@ export class ListarFuncionariosComponent implements OnInit {
    * Llama a la función aux enviando como contenido la lista.
    */
   getFuncionarios(){
-      this.FuncionariosService.getFuncionarios().subscribe(data=>this.aux(data.content)); //suscribe
+      this.FuncionariosService.getFuncionarios().subscribe(data=>this.aux(data.content),error=>this.router.navigate(['/error'])); //suscribe
   }
   
   /**

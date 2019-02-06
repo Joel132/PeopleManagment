@@ -45,7 +45,7 @@ export class ListarPostulantesComponent implements OnInit {
    * Llama a la función aux enviando como contenido la lista.
    */
   getPostulantes(){
-      this.postulantesService.getPostulantes().subscribe(data=>this.aux(data.content)); //suscribe
+      this.postulantesService.getPostulantes().subscribe(data=>this.aux(data.content),error=>this.router.navigate(['/error'])); //suscribe
   }
   
   /**

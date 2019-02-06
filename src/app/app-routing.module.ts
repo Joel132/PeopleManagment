@@ -11,7 +11,8 @@ import { CrearPostulanteComponent } from './postulantes/crear-postulante/crear-p
 import { EditarFuncionariosComponent } from './funcionarios/editar-funcionarios/editar-funcionarios.component';
 import { ListarFuncionariosComponent } from './funcionarios/listar-funcionarios/listar-funcionarios.component';
 import { CrearFuncionariosComponent } from './funcionarios/crear-funcionarios/crear-funcionarios.component';
-
+import { InicioComponent } from './inicio/inicio.component';
+import { ErrorComponent } from './error/error.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
@@ -35,8 +36,17 @@ const routes: Routes = [
           { path: 'editar/:id', component: EditarPostulanteComponent, canActivateChild: [AuthorizatedGuard] },
           { path: 'ver/:id', component: VerFuncionarioComponent, canActivateChild: [AuthorizatedGuard] }
         ]
+      },
+      {
+        path:'',
+        component: InicioComponent,
+        canActivateChild: [AuthorizatedGuard]
+      },
+      {
+        path:'error',
+        component: ErrorComponent,
+        canActivateChild: [AuthorizatedGuard]
       }
-
       
     ]
     

@@ -32,6 +32,8 @@ import { DialogBajaComponent } from './funcionarios/listar-funcionarios/dialog-b
 //editar-postulante
 import { EditarPostulanteService } from 'src/app/shared/helpers/editar-postulante.service';
 import { ModalComponent } from './funcionarios/ver-funcionario/modal/modal.component';
+import { InicioComponent } from './inicio/inicio.component';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { ModalComponent } from './funcionarios/ver-funcionario/modal/modal.compo
     VerFuncionarioComponent,
     VerPostulanteComponent,
     DialogBajaComponent,
-    ModalComponent
+    ModalComponent,
+    InicioComponent,
+    ErrorComponent
   ],
   entryComponents: [DialogBajaComponent,ModalComponent],
   imports: [

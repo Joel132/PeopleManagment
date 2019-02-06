@@ -58,7 +58,10 @@ export class VerFuncionarioComponent implements OnInit {
           
         }
       },
-      (error)=>this.openDialog()
+      (error)=>{
+        //this.openDialog();
+        this.router.navigate(['/error']);
+      }
       );
     }
 

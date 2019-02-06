@@ -205,6 +205,7 @@ export class EditarPostulanteComponent implements OnInit {
       error_respuesta=>{
         console.log("Ha ocurrido un error al intentar cargar los datos del postulante");
         console.log(error_respuesta);
+        this.router.navigate(['/error']);
       }
       );
   }
