@@ -15,13 +15,12 @@
             </mat-form-field></p>
             
           <p style="text-align:center;"><mat-form-field [ngClass]="{'mat-input-invalid': submitted && error?.code == 2}">
-          <input matInput type="password" class="placeholder" formControlName="password" placeholder="Contraseña"/>
+          <input matInput [type]="hide ? 'password' : 'text'" class="placeholder" formControlName="password" placeholder="Contraseña"/>
+          <mat-icon  matTooltip="Ver contraseña" class="cursor" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           <mat-hint style="color: red; " *ngIf="submitted && error?.code == 2 && !loginForm.controls.password.hasError('required')">{{error.message}}</mat-hint>
           <mat-hint style="color: red;" *ngIf="submitted && loginForm.controls.password.hasError('required')">Campo obligatorio</mat-hint>
-          <mat-icon matSuffix>lock</mat-icon>
         </mat-form-field></p>
       </form>
       <div style="text-align: center;"><button mat-button style="height:50px;width:200px; background: linear-gradient(90deg,#751B52,#DB1944,#EE730D ); color: white" type="submit" form="login-form" class="natura-button-3">INGRESAR</button></div>
-    
     </mat-card>
 </div>

@@ -1,3 +1,4 @@
+/*mat-card*/
 .example-card {
     max-width: 300px;
     margin-left: auto;
@@ -9,7 +10,11 @@
     font-weight: bold;
     font-family: 'Montserrat', sans-serif;
 }
+/*cursor pointer*/
+.cursor{
+    cursor:pointer;
 
+  }
 
 .input{
     color:white;
@@ -33,7 +38,7 @@ p.inicio {
     margin-right: auto;
 }
 
-
+/*barra de navegacion*/
 .barraNavegacion{
     background: black;
 }

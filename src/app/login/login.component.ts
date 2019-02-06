@@ -34,6 +34,12 @@ export class LoginComponent implements OnInit {
               private router: Router,
               private jwt: JwtService) { }
 
+
+  /**
+   * atributos boolean, para ocultar caracteres en el  password form
+  */
+    hide:boolean= true;
+
   /**
    * Se inicializa el form con valores vacios por defecto
    */

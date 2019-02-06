@@ -169,68 +169,88 @@
     
       <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
         <!--div bloque 1-->
-        <div fxFlex="60%" class="bloque" >
-            <!--comentario general--> 
-            <h4>Comentario General</h4>            
-            <mat-form-field appearance="outline" class="example-full-width">
-            <textarea matInput formControlName="comentario" placeholder="Comentario General"></textarea>
-            </mat-form-field>
+        <div fxFlex="60%" class="bloque">
+          <!--comentario de desafio-->
+          <div class="feature">
+          <div class="icon">
+          <i class="material-icons" style="color: #e91e63;">chrome_reader_mode</i>
+          </div>
+          <div class="desc">
+          <h4>Comentario de Desafio</h4>
+          </div>
+          </div>
+          <mat-form-field class="example-full-width"  >
+          <textarea matInput formControlName="comentarioDesafio" cdkTextareaAutosize
+          cdkAutosizeMinRows="3"
+          cdkAutosizeMaxRows="10"></textarea>
+          </mat-form-field>
+
+          <!--comentario general-->
+ 
+          <div class="feature">
+          <div class="icon">
+          <i class="material-icons" style="color: #e91e63;">speaker_notes</i>
+          </div>
+          <div class="desc">
+          <h4>Comentario General</h4>
+          </div>
+          </div>
+          <mat-form-field appearance="fill" class="example-full-width" >
+          <textarea matInput formControlName="comentario" cdkTextareaAutosize
+          cdkAutosizeMinRows="3"
+          cdkAutosizeMaxRows="10"></textarea>
+          </mat-form-field>
+          
         </div>
 
         <!--div bloque 2-->
         <div fxFlex="50%" class="bloque">
-          <!--comentario desafio--> 
-          <h4>Comentario de Desafio</h4>
-          <mat-form-field appearance="outline" class="example-full-width">
-            <textarea matInput formControlName="comentarioDesafio" placeholder="Agregar comentario desafio"></textarea>
-          </mat-form-field>
-
           <!--comentario de entrevistas-->
-          <h4>Comentario de Entrevistas</h4>
+          <div class="feature">
+              <div class="icon">
+              <i class="material-icons" style="color: #e91e63;">group</i>
+              </div>
+              <div class="desc">
+              <h4>Comentario de Entrevistas</h4>
+              </div>
+          </div>
           
           <!--SM entrevista-->
-          <mat-form-field appearance="outline" class="example-full-width">
-          <textarea matInput formControlName="comentarioSm" placeholder="Agregar comentario"></textarea>
+          <mat-form-field class="example-full-width" >
+          <mat-label>Scrum Master</mat-label>
+          <textarea matInput formControlName="comentarioSm" cdkTextareaAutosize
+          cdkAutosizeMinRows="3"
+          cdkAutosizeMaxRows="10"></textarea>
           </mat-form-field>
 
-          <!--admin entrevista--> 
-          <mat-form-field appearance="outline" class="example-full-width">
-          <textarea matInput formControlName="comentarioAdmin" placeholder="Agregar comentario"></textarea>
-          </mat-form-field>          
+          <!--admin entrevista-->          
+          <mat-form-field class="example-full-width" >
+          <mat-label>Administrador</mat-label>
+          <textarea  matInput formControlName="comentarioAdmin" cdkTextareaAutosize
+          cdkAutosizeMinRows="3"
+          cdkAutosizeMaxRows="10"></textarea>
+          </mat-form-field>
 
           <!--team entrevista-->  
-          <mat-form-field appearance="outline" class="example-full-width">
-          <textarea matInput  formControlName="comentarioTeam" placeholder="Agregar comentario"></textarea>
+          <mat-form-field class="example-full-width" >
+          <mat-label>Team</mat-label>
+          <textarea matInput  formControlName="comentarioTeam" cdkTextareaAutosize
+          cdkAutosizeMinRows="3"
+          cdkAutosizeMaxRows="10"></textarea>
           </mat-form-field>
-
         </div>
-
       </div>  
-<!--       <button type="button" mat-stroked-button color="warn" (click)="volverAlListado()">Cancelar</button>
-      <button mat-raised-button  type="submit" [disabled]="formEditarPostulante.invalid">Guardar</button>  -->
-  
     </mat-tab>
     <!--fin pestana 2--> 
 
     <!--pestana comentarios-->
     <mat-tab label="Aptitudes"> 
-    <h4>En desarrollo </h4>
-    <button mat-icon-button color="warn" type="button">
-      <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
-    </button>
+      <p style="   text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: 5px;">Sitio en contruccion</p>
     </mat-tab>
   </mat-tab-group>
-  
-<!--   <div  
-    style="
-    width: 100%;
-    bottom: 1%;
-    position: fixed;
-    ">
-    <button type="button" mat-stroked-button color="warn" (click)="volverAlListado()">Cancelar</button>
-    <button mat-raised-button  type="submit" [disabled]="formEditarPostulante?.invalid">Guardar</button> 
-  </div> -->
-  
+ 
    <button mat-raised-button class="fabButton natura-button-1" mat-fab color="primary"  [disabled]="formEditarPostulante?.invalid||enviandoCambios" >
     <mat-icon>save</mat-icon>
    </button>
