@@ -218,10 +218,10 @@ export class EditarPostulanteComponent implements OnInit {
     //TODO: averiguar como obtener el nombre del archivo cuando ya tiene una url asignada
     this.formEditarPostulante = this.formBuilder.group({
       id: new FormControl(postulante.id),
-      nombre : new FormControl(postulante.nombre, [Validators.required,Validators.pattern('[/a-zA-Z ]*')]),
-      apellido : new FormControl(postulante.apellido, [Validators.required,Validators.pattern('[/a-zA-Z ]*')] ),
+      nombre : new FormControl(postulante.nombre, [Validators.required,Validators.pattern('[/a-zA-ZáéíóúÁÉÍÓÚñÑ ]*')]),
+      apellido : new FormControl(postulante.apellido, [Validators.required,Validators.pattern('[/a-zA-ZáéíóúÁÉÍÓÚñÑ ]*')] ),
       documento : new FormControl(postulante.documento, [Validators.pattern('[/0-9]*')]),
-      celular : new FormControl(postulante.celular,[Validators.pattern('[[/+][/0-9]+]|[/0-9]+')]),
+      celular : new FormControl(postulante.celular,[Validators.pattern('[[/+][/0-9]+]|[/0-9]+'),,Validators.minLength(6)]),
       fechaDeNacimiento	 : new FormControl(this.getFecha(postulante.fechaDeNacimiento)),
       mail : new FormControl(postulante.mail, [Validators.required, Validators.email]),
       direccion : new FormControl(postulante.direccion),

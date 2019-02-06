@@ -84,7 +84,7 @@ export class ListarFuncionariosComponent implements OnInit {
   }  
   openModalBaja(): void{
     const dialogRef = this.dialog.open(DialogBajaComponent, {
-      width: '450px',
+      width: '350px',
       data: {estado: this.estado}
     });
 

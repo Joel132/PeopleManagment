@@ -102,15 +102,15 @@ ngOnInit() {
 
   this.formCrearPostulantes = this.formBuilder.group({
     id: new FormControl(0),
-    nombre : new FormControl('', [Validators.required,Validators.pattern('[/a-zA-Z ]*')]), //solo letras, requerido
-    apellido : new FormControl('', [Validators.required,Validators.pattern('[/a-zA-Z ]*')] ), //solo letras, requerido
+    nombre : new FormControl('', [Validators.required,Validators.pattern('[/a-zA-ZáéíóúÁÉÍÓÚñÑ ]*')]), //solo letras, requerido
+    apellido : new FormControl('', [Validators.required,Validators.pattern('[/a-zA-ZáéíóúÁÉÍÓÚñÑ ]*')] ), //solo letras, requerido
     documento : new FormControl('', [Validators.pattern('[/0-9]*')]), //, hasta 7 cifras
-    celular : new FormControl('', [Validators.pattern('[/0-9]*')]),
+    celular : new FormControl('', [Validators.pattern('[[/+][/0-9]+]|[/0-9]+'),Validators.minLength(6)]),
     fechaDeNacimiento : new FormControl({value:'',disabled: false}),
     mail : new FormControl('', [Validators.required, Validators.email]), //direccion valida, requerido
     direccion : new FormControl(''), 
     estado : new FormControl('1'),
-    genero : new FormControl(),
+    genero : new FormControl('Otro'),
     desafioUrl: new FormControl(),
     curriculumUrl: new FormControl(),
     comentario: new FormControl(),

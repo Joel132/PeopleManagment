@@ -75,7 +75,8 @@
             <mat-icon matSuffix aria-label="Side nav toggle icon"  class="icono" >call</mat-icon>
             <input formControlName = "celular" matInput placeholder="Telefono" type="tel" n>
             <mat-error *ngIf="formCrearPostulantes.get('celular').errors && formCrearPostulantes.get('celular').touched">
-              <p *ngIf=" formCrearPostulantes.get('celular').hasError('pattern')">Numero Invalido</p>
+              <p *ngIf=" formCrearPostulantes.get('celular').hasError('pattern')">Ingrese un formato valido. Ej:+5959723214 o 0984124721</p>
+              <p *ngIf=" formCrearPostulantes.get('celular').hasError('minlength')">Ingrese al menos 6 digitos</p>
             </mat-error>             
           </mat-form-field>
           
@@ -129,7 +130,7 @@
           <label matSuffix for="cvInput" *ngIf="!isLoadingCV&&!cvName"><mat-icon matTooltip="Subir archivo" class="icono">attach_file</mat-icon></label>
           <label matSuffix *ngIf="isLoadingCV" ><mat-spinner diameter=20></mat-spinner></label>
           <label matSuffix *ngIf="!isLoadingCV&&cvName" (click)="vaciarInputCV()"><mat-icon  matTooltip="Eliminar archivo" class="icono">clear</mat-icon></label>
-          <mat-hint *ngIf="errorCV">
+          <mat-hint *ngIf="errorCV" style="color:red">
             <p *ngIf="!errorCVPesado">No se ha podido subir el archivo. Error en el servidor</p>
             <p *ngIf="errorCVPesado">El tamaño maximo por archivo es de 1MB</p>
           </mat-hint>
@@ -143,10 +144,10 @@
           <label matSuffix for="desafioInput" *ngIf="!isLoadingDesafio&&!desafioName"><mat-icon matTooltip="Subir archivo" class="icono">attach_file</mat-icon></label>
           <label matSuffix for="desafioInput" *ngIf="isLoadingDesafio" ><mat-spinner diameter=20></mat-spinner></label>
           <label matSuffix *ngIf="!isLoadingDesafio&&desafioName" (click)="vaciarInputDesafio()"><mat-icon matTooltip="Eliminar archivo" class="icono">clear</mat-icon></label>
-          <mat-error *ngIf="errorDesafio">
+          <mat-hint *ngIf="errorDesafio" style="color:red">
               <p *ngIf="!errorDesafioPesado">No se ha podido subir el archivo. Error en el servidor</p>
               <p *ngIf="errorDesafioPesado">El tamaño maximo por archivo es de 1sMB</p>
-          </mat-error>
+          </mat-hint>
           </mat-form-field>
           <input type="file" id="desafioInput"  class="inputFile" #desafioInput (change)="cargarDesafio()">
       

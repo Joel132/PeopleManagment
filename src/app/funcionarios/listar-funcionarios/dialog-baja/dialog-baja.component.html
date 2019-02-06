@@ -1,8 +1,8 @@
-<h1 mat-dialog-title>Dar de Baja a Funcionario</h1>
-<div mat-dialog-content id="mensaje">
-  <p>¿Está seguro que quiere dar de baja a este Funcionario?</p>
+<h1 mat-dialog-title>Dar de Baja</h1>
+<div mat-dialog-content id="mensaje" class="text-error">
+  <p class="mat-body">¿Está seguro que quiere dar de baja a este Funcionario?</p>
 </div>
-<div mat-dialog-actions id="botones">
+<div mat-dialog-actions id="botones" fxLayoutGap="5px">
   <button mat-button (click)="onNoClick()">Cancelar</button>
-  <button mat-button cdkFocusInitial>Aceptar</button>
+  <button mat-raised-button color="warn" (click)="onClick()">Aceptar</button>
 </div>

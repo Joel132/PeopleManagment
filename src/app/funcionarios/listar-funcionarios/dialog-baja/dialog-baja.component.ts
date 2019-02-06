@@ -15,7 +15,10 @@ export class DialogBajaComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DialogBajaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
-
+    
+  onClick(): void {
+      this.dialogRef.close();
+  }
   onNoClick(): void {
     this.dialogRef.close();
   }

@@ -29,11 +29,11 @@ mat-header-row{
   align-items: initial;
   background:  rgb(0, 0, 0);
 }
-mat-row{
-  align-items: center;
+#icon_activo{
+  color:#4fb538;
 }
-mat-cell{
-  text-align: center;
+#icon_inactivo{
+  color:gray;
 }
 mat-toolbar{
   padding-top: 20px;

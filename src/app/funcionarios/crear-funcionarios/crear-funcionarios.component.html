@@ -160,9 +160,9 @@
           ng-minlength="4" ng-maxlength="13"  >
           <mat-icon matSuffix class="icono">call</mat-icon>
           <mat-error *ngIf="formCrearFuncionario.get('celular').errors && formCrearFuncionario.get('celular').touched">
-            <p *ngIf=" formCrearFuncionario.get('celular').hasError('pattern')">Solo se aceptan numeros</p>
-            <p *ngIf=" formCrearFuncionario.get('celular').hasError('maxlength')">Longitud maxima de 13 digitos</p>
-            <p *ngIf=" formCrearFuncionario.get('celular').hasError('pattern')">Numero Invalido</p>
+            <p *ngIf=" formCrearFuncionario.get('celular').hasError('minlength')">Ingrese al menos 6 digitos</p>
+            <p *ngIf=" formCrearFuncionario.get('celular').hasError('pattern')">Ingrese un formato valido. Ej:+5959723214 o 0984124721</p>
+            
           </mat-error> 
           </mat-form-field>
 
