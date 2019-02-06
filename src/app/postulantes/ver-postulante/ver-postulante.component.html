@@ -191,12 +191,30 @@
             <div fxLayout="column">
                 <h3 mat-line> <strong>Archivos: </strong> </h3>
                 <div fxLayout="row" fxLayoutAlign="start">
-                    <button fxLayout mat-stroked-button color="accent">
-                        <mat-icon>get_app</mat-icon>Desafío
-                    </button>
-                    <button fxLayout mat-stroked-button color="accent">
-                        <mat-icon>get_app</mat-icon>Currículum
-                    </button>
+                    <div *ngIf="postulante?.curriculumUrl; then curriculumSi else curriculumNo"></div>
+                    <ng-template #curriculumSi>
+                            <button fxLayout mat-stroked-button color="accent">
+                                    <mat-icon>get_app</mat-icon>Currículum
+                                </button>
+        
+                    </ng-template>
+                    <ng-template #curriculumNo>
+                            <button fxLayout mat-stroked-button color="accent" disabled>
+                                    <mat-icon>get_app</mat-icon>Currículum
+                                </button>
+                            </ng-template>
+                    <div *ngIf="postulante?.desafioUrl; then desafioSi else desafioNo"></div>
+                    <ng-template #desafioSi>
+                        <button fxLayout mat-stroked-button color="accent">
+                            <mat-icon>get_app</mat-icon>Desafío
+                        </button>
+
+                    </ng-template>
+                    <ng-template #desafioNo>
+                            <button fxLayout mat-stroked-button color="accent" disabled>
+                                    <mat-icon>get_app</mat-icon>Desafío
+                                </button>
+                    </ng-template>
                 </div>
 
             </div>
