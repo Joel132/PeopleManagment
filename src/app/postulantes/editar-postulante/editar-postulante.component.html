@@ -43,41 +43,41 @@
             <!-- campo del nombre-->
             <mat-form-field>
               <mat-label>Nombre</mat-label>
-              <input formControlName = "nombre" matInput placeholder="Nombre" type="text" required>
+              <input formControlName = "nombre" matInput placeholder="Nombre" type="text" required id="nombre">
               <mat-icon matSuffix class="icono">person</mat-icon>
               <mat-error  *ngIf="formEditarPostulante?.get('nombre').errors && formEditarPostulante?.get('nombre')?.dirty">
-                <p *ngIf=" formEditarPostulante?.get('nombre').hasError('required')">Completar campo</p>
-                <p *ngIf=" formEditarPostulante?.get('nombre').hasError('pattern')">Ingresa solo Letras</p>
+                <p id="hint-nombre-completar" *ngIf=" formEditarPostulante?.get('nombre').hasError('required')">Completar campo</p>
+                <p id="hint-nombre-solo-letra" *ngIf=" formEditarPostulante?.get('nombre').hasError('pattern')">Ingresa solo Letras</p>
               </mat-error>
             </mat-form-field>
             
             <!-- campo del apellido-->
             <mat-form-field>
               <mat-label>Apellido</mat-label>
-              <input formControlName = "apellido" matInput placeholder="Apellido" type="text" required>
+              <input formControlName = "apellido" matInput placeholder="Apellido" type="text" required id="apellido">
               <mat-icon matSuffix class="icono">person</mat-icon>
               <mat-error *ngIf="formEditarPostulante?.get('nombre').errors && formEditarPostulante?.get('nombre').dirty">
-                <p *ngIf=" formEditarPostulante?.get('apellido').hasError('required')">Completar campo</p>
-                <p *ngIf=" formEditarPostulante?.get('apellido').hasError('pattern')" [ngStyle]="{'color': 'black'}" align="start">Ingrese solo Letras</p>
+                <p id="hint-apellido-completar" *ngIf=" formEditarPostulante?.get('apellido').hasError('required')">Completar campo</p>
+                <p id="hint-apellido-solo-letra" *ngIf=" formEditarPostulante?.get('apellido').hasError('pattern')" [ngStyle]="{'color': 'black'}" align="start">Ingrese solo Letras</p>
               </mat-error>
             </mat-form-field>
            
             <!-- campo del mail-->
             <mat-form-field>
-              <input matInput placeholder="Email" formControlName="mail" required>
+              <input matInput placeholder="Email" formControlName="mail" required id="mail">
               <mat-icon matSuffix class="icono">email</mat-icon>
               <mat-error *ngIf="formEditarPostulante?.invalid">{{getErrorEmailMessage()}}</mat-error>
             </mat-form-field>
            
             <!-- campo de la direccion-->
             <mat-form-field>
-              <input formControlName = "direccion" matInput placeholder="Direccion" type="text">
+              <input formControlName = "direccion" matInput placeholder="Direccion" type="text" id="direccion">
               <mat-icon matSuffix class="icono" >location_on</mat-icon>
             </mat-form-field> 
 
             <!-- campo del estado-->          
             <mat-form-field>
-                <mat-select formControlName = "estado" placeholder="Estado"  disableRipple>
+                <mat-select formControlName = "estado" placeholder="Estado"  class="estado" disableRipple id="estado">
                   <mat-option value="1">Desafio Pendiente</mat-option>
                   <mat-option value="2">Desafío Recibido</mat-option>
                   <mat-option value="3">Desafío Revisado</mat-option>
@@ -90,7 +90,7 @@
               </mat-form-field>   
               
               <mat-form-field>
-                <mat-select formControlName = "genero" placeholder="Sexo"  disableRipple>
+                <mat-select formControlName = "genero" placeholder="Sexo"  disableRipple id="genero">
                   <mat-option value="Masculino">Masculino</mat-option>
                   <mat-option value="Femenino">Femenino</mat-option>
                   <mat-option value="Otro">Otro</mat-option>
@@ -104,7 +104,7 @@
             <!-- campo del documento-->
             <mat-form-field>
               <mat-icon matSuffix class="icono">contact_mail</mat-icon>
-              <input formControlName = "documento" matInput placeholder="CI" type="text">
+              <input formControlName = "documento" matInput placeholder="CI" type="text" id="documento">
               <mat-error *ngIf="formEditarPostulante?.get('documento').hasError('pattern')">Ingrese solo numeros</mat-error>
             </mat-form-field>
             
@@ -112,7 +112,7 @@
             <mat-form-field>
               <mat-label>Telefono</mat-label>
               <input formControlName = "celular" matInput placeholder="ej; +595961565376" type="tel"
-              ng-minlength="10" ng-maxlength="10"  >
+              ng-minlength="10" ng-maxlength="10"  id="celular">
               <mat-icon matSuffix class="icono">call</mat-icon>
               <mat-error *ngIf="formEditarPostulante?.get('celular').hasError('pattern')">Ingrese un formato valido. Ej:+5959723214 o 0984124721</mat-error>
               <mat-error *ngIf="formEditarPostulante?.get('celular').hasError('minlength')">Ingrese al menos 6 digitos</mat-error>
@@ -120,7 +120,7 @@
             
             <!-- campo de fecha de nacimiento-->
             <mat-form-field class="Fecha de Nacimiento">
-              <input formControlName = "fechaDeNacimiento" matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Fecha de Nacimiento">
+              <input formControlName = "fechaDeNacimiento" matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Fecha de Nacimiento" id = "fechaDeNacimiento">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker disabled="false"></mat-datepicker>
             </mat-form-field>
@@ -166,7 +166,7 @@
     <!--fin pestana 1--> 
     
     <!--inicio pestana 2--> 
-    <mat-tab label="Comentarios">
+    <mat-tab label="Comentarios" id="tab-comentarios">
     
       <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="5%" fxLayoutAlign="center">
         <!--div bloque 1-->
@@ -183,7 +183,7 @@
           <mat-form-field class="example-full-width"  >
           <textarea matInput formControlName="comentarioDesafio" cdkTextareaAutosize
           cdkAutosizeMinRows="3"
-          cdkAutosizeMaxRows="10"></textarea>
+          cdkAutosizeMaxRows="10" id="comentarioDesafio"></textarea>
           </mat-form-field>
 
           <!--comentario general-->
@@ -199,7 +199,7 @@
           <mat-form-field appearance="fill" class="example-full-width" >
           <textarea matInput formControlName="comentario" cdkTextareaAutosize
           cdkAutosizeMinRows="3"
-          cdkAutosizeMaxRows="10"></textarea>
+          cdkAutosizeMaxRows="10" id="comentario"></textarea>
           </mat-form-field>
           
         </div>
@@ -221,7 +221,7 @@
           <mat-label>Scrum Master</mat-label>
           <textarea matInput formControlName="comentarioSm" cdkTextareaAutosize
           cdkAutosizeMinRows="3"
-          cdkAutosizeMaxRows="10"></textarea>
+          cdkAutosizeMaxRows="10" id="comentarioSm"></textarea>
           </mat-form-field>
 
           <!--admin entrevista-->          
@@ -229,7 +229,7 @@
           <mat-label>Administrador</mat-label>
           <textarea  matInput formControlName="comentarioAdmin" cdkTextareaAutosize
           cdkAutosizeMinRows="3"
-          cdkAutosizeMaxRows="10"></textarea>
+          cdkAutosizeMaxRows="10" id="comentarioAdmin"></textarea>
           </mat-form-field>
 
           <!--team entrevista-->  
@@ -237,7 +237,7 @@
           <mat-label>Team</mat-label>
           <textarea matInput  formControlName="comentarioTeam" cdkTextareaAutosize
           cdkAutosizeMinRows="3"
-          cdkAutosizeMaxRows="10"></textarea>
+          cdkAutosizeMaxRows="10" comentarioTeam id="comentarioTeam"></textarea>
           </mat-form-field>
         </div>
       </div>  
@@ -252,7 +252,7 @@
     </mat-tab>
   </mat-tab-group>
  
-   <button mat-raised-button class="fabButton natura-button-1" mat-fab color="primary"  [disabled]="formEditarPostulante?.invalid||enviandoCambios" >
+   <button mat-raised-button class="fabButton natura-button-1" mat-fab color="primary"  [disabled]="formEditarPostulante?.invalid||enviandoCambios" id="boton">
     <mat-icon>save</mat-icon>
    </button>
 
