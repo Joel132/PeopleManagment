@@ -22,7 +22,9 @@ export class ListarPostulantesComponent implements OnInit {
   dataSource: MatTableDataSource<Postulante>;
   lista_Postulantes: Array<Postulante>;
   estados= ESTADOS;
-  
+  totalPostulantes: number;
+
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -35,8 +37,7 @@ export class ListarPostulantesComponent implements OnInit {
   
   ngOnInit(){
       this.getPostulantes();
-      this.tituloService.asignarTitulo(this.titulo);
-      
+      this.tituloService.asignarTitulo(this.titulo); 
   }
   
   /**
@@ -45,7 +46,7 @@ export class ListarPostulantesComponent implements OnInit {
    * Llama a la función aux enviando como contenido la lista.
    */
   getPostulantes(){
-      this.postulantesService.getPostulantes().subscribe(data=>this.aux(data.content),error=>this.router.navigate(['/error'])); //suscribe
+      this.postulantesService.getPostulantes().subscribe(data=>this.aux(data),error=>this.router.navigate(['/error'])); //suscribe
   }
   
   /**
@@ -54,9 +55,11 @@ export class ListarPostulantesComponent implements OnInit {
    * @param lista_postulantes {any} La lista de objetos Postulante
    */
   aux(lista_postulantes: any){
-      this.dataSource=new MatTableDataSource(lista_postulantes);
+      this.dataSource=new MatTableDataSource(lista_postulantes.content);
       this.dataSource.paginator= this.paginator;
       this.dataSource.sort= this.sort;
+      this.totalPostulantes = lista_postulantes.totalPostulantes;
+      
   }
 
   /**
@@ -78,4 +81,9 @@ export class ListarPostulantesComponent implements OnInit {
   onclickPostulante(){
     this.router.navigate(['/']);
   }
+
+  onclickAgregar(){
+    this.router.navigate(['/postulante/crear']);
+  }
+
 }
