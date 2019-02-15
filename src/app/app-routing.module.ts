@@ -36,7 +36,7 @@ const routes: Routes = [
         children: [
           { path: 'crear', component: CrearFuncionariosComponent },
           { path: '', component: ListarFuncionariosComponent, canActivateChild: [AuthorizatedGuard] },
-          { path: 'editar/:id', component: EditarPostulanteComponent, canActivateChild: [AuthorizatedGuard] },
+          { path: 'editar/:id', component: EditarFuncionariosComponent, canActivateChild: [AuthorizatedGuard] },
           { path: 'ver/:id', component: VerFuncionarioComponent, canActivateChild: [AuthorizatedGuard] }
         ]
       },
