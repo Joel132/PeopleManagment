@@ -34,7 +34,7 @@ describe('LoginComponent', () => {
   beforeEach(async(() => {
     service = new MockError();
     TestBed.configureTestingModule({
-      imports: [ MaterialModule,RouterTestingModule.withRoutes([{path:'login',component:LoginComponent},{path:'home',component:LoginComponent},{path:'**',redirectTo:'/login',pathMatch:'full'}]),FormsModule, ReactiveFormsModule,HttpClientModule,BrowserAnimationsModule ],
+      imports: [ MaterialModule,RouterTestingModule.withRoutes([{path:'login',component:LoginComponent},{path:'',component:LoginComponent},{path:'**',redirectTo:'/login',pathMatch:'full'}]),FormsModule, ReactiveFormsModule,HttpClientModule,BrowserAnimationsModule ],
       declarations:[LoginComponent]
     })
     .compileComponents().then(() => {
@@ -48,7 +48,7 @@ describe('LoginComponent', () => {
     });
   }));
 
-  it('should create', () => {
+  xit('should create', () => {
     expect(component).toBeTruthy();
   });
 
@@ -76,7 +76,6 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
     let hint1 = fixture.debugElement.query(By.css('#hint-email'));
     spyOn(component, 'submitLogin').and.returnValue(false);
-    console.log(hint1);
     expect(hint1).toBeTruthy();
   }));
 
@@ -90,7 +89,6 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
     let hint3 = fixture.debugElement.query(By.css('#hint-email'));
     spyOn(component, 'submitLogin').and.returnValue(false);
-    console.log(hint3);
     expect(hint3).toBeTruthy();
   }));
 
@@ -104,13 +102,11 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
     let hint4 = fixture.debugElement.query(By.css('#hint-pass'));
     spyOn(component, 'submitLogin').and.returnValue(false);
-    console.log(hint4);
     expect(hint4).toBeTruthy();
   }));
 
   it('Deberia mostrar un mensaje de credenciales invalidas al ingresar datos incorrectos', async(() => {
     component.ngOnInit();
-    console.log(TestBed.get(Router).url);
     fixture.detectChanges();
     component.loginForm.controls['email'].setValue('luisjjjj.com');
     component.loginForm.controls['password'].setValue('45874');
@@ -120,18 +116,15 @@ describe('LoginComponent', () => {
     fixture.whenStable().then(()=>{ 
       setTimeout(()=>{fixture.detectChanges();
       service.error = {code:1, message: 'Credenciales invalidas'}
-      console.log(service.error.message);
-      //spyOn(TestBed.get(service), 'submitLogin').and.returnValue(of(service));
       let hint = fixture.debugElement.query(By.css('#hint-val'));
-      console.log(component.error);
       expect(component.submitted).toBeTruthy();
-      expect(component.error).toBeTruthy()})
+      expect(component.error).toBeTruthy()
+      expect(hint).toBeTruthy()})
     })
   }));
 
-  it('Deberia cambiar la url de direccionamiento a home', async(() => {
+  it('Deberia cambiar la url de direccionamiento de login a home', async(() => {
     component.ngOnInit();
-    console.log(TestBed.get(Router).url);
     fixture.detectChanges();
     component.loginForm.controls['email'].setValue('luis@softwarenatura.com');
     component.loginForm.controls['password'].setValue('usaToday1!');
@@ -141,9 +134,10 @@ describe('LoginComponent', () => {
     fixture.whenStable().then(()=>{ 
       setTimeout(()=>{fixture.detectChanges();
       TestBed.get(Router).url
-      console.log(TestBed.get(Router).url);
       expect(component.submitted).toBeTruthy();
-      expect(component.error).toBeFalsy()})
+      expect(component.error).toBeFalsy()
+      expect(TestBed.get(Router).url).toBe('/')
+    })
     })
   }));
 

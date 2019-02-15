@@ -4,7 +4,15 @@
   </mat-toolbar>  
   <mat-card style="align-content: center; margin-top: 10%"  class="example-card">
       <img class="portrait" src="assets/img/simbolo-natura.png">
-      <p class="inicio">INICIAR SESIÓN</p>
+      <p class="inicio">INICIAR SESIÓN</p> 
+      <!--
+        TO DO:
+        El codigo html se debe modificar la seccion donde termina la palabra "error" 
+        de la linea de codigo de abajo hasta el sinmbolo de "mayor que" que se encuentra
+        antes del binding, esta seccion del codigo impide mostrar e mensaje al cual ademas 
+        le falta un mascara por defecto para mostrar un mensaje concreto y facil de interpretar 
+        para el usuario.
+      -->
       <mat-hint id="hint_val" style="color: red;" *ngIf="submitted && error?.code > 0">{{error.message}}</mat-hint>
       <form id="login-form" #lForm="ngForm" [formGroup]="loginForm" (ngSubmit)="submitLogin()" novalidate>
           <p style="text-align:center">
