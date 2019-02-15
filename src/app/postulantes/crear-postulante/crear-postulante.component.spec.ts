@@ -1,20 +1,28 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CrearPostulanteComponent } from './crear-postulante.component';
 import { By } from '@angular/platform-browser';
-import { AppModule } from 'src/app/app.module';
+import { ObtenerTituloService } from 'src/app/shared/helpers/obtener-titulo.service';
+import { AgregarPostulanteService } from 'src/app/shared/helpers/agregar.service';
+import { MaterialModule } from 'src/app/angular_material';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 describe('CrearPostulanteComponent', () => {
   let component: CrearPostulanteComponent;
   let fixture: ComponentFixture<CrearPostulanteComponent>;
-
+  let service: ObtenerTituloService;
   let fecha_actual: Date;
   let aux: number;
   jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ AppModule ]
+      imports: [MaterialModule, RouterTestingModule, HttpClientModule, BrowserAnimationsModule, FormsModule, ReactiveFormsModule],
+      declarations: [ CrearPostulanteComponent ],
+      providers: [ AgregarPostulanteService ]
     })
     .compileComponents();
   }));
@@ -22,13 +30,17 @@ describe('CrearPostulanteComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CrearPostulanteComponent);
     component = fixture.componentInstance;
-    component.ngOnInit();
+    service = TestBed.get(ObtenerTituloService);
     fixture.detectChanges();
   });
 
   /* it('should create', () => {
     expect(component).toBeTruthy();
   }); */
+
+  it('Titulo Service', () =>{
+    expect(service.obtenerTitulo()).toBe(component.titulo);
+  });
 
   it('Form en blanco es inválido', () => {
     expect(component.formCrearPostulantes.valid).toBeFalsy();
@@ -71,10 +83,6 @@ describe('CrearPostulanteComponent', () => {
     let celular = component.formCrearPostulantes.controls['celular'];
     celular.setValue('123');
     errors = celular.errors || {};
-    console.log(errors);
-    /* console.log(errors['minlength']);
-    console.log(errors['minlength'].requiredLength);
-    console.log(errors['minlength'].actualLength); */
     expect(errors['minlength'].actualLength).not.toBeGreaterThanOrEqual(errors['minlength'].requiredLength);
   }));
 
@@ -83,16 +91,16 @@ describe('CrearPostulanteComponent', () => {
     let documento = component.formCrearPostulantes.controls['documento'];
     documento.setValue('1234567891011121314161617181920212223242526272829303132333435');
     errors = documento.errors || {};
-    console.log(errors);
     expect(errors['minlength'].actualLength).toBeLessThanOrEqual(60);
   }));
 
   it('Fecha de nacimiento fidedigna', async(() => {
     component.formCrearPostulantes.controls['fechaDeNacimiento'].setValue('01/01/1971');
-    console.log("Cambiar fecha por una inválida");
     fecha_actual = new Date (component.formCrearPostulantes.controls['fechaDeNacimiento'].value);
     //The getTime() method returns the number of milliseconds since January 1, 1970
     aux = fecha_actual.getTime()/(1000*60*60*24*365); 
     expect(aux).toBeGreaterThanOrEqual(0);
   }));
+
+  
 });
