@@ -64,17 +64,16 @@ describe('ListarPostulantesComponent', () => {
     fixture.detectChanges();
     
     let listadoPostulantes = fixture.nativeElement.querySelectorAll('tr');
-    console.log(listadoPostulantes.length);
 
     // se comprueban los nombres de los titulos
     let headerRow = listadoPostulantes[0];
-    expect(headerRow.cells[0].innerText).toBe('Perfil');
-    expect(headerRow.cells[1].innerText).toBe('Nombre');
-    expect(headerRow.cells[2].innerText).toBe('Apellido');
-    expect(headerRow.cells[3].innerText).toBe('Mail');
-    expect(headerRow.cells[4].innerText).toBe('Celular');
-    expect(headerRow.cells[5].innerText).toBe('Estado');
-    expect(headerRow.cells[6].innerText).toBe('Acción');
+    expect(headerRow.cells[0].textContent).toBe(' Perfil ');
+    expect(headerRow.cells[1].textContent).toBe(' Nombre ');
+    expect(headerRow.cells[2].textContent).toBe(' Apellido ');
+    expect(headerRow.cells[3].textContent).toBe(' Mail ');
+    expect(headerRow.cells[4].textContent).toBe(' Celular ');
+    expect(headerRow.cells[5].textContent).toBe(' Estado ');
+    expect(headerRow.cells[6].textContent).toBe(' Acción ');  
 
     done();
     });

@@ -9,7 +9,7 @@ describe('NoLoginGuard', () => {
     });
   });
 
-  it('should ...', inject([NoLoginGuard], (guard: NoLoginGuard) => {
+  xit('should ...', inject([NoLoginGuard], (guard: NoLoginGuard) => {
     expect(guard).toBeTruthy();
   }));
 });
