@@ -39,7 +39,7 @@ describe('CrearPostulanteComponent', () => {
   }); */
 
   it('Titulo Service', () =>{
-    expect(service.obtenerTitulo()).toBe(component.titulo);
+    expect(service.titulo).toBe(component.titulo);
   });
 
   it('Form en blanco es inválido', () => {
