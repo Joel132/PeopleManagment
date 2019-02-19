@@ -1,6 +1,10 @@
 <div class="component-view">
     <div fxLayoutAlign="center" class="mat-typography">
         <div *ngIf="postulante?.nombre && postulante.apellido; then nombreSi else nombreNo"></div>
+        <!-- 
+            TODO:
+            Separar la logica del nombre del apellido
+        -->
         <ng-template #nombreSi>
             <h2 mat-line id="nombreSi"><strong>{{ postulante?.nombre }} {{postulante?.apellido}} </strong></h2>
         </ng-template>
@@ -147,7 +151,10 @@
                             </ng-template>
                         </div>
                     </div>
-
+<!--
+    TODO:
+    Cambiar el dato del comentario admin al comentario sm. 
+-->
                     <div fxLayout="column" fxFlex="50%">
                         <div>
                             <h4 mat-line> <strong>Scrum Master: </strong> </h4>
@@ -189,6 +196,10 @@
                 <p mat-line class="text-error" id="comentarioNo">No disponible</p>
             </ng-template>
             <div fxLayout="column">
+                <!--
+                    TODO:
+                    Llamar a una funcion que se encargue de abrir la pestana nueva para descargar el archivo
+                -->
                 <h3 mat-line> <strong>Archivos: </strong> </h3>
                 <div fxLayout="row" fxLayoutAlign="start">
                     <div *ngIf="postulante?.curriculumUrl; then curriculumSi else curriculumNo"></div>
