@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { EditarPostulanteComponent } from './editar-postulante.component';
@@ -19,7 +19,7 @@ import { POSTULANTES } from 'src/app/shared/mocks/mock-postulantes';
 import { of } from 'rxjs';
 import { Postulante } from 'src/app/shared/models/postulante';
 
-describe('EditarPostulanteComponent', () => {
+fdescribe('EditarPostulanteComponent', () => {
   let component: EditarPostulanteComponent;
   let fixture: ComponentFixture<EditarPostulanteComponent>;
   let de: DebugElement;
@@ -130,54 +130,83 @@ describe('EditarPostulanteComponent', () => {
     expect(component.formEditarPostulante.valid).toBeFalsy();
   })
 
-  xit('deberia recuperar los campos correctamente', async() => {
+  fit('deberia recuperar los campos de texto correctamente', fakeAsync(() => {
     postulante = POSTULANTES[1];
     function compara(tag: string, valor:any) {
       const atributo = fixture.debugElement.query(By.css('#'+tag));
       expect(atributo.nativeElement.value).toMatch(valor);
     }
-    const tab = fixture.debugElement.query(By.css('#tab-comentarios')).nativeElement;
-    
-    
+    /* 
     
     compara('nombre', postulante.nombre);
     compara('apellido', postulante.apellido);
     compara('mail', postulante.mail);
     compara('direccion', postulante.direccion);
-      
-    //compara('estado', postulante.estado);
-    //compara('genero', postulante.genero);
-    //compara('documento', postulante.documento);
+    compara('documento', postulante.documento);
     compara('celular', postulante.celular);
-    //compara('fechaDeNacimiento', postulante.fechaDeNacimiento);
-    
+     */
+    const tab = fixture.debugElement.queryAll(By.css('.mat-tab-label'))[1].nativeElement;
     tab.click();
-    fixture.whenStable().then(() => {
-      setTimeout(()=>{
-        fixture.detectChanges();
-        compara('comentarioDesafio', postulante.comentarioDesafio);
-        compara('comentario', postulante.comentario);
-        compara('comentarioSM', postulante.comentarioSm);
-        compara('comentarioAdmin', postulante.comentarioAdmin);
-        compara('comentarioTeam', postulante.comentarioTeam);  
-      },5000);
-      
-    }
-
-    );
- 
-
-    
-    const trigger = fixture.debugElement.query(By.css('#estado')).nativeElement;
-    
-    trigger.click();
     fixture.detectChanges();
-    const opcion = fixture.debugElement.query(By.css('.estado')).nativeElement;
-    
-    
-    
-    //expect(compiled.query(By.css('#nombre')).nativeElement.value.trim()).toMatch(postulante.nombre);
+    tick();
+    console.log(fixture.debugElement.query(By.css('#comentarioDesafio')));
+    compara('comentarioDesafio', postulante.comentarioDesafio);
+    compara('comentario', postulante.comentario);
+    compara('comentarioSM', postulante.comentarioSm);
+    compara('comentarioAdmin', postulante.comentarioAdmin);
+    compara('comentarioTeam', postulante.comentarioTeam);
+  }))
+
+  it('deberia recuperar los campos correctamente', () => {
+    postulante = POSTULANTES[1];
+    let estado = component.formEditarPostulante.controls['estado'].value;
+    let fecha = component.formEditarPostulante.controls['fechaDeNacimiento'].value;
+    expect(estado).toMatch(postulante.estado);
+    expect(fecha).toMatch(postulante.fechaDeNacimiento);
+    //nombre.markAsDirty();
   })
 
-
+  it('deberia recuperar el estado correctamente', async(() => {
+    postulante = POSTULANTES[1];
+    fixture.detectChanges();
+    fixture.whenStable().then(()=>{
+      //fixture.detectChanges();
+      console.log(fixture.debugElement.query(By.css('#estado')).nativeElement.textContent);
+    })
+  }))
 });
+
+
+/*
+//console.log("El objeto: ", fixture.debugElement.queryAll(By.css('.mat-select-value')));
+/* const trigger = fixture.debugElement.queryAll(By.css('mat-select-value'))[0].nativeElement;
+const innerSpan = trigger.children[0].children[0];
+console.log(innerSpan.innerHTML);
+console.log("TRIGER\n",trigger); 
+
+//console.log(fixture.debugElement.queryAll(By.css('.mat-tab-label'))[1].nativeElement.innerText);
+
+console.log(trigger.children["0"].children["0"].children["0"].children["0"]);
+
+//fixture.detectChanges();
+
+//const opcion = fixture.debugElement.query(By.css('#estado')).nativeElement.children["0"]; //.children["0"].children["0"].nativeElement.innerHTML;
+
+//console.log("OPCION\n",opcion);
+
+//console.log(trigger.contentText);
+
+const trigger = fixture.debugElement.query(By.css('.mat-select-trigger')).nativeElement;
+trigger.click();
+fixture.whenStable().then(() => {
+  const opcion = fixture.debugElement.query(By.css('#estado'));
+  console.log(opcion);
+  console.log(opcion.nativeElement);
+  console.log(opcion.children[1]);
+   // console.log(trigger);   
+  });
+
+
+  //expect(compiled.query(By.css('#nombre')).nativeElement.value.trim()).toMatch(postulante.nombre);
+  
+  */
