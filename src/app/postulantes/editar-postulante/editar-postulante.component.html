@@ -66,7 +66,7 @@
             <mat-form-field>
               <input matInput placeholder="Email" formControlName="mail" required id="mail">
               <mat-icon matSuffix class="icono">email</mat-icon>
-              <mat-error *ngIf="formEditarPostulante?.invalid">{{getErrorEmailMessage()}}</mat-error>
+              <mat-error *ngIf="formEditarPostulante?.invalid" id="mail-error">{{getErrorEmailMessage()}}</mat-error>
             </mat-form-field>
            
             <!-- campo de la direccion-->
@@ -105,7 +105,7 @@
             <mat-form-field>
               <mat-icon matSuffix class="icono">contact_mail</mat-icon>
               <input formControlName = "documento" matInput placeholder="CI" type="text" id="documento">
-              <mat-error *ngIf="formEditarPostulante?.get('documento').hasError('pattern')">Ingrese solo numeros</mat-error>
+              <mat-error *ngIf="formEditarPostulante?.get('documento').hasError('pattern')" id="error-documento">Ingrese solo numeros</mat-error>
             </mat-form-field>
             
             <!-- campo del telefono-->
@@ -114,8 +114,8 @@
               <input formControlName = "celular" matInput placeholder="ej; +595961565376" type="tel"
               ng-minlength="10" ng-maxlength="10"  id="celular">
               <mat-icon matSuffix class="icono">call</mat-icon>
-              <mat-error *ngIf="formEditarPostulante?.get('celular').hasError('pattern')">Ingrese un formato valido. Ej:+5959723214 o 0984124721</mat-error>
-              <mat-error *ngIf="formEditarPostulante?.get('celular').hasError('minlength')">Ingrese al menos 6 digitos</mat-error>
+              <mat-error *ngIf="formEditarPostulante?.get('celular').hasError('pattern')" id="error-formato-telefono">Ingrese un formato valido. Ej:+5959723214 o 0984124721</mat-error>
+              <mat-error *ngIf="formEditarPostulante?.get('celular').hasError('minlength')" id="error-longitud-telefono">Ingrese al menos 6 digitos</mat-error>
             </mat-form-field>
             
             <!-- campo de fecha de nacimiento-->

@@ -37,8 +37,8 @@ export const POSTULANTES: Array<Postulante> = [
         comentarioAdmin: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend nisl lectus, a imperdiet purus fermentum sit amet. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur quis sagittis lacus. Aliquam et faucibus nunc. Nullam sagittis, mi ac cursus viverra, mauris lectus consequat risus, at sollicitudin massa tortor sed dui. Pellentesque aliquet bibendum risus sit amet accumsan. Cras vitae tempus augue. Quisque convallis finibus interdum. Phasellus lacinia lacus id est pellentesque, quis varius libero iaculis. In id semper nisi, ut elementum nibh.',
         comentarioSm: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend nisl lectus, a imperdiet purus fermentum sit amet. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur quis sagittis lacus. Aliquam et faucibus nunc. Nullam sagittis, mi ac cursus viverra, mauris lectus consequat risus, at sollicitudin massa tortor sed dui. Pellentesque aliquet bibendum risus sit amet accumsan. Cras vitae tempus augue. Quisque convallis finibus interdum. Phasellus lacinia lacus id est pellentesque, quis varius libero iaculis. In id semper nisi, ut elementum nibh.',
         comentarioTeam: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend nisl lectus, a imperdiet purus fermentum sit amet. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur quis sagittis lacus. Aliquam et faucibus nunc. Nullam sagittis, mi ac cursus viverra, mauris lectus consequat risus, at sollicitudin massa tortor sed dui. Pellentesque aliquet bibendum risus sit amet accumsan. Cras vitae tempus augue. Quisque convallis finibus interdum. Phasellus lacinia lacus id est pellentesque, quis varius libero iaculis. In id semper nisi, ut elementum nibh.',
-        fechaDeNacimiento: '1986-08-22',
-        genero:'',
+        fechaDeNacimiento: '2019-02-19T03:00:00.000+0000',
+        genero:'Masculino',
         direccion:''
     },
     {        
@@ -58,7 +58,7 @@ export const POSTULANTES: Array<Postulante> = [
         comentarioSm: '',
         comentarioTeam: '',
         fechaDeNacimiento: '',
-        genero:'',
+        genero:'Masculino',
         direccion:''
     },
     {        
