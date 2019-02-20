@@ -1,34 +1,45 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { ListarPostulantesComponent } from './listar-postulantes.component';
-import {AppModule} from 'src/app/app.module';
 import {RecibirPostulanteService} from 'src/app/shared/helpers/recibir-postulante.service';
 import { StorageService } from 'src/app/shared/helpers/storage.service';
 import { Session } from 'src/app/shared/models/session';
 import { MaterialModule } from 'src/app/angular_material';
-import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import {RouterTestingModule} from '@angular/router/testing';
-import { fakeBackendProvider } from 'src/app/shared/helpers/fake-backend';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {By} from '@angular/platform-browser';
-import { Postulante } from 'src/app/shared/models/postulante';
+import {By,  BrowserModule} from '@angular/platform-browser';
 import {POSTULANTES} from 'src/app/shared/mocks/mock-postulantes';
-import {of} from 'rxjs';
+import { Router } from '@angular/router';
+import { ResponseLista } from 'src/app/shared/models/responseLista';
+import { of } from 'rxjs';
+import { RESPUESTA_POSTULANTES } from 'src/app/shared/mocks/mock-response-postulantes';
 
 describe('ListarPostulantesComponent', () => {
   let servicio: RecibirPostulanteService;
   let component: ListarPostulantesComponent;
   let fixture: ComponentFixture<ListarPostulantesComponent>;
-  jasmine.DEFAULT_TIMEOUT_INTERVAL = 200000;
+  let id: number= 1;
+  jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
      // declarations: [ListarPostulantesComponent],
-      imports: [MaterialModule,RouterModule,HttpClientModule,RouterTestingModule,BrowserAnimationsModule],
-      providers: [RecibirPostulanteService,StorageService,fakeBackendProvider],
+      imports: [MaterialModule,
+        RouterTestingModule.withRoutes(
+            [{path:'postulante',component:ListarPostulantesComponent},
+            {path: 'postulante/crear', component:ListarPostulantesComponent},
+            {path:'ver/:id',component: ListarPostulantesComponent},
+            {path:'',component:ListarPostulantesComponent},
+            {path:'**',redirectTo:'postulante',pathMatch:'full'}]),
+          HttpClientModule,BrowserAnimationsModule,BrowserModule],
+      
+      providers: [RecibirPostulanteService,StorageService],
+      
       declarations: [ListarPostulantesComponent]
     })
     .compileComponents().then(()=>{
+      spyOn(TestBed.get(RecibirPostulanteService),'getPostulantes').and.returnValue(of(RESPUESTA_POSTULANTES)) //se 
+      TestBed.get(Router).initialNavigation(); //se pone la ruta inicial 
       fixture = TestBed.createComponent(ListarPostulantesComponent); //se crea el componente
       component = fixture.componentInstance; //se instancia el componente
     });
@@ -43,12 +54,19 @@ describe('ListarPostulantesComponent', () => {
     
   }));
 
-  /* se comprueba que se haya creado el componente */
+  /**
+   * Test para verificar que el componenete ListarPostulanteComponent 
+   * se cree correctamente
+   */
   it('El componente debe crearse', () => {
     fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 
+  /**
+   * Test para verificar que se cuente con un id #buscador 
+   * que corresponde al input del buscador
+   */
   it('Debe contar con barra para buscar',()=>{
     fixture.detectChanges();
     const dom = fixture.debugElement.nativeElement;
@@ -57,12 +75,107 @@ describe('ListarPostulantesComponent', () => {
 
   }); 
   
+  /**
+   * Test para verificar que se cuente con un id #filtroEstado 
+   * que corresponde a la lista para filtrar por estado
+   */
+  it('Debe contar con filtro por Estados',()=>{
+    fixture.detectChanges();
+    const dom = fixture.debugElement.nativeElement;
+    const elemento = dom.querySelector('#filtroEstado');
+    expect(elemento).not.toBeNull()
+  });
+  
+  /**
+   * Test para verificar que se cuente con un id #paginacion 
+   * que corresponde a la seccion para controlar la paginacion de
+   * la lista
+   */
+  it('Debe contar con paginacion',()=>{
+    fixture.detectChanges();
+    const dom = fixture.debugElement.nativeElement;
+    const elemento = dom.querySelector('#paginacion');
+    expect(elemento).not.toBeNull()
+  });
+
+  /**
+   * Test para verificar que el componente cuente con un atributo titulo 
+   * no nulo
+   */
+  it('Debe contar con un titulo',()=>{
+    fixture.detectChanges();
+
+    //se espera que el componente cuente con un atributo titulo que no 
+    //este nulo
+    expect(component.titulo).not.toBeNull();
+  });
+
+  /** 
+   * Test para verificar que el titulo del componente sea 
+   * 'Lista de Postulantes'
+  */ 
+  it('El titulo es Lista de Postulantes',()=>{
+    fixture.detectChanges();
+    expect(component.titulo).toEqual("Lista de Postulantes");
+  });
+
+  /**
+   * Test para verificar que se realice la llamada a funcion 
+   * correspondiente a Ver Postulante
+   */
+  it('Se realiza la llamada a funcion para Ver Postulante', () => {
+    fixture.detectChanges();
+
+    //Se define un SpyOn para espiar al metodo onClickPostulante de 
+    //del componente
+    spyOn(component, 'onclickPostulante');
+    
+    //se extrae el DOM 
+    const dom = fixture.debugElement.nativeElement;
+    
+    //se extrae la fila cuyo id es verPostulante 
+    const fila = dom.querySelector('#verPostulante');
+
+    //se hace click en la fila 
+    fila.click();
+
+    //se espera que la funcion espiada haya sido llamada
+    expect(component.onclickPostulante).toHaveBeenCalled();
+  });
+
+  /**
+   * Test para verificar que se realice la llamada a funcion 
+   * correspondiente a Agregar Postulante
+   */ 
+  it('Se realiza la llamada a funcion para Agregar Postulante', () => {
+    fixture.detectChanges();
+
+    //se define un espia para el metodo onClickAgregar del componente
+    spyOn(component, 'onclickAgregar');
+    
+    //Se extrae el DOM 
+    const dom = fixture.debugElement.nativeElement;
+    
+    //se extrae el boton para agregar postulante
+    const boton = dom.querySelector('#botonAgregar');
+   
+    //Se hace click en el boton
+    boton.click();
+   
+    //se verifica si se hace la llamada a la funcion espiada
+    expect(component.onclickAgregar).toHaveBeenCalled();
+  });
+
+  /**
+   * Test para verificar que los nombres de las columnas sean correctos
+   */
   it('Probar que todos los nombres de las columnas se muestren correctamente ', (done) => {
     //expect(component.users).toEqual(testUsers);
     fixture.detectChanges();
     fixture.whenStable().then(() => {
     fixture.detectChanges();
     
+    //se extrae la lista de postulantes
     let listadoPostulantes = fixture.nativeElement.querySelectorAll('tr');
 
     // se comprueban los nombres de los titulos
@@ -79,12 +192,17 @@ describe('ListarPostulantesComponent', () => {
     });
   });
 
+  /**
+   * Test para verificar que los datos del primer postulante listado se muestren 
+   * correctamente según datos predefinidos
+   */
   it('Probar que se muestre correctamente los datos del primer postulante ', (done) => {
     //expect(component.users).toEqual(testUsers);
     fixture.detectChanges();
     fixture.whenStable().then(() => {
     fixture.detectChanges();
     
+    //se obtiene la lista de postulantes
     let listadoPostulantes = fixture.nativeElement.querySelectorAll('tr');
    
     //compara que los campos muestres los datos correspondientes para el primer postulantes
@@ -99,12 +217,72 @@ describe('ListarPostulantesComponent', () => {
     });
   });
 
-  it('Probar que ningun postulante tenga datos vacios o no disponibles  ', (done) => {
-    //expect(component.users).toEqual(testUsers);
+  /**
+   * Test para verificar que al presionar el boton de Agregar Postulante, se cambie correctamente la URL
+   */
+  it('El boton de Agregar Postulante redirecciona correctamente', async(() => {
+    component.ngOnInit();
+    fixture.detectChanges();
+    spyOn(component,'onclickAgregar').and.callThrough();
+    fixture.detectChanges();
+    fixture.debugElement.query(By.css('#botonAgregar')).nativeElement.click();
+    fixture.detectChanges();
+    fixture.whenStable().then(()=>{
+      setTimeout(()=>{
+        fixture.detectChanges();
+        expect(component.onclickAgregar).toHaveBeenCalled();
+        TestBed.get(Router).url
+        expect(component.onclickAgregar).toBeTruthy();
+        expect(TestBed.get(Router).url).toEqual('/postulante/crear');
+        })
+      })
+  }));
+ 
+  /**
+   * Test para verificar que al presionar un Postulante, se cambie correctamente la URL,
+   * Este test debe dar como resultado FAILED
+   */
+  it('El boton de ver Postulante redirecciona correctamente', async(() => {
+ 
+    //fixture.detectChanges();
+    
+    //se 
+    spyOn(component,'onclickPostulante').and.callThrough();
+    fixture.detectChanges();
+
+    //Se extrae la fila del DOM
+    const dom = fixture.debugElement.nativeElement;
+    const fila = dom.querySelector('#verPostulante');
+
+    //se hace click en la fila
+    fila.click();
+
+    //se detectan cambios
+    //fixture.detectChanges();
+    
+    fixture.whenStable().then(()=>{
+      setTimeout(()=>{
+        fixture.detectChanges();
+        expect(component.onclickPostulante).toHaveBeenCalled();
+        TestBed.get(Router).url
+
+        expect(component.onclickPostulante).toBeTruthy();
+        expect(TestBed.get(Router).url).toEqual('/postulante/ver/' + id);
+        })
+      })
+  }));
+
+  /**
+   * Test para verificar que los postulantes listados no tengan datos vacios
+   * Este test debe dar como resultado FAILED 
+   */
+  it('Probar que ningun postulante tenga datos vacios', (done) => {
+
     fixture.detectChanges();
     fixture.whenStable().then(() => {
     fixture.detectChanges();
     
+    //se extrae la lista de postulantes
     let listadoPostulantes = fixture.nativeElement.querySelectorAll('tr');
    
     //comprueba que los campos no esten vacios en todas las filas
@@ -120,68 +298,154 @@ describe('ListarPostulantesComponent', () => {
     });
   });
 
-  it('Se debe listar según lo ingresado en el buscador',()=>{
-    fixture.detectChanges();
-    const dom = fixture.debugElement.nativeElement;
-    const buscador = dom.querySelector('#buscador');
-    
-    //Se ingresa un nombre en la barra de buscador
-    buscador.value = 'Juan';
-    
-    //Se detectan los cambios
+  /**
+   * Test para verificar que al buscar por nombre, los nombres del listado
+   * deben coincidir con dicho nombre buscado
+   */
+  it('Se debe listar según lo ingresado en el buscador',fakeAsync(()=>{
     fixture.detectChanges();
 
+    //se extraen los elementos del DOM
+    const dom = fixture.debugElement.nativeElement;
+    const buscador = dom.querySelector('#buscador');
+    const nombreBuscado = 'Carlos';
+
+    //Se ingresa un nombre en la barra de buscador
+    buscador.value = nombreBuscado;
+    
+    //se dispara el evento para aplicar el filtro al listado
+    buscador.dispatchEvent(new Event('keyup'));
+
+    //Se detectan cambios
+    fixture.detectChanges();
+    
     //se recupera la lista actualizada de postulantes
     let listadoPostulantes = fixture.nativeElement.querySelectorAll('tr');
     let primerPostulante = listadoPostulantes[1];
-    
-    //se compara el primer nombre obtenido del listado
-    expect(primerPostulante.cells[1].innerText).toBe('Juan');      
-    
-    
-  });
   
-  it('Debe contar con filtro por Estados',()=>{
-    fixture.detectChanges();
-    const dom = fixture.debugElement.nativeElement;
-    const elemento = dom.querySelector('#filtroEstado');
-    expect(elemento).not.toBeNull()
-  });
+    //Se espera un tiempo para renderizar la pantalla
+    //tick(4000); //4 segundos
+    
+    fixture.whenStable().then(()=>{
+      //se espera que el primer nombre de la lista coincida 
+      expect(primerPostulante.cells[1].innerText).toBe(nombreBuscado);     
+    });
 
-  it('Debe contar con paginacion',()=>{
-    fixture.detectChanges();
-    const dom = fixture.debugElement.nativeElement;
-    const elemento = dom.querySelector('#paginacion');
-    expect(elemento).not.toBeNull()
-  });
+  }));
   
-  it('El boton de ver postulante funciona', () => {
-    fixture.detectChanges();
-    spyOn(component, 'onclickPostulante');
-    const dom = fixture.debugElement.nativeElement;
-    const fila = dom.querySelector('#verPostulante');
-    fila.click();
-    expect(component.onclickPostulante).toHaveBeenCalled();
-  });
-  
-  it('El boton de agregar postulante funciona', () => {
-    fixture.detectChanges();
-    spyOn(component, 'onclickAgregar');
-    const dom = fixture.debugElement.nativeElement;
-    const boton = dom.querySelector('#botonAgregar');
-    boton.click();
-    expect(component.onclickAgregar).toHaveBeenCalled();
-  });
-  
-  it('Tiene un titulo',()=>{
-    fixture.detectChanges();
-    expect(component.titulo).not.toBeNull();
-  });
-    
-  it('El titulo es Lista de Postulantes',()=>{
-    fixture.detectChanges();
-    expect(component.titulo).toEqual("Lista de Postulantes");
-  });
+  /**
+   * Test para verificar que, en caso de que un postulante no tenga todos los campos 
+   * cargados, en el listado se debe mostrar dicho campo como 'No Disponible'.
+   * Este test debe dar como resultado FAILED 
+   */
+  it('Probar que un dato vacio muestre un mensaje de No Disponible ', (done) => {
 
- 
+    fixture.detectChanges();
+   
+    fixture.whenStable().then(() => {
+      fixture.detectChanges();
+
+      //se extrae la lista de postulantes
+      let listadoPostulantes = fixture.nativeElement.querySelectorAll('tr');
+      
+      //compara que los campos muestres los datos correspondientes a un postulante que se 
+      //conoce de antemano que no tiene numero de telefono
+      let postulante = listadoPostulantes[1];
+      expect(postulante.cells[4].innerText).toBe('No disponible');
+      done();
+    });
+    
+  });  
+
+  /**
+   * Test para verificar que al filtrar la lista por estado, se muestren solo 
+   * los postulantes con dicho estado. Se comprueba con el primer postulante
+   * listado
+   */
+  it('Se filtra por estados correctamente',fakeAsync(()=>{
+    fixture.detectChanges();
+
+    //se extraen los elementos del DOM
+    const dom = fixture.debugElement.nativeElement;
+    const filtro = dom.querySelector('#filtroEstado');
+    const filtrarEstado = 'Rechazado'; //estado que se espera filtrar 
+    
+    //Se ingresa un nombre en la barra de buscador
+    filtro.value = filtrarEstado;
+    
+    //se dispara el evento para aplicar el filtro al listado
+    filtro.dispatchEvent(new Event('keyup'));
+    
+    //Se detectan cambios
+    fixture.detectChanges();
+    
+    //se recupera la lista actualizada de postulantes
+    let listadoPostulantes = fixture.nativeElement.querySelectorAll('tr');
+
+    //Se captura el primer postulante de la lista
+    let primerPostulante = listadoPostulantes[1];
+    
+    //Se espera un tiempo para renderizar la pantalla
+    tick(4000); //4 segundos
+    
+    fixture.whenStable().then(()=>{
+      //se espera que el estado del primer postulante de la lista coincida
+      expect(primerPostulante.cells[5].innerText).toBe(filtrarEstado);
+    });
+    
+  }));
+
+  /**
+   * Test para verificar que al cambiar de pagina, el nombre del primer postulante
+   * corresponda con el nombre predefinido esperado
+   */
+  it('La Paginación funciona correctamente', async(()=>{
+
+    //se extrae y se hace click al boton siguiente de la paginacion
+    fixture.debugElement.query(By.css('#paginacion')).nativeElement.click();
+    
+    //Se detectan cambios
+    fixture.detectChanges();
+
+    //se cambia la pagina del paginator en el componente
+    component.paginator.nextPage();
+    
+    //Se detectan cambios
+    fixture.detectChanges();
+    
+    fixture.whenStable().then(()=>{
+
+      //se extrae la lista de postulantes
+      let listadoPostulantes = fixture.nativeElement.querySelectorAll('tr');
+      
+      //se extrae el primer postulante de la lista
+      let primerPostulante = listadoPostulantes[1];
+      
+      //se espera que el primer nombre del primer postulante al cambiar la pagina sea 'Amelio'
+      expect(primerPostulante.cells[1].innerText).toBe('Amelio');
+    })
+    }));
+
+  /**
+   * Test para verificar que la cantidad mostrada en el paginator sea correcta
+   */
+  it('Se verifica que el total en el Paginator coincida con la cantidad real de postulantes', fakeAsync(()=>{
+
+    //se detectan cambios
+    fixture.detectChanges();
+
+    //se espera a que se renderice la pagina
+    tick();
+    
+    //Se extrae el label que muestra el total de postulantes en el paginador
+    let cadena = fixture.debugElement.query(By.css('.mat-paginator-range-label')).nativeElement.innerText
+    
+    //Se convierte esa cadena en un vector de cadenas
+    let vectorCadena = cadena.split(" ");
+
+    //Se espera que la cantidad mostrada en el paginator corresponda con la cantidad real de postulantes  
+    expect(parseInt(vectorCadena[vectorCadena.length-1])).toEqual(POSTULANTES.length);
+
+  }));
+
 });

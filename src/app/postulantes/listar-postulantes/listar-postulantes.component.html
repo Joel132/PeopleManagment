@@ -2,7 +2,7 @@
     <br>
   <mat-toolbar>
       <!--Buscar Form-->
-      <mat-form-field  class="inputBuscador" appearance="outline">
+      <mat-form-field  appearance="outline">
           <mat-label>Buscar Postulante</mat-label>
           <input id="buscador" matInput (keyup)="applyFilter($event.target.value)">
           <mat-icon matSuffix>search</mat-icon>
@@ -83,7 +83,7 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"
       id = "verPostulante" (click)="onclickPostulante()"></tr>
-    </table>
+  </table>
 
     <mat-paginator id="paginacion" [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
 </div>
