@@ -214,13 +214,13 @@ export const POSTULANTES: Postulante[]=[ {
     nombre: 'Juan',
     foto: 'https://www.link.com',
     estado: '8',
-    comentarioDesafio: '',
+    comentarioDesafio: 'Very good',
     comentarioAdmin: 'Malo',
-    comentarioSm: '',
-    comentarioTeam: '',
+    comentarioSm: 'Exact',
+    comentarioTeam: 'Soso',
     fechaDeNacimiento: '12-01-2011',
-    genero:'',
-    direccion:''
+    genero:'Masculino',
+    direccion:'Tte 213'
 },
 {        
     apellido: 'Martinez',
