@@ -4,12 +4,12 @@
         <!--Buscar Form-->
         <mat-form-field  appearance="outline">
             <mat-label>Buscar Funcionario</mat-label>
-            <input matInput (keyup)="applyFilter($event.target.value)">
+            <input id="buscar" matInput (keyup)="applyFilter($event.target.value)">
             <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
         <!--Filtar Form -->
         <mat-form-field appearance="outline">
-            <mat-select placeholder="Filtrar por estados" (selectionChange)= "applyFilter($event.value)"> 
+            <mat-select id="filtro" placeholder="Filtrar por estados" (selectionChange)= "applyFilter($event.value)"> 
                 <!--$event.value me devuelve el contenido de [value]-->
                 <mat-option>-- TODOS --</mat-option>
                 <mat-option *ngFor="let est of estados" [value]="est.value">
@@ -104,7 +104,7 @@
             <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"></mat-row>
         </mat-table>
-        <mat-paginator class="tabla-datos" [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+        <mat-paginator id="pagina" class="tabla-datos" [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
     </div>
 </div>
   
